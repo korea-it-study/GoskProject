@@ -1,0 +1,107 @@
+/* reset.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+*{
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 38px; /* 50px 80px */
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+}
+
+.container{
+    width: 1080px;
+    min-height: 1920px;
+    background-color: #3a3a3a;
+    margin: 0 auto;
+    padding: 80px;
+    position: relative;
+}
+
+img{
+    border: none;
+}
+
+ul, ol, li{
+    list-style:none;
+}
+
+input{
+    padding: 0px 10px;
+    color: rgb(255, 255, 255);
+    border: none;
+    background-color: rgb(0,0,0);
+    border-radius: 10px;
+}
+
+input:focus{
+    outline: none;
+}
+input::placeholder {
+    color: rgb(190, 190, 190);
+    font-weight: 500;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+/* 숨김 기능 */
+.invisible{
+    display: none;
+}
+
+/* 버튼 */
+.btn{
+    cursor: pointer;
+    width: 100%; height: 60px;
+    font-size: 38px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+}
+
+.white-btn{
+    color: #373737;
+    background-color: rgb(255, 255, 255);
+}
+
+.black-btn{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0,0,0);
+}
+
+.sky-btn{
+    color: rgb(255, 255, 255);
+    background-color: #62c1a9;
+}
+
+.org-btn{
+    color: rgb(255, 255, 255);
+    background-color: #fb6624;
+}
+
+.gray-btn{
+    color: rgb(255, 255, 255);
+    background-color: #373737;
+}
+
+
+/* 글자색상 */
+.font-color{
+    color: rgb(255, 255, 255);
+}
+
+
+/* float 속성 */
+.clearfix::after{
+    display: block; 
+    content: ''; 
+    clear: both;
+}
+
