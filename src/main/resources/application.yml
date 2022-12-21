@@ -1,0 +1,26 @@
+
+server:
+  port: 8000
+
+spring:
+  thymeleaf:
+    prefix: "classpath:templates/"
+    suffix: .html
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://web-study.c6csxmxkinkd.ap-northeast-2.rds.amazonaws.com:3306/GoskProject
+    username: admin
+    password: 1q2w3e4r
+
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+
+mybatis:
+  mapper-locations:
+    - /mappers/*.xml
+
+file:
+  path: C:/GoskProject/GoskProject20221221/upload/
