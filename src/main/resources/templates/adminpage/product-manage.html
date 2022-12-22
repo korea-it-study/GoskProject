@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="/static/css/reset.css">
+<link rel="stylesheet" href="/static/css/main.css">
+<link rel="stylesheet" href="/static/css/adminpage/product-manage.css">
+<title>G-OSK 프로젝트</title>
+<body>
+    <main class="container">
+<!-- header -->
+        <header class="main-header">
+            <p>G-OSK</p>
+            <div class="header-bot">
+                <ul>
+                    <li>그레이즈 스터디카페</li>
+                    <li>
+                        <i class="fa-solid fa-user"></i>
+                        <span>운영시간: 10:00 - 20:00</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="main-category">
+                <button class="product-inquiry">상품관리</button>
+                <button class="product-inquiry">회원관리</button>
+                <button class="product-inquiry">좌석관리</button>
+                <button class="product-inquiry">매출조회</button>
+            </div>
+        </header>
+<!-- section -->
+        <section class="main-container">
+            <div class="product-category">
+                <ul>
+                    <li class="category-name">지정석</li>
+                    <li>기간권</li>
+                </ul>
+                <ul>
+                    <li class="category-name">일반석</li>
+                    <li>원데이</li>
+                    <li>시간권</li>
+                    <li>기간권</li>
+                </ul>
+            </div>
+            <div class="table-container">
+                <table class="prouct-table">
+                    <tr>
+                        <th>상품 이름</th>
+                        <th>상품 가격</th>
+                        <th>상품 수정</th>
+                        <th>상품 삭제</th>
+                    </tr>
+                    <tr>
+                        <td>1시간</td>
+                        <td><span>1000</span>원</td>
+                        <td><button class="btn update-btn">수정</button></td>
+                        <td><button class="btn dlt-btn">삭제</button></td>
+                    </tr>
+                </table>
+            </div>
+            <button class="btn orange-btn">상품 등록</button>
+        </section>
+<!-- footer -->
+        <footer class="main-footer">
+        </footer>
+    </main>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/adminpage/product-manage.js"></script>
+    <script src="/static/js/adminpage/admin.js"></script>
+</body>
+</html>

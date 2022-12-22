@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="/static/css/reset.css">
+<link rel="stylesheet" href="/static/css/main.css">
+<link rel="stylesheet" href="/static/css/adminpage/product-manage.css">
+<title>G-OSK 프로젝트</title>
+<body>
+    <main class="container">
+<!-- header -->
+        <header class="main-header">
+            <p>G-OSK</p>
+            <div class="header-bot">
+                <ul>
+                    <li>그레이즈 스터디카페</li>
+                    <li>
+                        <i class="fa-solid fa-user"></i>
+                        <span>운영시간: 10:00 - 20:00</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="main-category">
+                <button class="product-inquiry">상품관리</button>
+                <button class="product-inquiry">회원관리</button>
+                <button class="product-inquiry">좌석관리</button>
+                <button class="product-inquiry">매출조회</button>
+            </div>
+        </header>
+<!-- section -->
+        <section class="main-container">
+            <div class="sales-category">
+    
+            </div>
+            <div class="table-container">
+                <table class="sales-table">
+                    <tr>
+                        <th>판매 날짜</th>
+                        <th>판매된 상품</th>
+                        <th>판매 횟수</th>
+                        <th>누적 금액</th>
+                    </tr>
+                    <tr>
+                        <td>2022. 12. 22</td>
+                        <td>100시간 권</td>
+                        <td>1 회</td>
+                        <td>100000 원</td>
+                    </tr>
+                    <tr>
+                        <td>총 매출</td>
+                        <td class="total-price">총 100000 원</td>
+                    </tr>
+                </table>
+
+            </div>
+        </section>
+<!-- footer -->
+        <footer class="main-footer">
+        </footer>
+    </main>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/adminpage/product-manage.js"></script>
+    <script src="/static/js/adminpage/admin.js"></script>
+</body>
+</html>
