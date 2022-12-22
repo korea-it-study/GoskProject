@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="/static/css/reset.css">
+
+<link rel="stylesheet" href="/static/css/account_join.css">
+<title>G-OSK 프로젝트</title>
+<body>
+    <main class="container">
+<!-- header -->
+        <header class="join-header">
+            <i class="fa-solid fa-user-group"></i>
+            <p>회원가입</p>
+            <div>휴대폰번호와 성명을 입력해주세요</div>
+        </header>
+<!-- section -->
+        <section class="join-content">
+            <ul>
+                <li>
+                    <span>휴대폰 번호</span>
+                    <input type="text">
+                </li>
+                <li>
+                    <span>성명(실명)</span>
+                    <input type="text">
+                </li>
+            </ul>
+        </section>
+        <article class="join-keybord">
+            <ul>
+                <li>
+                    <button class="btn white-btn">1</button>
+                    <button class="btn white-btn">2</button>
+                    <button class="btn white-btn">3</button>
+                    <button class="btn white-btn">4</button>
+                    <button class="btn white-btn">5</button>
+                    <button class="btn white-btn">6</button>
+                    <button class="btn white-btn">7</button>
+                    <button class="btn white-btn">8</button>
+                    <button class="btn white-btn">9</button>
+                    <button class="btn white-btn">0</button>
+                </li>
+                <li>
+                    <button class="btn white-btn">ㅂ</button>
+                    <button class="btn white-btn">ㅈ</button>
+                    <button class="btn white-btn">ㄷ</button>
+                    <button class="btn white-btn">ㄱ</button>
+                    <button class="btn white-btn">ㅅ</button>
+                    <button class="btn white-btn">ㅛ</button>
+                    <button class="btn white-btn">ㅕ</button>
+                    <button class="btn white-btn">ㅑ</button>
+                    <button class="btn white-btn">ㅐ</button>
+                    <button class="btn white-btn">ㅔ</button>
+                    <button class="btn white-btn">◀</button>
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </article>
+<!-- footer -->
+        <footer class="join-footer">
+            <button class="btn gray-btn">
+                <i class="fa-solid fa-xmark"></i>
+                가입취소
+            </button>
+            <button class="btn org-btn">
+                <i class="fa-solid fa-check"></i>
+                가입완료
+            </button>
+        </footer>
+    </main>
+    <script src="/static/js/account_join.js"></script>
+</body>
+</html>
