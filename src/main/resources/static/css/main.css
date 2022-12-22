@@ -1,6 +1,7 @@
 /* main-header *//* main-header *//* main-header *//* main-header */
 .main-header{
     width: 100%;
+    padding: 80px;
 }
 
 /* g-osk 글자(로고) *//* g-osk 글자(로고) */
@@ -56,9 +57,11 @@
 /* main-content *//* main-content *//* main-content *//* main-content */
 .main-content{
     width: 100%;
+    padding: 80px;
 }
 
 /* main-footer *//* main-footer *//* main-footer *//* main-footer */
 .main-footer{
     width: 100%;
+    padding: 0px 80px 80px 80px;
 }

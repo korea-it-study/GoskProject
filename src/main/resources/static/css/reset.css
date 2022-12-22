@@ -18,11 +18,11 @@ body{
     min-height: 1920px;
     background-color: #3a3a3a;
     margin: 0 auto;
-    padding: 80px;
     position: relative;
 }
 
 img{
+    display: block;
     border: none;
 }
 
