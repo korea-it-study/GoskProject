@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="/static/css/reset.css">
+
+<link rel="stylesheet" href="/static/css/locker_management.css">
+<title>G-OSK 프로젝트</title>
+<body>
+    <main class="container">
+<!-- header -->
+        <header class="locker-management-header">
+            <i class="fa-solid fa-briefcase"></i>
+            <p>사물함선택</p>
+            <div>원하시는 사물함 선택해 주세요.</div>
+            
+            <div class="circle">
+                <i class="fa-solid fa-circle" id = "circle1">
+                    <span>이용중&nbsp&nbsp&nbsp</span>
+                </i>
+                <i class="fa-solid fa-circle" id = "circle2">
+                    <span>이용가능</span>
+                </i>
+            </div>
+
+        </header>
+<!-- section -->
+        <section class="locker-management-content">
+            <div></div>
+        </section>
+<!-- footer -->
+        <footer class="locker-management-footer">
+            <div>
+                <span>선택한 사물함&nbsp&nbsp</span>
+                <input type = "input" class = "locker-select-name"></span>
+            </div>
+
+            <br><br>
+
+            <div>
+                <button class="btn gray-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                    홈으로
+                </button>
+                <button class="btn org-btn">
+                    <i class="fa-solid fa-check"></i>
+                    다음단계
+                </button>
+            </div>
+
+        </footer>
+    </main>
+    <script src="/static/js/locker-management.js"></script>
+</body>
+</html>

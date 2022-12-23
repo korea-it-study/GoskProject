@@ -1,0 +1,87 @@
+/* locker-management-header *//* locker-management-header */
+.locker-management-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%; height: 400px;
+    padding: 80px 80px 0px 80px;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+/* 아이콘 */
+.locker-management-header > i {
+   font-size: 80px;
+   color: #62c1a9;
+}
+
+/* 부제 */
+.locker-management-header> p {
+    font-size: 50px;
+    color: #62c1a9;
+}
+
+/* 설명 */
+.locker-management-header > div {
+    font-weight: 300;
+}
+
+.locker-management-header > .circle {
+    display: flex;
+    padding: 20px 0px;
+}
+
+.locker-management-header > .circle > #circle1{
+    font-size: 38px;
+    color : gray;
+}
+
+.locker-management-header > .circle > #circle2{
+    font-size: 38px;
+    color : white;
+}
+
+.locker-management-header > .circle > i > span{
+    color: white;
+}
+
+/* locker-management-content *//* locker-management-content */
+.locker-management-content{
+    width: 100%; height: 1000px;
+    padding: 80px;
+}
+
+.locker-management-content > div{
+    background-color: black;
+    width: 100%;
+    height: 100%;
+}
+
+/* locker-management-footer *//* locker-management-footer */
+.locker-management-footer{
+    width: 100%; height: 520px;
+    padding: 0px 80px 80px 80px;
+    text-align: center;
+}
+
+.locker-management-footer > div{
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.locker-management-footer > div > input{
+    background-color: black;
+    width: 230px;
+    height: 100px;
+    border-radius: 20px;
+    color: white;
+    font-size: 50px;
+    text-align: center;
+}
+
+.locker-management-footer > div > button{
+    width: 400px;
+    height: 100px;
+}
