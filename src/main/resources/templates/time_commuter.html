@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="/static/css/reset.css">
+
+<link rel="stylesheet" href="/static/css/time_cmmuter.css">
+<title>G-OSK 정액권</title>
+<body>
+    <main class="container">
+<!-- header -->
+        <header class="oneday-header">
+            <i class="fa-solid fa-ticket"></i>
+            <p>정액권 이용권 선택</p>
+            <div>원하는 이용권을 선택해 하세요.</div>
+        </header>
+<!-- section -->
+        <section class="oneday-content">
+            <ul>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        50시간
+                    </p>
+                    <div>60,000 원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        100시간
+                    </p>
+                    <div>110,000 원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        150시간
+                    </p>
+                    <div>160,000 원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        200시간
+                    </p>
+                    <div>200,000 원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        1주
+                    </p>
+                    <div>50,000 원</div>
+                </li>
+            </ul>
+            <div class="junho">
+                <button>
+                    <i class="fa-solid fa-circle-chevron-left"></i>
+                </button>
+                <span>1</span>
+                <span>/</span>
+                <span>3</span>
+                <button>
+                    <i class="fa-solid fa-circle-chevron-right"></i>
+                </button>
+            </div>
+            
+            
+
+        </section>
+<!-- footer -->
+        <footer class="oneday-footer">
+            <p>
+                <i class="fa-solid fa-star"></i>
+                구입한 당일에만 이용할 수 있는 시간내 이용권입니다. 
+            </p>
+            <p>
+                <i class="fa-solid fa-star"></i>
+                결제와 함께 이용시간이 소진되기 시작합니다. 
+            </p>
+            <p>
+                <i class="fa-solid fa-star"></i>
+                원데이 이용권은 잔여시간에 대한 관리가 되지 않습니다. 
+            </p>
+            <div>
+                <button class="junho btn gray-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                    홈으로
+                </button>
+            </div>
+            
+        </footer>
+    </main>
+    <script src="/static/js/pay.js"></script>
+</body>
+</html>

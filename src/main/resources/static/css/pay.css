@@ -1,0 +1,110 @@
+/* pay-header *//* pay-header *//* pay-header *//* pay-header */
+.pay-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%; height: 400px;
+    padding: 120px 80px 80px 80px;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+/* 아이콘 */
+.pay-header > i {
+   font-size: 80px;
+   color: #62c1a9;
+}
+
+/* 부제 */
+.pay-header > p {
+    font-size: 50px;
+    color: #62c1a9;
+}
+
+/* 설명 */
+.pay-header > div {
+    font-weight: 300;
+}
+
+/* pay-content *//* pay-content *//* pay-content *//* pay-content */
+.pay-content{
+    width: 100%; height: 1000px;
+    padding: 80px;
+    /* border-bottom: 2px solid black; */
+}
+.pay-content ul{
+    background-color:black;
+    border-radius: 20px;
+}
+
+.pay-content ul li{
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    height: 170px;
+    border-bottom: 1px solid black;
+}
+.pay-content ul li .product1{
+    margin: auto 10px;
+    font-size: 50px;
+}
+.pay-content ul li .product2{
+    text-align: center;
+    width: 335px;
+    /* margin: 0 0 0 40px; */
+    border-right: 7.5px dotted  #3a3a3a;
+    
+}
+.pay-content ul li .product3{
+    text-align: center;
+    width: 220px;
+    margin: 0 40px 0 0;
+    /* border-left: 7.5px dotted  #3a3a3a; */
+}
+.pay-content ul li .product1 p{
+    margin: 30px 0 0 20px;
+}
+.pay-content ul li .product2 p{
+    font-size: 30px;
+    margin:10px 0 10px 0 ;
+}
+.pay-content ul li .product3 p{
+    font-size: 30px;
+    margin:10px 0 10px 0 ;
+}
+
+.pay-content ul li .product2 span{
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: #fb6624;;
+}
+
+.pay-content ul li .product3 span{
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: #fb6624;;
+}
+.pay-content img{
+    width: 500px;
+    height: 500px;
+    margin: 130px 0 0 1210px ;
+}
+
+
+
+/* pay-footer *//* pay-footer *//* pay-footer *//* pay-footer */
+.pay-footer{
+    width: 100%; height: 520px;
+    padding: 0px 80px 80px 80px;
+}
+.pay-footer p{
+    margin-top: 50px;
+    text-align: center;
+    font-size: 43px;
+}
+
+
+
