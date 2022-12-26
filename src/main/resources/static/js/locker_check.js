@@ -4,13 +4,11 @@ $(".locker-management-content button").click(function(){
         if($(this).hasClass('sky-btn') == true){
             $(this).removeClass('sky-btn');
             $(".locker-select-name").attr('value',"");
-        }else{
+        }else{           
+            $(this).parent().siblings().children().removeClass('sky-btn');
             $(this).addClass('sky-btn').siblings().removeClass('sky-btn');
             $('.locker-select-name').attr('value',$(this).text());
         }
-    } else {
-        $(this).addClass('sky-btn').siblings().removeClass('sky-btn');
-        $(".locker-select-name").attr('value',"");
     }
 })
 

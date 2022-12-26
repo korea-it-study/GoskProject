@@ -6,8 +6,8 @@
 <script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="/static/css/reset.css">
-<link rel="stylesheet" href="/static/css/adminpage/admin.css">
-<link rel="stylesheet" href="/static/css/adminpage/seat-manage.css">
+<link rel="stylesheet" href="/static/css/admin/admin.css">
+<link rel="stylesheet" href="/static/css/admin/seatlist.css">
 <title>G-OSK 프로젝트</title>
 
 <body>
@@ -31,6 +31,7 @@
                 <ul>
                     <li class="reserved">지정석</li>
                     <li class="nomal">일반석</li>
+                    <li class="locker">사물함</li>
                 </ul>
             </div>
             <div class="table-container">
@@ -80,10 +81,52 @@
                         <button class="btn seat-btn">Os19</button>
                         <button class="btn seat-btn">Os20</button>
                     </article>
+                    <article class="locker-management-content invisible">
+                        <div>
+                            <div class ="AL">
+                                <button class = "btn">AL01</button>
+                                <button class = "btn">AL02</button>
+                                <button class = "btn">AL03</button>
+                                <button class = "btn">AL04</button>
+                                <button class = "btn">AL05</button>
+                                <button class = "btn">AL06</button>
+                                <button class = "btn">AL07</button>
+                                <button class = "btn">AL08</button>
+                                <button class = "btn">AL09</button>
+                                <button class = "btn">AL10</button>
+                                <button class = "btn">AL11</button>
+                                <button class = "btn">AL12</button>
+                            </div>
+                            <div class ="BL">
+                                <button class = "btn">BL01</button>
+                                <button class = "btn">BL02</button>
+                                <button class = "btn">BL03</button>
+                                <button class = "btn">BL04</button>
+                                <button class = "btn">BL05</button>
+                                <button class = "btn">BL06</button>
+                                <button class = "btn">BL07</button>
+                                <button class = "btn">BL08</button>
+                                <button class = "btn">BL09</button>
+                                <button class = "btn">BL10</button>
+                                <button class = "btn">BL11</button>
+                                <button class = "btn">BL12</button>
+                            </div>
+                            <div class ="CL">
+                                <button class = "btn">CL01</button>
+                                <button class = "btn">CL02</button>
+                                <button class = "btn">CL03</button>
+                                <button class = "btn">CL04</button>
+                                <button class = "btn">CL05</button>
+                                <button class = "btn">CL06</button>
+                                <button class = "btn">CL07</button>
+                            </div>
+                        </div>
+                    </article>
                 </section>
                 <!-- footer -->
             </div>
             <div class="btn-all">
+                <button class="btn sky-btn move-btn">자리이동</button>
                 <button class="btn gray-btn repair-btn">유지보수</button>
                 <button class="btn org-btn exit-btn">강제퇴장</button>
             </div>
@@ -98,8 +141,8 @@
             </div>
         </footer>
     </main>
-    <script src="/static/js/adminpage/admin.js"></script>
-    <script src="/static/js/adminpage/seat-manage.js"></script>
+    <script src="/static/js/admin/admin.js"></script>
+    <script src="/static/js/admin/seatlist.js"></script>
 </body>
 
 </html>
