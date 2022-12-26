@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <link rel="stylesheet" href="/static/css/reset.css">
 
 <link rel="stylesheet" href="/static/css/account_login.css">
@@ -13,32 +14,32 @@
     <main class="container">
 <!-- header -->
         <header class="account-login-header">
-            <i class="fa-solid fa-mobile-screen-button"></i> 
+            <i class="fa-solid fa-mobile-screen-button"></i>
             <p>휴대폰인증</p>
             <div>휴대폰 번호를 입력하세요.</div>
         </header>
 <!-- section -->
         <section class="account-login-content">
             <div class="phone-input">
-                <input type="tel" id="phone">
+                <input type="text" id="phone">
                 <button>로그인</button>
             </div>
 
             <br>
 
             <div class="phone-key">
-                <button class ="btn white-btn">1</button>
-                <button class ="btn white-btn">2</button>
-                <button class ="btn white-btn">3</button>
-                <button class ="btn white-btn">4</button>
-                <button class ="btn white-btn">5</button>
-                <button class ="btn white-btn">6</button>
-                <button class ="btn white-btn">7</button>
-                <button class ="btn white-btn">8</button>
-                <button class ="btn white-btn">9</button>
-                <button class ="btn white-btn">CLR</button>
-                <button class ="btn white-btn">0</button>
-                <button class ="btn white-btn">
+                <button class ="btn white-btn" onclick="keybtn(1)">1</button>
+                <button class ="btn white-btn" onclick="keybtn(2)">2</button>
+                <button class ="btn white-btn" onclick="keybtn(3)">3</button>
+                <button class ="btn white-btn" onclick="keybtn(4)">4</button>
+                <button class ="btn white-btn" onclick="keybtn(5)">5</button>
+                <button class ="btn white-btn" onclick="keybtn(6)">6</button>
+                <button class ="btn white-btn" onclick="keybtn(7)">7</button>
+                <button class ="btn white-btn" onclick="keybtn(8)">8</button>
+                <button class ="btn white-btn" onclick="keybtn(9)">9</button>
+                <button class ="btn white-btn" onclick="keybtn('CLR')">CLR</button>
+                <button class ="btn white-btn" onclick="keybtn(0)">0</button>
+                <button class ="btn white-btn" onclick="keybtn('DEL')">
                     <i class="fa-solid fa-delete-left"></i>
                 </button>
             </div>

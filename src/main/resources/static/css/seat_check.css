@@ -1,17 +1,19 @@
-/* seat-header *//* seat-header */
-.seat-header{
+/* seat-header */
+/* seat-header */
+.seat-header {
     width: 100%;
     padding: 80px 0px 0px;
 }
 
-.seat-header > article{
+.seat-header>article {
     display: flex;
     justify-content: space-between;
     padding: 40px 80px;
     margin: 20px 0px;
 }
 
-/* seat-header-top *//* seat-header-top */
+/* seat-header-top */
+/* seat-header-top */
 .seat-header .seat-header-top {
     border-bottom: 2px solid black;
     flex-direction: column;
@@ -20,174 +22,204 @@
 }
 
 /* 부제 */
-.seat-header-top > p {
+.seat-header-top>p {
     font-size: 50px;
     color: #62c1a9;
 }
 
 /* 설명 */
-.seat-header-top > div {
+.seat-header-top>div {
     font-weight: 300;
 }
 
-/* seat-header-bot *//* seat-header-bot */
+/* seat-header-bot */
+/* seat-header-bot */
 .seat-header .seat-header-bot {
     height: 180px;
 }
 
 /* 이용여부seat-view */
-.seat-header-bot > .seat-view > span {
+.seat-header-bot>.seat-view>span {
     line-height: 97px;
     margin-right: 20px;
 }
 
-.seat-header-bot > .seat-view > span > i{
+.seat-header-bot>.seat-view>span>i {
     font-size: 50px;
 }
 
-.seat-header-bot > .seat-view > .onbtn > i{
+.seat-header-bot>.seat-view>.onbtn>i {
     color: #fb6624;
 }
 
 /* 이용석seat-layer */
-.seat-header-bot > .seat-layer {
+.seat-header-bot>.seat-layer {
     width: 300px;
     display: flex;
     justify-content: space-between;
 }
 
-.seat-header-bot > .seat-layer button{
-    width: 140px; height: 97px;
+.seat-header-bot>.seat-layer button {
+    width: 140px;
+    height: 97px;
 }
 
 
-/* seat-content *//* seat-content *//* seat-content *//* seat-content */
-.seat-content{
-    width: 100%; height: 1000px;
+/* seat-content */
+/* seat-content */
+/* seat-content */
+/* seat-content */
+.seat-content {
+    width: 100%;
+    height: 1000px;
     padding: 0px 80px 50px;
 }
 
-.seat-content > article{    
-    width: 100%; height: 100%;
+.seat-content>article {
+    width: 100%;
+    height: 100%;
     background-color: black;
     background-image: url(../images/seat_table.png);
     position: relative;
 }
 
-.seat-content > article > button{ 
-    width: 80px; height: 80px;
+.seat-content>article>button {
+    width: 80px;
+    height: 80px;
     font-size: 30px;
 }
 
-.seat-content > article > button:nth-child(1){
+.seat-content>article>button:nth-child(1) {
     position: absolute;
-    top: 240px; left: 80px;
+    top: 240px;
+    left: 80px;
 }
 
-.seat-content > article > button:nth-child(2){
+.seat-content>article>button:nth-child(2) {
     position: absolute;
-    top: 330px; left: 80px;
+    top: 330px;
+    left: 80px;
 }
 
-.seat-content > article > button:nth-child(3){
+.seat-content>article>button:nth-child(3) {
     position: absolute;
-    top: 420px; left: 80px;
+    top: 420px;
+    left: 80px;
 }
 
-.seat-content > article > button:nth-child(4){
+.seat-content>article>button:nth-child(4) {
     position: absolute;
-    top: 510px; left: 80px;
+    top: 510px;
+    left: 80px;
 }
 
-.seat-content > article > button:nth-child(5){
+.seat-content>article>button:nth-child(5) {
     position: absolute;
-    top: 600px; left: 80px;
+    top: 600px;
+    left: 80px;
 }
 
-.seat-content > article > button:nth-child(6){
+.seat-content>article>button:nth-child(6) {
     position: absolute;
-    top: 690px; left: 80px;
+    top: 690px;
+    left: 80px;
 }
 
-.seat-content > article > button:nth-child(7){
+.seat-content>article>button:nth-child(7) {
     position: absolute;
-    top: 170px; left: 270px;
+    top: 170px;
+    left: 270px;
 }
 
-.seat-content > article > button:nth-child(8){
+.seat-content>article>button:nth-child(8) {
     position: absolute;
-    top: 255px; left: 270px;
+    top: 255px;
+    left: 270px;
 }
 
-.seat-content > article > button:nth-child(9){
+.seat-content>article>button:nth-child(9) {
     position: absolute;
-    top: 340px; left: 270px;
+    top: 340px;
+    left: 270px;
 }
 
-.seat-content > article > button:nth-child(10){
+.seat-content>article>button:nth-child(10) {
     position: absolute;
-    top: 170px; left: 480px;
+    top: 170px;
+    left: 480px;
 }
 
-.seat-content > article > button:nth-child(11){
+.seat-content>article>button:nth-child(11) {
     position: absolute;
-    top: 255px; left: 480px;
+    top: 255px;
+    left: 480px;
 }
 
-.seat-content > article > button:nth-child(12){
+.seat-content>article>button:nth-child(12) {
     position: absolute;
-    top: 340px; left: 480px;
+    top: 340px;
+    left: 480px;
 }
 
-.seat-content > article > button:nth-child(13){
+.seat-content>article>button:nth-child(13) {
     position: absolute;
-    top: 170px; left: 590px;
+    top: 170px;
+    left: 590px;
 }
 
-.seat-content > article > button:nth-child(14){
+.seat-content>article>button:nth-child(14) {
     position: absolute;
-    top: 255px; left: 590px;
+    top: 255px;
+    left: 590px;
 }
 
-.seat-content > article > button:nth-child(15){
+.seat-content>article>button:nth-child(15) {
     position: absolute;
-    top: 340px; left: 590px;
+    top: 340px;
+    left: 590px;
 }
 
-.seat-content > article > button:nth-child(16){
+.seat-content>article>button:nth-child(16) {
     position: absolute;
-    top: 690px; left: 355px;
+    top: 690px;
+    left: 355px;
 }
 
-.seat-content > article > button:nth-child(17){
+.seat-content>article>button:nth-child(17) {
     position: absolute;
-    top: 690px; left: 445px;
+    top: 690px;
+    left: 445px;
 }
 
-.seat-content > article > button:nth-child(18){
+.seat-content>article>button:nth-child(18) {
     position: absolute;
-    top: 690px; left: 535px;
+    top: 690px;
+    left: 535px;
 }
 
-.seat-content > article > button:nth-child(19){
+.seat-content>article>button:nth-child(19) {
     position: absolute;
-    top: 690px; left: 625px;
+    top: 690px;
+    left: 625px;
 }
 
-.seat-content > article > button:nth-child(20){
+.seat-content>article>button:nth-child(20) {
     position: absolute;
-    top: 690px; left: 715px;
+    top: 690px;
+    left: 715px;
 }
 
 
-/* seat-footer *//* seat-footer */
-.seat-footer{
-    width: 100%; height: 520px;
+/* seat-footer */
+/* seat-footer */
+.seat-footer {
+    width: 100%;
+    height: 520px;
     padding: 0px 80px 80px 80px;
     font-size: 50px;
 }
 
-.seat-footer > article{
+.seat-footer>article {
     width: 500px;
     margin: 0 auto;
     display: flex;
@@ -195,19 +227,21 @@
     padding: 20px 0px;
 }
 
-.seat-footer > article > input{
-    width: 230px; height: 100px;
+.seat-footer>article>input {
+    width: 230px;
+    height: 100px;
     font-size: 50px;
     text-align: center;
 }
 
-.seat-footer > div{
+.seat-footer>div {
     display: flex;
     justify-content: space-between;
     text-align: center;
     padding: 80px 0px;
 }
 
-.seat-footer > div > button{
-    width: 450px; height: 100px;
+.seat-footer>div>button {
+    width: 450px;
+    height: 100px;
 }

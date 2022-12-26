@@ -1,0 +1,69 @@
+.sales-category {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#seat-category {
+    width: 200px;
+    height: 60px;
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+#seat-category:focus {
+    outline: none;
+}
+
+.date-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.date-container div {
+    margin: 0 20px;
+}
+
+#history_start_date,
+#history_end_date {
+    height: 80px;
+    width: 270px;
+    font-size: 38px;
+    margin-right: 20px;
+}
+
+
+
+.ui-datepicker-trigger {
+    width: 50px;
+    height: 50px;
+}
+
+.search-btn {
+    height: 50px;
+    width: 200px;
+}
+
+/* .sales-th-table {
+    margin: 30px 0;
+} */
+
+.total-price {
+    float: right;
+    color: #fb6624;
+    font-size: 50px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.total-price b {
+    font-weight: 900;
+}

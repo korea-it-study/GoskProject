@@ -1,0 +1,83 @@
+/* pay-header *//* pay-header *//* pay-header *//* pay-header */
+.inout-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%; height: 400px;
+    padding: 80px;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+/* 아이콘 */
+.inout-header > i {
+   font-size: 80px;
+   color: #62c1a9;
+}
+
+/* 부제 */
+.inout-header > p {
+    font-size: 50px;
+    color: #62c1a9;
+}
+ 
+/* 설명 */
+.inout-header > div {
+    font-weight: 300;
+}
+
+/* pay-content *//* pay-content *//* pay-content *//* pay-content */
+.inout-content{
+    width: 100%; height: 1000px;
+    padding: 80px;
+    /* border-bottom: 2px solid black; */
+}
+.inout-content ul{
+    margin-top: 35px;
+    border-radius: 30px;
+    border: none;
+    overflow: hidden;
+}
+
+.inout-content ul li{
+    width: 100%;
+    height: 200px;
+    /* margin: 0 auto; */
+    padding: 0 50px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    font-size: 50px;
+    border-bottom: 1px solid black;
+}
+.inout-content ul li p{
+    line-height: 200px;
+}
+.inout-content ul li span{
+    line-height: 200px;
+}
+.inout-content ul li .close{
+    line-height: 200px;
+}
+.inout-content ul li div{
+    font-size: 70px;
+    
+    line-height: 200px;
+}
+
+/* pay-footer *//* pay-footer *//* pay-footer *//* pay-footer */
+.inout-footer{
+    width: 100%; height: 520px;
+    padding: 100px 80px 80px 80px;
+}
+.inout-footer > button{
+    background-color:gray;
+    color: white;
+    width: 300px;
+    height: 107px;
+    font-size: 40px;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto;
+}

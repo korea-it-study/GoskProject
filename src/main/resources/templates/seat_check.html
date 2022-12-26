@@ -9,9 +9,10 @@
 
 <link rel="stylesheet" href="/static/css/seat_check.css">
 <title>G-OSK 프로젝트</title>
+
 <body>
     <main class="container">
-<!-- header -->
+        <!-- header -->
         <header class="seat-header">
             <article class="seat-header-top">
                 <p>좌석선택</p>
@@ -29,18 +30,18 @@
                     </span>
                 </div>
                 <div class="seat-layer">
-                    <button class="btn sky-btn">일반석</button>
-                    <button class="btn">지정석</button>
+                    <button class="basic btn sky-btn">일반석</button>
+                    <button class="special btn">지정석</button>
                 </div>
-            </article> 
+            </article>
         </header>
-<!-- section -->
+        <!-- section -->
         <section class="seat-content">
-            <article class="seat-basic invisible">
+            <article class="seat-basic">
                 <button class="btn org-btn">Os1</button>
                 <button class="btn">Os2</button>
                 <button class="btn">Os3</button>
-                <button class="btn sky-btn">Os4</button>
+                <button class="btn">Os4</button>
                 <button class="btn">Os5</button>
                 <button class="btn org-btn">Os6</button>
                 <button class="btn">Os7</button>
@@ -48,7 +49,7 @@
                 <button class="btn">Os9</button>
                 <button class="btn">Os10</button>
                 <button class="btn">Os11</button>
-                <button class="btn">Os12</button>
+                <button class="btn sky-btn">Os12</button>
                 <button class="btn">Os13</button>
                 <button class="btn org-btn">Os14</button>
                 <button class="btn">Os15</button>
@@ -58,7 +59,7 @@
                 <button class="btn">Os19</button>
                 <button class="btn">Os20</button>
             </article>
-            <article class="seat-special ">
+            <article class="seat-special invisible">
                 <button class="btn">Os1</button>
                 <button class="btn">Os2</button>
                 <button class="btn">Os3</button>
@@ -66,7 +67,7 @@
                 <button class="btn">Os5</button>
                 <button class="btn">Os6</button>
                 <button class="btn">Os7</button>
-                <button class="btn sky-btn">Os8</button>
+                <button class="btn">Os8</button>
                 <button class="btn">Os9</button>
                 <button class="btn">Os10</button>
                 <button class="btn">Os11</button>
@@ -81,11 +82,11 @@
                 <button class="btn">Os20</button>
             </article>
         </section>
-<!-- footer -->
+        <!-- footer -->
         <footer class="seat-footer">
             <article>
                 <span>선택한 좌석</span>
-                <input type = "input" class = "locker-select-name"></span>
+                <input type="input" class="seat-select-name">
             </article>
             <div>
                 <button class="btn gray-btn">
@@ -102,4 +103,5 @@
     </main>
     <script src="/static/js/seat_check.js"></script>
 </body>
+
 </html>

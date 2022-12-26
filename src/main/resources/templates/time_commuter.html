@@ -9,17 +9,18 @@
 
 <link rel="stylesheet" href="/static/css/time_cmmuter.css">
 <title>G-OSK 정액권</title>
+
 <body>
     <main class="container">
-<!-- header -->
+        <!-- header -->
         <header class="oneday-header">
             <i class="fa-solid fa-ticket"></i>
             <p>정액권 이용권 선택</p>
             <div>원하는 이용권을 선택해 하세요.</div>
         </header>
-<!-- section -->
+        <!-- section -->
         <section class="oneday-content">
-            <ul>
+            <ul class="box1 ">
                 <li>
                     <p>
                         <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -56,34 +57,72 @@
                     <div>50,000 원</div>
                 </li>
             </ul>
+            <ul class="box2 invisible">
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        24시간
+                    </p>
+                    <div>60,000 원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        24시간
+                    </p>
+                    <div>110,000 원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        24시간
+                    </p>
+                    <div>160,000 원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        24시간
+                    </p>
+                    <div>200,000 원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        1주
+                    </p>
+                    <div>50,000 원</div>
+                </li>
+            </ul>
             <div class="junho">
-                <button>
+                <button class="back">
                     <i class="fa-solid fa-circle-chevron-left"></i>
                 </button>
-                <span>1</span>
+                <span class="one">1</span>
+                <span class="two invisible">2</span>
                 <span>/</span>
-                <span>3</span>
-                <button>
+                <span>2</span>
+                <button class="next">
                     <i class="fa-solid fa-circle-chevron-right"></i>
                 </button>
             </div>
-            
-            
+
+
 
         </section>
-<!-- footer -->
+        <!-- footer -->
         <footer class="oneday-footer">
             <p>
                 <i class="fa-solid fa-star"></i>
-                구입한 당일에만 이용할 수 있는 시간내 이용권입니다. 
+                구입한 당일에만 이용할 수 있는 시간내 이용권입니다.
             </p>
             <p>
                 <i class="fa-solid fa-star"></i>
-                결제와 함께 이용시간이 소진되기 시작합니다. 
+                결제와 함께 이용시간이 소진되기 시작합니다.
             </p>
             <p>
                 <i class="fa-solid fa-star"></i>
-                원데이 이용권은 잔여시간에 대한 관리가 되지 않습니다. 
+                원데이 이용권은 잔여시간에 대한 관리가 되지 않습니다.
             </p>
             <div>
                 <button class="junho btn gray-btn">
@@ -91,9 +130,10 @@
                     홈으로
                 </button>
             </div>
-            
+
         </footer>
     </main>
-    <script src="/static/js/pay.js"></script>
+    <script src="/static/js/time_commuter.js"></script>
 </body>
+
 </html>

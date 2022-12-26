@@ -41,11 +41,12 @@
     width: 400px;
     height: 100px;
     border-radius: 20px;
+    font-size: 50px;
     text-align: center;
 }
 
 .account-login-content > .phone-input > button {
-    font-size: 38px;
+    font-size: 50px;
     width: 200px;
     height: 107px;
     border-radius: 20px;

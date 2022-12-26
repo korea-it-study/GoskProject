@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="/static/css/reset.css">
+
+<link rel="stylesheet" href="/static/css/mypage_myinfo.css">
+<title>G-OSK 프로젝트</title>
+<body>
+    <main class="container">
+<!-- header -->
+        <header class="myinfo-header">
+            <i class="fa-solid fa-file-lines"></i>
+            <p>구매내역</p>
+            <div>고객님의 정보입니다.</div>
+        </header>
+<!-- section -->
+        <section class="myinfo-content">
+            <button class="btn-one btn black-btn">
+                오늘
+            </button>
+            <button class="btn-two btn black-btn">
+                1개월 이내
+            </button>
+            <button class="btn-two btn black-btn">
+                3개월 이내
+            </button>
+            <table class="sales-th-table">
+                <colgroup>
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                </colgroup>
+                <tr>
+                    <th>No.</th>
+                    <th>구매일자</th>
+                    <th>상품명</th>
+                    <th>결제금액</th>
+                    <th>사용</th>
+                </tr>
+            </table>
+            <div class="table-container">
+                <table class="sales-table">
+                    <colgroup>
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                    </colgroup>
+                    <tr>
+                        <td>1</td>
+                        <td>2022-12-22</td>
+                        <td>100시간 권</td>
+                        <td>100000 원</td>
+                        <td>사용중</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2022-12-22</td>
+                        <td>100시간 권</td>
+                        <td>100000 원</td>
+                        <td>사용중</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2022-12-22</td>
+                        <td>100시간 권</td>
+                        <td>100000 원</td>
+                        <td>사용중</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2022-12-22</td>
+                        <td>100시간 권</td>
+                        <td>100000 원</td>
+                        <td>사용중</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2022-12-22</td>
+                        <td>100시간 권</td>
+                        <td>100000 원</td>
+                        <td>사용중</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2022-12-22</td>
+                        <td>100시간 권</td>
+                        <td>100000 원</td>
+                        <td>사용중</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2022-12-22</td>
+                        <td>100시간 권</td>
+                        <td>100000 원</td>
+                        <td>사용중</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2022-12-22</td>
+                        <td>100시간 권</td>
+                        <td>100000 원</td>
+                        <td>사용중</td>
+                        
+                    </tr>
+                    <!-- <tr>
+                        <td></td>
+                        <td></td>
+                        <td>총 매출</td>
+                        <td class="total-price">총 100000 원</td>
+                    </tr> -->
+                </table>
+            </div>
+        </section>
+<!-- footer -->
+        <footer class="myinfo-footer">
+            <p>
+                <i class="fa-solid fa-star"></i>
+                취소/환불를 원하실 경우 카운터로 와주세요. 
+            </p>
+            <button class="btn gray-btn">
+                <i class="fa-solid fa-xmark"></i>
+                홈으로
+            </button>
+        </footer>
+    </main>
+    <script src="/static/js/pay.js"></script>
+</body>
+</html>

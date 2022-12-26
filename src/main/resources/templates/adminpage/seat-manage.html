@@ -6,16 +6,14 @@
 <script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="/static/css/reset.css">
-<link rel="stylesheet" href="/static/css/main.css">
 <link rel="stylesheet" href="/static/css/adminpage/admin.css">
 <link rel="stylesheet" href="/static/css/adminpage/seat-manage.css">
-<script src="/static/js/adminpage/admin.js"></script>
-<script src="/static/js/adminpage/seat-manage.js"></script>
 <title>G-OSK 프로젝트</title>
+
 <body>
     <main class="container">
-<!-- header -->
-        <header class="main-header">
+        <!-- header -->
+        <header class="admin-header">
             <p>G-OSK</p>
             <div class="header-bot">
                 <ul>
@@ -26,33 +24,82 @@
                     </li>
                 </ul>
             </div>
-            <div class="main-category">
-                <button class="product-inquiry">상품관리</button>
-                <button class="product-inquiry">회원관리</button>
-                <button class="product-inquiry">좌석관리</button>
-                <button class="product-inquiry">매출조회</button>
-            </div>
         </header>
-<!-- section -->
-        <section class="main-container">
+        <!-- section -->
+        <section class="admin-container">
             <div class="seat-category">
                 <ul>
-                    <li><button type="button" class="btn orange-btn reserved-seat">지정석</button></li>
-                    <li><button type="button" class="btn mint-btn nomal-seat">일반석</button></li>
+                    <li class="reserved">지정석</li>
+                    <li class="nomal">일반석</li>
                 </ul>
             </div>
             <div class="table-container">
-                <!-- 훔쳐오자. -->
+                <!-- section -->
+                <section class="seat-content">
+                    <article class="seat-basic">
+                        <button class="btn seat-btn org-btn">Os1</button>
+                        <button class="btn seat-btn">Os2</button>
+                        <button class="btn seat-btn">Os3</button>
+                        <button class="btn seat-btn org-btn">Os4</button>
+                        <button class="btn seat-btn">Os5</button>
+                        <button class="btn seat-btn org-btn">Os6</button>
+                        <button class="btn seat-btn">Os7</button>
+                        <button class="btn seat-btn">Os8</button>
+                        <button class="btn seat-btn">Os9</button>
+                        <button class="btn seat-btn">Os10</button>
+                        <button class="btn seat-btn">Os11</button>
+                        <button class="btn seat-btn">Os12</button>
+                        <button class="btn seat-btn">Os13</button>
+                        <button class="btn seat-btn org-btn">Os14</button>
+                        <button class="btn seat-btn">Os15</button>
+                        <button class="btn seat-btn">Os16</button>
+                        <button class="btn seat-btn">Os17</button>
+                        <button class="btn seat-btn">Os18</button>
+                        <button class="btn seat-btn">Os19</button>
+                        <button class="btn seat-btn">Os20</button>
+                    </article>
+                    <article class="seat-special invisible">
+                        <button class="btn seat-btn">Os1</button>
+                        <button class="btn seat-btn">Os2</button>
+                        <button class="btn seat-btn">Os3</button>
+                        <button class="btn seat-btn">Os4</button>
+                        <button class="btn seat-btn">Os5</button>
+                        <button class="btn seat-btn">Os6</button>
+                        <button class="btn seat-btn">Os7</button>
+                        <button class="btn seat-btn">Os8</button>
+                        <button class="btn seat-btn">Os9</button>
+                        <button class="btn seat-btn">Os10</button>
+                        <button class="btn seat-btn">Os11</button>
+                        <button class="btn seat-btn">Os12</button>
+                        <button class="btn seat-btn">Os13</button>
+                        <button class="btn seat-btn">Os14</button>
+                        <button class="btn seat-btn">Os15</button>
+                        <button class="btn seat-btn">Os16</button>
+                        <button class="btn seat-btn">Os17</button>
+                        <button class="btn seat-btn">Os18</button>
+                        <button class="btn seat-btn">Os19</button>
+                        <button class="btn seat-btn">Os20</button>
+                    </article>
+                </section>
+                <!-- footer -->
             </div>
             <div class="btn-all">
-                <button class="btn orange-btn repair-btn">유지보수</button>
-                <button class="btn mint-btn repair-btn">강제퇴장</button>
+                <button class="btn gray-btn repair-btn">유지보수</button>
+                <button class="btn org-btn exit-btn">강제퇴장</button>
             </div>
         </section>
-<!-- footer -->
-        <footer class="main-footer">
+        <!-- footer -->
+        <footer class="admin-footer">
+            <div class="main-category">
+                <button class="btn black-btn product-inquiry">상 품<br>관 리</button>
+                <button class="btn black-btn product-inquiry">회 원<br>관 리</button>
+                <button class="btn black-btn product-inquiry">좌 석<br>관 리</button>
+                <button class="btn black-btn product-inquiry">매 출<br>조 회</button>
+            </div>
         </footer>
     </main>
-    <script src="/static/js/main.js"></script>
+    <script src="/static/js/adminpage/admin.js"></script>
+    <script src="/static/js/adminpage/seat-manage.js"></script>
 </body>
+
 </html>

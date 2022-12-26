@@ -6,13 +6,17 @@
 <script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="/static/css/reset.css">
-<link rel="stylesheet" href="/static/css/main.css">
-<link rel="stylesheet" href="/static/css/adminpage/product-manage.css">
+<link rel="stylesheet" href="/static/css/adminpage/admin.css">
+<link rel="stylesheet" href="/static/css/adminpage/sales-manage.css">
+<!--datepicker-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>G-OSK 프로젝트</title>
+
 <body>
     <main class="container">
-<!-- header -->
-        <header class="main-header">
+        <!-- header -->
+        <header class="admin-header">
             <p>G-OSK</p>
             <div class="header-bot">
                 <ul>
@@ -23,46 +27,86 @@
                     </li>
                 </ul>
             </div>
-            <div class="main-category">
-                <button class="product-inquiry">상품관리</button>
-                <button class="product-inquiry">회원관리</button>
-                <button class="product-inquiry">좌석관리</button>
-                <button class="product-inquiry">매출조회</button>
-            </div>
+
         </header>
-<!-- section -->
-        <section class="main-container">
+        <!-- section -->
+        <section class="admin-container">
             <div class="sales-category">
-    
+                <div>
+                    <select id="seat-category" name="seat-category">
+                        <option value="all">전체</option>
+                        <option value="reserved">지정석</option>
+                        <option value="normal">일반석</option>
+                        <option class="order-status-hidden" style=" display: none;">
+                        </option>
+                    </select>
+                </div>
+                <div class="date-container">
+                    <input id="history_start_date" name="history_start_date" class="history-date date-picker"
+                        readonly="readonly" size="10" value="" type="text">
+                    <input id="history_start_date_hidden" readonly="readonly" size="10" th:value="${history_start_date}"
+                        type="hidden">
+
+                    <div>~</div>
+                    <input id="history_end_date" name="history_end_date" class="history-date date-picker"
+                        readonly="readonly" size="10" value="" type="text">
+                    <input id="history_end_date_hidden" readonly="readonly" size="10" th:value="${history_end_date}"
+                        type="hidden">
+                </div>
+                <button class="btn gray-btn search-btn">조회</button>
             </div>
+            <table class="sales-th-table">
+                <colgroup>
+                    <col width="25%">
+                    <col width="25%">
+                    <col width="25%">
+                    <col width="25%">
+                </colgroup>
+                <tr>
+                    <th>판매 날짜</th>
+                    <th>판매된 상품</th>
+                    <th>판매 횟수</th>
+                    <th>누적 금액</th>
+                </tr>
+            </table>
             <div class="table-container">
                 <table class="sales-table">
-                    <tr>
-                        <th>판매 날짜</th>
-                        <th>판매된 상품</th>
-                        <th>판매 횟수</th>
-                        <th>누적 금액</th>
-                    </tr>
+                    <colgroup>
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
+                    </colgroup>
                     <tr>
                         <td>2022. 12. 22</td>
                         <td>100시간 권</td>
                         <td>1 회</td>
                         <td>100000 원</td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
+                        <td></td>
+                        <td></td>
                         <td>총 매출</td>
                         <td class="total-price">총 100000 원</td>
-                    </tr>
+                    </tr> -->
                 </table>
-
+            </div>
+            <div class="total-price">
+                <div><b>총 매출</b> 100000원</div>
             </div>
         </section>
-<!-- footer -->
-        <footer class="main-footer">
+        <!-- footer -->
+        <footer class="admin-footer">
+            <div class="main-category">
+                <button class="btn black-btn product-inquiry">상 품<br>관 리</button>
+                <button class="btn black-btn product-inquiry">회 원<br>관 리</button>
+                <button class="btn black-btn product-inquiry">좌 석<br>관 리</button>
+                <button class="btn black-btn product-inquiry">매 출<br>조 회</button>
+            </div>
         </footer>
     </main>
-    <script src="/static/js/main.js"></script>
-    <script src="/static/js/adminpage/product-manage.js"></script>
+    <script src="/static/js/adminpage/sales-manage.js"></script>
     <script src="/static/js/adminpage/admin.js"></script>
 </body>
+
 </html>

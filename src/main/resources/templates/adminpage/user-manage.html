@@ -6,14 +6,31 @@
 <script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="/static/css/reset.css">
-<link rel="stylesheet" href="/static/css/main.css">
 <link rel="stylesheet" href="/static/css/adminpage/admin.css">
 <link rel="stylesheet" href="/static/css/adminpage/user-mange.css">
 <title>G-OSK 프로젝트</title>
+
 <body>
     <main class="container">
-<!-- header -->
-        <header class="main-header">
+        <div class="popup-back invisible">
+            <div class="popup">
+                <p>수정 전 정보</p>
+                <input type="text" value="수정 전 회원 번호" readonly>
+                <input type="text" value="수정 전 회원 비번" readonly>
+                <p>수정 할 정보</p>
+                <input type="text" placeholder="수정 할 회원 번호" onfocus="this.placeholder=''"
+                    onblur="this.placeholder='수정 할 회원 번호'">
+                <input type="text" placeholder="수정 할 회원 비번" onfocus="this.placeholder=''"
+                    onblur="this.placeholder='수정 할 회원 비번'">
+
+                <div class="popup-btns">
+                    <button class="btn gray-btn popup-update-btn">수정</button>
+                    <button class="btn org-btn popup-close-btn">닫기</button>
+                </div>
+            </div>
+        </div>
+        <!-- header -->
+        <header class="admin-header">
             <p>G-OSK</p>
             <div class="header-bot">
                 <ul>
@@ -24,38 +41,53 @@
                     </li>
                 </ul>
             </div>
-            <div class="main-category">
-                <button class="product-inquiry">상품관리</button>
-                <button class="product-inquiry">회원관리</button>
-                <button class="product-inquiry">좌석관리</button>
-                <button class="product-inquiry">매출조회</button>
-            </div>
         </header>
-<!-- section -->
-        <section class="main-container">
+        <!-- section -->
+        <section class="admin-container">
+            <table class="th-table">
+                <colgroup>
+                    <col width="">
+                    <col width="20%">
+                    <col width="15%">
+                    <col width="15%">
+                </colgroup>
+                <tr>
+                    <th>전화번호</th>
+                    <th>비밀번호</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+            </table>
             <div class="table-container">
                 <table class="user-table">
+                    <colgroup>
+                        <col width="">
+                        <col width="20%">
+                        <col width="15%">
+                        <col width="15%">
+                    </colgroup>
+                    <!-- update-btn, dlt-btn css는 admin.css에 있음 -->
                     <tr>
-                        <th>회원 이름</th>
-                        <th>회원 전화번호</th>
-                        <th>회원 정보 수정</th>
-                        <th>회원 정보 삭제</th>
-                    </tr>
-                    <tr>
-                        <td>홍길동</td>
                         <td>010-1234-5678</td>
-                        <td><button class="btn orange-btn update-btn">수정</button></td>
-                        <td><button class="btn mint-btn dlt-btn">삭제</button></td>
+                        <td>1234</td>
+                        <td><button class="btn update-btn">수정</button></td>
+                        <td><button class="btn dlt-btn">삭제</button></td>
                     </tr>
                 </table>
             </div>
         </section>
-<!-- footer -->
-        <footer class="main-footer">
+        <!-- footer -->
+        <footer class="admin-footer">
+            <div class="main-category">
+                <button class="btn black-btn product-inquiry">상 품<br>관 리</button>
+                <button class="btn black-btn product-inquiry">회 원<br>관 리</button>
+                <button class="btn black-btn product-inquiry">좌 석<br>관 리</button>
+                <button class="btn black-btn product-inquiry">매 출<br>조 회</button>
+            </div>
         </footer>
     </main>
-    <script src="/static/js/main.js"></script>
     <script src="/static/js/adminpage/user-mange.js"></script>
     <script src="/static/js/adminpage/admin.js"></script>
 </body>
+
 </html>
