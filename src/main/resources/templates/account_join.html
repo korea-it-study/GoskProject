@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
@@ -15,52 +16,36 @@
         <header class="join-header">
             <i class="fa-solid fa-user-group"></i>
             <p>회원가입</p>
-            <div>휴대폰번호와 성명을 입력해주세요</div>
+            <div>휴대폰번호와 비밀번호 4자리를 입력해주세요</div>
         </header>
 <!-- section -->
         <section class="join-content">
             <ul>
                 <li>
                     <span>휴대폰 번호</span>
-                    <input type="text">
+                    <input type="text" maxlength='13' class="phone-id">
                 </li>
                 <li>
-                    <span>성명(실명)</span>
-                    <input type="text">
+                    <span>비밀번호</span>
+                    <input type="password" maxlength='4'class="phone-pw">
                 </li>
             </ul>
         </section>
         <article class="join-keybord">
-            <ul>
-                <li>
-                    <button class="btn white-btn">1</button>
-                    <button class="btn white-btn">2</button>
-                    <button class="btn white-btn">3</button>
-                    <button class="btn white-btn">4</button>
-                    <button class="btn white-btn">5</button>
-                    <button class="btn white-btn">6</button>
-                    <button class="btn white-btn">7</button>
-                    <button class="btn white-btn">8</button>
-                    <button class="btn white-btn">9</button>
-                    <button class="btn white-btn">0</button>
-                </li>
-                <li>
-                    <button class="btn white-btn">ㅂ</button>
-                    <button class="btn white-btn">ㅈ</button>
-                    <button class="btn white-btn">ㄷ</button>
-                    <button class="btn white-btn">ㄱ</button>
-                    <button class="btn white-btn">ㅅ</button>
-                    <button class="btn white-btn">ㅛ</button>
-                    <button class="btn white-btn">ㅕ</button>
-                    <button class="btn white-btn">ㅑ</button>
-                    <button class="btn white-btn">ㅐ</button>
-                    <button class="btn white-btn">ㅔ</button>
-                    <button class="btn white-btn">◀</button>
-                </li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+            <button class ="btn white-btn">1</button>
+            <button class ="btn white-btn">2</button>
+            <button class ="btn white-btn">3</button>
+            <button class ="btn white-btn">4</button>
+            <button class ="btn white-btn">5</button>
+            <button class ="btn white-btn">6</button>
+            <button class ="btn white-btn">7</button>
+            <button class ="btn white-btn">8</button>
+            <button class ="btn white-btn">9</button>
+            <button class ="btn white-btn">CLR</button>
+            <button class ="btn white-btn">0</button>
+            <button class ="btn white-btn">
+                <i class="fa-solid fa-delete-left"></i>
+            </button>
         </article>
 <!-- footer -->
         <footer class="join-footer">
