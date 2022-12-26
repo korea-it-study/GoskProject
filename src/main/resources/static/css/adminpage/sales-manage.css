@@ -3,17 +3,20 @@
     align-items: center;
     margin-bottom: 30px;
 
-    display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+.seat-search{
+    display: flex;
+}
 
 #seat-category {
-    width: 200px;
-    height: 60px;
+    width: 500px;
+    height: 70px;
+    padding: 10px 20px;
     font-size: 38px;
-    margin-bottom: 20px;
+    margin: 10px;
 }
 
 #seat-category:focus {
@@ -48,8 +51,11 @@
 }
 
 .search-btn {
-    height: 50px;
     width: 200px;
+    height: 70px;
+    padding: 10px 20px;
+    font-size: 38px;
+    margin: 10px;
 }
 
 /* .sales-th-table {

@@ -32,15 +32,6 @@
         <!-- section -->
         <section class="admin-container">
             <div class="sales-category">
-                <div>
-                    <select id="seat-category" name="seat-category">
-                        <option value="all">전체</option>
-                        <option value="reserved">지정석</option>
-                        <option value="normal">일반석</option>
-                        <option class="order-status-hidden" style=" display: none;">
-                        </option>
-                    </select>
-                </div>
                 <div class="date-container">
                     <input id="history_start_date" name="history_start_date" class="history-date date-picker"
                         readonly="readonly" size="10" value="" type="text">
@@ -53,7 +44,16 @@
                     <input id="history_end_date_hidden" readonly="readonly" size="10" th:value="${history_end_date}"
                         type="hidden">
                 </div>
-                <button class="btn gray-btn search-btn">조회</button>
+                <div class="seat-search">
+                    <select id="seat-category" name="seat-category">
+                        <option value="all">전체</option>
+                        <option value="reserved">지정석</option>
+                        <option value="normal">일반석</option>
+                        <option class="order-status-hidden" style=" display: none;">
+                        </option>
+                    </select>
+                    <button class="btn gray-btn search-btn">조회</button>
+                </div>
             </div>
             <table class="sales-th-table">
                 <colgroup>
