@@ -1,8 +1,5 @@
-/* pay-header */
-/* pay-header */
-/* pay-header */
-/* pay-header */
-.oneday-header {
+/* time-header */
+.time-header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -14,27 +11,24 @@
 }
 
 /* 아이콘 */
-.oneday-header>i {
+.time-header>i {
     font-size: 80px;
     color: #62c1a9;
 }
 
 /* 부제 */
-.oneday-header>p {
+.time-header>p {
     font-size: 50px;
     color: #62c1a9;
 }
 
 /* 설명 */
-.oneday-header>div {
+.time-header>div {
     font-weight: 300;
 }
 
-/* pay-content */
-/* pay-content */
-/* pay-content */
-/* pay-content */
-.oneday-content {
+/* time-content */
+.time-content {
     width: 100%;
     height: 1000px;
     padding: 50px 80px 80px 80px;
@@ -42,7 +36,7 @@
     /* border-bottom: 2px solid black; */
 }
 
-.oneday-content ul li {
+.time-content ul li {
     width: 800px;
     height: 140px;
     margin: 40px auto;
@@ -57,55 +51,62 @@
     border-bottom: 1px solid black;
 }
 
-.oneday-content ul li p {
+.time-content ul li p {
     width: 500px;
     /* margin: auto 0; */
     line-height: 138.4px;
     border-right: 7.5px dotted #3a3a3a;
 }
 
-.oneday-content ul li div {
+.time-content ul li div {
     color: #fb6624;
     width: 300px;
     margin: auto 0;
 
 }
 
-.oneday-content .junho button {
+.time-content .junho button {
     border: none;
     background-color: #3a3a3a;
 }
 
-.oneday-content .junho i {
+.time-content .junho i {
     margin: 0 30px 0 30px;
     color: #fb6624;
     font-size: 50px;
 }
+.time-content {
+    overflow:auto; 
+}
+.time-content::-webkit-scrollbar {
+    width: 20px;  /* 스크롤바의 너비 */
+}
 
+.time-content::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #62c1a9; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
 
-
-/* pay-footer */
-/* pay-footer */
-/* pay-footer */
-/* pay-footer */
-.oneday-footer {
+/* time-footer */
+.time-footer {
     width: 100%;
     height: 520px;
-    padding: 100px 80px 80px 80px;
+    padding: 65px 80px 80px 80px;
 
 }
 
-.oneday-footer p {
+.time-footer p {
     font-size: 30px;
     padding-left: 40px;
 }
 
-.oneday-footer div {
+.time-footer div {
     margin: 50px auto;
     width: 300px;
 
 }
 
-.oneday-footer button {
+.time-footer button {
     height: 100px;
 }
