@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gosk.GoskProject20221221.repository.UserRepository">
+
+    <resultMap id="user" type="com.Gosk.GoskProject20221221.domain.user.User">
+        <result property="user_id" column="user_id"></result>
+        <result property="role_id" column="role_id"></result>
+        <result property="seat_num" column="seat_num"></result>
+        <result property="reserved_num" column="reserved_num"></result>
+        <result property="locker_num" column="locker_num"></result>
+        <result property="user_phone" column="user_phone"></result>
+        <result property="user_pw" column="user_pw"></result>
+        <result property="user_time" column="user_time"></result>
+        <result property="user_date" column="user_date"></result>
+        <result property="user_locker_date" column="user_locker_date"></result>
+        <result property="user_create_date" column="user_create_date"></result>
+        <result property="user_update_date" column="user_update_date"></result>
+    </resultMap>
+
+<!--  회원가입  -->
+    <insert id="join"
+            parameterType="com.Gosk.GoskProject20221221.domain.user.User"
+    >
+        INSERT INTO
+            user_mst(
+                user_id,
+                user_phone,
+                user_pw,
+                user_create_date,
+                user_update_date
+            )
+
+        VALUES(
+            0,
+            #{user_phone},
+            #{user_pw},
+            NOW(),
+            NOW()
+            )
+
+    </insert>
+
+<!--  유저 정보 들고오기  -->
+    <select id="userSelect" parameterType="String" resultMap="user">
+        SELECT
+            um.user_id,
+            um.role_id,
+            um.seat_num,
+            um.reserved_num,
+            um.locker_num,
+            um.user_phone,
+            um.user_pw,
+            um.user_time,
+            um.user_date,
+            um.user_locker_date,
+            um.user_create_date,
+            um.user_update_date,
+
+            rm.role_id,
+            rm.role
+
+        FROM
+            user_mst um LEFT OUTER JOIN role_mst rm ON (rm.role_id = um.role_id)
+
+        WHERE
+            user_phone = #{user_phone}
+    </select>
+
+</mapper>

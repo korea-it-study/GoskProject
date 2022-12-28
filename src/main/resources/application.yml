@@ -3,9 +3,12 @@ server:
   port: 8000
 
 spring:
+  mvc:
+    static-path-pattern: /static/**
+
   thymeleaf:
     prefix: "classpath:templates/"
-    suffix: .html
+    suffix: ".html"
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver

@@ -55,3 +55,40 @@ function phoneFormat(phoneNumber) {
       value.slice(value.length - 4),
     ].join('-');
   }
+
+
+  // 회원가입 정보 보내기
+
+  const joinBtn = document.querySelector(".join-btn");
+
+  joinBtn.onclick = () => {
+    userInfoData();
+  }
+
+function userInfoData() {
+
+    let joinInfo = {
+        userPhone : $(".phone-id").val().replaceAll("-", ""),
+        userPw : $(".phone-pw").val()
+    }
+
+    $.ajax({
+        async: false,
+        type: "post",
+        url: "/api/account/join",
+        contentType: "application/json",
+        data: JSON.stringify(joinInfo),
+        dataType: "json",
+        success: (response) => {
+            console.log(response);
+            alert("회원가입 완료!");
+            alert("userId : " + joinInfo.userPhone + "\n" +
+            "userPw : " + joinInfo.userPw);
+            location.replace("/index");
+        },
+        error: (error) => {
+            console.log(error);
+            alert("회원가입 실패!");
+        }
+    })
+}
