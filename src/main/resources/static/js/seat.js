@@ -1,3 +1,34 @@
+// 페이지 이동 //// 페이지 이동 //
+$(function(){
+    var time = localStorage.getItem("time");
+    if(time == "reserved"){
+        $('.basic').addClass('invisible');
+        $('.seat-basic').addClass('invisible');
+    }else if(time == "oneday" || time == "commuter"){
+        $('.special').addClass('invisible');
+        $('.seat-special').addClass('invisible');
+    }
+})
+
+
+// 홈으로
+$('.index-btn').click(function(){
+    location.href = "/index";
+    localStorage.clear();
+});
+
+// 다음단계
+$('.next-btn').click(function(){
+    localStorage.setItem("pickSeat", $('.seat-select-name').val());
+    var time = localStorage.getItem("time");
+
+    if($('.seat-select-name').val() != ""){
+        location.href = "/time/" + time;
+    }else{
+        alert("좌석을 선택해 주세요.");
+    }
+});
+
 const seatbasic = document.querySelector(".seat-basic");
 const seatspecial = document.querySelector(".seat-special");
 const basic = document.querySelector(".basic");

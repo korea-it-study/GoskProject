@@ -55,7 +55,7 @@
 .seat-header-bot>.seat-layer {
     width: 300px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
 }
 
 .seat-header-bot>.seat-layer button {
