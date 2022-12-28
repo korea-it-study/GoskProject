@@ -84,41 +84,41 @@
                     <article class="locker-management-content invisible">
                         <div>
                             <div class ="AL">
-                                <button class = "btn">AL01</button>
-                                <button class = "btn">AL02</button>
-                                <button class = "btn">AL03</button>
-                                <button class = "btn">AL04</button>
-                                <button class = "btn">AL05</button>
-                                <button class = "btn">AL06</button>
-                                <button class = "btn">AL07</button>
-                                <button class = "btn">AL08</button>
-                                <button class = "btn">AL09</button>
-                                <button class = "btn">AL10</button>
-                                <button class = "btn">AL11</button>
-                                <button class = "btn">AL12</button>
+                                <button class = "btn seat-btn">AL01</button>
+                                <button class = "btn seat-btn">AL02</button>
+                                <button class = "btn seat-btn">AL03</button>
+                                <button class = "btn seat-btn">AL04</button>
+                                <button class = "btn seat-btn">AL05</button>
+                                <button class = "btn seat-btn">AL06</button>
+                                <button class = "btn seat-btn">AL07</button>
+                                <button class = "btn seat-btn">AL08</button>
+                                <button class = "btn seat-btn">AL09</button>
+                                <button class = "btn seat-btn">AL10</button>
+                                <button class = "btn seat-btn">AL11</button>
+                                <button class = "btn seat-btn">AL12</button>
                             </div>
                             <div class ="BL">
-                                <button class = "btn">BL01</button>
-                                <button class = "btn">BL02</button>
-                                <button class = "btn">BL03</button>
-                                <button class = "btn">BL04</button>
-                                <button class = "btn">BL05</button>
-                                <button class = "btn">BL06</button>
-                                <button class = "btn">BL07</button>
-                                <button class = "btn">BL08</button>
-                                <button class = "btn">BL09</button>
-                                <button class = "btn">BL10</button>
-                                <button class = "btn">BL11</button>
-                                <button class = "btn">BL12</button>
+                                <button class = "btn seat-btn">BL01</button>
+                                <button class = "btn seat-btn">BL02</button>
+                                <button class = "btn seat-btn">BL03</button>
+                                <button class = "btn seat-btn">BL04</button>
+                                <button class = "btn seat-btn">BL05</button>
+                                <button class = "btn seat-btn">BL06</button>
+                                <button class = "btn seat-btn">BL07</button>
+                                <button class = "btn seat-btn">BL08</button>
+                                <button class = "btn seat-btn">BL09</button>
+                                <button class = "btn seat-btn">BL10</button>
+                                <button class = "btn seat-btn">BL11</button>
+                                <button class = "btn seat-btn">BL12</button>
                             </div>
                             <div class ="CL">
-                                <button class = "btn">CL01</button>
-                                <button class = "btn">CL02</button>
-                                <button class = "btn">CL03</button>
-                                <button class = "btn">CL04</button>
-                                <button class = "btn">CL05</button>
-                                <button class = "btn">CL06</button>
-                                <button class = "btn">CL07</button>
+                                <button class = "btn seat-btn">CL01</button>
+                                <button class = "btn seat-btn">CL02</button>
+                                <button class = "btn seat-btn">CL03</button>
+                                <button class = "btn seat-btn">CL04</button>
+                                <button class = "btn seat-btn">CL05</button>
+                                <button class = "btn seat-btn">CL06</button>
+                                <button class = "btn seat-btn">CL07</button>
                             </div>
                         </div>
                     </article>
@@ -130,6 +130,32 @@
                 <button class="btn gray-btn repair-btn">유지보수</button>
                 <button class="btn org-btn exit-btn">강제퇴장</button>
             </div>
+            <!-- popup -->
+            <div class="popup-back invisible">
+                <div class="popup">
+                    <span>변경할 대상</span>
+                    <select name="bdiv" id="ctg" class="sel_cate">
+                        <option value="nomal">일반석</option>
+                        <option value="special">지정석</option>
+                        <option value="locker">사물함</option>
+                    </select>
+                    <span>변경할 좌석</span>
+                    <select name="sdiv" id="ctg_nm" class="sel_list">
+                        <option value="">소분류</option>
+                       </select>
+                    <span>이동할 좌석</span>
+                    <select name="cdiv" id="ctg_nm2" class="sel_list2">
+                        <option value="">소소분류</option>
+                    </select>
+    
+                    <div class="popup-btns">
+                        <span class="user-show">사용자 : 홍길동</span>
+                        <button class="btn gray-btn popup-register-btn">변경</button>
+                        <button class="btn org-btn close-btn">닫기</button>
+                    </div>
+                </div>
+            </div>
+            
         </section>
         <!-- footer -->
         <footer class="admin-footer">

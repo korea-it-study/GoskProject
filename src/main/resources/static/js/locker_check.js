@@ -11,7 +11,3 @@ $(".locker-management-content button").click(function(){
         }
     }
 })
-
-
-
-
