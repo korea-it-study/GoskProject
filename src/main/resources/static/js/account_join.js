@@ -84,7 +84,7 @@ function userInfoData() {
             alert("회원가입 완료!");
             alert("userId : " + joinInfo.userPhone + "\n" +
             "userPw : " + joinInfo.userPw);
-            location.replace("/index");
+            location.replace("/account/login");
         },
         error: (error) => {
             console.log(error);

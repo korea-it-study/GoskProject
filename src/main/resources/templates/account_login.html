@@ -21,16 +21,18 @@
         </header>
         <!-- section -->
         <section class="join-content">
-            <ul>
-                <li>
-                    <span>휴대폰 번호</span>
-                    <input type="text" maxlength='13' class="phone-id">
-                </li>
-                <li>
-                    <span>비밀번호</span>
-                    <input type="password" maxlength='4' class="phone-pw">
-                </li>
-            </ul>
+            <form action="/account/login" method="post">
+                <ul>
+                    <li>
+                        <span>휴대폰 번호</span>
+                        <input type="text" name="user_phone" maxlength='13' class="phone-id">
+                    </li>
+                    <li>
+                        <span>비밀번호</span>
+                        <input type="password" name="user_pw" maxlength='4' class="phone-pw">
+                    </li>
+                </ul>
+            </form>
         </section>
         <article class="join-keybord">
             <button class="btn white-btn">1</button>
