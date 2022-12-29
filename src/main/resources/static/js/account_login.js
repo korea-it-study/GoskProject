@@ -1,6 +1,6 @@
 
 
-$('.join-keybord > button').click(function () {
+$('.login-keybord > button').click(function () {
     var phoneIdInput = $(".phone-id").val();
     var phonePwInput = $(".phone-pw").val();
 
