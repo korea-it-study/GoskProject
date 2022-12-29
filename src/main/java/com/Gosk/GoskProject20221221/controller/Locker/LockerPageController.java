@@ -11,11 +11,11 @@ public class LockerPageController {
 
     @GetMapping("/check")
     public String check() {
-        return "locker_check";
+        return "locker/locker_check";
     }
 
     @GetMapping("/time")
     public String time() {
-        return "locker_time";
+        return "locker/locker_time";
     }
 }

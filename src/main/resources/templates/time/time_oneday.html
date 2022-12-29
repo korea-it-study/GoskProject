@@ -7,14 +7,14 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="/static/css/reset.css">
 
-<link rel="stylesheet" href="/static/css/time.css">
-<title>G-OSK 사물함 결제</title>
+<link rel="stylesheet" href="/static/css/time/time.css">
+<title>G-OSK 일일권</title>
 <body>
     <main class="container">
 <!-- header -->
         <header class="time-header">
             <i class="fa-solid fa-ticket"></i>
-            <p>사물함 이용권 선택</p>
+            <p>원데이 이용권 선택</p>
             <div>원하는 이용권을 선택해 하세요.</div>
         </header>
 <!-- section -->
@@ -23,63 +23,56 @@
                 <li>
                     <p>
                         <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
-                        1주(사물함)
+                        <span>2시간</span>
                     </p>
-                    <div>4,000원</div>
+                    <div>3000원</div>
                 </li>
                 <li>
                     <p>
                         <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
-                        2주(사물함)
+                        <span>3시간</span>
                     </p>
-                    <div>6,000원</div>
+                    <div>4000원</div>
                 </li>
                 <li>
                     <p>
                         <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
-                        3주(사물함)
+                        <span>5시간</span>
                     </p>
-                    <div>10,000원</div>
+                    <div>5000원</div>
                 </li>
                 <li>
                     <p>
                         <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
-                        4주(사물함)
+                        <span>7시간</span>
                     </p>
-                    <div>14,000원</div>
+                    <div>7000원</div>
                 </li>
                 <li>
                     <p>
                         <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
-                        6주(사물함)
+                        <span>8시간</span>
                     </p>
-                    <div>20,000원</div>
+                    <div>9000원</div>
                 </li>
             </ul>
-            <!-- <div class="junho">
-                <button>
-                    <i class="fa-solid fa-circle-chevron-left"></i>
-                </button>
-                <span>1</span>
-                <span>/</span>
-                <span>3</span>
-                <button>
-                    <i class="fa-solid fa-circle-chevron-right"></i>
-                </button>
-            </div> -->
         </section>
 <!-- footer -->
         <footer class="time-footer">
             <p>
                 <i class="fa-solid fa-star"></i>
-                구입하신 시간 내에서 자유롭게 이용할 수 있는 이용권입니다.
+                구입한 당일에만 이용할 수 있는 시간내 이용권입니다. 
             </p>
             <p>
                 <i class="fa-solid fa-star"></i>
-                사물함은 실제 사용한 시간만큼만 실시간 차감/관리 됩니다.
+                결제와 함께 이용시간이 소진되기 시작합니다. 
+            </p>
+            <p>
+                <i class="fa-solid fa-star"></i>
+                원데이 이용권은 잔여시간에 대한 관리가 되지 않습니다. 
             </p>
             <div>
-                <button class="btn gray-btn">
+                <button class="index-btn btn gray-btn">
                     <i class="fa-solid fa-xmark"></i>
                     홈으로
                 </button>
@@ -87,6 +80,6 @@
             
         </footer>
     </main>
-    <script src="/static/js/pay.js"></script>
+    <script src="/static/js/time/time_oneday.js"></script>
 </body>
 </html>

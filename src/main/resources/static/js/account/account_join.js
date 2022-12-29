@@ -62,13 +62,13 @@ function phoneFormat(phoneNumber) {
   const joinBtn = document.querySelector(".join-btn");
 
   joinBtn.onclick = () => {
-    userInfoData();
+    checkDuplicate();
   }
 
 function userInfoData() {
 
     let joinInfo = {
-        userPhone : $(".phone-id").val().replaceAll("-", ""),
+        userPhone : $(".phone-id").val(),
         userPw : $(".phone-pw").val()
     }
 
@@ -91,4 +91,31 @@ function userInfoData() {
             alert("회원가입 실패!");
         }
     })
+}
+
+// 중복체크
+
+function checkDuplicate() {
+
+    let joinInfo = {
+        userPhone : $(".phone-id").val()
+    }
+
+    $.ajax({
+        async: false,
+        type: "post",
+        url: "/api/account/join/checkDuplicate",
+        contentType: "application/json",
+        data: JSON.stringify(joinInfo),
+        dataType: "json",
+        success: (response) => {
+            console.log("joinInfo : ", joinInfo);
+            alert("사용가능한 아이디입니다!");
+            userInfoData();
+        },
+        error: (error) => {
+            console.log(error);
+            alert("이미 가입된 아이디입니다!");
+        }
+    });
 }

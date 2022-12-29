@@ -59,8 +59,8 @@ repairBtn.onclick = () => {
 
 const moveBtn = document.querySelector(".move-btn");
 const selCate = document.querySelector(".sel_cate");
-const selList = document.querySelector(".sel_list");
-const selList2 = document.querySelector(".sel_list2");
+const selList = document.querySelector(".sel_list"); // 소분류
+const selList2 = document.querySelector(".sel_list2"); // 소소분류
 
 const popupBack = document.querySelector(".popup-back");
 const popup = document.querySelector(".popup");
@@ -94,8 +94,8 @@ function categoryList(sVal) {
    
     } else if(sVal == "special" || sVal == "nomal" || sVal == "locker") {
 
-        selList.innerHTML = "";
-        selList2.innerHTML = "";
+        selList.innerHTML = ""; // 소분류
+        selList2.innerHTML = ""; // 소소분류
 
         for(let i = 0; i < 3; i++) {
             selList.innerHTML += `

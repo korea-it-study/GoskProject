@@ -4,6 +4,11 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Gosk.GoskProject20221221.repository.UserRepository">
 
+    <resultMap id="role" type="com.Gosk.GoskProject20221221.domain.user.Role">
+    <result property="role_id" column="role_id"></result>
+    <result property="role" column="role"></result>
+
+    </resultMap>
     <resultMap id="user" type="com.Gosk.GoskProject20221221.domain.user.User">
         <result property="user_id" column="user_id"></result>
         <result property="role_id" column="role_id"></result>

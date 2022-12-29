@@ -1,12 +1,16 @@
 package com.Gosk.GoskProject20221221.domain.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class User {
     private int user_id;
     private int role_id;

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -29,7 +30,7 @@ public class UserReqDto {
         return User.builder()
                 .user_id(userId)
                 .user_phone(userPhone)
-                .user_pw(userPw)
+                .user_pw(new BCryptPasswordEncoder().encode(userPw))
                 .user_create_date(userCreateDate)
                 .user_update_date(userUpdateDate)
                 .build();

@@ -11,14 +11,14 @@ public class TimePageController {
 
     @GetMapping("/oneday")
     public String oneday() {
-        return "time_oneday";
+        return "time/time_oneday";
     }
     @GetMapping("/commuter")
     public String commuter() {
-        return "time_commuter";
+        return "time/time_commuter";
     }
     @GetMapping("/reserved")
     public String reserved() {
-        return "time_reserved";
+        return "time/time_reserved";
     }
 }

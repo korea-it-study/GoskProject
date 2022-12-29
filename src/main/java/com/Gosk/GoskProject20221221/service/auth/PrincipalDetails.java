@@ -2,6 +2,7 @@ package com.Gosk.GoskProject20221221.service.auth;
 
 import com.Gosk.GoskProject20221221.domain.user.User;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Getter
+@Slf4j
 public class PrincipalDetails implements UserDetails {
 
     private User user;
@@ -24,10 +26,14 @@ public class PrincipalDetails implements UserDetails {
      @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
+//         log.info("getRole 들고오나? :::::::::::::::::::::::::::::::: {}", user.getRole().getRole());
+
         Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(() -> user.getRole().getRole());
 
-        // return null;
+//        log.info("getRole 들고오나? :::::::::::::::::::::::::::::::: {}", user.getRole().getRole());
+
+//         return null;
          return authorities;
     }
 

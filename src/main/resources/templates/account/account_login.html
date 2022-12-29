@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<link rel="stylesheet" href="/static/css/reset.css">
+
+<link rel="stylesheet" href="/static/css/account/account_login.css">
+<title>G-OSK 프로젝트</title>
+
+<body>
+    <main class="container">
+        <!-- header -->
+        <header class="login-header">
+            <i class="fa-solid fa-user-group"></i>
+            <p>로그인</p>
+            <div>휴대폰번호와 비밀번호 4자리를 입력해주세요</div>
+        </header>
+        <!-- section -->
+        <form action="/account/login" method="post">
+            <section class="login-content">
+                <ul>
+                    <li>
+                        <span>휴대폰 번호</span>
+                        <input type="text" name="user_phone" maxlength='13' class="phone-id">
+                    </li>
+                    <li>
+                        <span>비밀번호</span>
+                        <input type="password" name="user_pw" maxlength='4' class="phone-pw">
+                    </li>
+                </ul>
+            </section>
+            <article class="login-keybord">
+                <button type="button" class="btn white-btn">1</button>
+                <button type="button" class="btn white-btn">2</button>
+                <button type="button" class="btn white-btn">3</button>
+                <button type="button" class="btn white-btn">4</button>
+                <button type="button" class="btn white-btn">5</button>
+                <button type="button" class="btn white-btn">6</button>
+                <button type="button" class="btn white-btn">7</button>
+                <button type="button" class="btn white-btn">8</button>
+                <button type="button" class="btn white-btn">9</button>
+                <button type="button" class="btn white-btn">CLR</button>
+                <button type="button" class="btn white-btn">0</button>
+                <button type="button" class="btn white-btn">
+                    <i class="fa-solid fa-delete-left"></i>
+                </button>
+            </article>
+            <!-- footer -->
+            <footer class="login-footer">
+                <button type="button" class="btn gray-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                    홈으로
+                </button>
+                <button class="btn org-btn" type="submit">
+                    <i class="fa-solid fa-check"></i>
+                    로그인
+                </button>
+            </footer>
+        </form>
+    </main>
+
+    <script src="/static/js/account/account_login.js"></script>
+</body>
+
+</html>

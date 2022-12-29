@@ -20,7 +20,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userPhone) throws UsernameNotFoundException {
 
         User user = userRepository.userSelect(userPhone);
-        log.info("로그인 중복 체크 : {}", userPhone);
+        log.info("로그인 정보 : {}", userPhone);
 
         if (user == null) {
             log.error("아이디 정보 없음");
