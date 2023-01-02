@@ -107,3 +107,7 @@ a{
     clear: both;
 }
 
+/* admin-btn 로고 설정 */
+.admin-btn{
+    cursor: pointer;
+}
