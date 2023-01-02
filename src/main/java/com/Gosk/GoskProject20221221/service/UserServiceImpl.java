@@ -44,6 +44,8 @@ public class UserServiceImpl implements UserService {
 
         if(result == 0) {
           log.info("에러!");
+        }else if(userEntity.getUser_pw().length() != 4) {
+            log.info("비밀번호 자릿수 에러!");
         }
 
         return false;

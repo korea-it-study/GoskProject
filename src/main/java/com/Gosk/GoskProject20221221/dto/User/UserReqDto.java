@@ -16,9 +16,6 @@ import java.time.LocalDateTime;
 public class UserReqDto {
     private int userId;
     private int roleId;
-    private String seatNum;
-    private String reservedNum;
-    private String lockerNum;
     private String userPhone;
     private String userPw;
     private LocalDateTime userTime;

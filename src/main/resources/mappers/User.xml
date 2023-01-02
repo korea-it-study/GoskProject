@@ -12,16 +12,13 @@
     <resultMap id="user" type="com.Gosk.GoskProject20221221.domain.user.User">
         <result property="user_id" column="user_id"></result>
         <result property="role_id" column="role_id"></result>
-        <result property="seat_num" column="seat_num"></result>
-        <result property="reserved_num" column="reserved_num"></result>
-        <result property="locker_num" column="locker_num"></result>
         <result property="user_phone" column="user_phone"></result>
         <result property="user_pw" column="user_pw"></result>
         <result property="user_time" column="user_time"></result>
         <result property="user_date" column="user_date"></result>
-        <result property="user_locker_date" column="user_locker_date"></result>
         <result property="user_create_date" column="user_create_date"></result>
         <result property="user_update_date" column="user_update_date"></result>
+        <collection property="role" resultMap="role"></collection>
     </resultMap>
 
 <!--  회원가입  -->
@@ -52,14 +49,10 @@
         SELECT
             um.user_id,
             um.role_id,
-            um.seat_num,
-            um.reserved_num,
-            um.locker_num,
             um.user_phone,
             um.user_pw,
             um.user_time,
             um.user_date,
-            um.user_locker_date,
             um.user_create_date,
             um.user_update_date,
 

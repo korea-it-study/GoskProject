@@ -17,7 +17,7 @@ import java.util.Map;
 @Aspect
 @Component
 public class ValidationAop {
-    @Pointcut("@annotation(com.Gosk.GoskProject20221221.aop.annotation.ValidAspect")
+    @Pointcut("@annotation(com.Gosk.GoskProject20221221.aop.annotation.ValidAspect)")
     private void pointCut() {};
 
     @Before("pointCut()")

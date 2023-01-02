@@ -59,3 +59,15 @@ function dateToStr(){
   
     return year+'년 '+month+'월 '+day+'일 '+dayName+'요일 '+localTime;    
 }
+
+function autoLogout() {
+    location.replace("/logout");
+}
+
+window.onload = () => {
+    let principal = getPrincipal();
+    
+    if(principal != "") {
+        autoLogout();
+    }
+}
