@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gosk.GoskProject20221221.repository.TimePriceRepository">
+    <!--table7.원데이 상품등록-->
+    <insert id="onedayPriceInsert"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice"
+            useGeneratedKeys="true"
+            keyProperty="oneday_price_id"
+    >
+        insert into
+        oneday_price_mst(
+        oneday_price_id,
+        oneday_time,
+        oneday_price
+        )
+        values(
+        0,
+        #{oneday_time},
+        #{oneday_price}
+        )
+    </insert>
+
+    <!--table8 정액권 시간 상품등록-->
+    <insert id="commuterTpPriceInsert"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice"
+            useGeneratedKeys="true"
+            keyProperty="commuter_tp_id"
+    >
+        insert into
+        commuter_time_price_mst(
+        commuter_tp_id,
+        commuter_tp_time,
+        commuter_tp_price
+        )
+        values(
+        0,
+        #{commuter_tp_time},
+        #{commuter_tp_price}
+        )
+    </insert>
+
+    <!--table9 정액권 기간 상품등록-->
+    <insert id="commuterDpPriceInsert"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice"
+            useGeneratedKeys="true"
+            keyProperty="commuter_dp_id"
+    >
+        insert into
+        commuter_day_price_mst(
+        commuter_dp_id,
+        commuter_dp_time,
+        commuter_dp_price
+        )
+        values(
+        0,
+        #{commuter_dp_time},
+        #{commuter_dp_price}
+        )
+    </insert>
+
+    <!--table10 지정석 상품등록-->
+    <insert id="reservedPriceInsert"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice"
+            useGeneratedKeys="true"
+            keyProperty="reserved_price_id"
+    >
+        insert into
+        reserved_price_mst(
+        reserved_price_id,
+        reserved_time,
+        reserved_price
+        )
+        values(
+        0,
+        #{reserved_time},
+        #{reserved_price}
+        )
+    </insert>
+
+
+<!--    &lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;-->
+<!--    <resultMap id="donateArea" type="com.unicef.domain.donate.Donate">-->
+<!--        &lt;!&ndash; 조인을 위함 &ndash;&gt;-->
+<!--        <result property="donate_area_id" column="donate_area_id"></result>-->
+<!--        <result property="donate_area" column="donate_area"></result>-->
+<!--    </resultMap>-->
+<!--    <resultMap id="donate" type="com.unicef.domain.donate.Donate">-->
+<!--        &lt;!&ndash; 조인을 위함 &ndash;&gt;-->
+<!--        <result property="donate_id" column="donate_id"></result>-->
+<!--        <result property="user_id" column="user_id"></result>-->
+<!--        <result property="donate_type" column="donate_type"></result>-->
+<!--        <result property="donate_amount" column="donate_amount"></result>-->
+<!--        <result property="create_date" column="create_date"></result>-->
+<!--        <result property="update_date" column="update_date"></result>-->
+<!--    </resultMap>-->
+<!--    <select id="getDonateList"-->
+<!--            parameterType="Integer"-->
+<!--            resultMap="donate">-->
+<!--        select-->
+<!--        dm.donate_id,-->
+<!--        dm.user_id,-->
+<!--        dm.donate_type,-->
+<!--        dm.donate_amount,-->
+
+<!--        dam.donate_area,-->
+
+<!--        dm.create_date,-->
+<!--        dm.update_date-->
+<!--        from-->
+<!--        donate_mst dm-->
+<!--        left outer join donate_area_mst dam on (dam.donate_area_id = dm.donate_area_id)-->
+<!--        where-->
+<!--        user_id = #{user_id}-->
+<!--    </select>-->
+
+<!--    <delete id="deleteDonate" parameterType="com.unicef.domain.donate.Donate">-->
+<!--        delete-->
+<!--        from-->
+<!--        donate_mst-->
+<!--        where-->
+<!--        donate_id = #{donate_id}-->
+<!--    </delete>-->
+
+</mapper>

@@ -10,53 +10,8 @@
 <body>
     <main class="container">
         <!-- header -->
-        <div class="popup-back invisible">
-            <div class="popup">
-                <select name="" id="">
-                    <option value="">일반석</option>
-                    <option value="">지정석</option>
-                </select>
-                <select name="" id="">
-                    <option value="">원데이</option>
-                    <option value="">시간권</option>
-                    <option value="">기간권</option>
-                </select>
-                <input type="text" placeholder="상품이름" onfocus="this.placeholder=''" onblur="this.placeholder='상품이름'">
-                <input type="text" placeholder="가격" onfocus="this.placeholder=''" onblur="this.placeholder='가격'">
-
-                <div class="popup-btns">
-                    <button class="btn gray-btn popup-register-btn">등록</button>
-                    <button class="btn org-btn close-btn">닫기</button>
-                </div>
-            </div>
-        </div>
-        <div class="popup-back2 invisible">
-            <div class="popup2">
-                <select name="" id="">
-                    <option value="">수정상품 자리</option>
-                    <option value="">일반석</option>
-                    <option value="">지정석</option>
-                </select>
-                <select name="" id="">
-                    <option value="">수정상품 시간</option>
-                    <option value="">원데이</option>
-                    <option value="">시간권</option>
-                    <option value="">기간권</option>
-                </select>
-                <input type="text" placeholder="수정상품 이름" onfocus="this.placeholder=''"
-                    onblur="this.placeholder='수정상품이름'">
-                <input type="text" placeholder="수정상품 가격" onfocus="this.placeholder=''"
-                    onblur="this.placeholder='수정상품가격'">
-
-                <div class="popup2-btns">
-                    <button class="btn gray-btn popup2-update-btn">수정</button>
-                    <button class="btn org-btn popup2-close-btn">닫기</button>
-                </div>
-            </div>
-        </div>
-
         <header class="admin-header">
-            <p>G-OSK</p>
+            <p class="admin-btn">G-OSK</p>
             <div class="header-bot">
                 <ul>
                     <li>그레이즈 스터디카페</li>
@@ -66,12 +21,6 @@
                     </li>
                 </ul>
             </div>
-            <!-- <div class="main-category">
-                <button class="btn black-btn product-inquiry">상품관리</button>
-                <button class="btn black-btn product-inquiry">회원관리</button>
-                <button class="btn black-btn product-inquiry">좌석관리</button>
-                <button class="btn black-btn product-inquiry">매출조회</button>
-            </div> -->
         </header>
         <!-- section -->
         <section class="admin-container">
@@ -112,8 +61,8 @@
                             <br>1시간
                         </td>
                         <td><span>1000</span>원</td>
-                        <td><button class="btn update-btn">수정</button></td>
-                        <td><button class="btn dlt-btn">삭제</button></td>
+                        <td><button class="update-btn btn">수정</button></td>
+                        <td><button class="dlt-btn btn">삭제</button></td>
                     </tr>
                     <tr>
                         <td>지정석</td>
@@ -121,12 +70,12 @@
                             <br>1시간
                         </td>
                         <td><span>1000</span>원</td>
-                        <td><button class="btn update-btn">수정</button></td>
-                        <td><button class="btn dlt-btn">삭제</button></td>
+                        <td><button class="update-btn btn">수정</button></td>
+                        <td><button class="dlt-btn btn">삭제</button></td>
                     </tr>
                 </table>
             </div>
-            <button class="btn org-btn register-btn">상품 등록</button>
+            <button class="register-btn btn org-btn">상품 등록</button>
         </section>
         <!-- footer -->
         <footer class="admin-footer">
@@ -137,6 +86,51 @@
                 <button class="btn black-btn product-inquiry">매 출<br>조 회</button>
             </div>
         </footer>
+        <!-- popup -->
+        <div class="plus-pop-back invisible">
+            <div class="plus-popup">
+                <select name="" id="" class="plus-seat">
+                    <option value="일반석">일반석</option>
+                    <option value="지정석">지정석</option>
+                </select>
+                <select name="" id="" class="plus-type">
+                    <option value="원데이">원데이(H)</option>
+                    <option value="시간권">시간권(H)</option>
+                    <option value="기간권">기간권(W)</option>
+                </select>
+                <input class="plus-time" type="text" placeholder="상품이름">
+                <input class="plus-price" type="text" placeholder="가격">
+
+                <div class="popup-btns">
+                    <button class="plus-register-btn btn gray-btn">등록</button>
+                    <button class="btn org-btn plus-close-btn">닫기</button>
+                </div>
+            </div>
+        </div>
+        <div class="fix-pop-back invisible">
+            <div class="fix-popup">
+                <select name="" id="">
+                    <option value="">수정상품 자리</option>
+                    <option value="">일반석</option>
+                    <option value="">지정석</option>
+                </select>
+                <select name="" id="">
+                    <option value="">수정상품 시간</option>
+                    <option value="">원데이</option>
+                    <option value="">시간권</option>
+                    <option value="">기간권</option>
+                </select>
+                <input type="text" placeholder="수정상품 이름" onfocus="this.placeholder=''"
+                    onblur="this.placeholder='수정상품이름'">
+                <input type="text" placeholder="수정상품 가격" onfocus="this.placeholder=''"
+                    onblur="this.placeholder='수정상품가격'">
+
+                <div class="popup-btns">
+                    <button class="fix-update-btn btn gray-btn">수정</button>
+                    <button class="fix-close-btn btn org-btn">닫기</button>
+                </div>
+            </div>
+        </div>
     </main>
     <script src="/static/js/admin/productlist.js"></script>
     <script src="/static/js/admin/admin.js"></script>

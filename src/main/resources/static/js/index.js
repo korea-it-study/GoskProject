@@ -1,5 +1,10 @@
 // 페이지 이동 //// 페이지 이동 //
 
+// 관리자 페이지
+$(".admin-btn").dblclick(function() {
+    location.replace("/admin/userlist"); 
+})
+
 // 회원가입
 $('.join-btn').click(function(){
     location.href = "/account/join";

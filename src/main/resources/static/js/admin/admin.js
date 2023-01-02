@@ -1,14 +1,23 @@
+// 페이지 이동 //// 페이지 이동 //
+
+// 관리자 페이지
+$(".admin-btn").dblclick(function() {
+    location.replace("/index"); 
+})
+
+//
+
 const productInquiry = document.querySelectorAll(".product-inquiry");
 
 productInquiry[0].onclick = () => {
-    location.replace("/templates/adminpage/product-manage.html")
+    location.href = "/admin/productlist";
 }
 productInquiry[1].onclick = () => {
-    location.replace("/templates/adminpage/user-manage.html")
+    location.href = "/admin/userlist";
 }
 productInquiry[2].onclick = () => {
-    location.replace("/templates/adminpage/seat-manage.html")
+    location.href = "/admin/seatlist";
 }
 productInquiry[3].onclick = () => {
-    location.replace("/templates/adminpage/sales-manage.html")
+    location.href = "/admin/saleslist";
 }
