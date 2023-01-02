@@ -66,3 +66,13 @@ var nickNameCheck = RegExp(/^[가-힣a-zA-Z0-9]{2,10}$/);
 var emailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 var birthdayCheck = RegExp(/^(19|20)[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/);
 var phonNumberCheck = RegExp(/^01[0179][0-9]{7,8}$/);
+
+
+// 홈으로 버튼 index로 보내기
+
+const indexBtn = document.querySelector(".index-btn");
+
+indexBtn.onclick = () => {
+    location.href = "/index";
+    localStorage.clear();
+}

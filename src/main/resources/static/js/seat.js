@@ -10,13 +10,6 @@ $(function(){
     }
 })
 
-
-// 홈으로
-$('.index-btn').click(function(){
-    location.href = "/index";
-    localStorage.clear();
-});
-
 // 다음단계
 $('.next-btn').click(function(){
     localStorage.setItem("pickSeat", $('.seat-select-name').val());
