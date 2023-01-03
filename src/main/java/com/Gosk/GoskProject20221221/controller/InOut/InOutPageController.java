@@ -13,4 +13,5 @@ public class InOutPageController {
     public String inOut(){
         return "inout";
     }
+
 }

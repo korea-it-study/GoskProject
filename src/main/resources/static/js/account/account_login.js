@@ -56,4 +56,9 @@ function phoneFormat(phoneNumber) {
     ].join('-');
 }
 
+//홈버튼 인덱스로 보내기
 
+$('.index-btn').click(function(){
+    location.href = "/index";
+    localStorage.clear();
+});

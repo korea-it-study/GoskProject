@@ -33,13 +33,20 @@ $('.locker-btn').click(function(){
 
 // 입실
 $('.in-btn').click(function(){
-    location.href = "/account/login";
+    location.href = "/inout";
 });
 
 // 퇴실
 $('.out-btn').click(function(){
-    // ajax로 put 버튼 보내면서 popup창 띄우기
+    location.href = "/inout";
 });
+
+
+// 입실 데이터 보내기
+
+
+
+// 퇴실 데이터 보내기
 
 
 // 현재시간 안내 //// 현재시간 안내 //
