@@ -1,3 +1,13 @@
+
+// 로그인 정보 //// 로그인 정보 //
+window.onload = () => {
+    let principal = getPrincipal();
+    
+    if(principal != "") {
+        location.replace("/logout");
+    }
+}
+
 // 페이지 이동 //// 페이지 이동 //
 
 // 관리자 페이지
@@ -63,16 +73,4 @@ function dateToStr(){
     var dayName = week[date.getDay()];
   
     return year+'년 '+month+'월 '+day+'일 '+dayName+'요일 '+localTime;    
-}
-
-function autoLogout() {
-    location.replace("/logout");
-}
-
-window.onload = () => {
-    let principal = getPrincipal();
-    
-    if(principal != "") {
-        autoLogout();
-    }
 }
