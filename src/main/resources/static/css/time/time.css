@@ -49,6 +49,8 @@
     border-radius: 10px;
     border: none;
     border-bottom: 1px solid black;
+
+    cursor: pointer;
 }
 
 .time-content ul li p {

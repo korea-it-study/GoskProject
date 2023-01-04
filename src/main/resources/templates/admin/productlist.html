@@ -25,10 +25,9 @@
         <!-- section -->
         <section class="admin-container">
             <div class="product-category">
-                <ul>
-                    <li class="reserved">지정석</li>
-                    <li class="nomal">일반석</li>
-                </ul>
+                <button class="reserved btn white-btn">지정석</button>
+                <button class="normal btn white-btn">일반석</button>
+                <button class="locker btn white-btn">사물함</button>
             </div>
             <table>
                 <colgroup>
@@ -102,10 +101,8 @@
                     <option value="">시간권</option>
                     <option value="">기간권</option>
                 </select>
-                <input type="text" placeholder="수정상품 이름" onfocus="this.placeholder=''"
-                    onblur="this.placeholder='수정상품이름'">
-                <input type="text" placeholder="수정상품 가격" onfocus="this.placeholder=''"
-                    onblur="this.placeholder='수정상품가격'">
+                <input class="fix-time" type="text" placeholder="수정상품 이름">
+                <input class="fix-price" type="text" placeholder="수정상품 가격">
 
                 <div class="popup-btns">
                     <button class="fix-update-btn btn gray-btn">수정</button>
