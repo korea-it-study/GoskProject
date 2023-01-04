@@ -21,4 +21,6 @@ public class TimePageController {
     public String reserved() {
         return "time/time_reserved";
     }
+    @GetMapping("/locker")
+    public String locker(){return "locker/locker_time";}
 }

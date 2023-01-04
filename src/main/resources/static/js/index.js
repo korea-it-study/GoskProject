@@ -38,6 +38,7 @@ $('.oneday-btn, .commuter-btn, .reserved-btn').click(function(){
 
 // 사물함
 $('.locker-btn').click(function(){
+    localStorage.setItem("time", $(this).val());
     location.href = "/locker/check";
 });
 

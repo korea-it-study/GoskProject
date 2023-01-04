@@ -16,7 +16,19 @@ $(".locker-management-content button").click(function(){
 // 홈으로 버튼 index로 보내기
 
 $('.index-btn').click(function(){
-    alert(1);
-    location.href = "/index";
+    location.replace("/index");
     localStorage.clear();
 });
+
+
+$('.next-btn').click(function(){
+    localStorage.setItem("pickSeat", $('.locker-select-name').val());
+    var time = localStorage.getItem("time");
+
+    if($('.locker-select-name').val() != ""){
+        location.href = "/time/" + time;
+    }else{
+        alert("좌석을 선택해 주세요.");
+    }
+});
+

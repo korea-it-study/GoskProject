@@ -32,4 +32,5 @@ public class PayApi {
         System.out.println("[PAY API] reserved seat pay data :::::::" + reservedSeatReqDto);
         return ResponseEntity.ok().body(new CMRespDto<>(1, "reserved seat data success", reservedSeatReqDto));
     }
+    //여기다가 라커 하기
 }
