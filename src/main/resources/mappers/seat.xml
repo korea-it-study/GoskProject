@@ -25,11 +25,13 @@
                 user_id,
                 seat_start_time,
                 seat_total_time
+        )
 
         VALUES (
+            #{seat_id},
             #{user_id},
             NOW(),
-            #{seat_total_time}
+            DATE_ADD(NOW(), INTERVAL #{reserved_total_time} HOUR)
         )
     </insert>
 
