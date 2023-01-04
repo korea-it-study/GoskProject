@@ -61,10 +61,37 @@ $(".seat-content button").click(function(){
             $('.seat-select-name').attr('value',$(this).text());
         }
     } else {
-        $(this).addClass('sky-btn').siblings().removeClass('sky-btn');
         $(".seat-select-name").attr('value',"");
     }
 })
 
 
-// 데이터 보내기
+// 데이터 받아서 사용중인 좌석 org-btn으로 바꾸기 //
+
+//데이터 받아오기
+
+function getSeatData() {
+    $.ajax({
+        async:false,
+        url: "/api/seat/useSeat",
+        type: "get",
+        contentType: "application/json",
+        dataType: "json",
+        success: (response) => {
+            alert("seat data 받아오기 성공");
+            alert(response.data);
+            console.log(response);
+        },
+        error: (error) => {
+            alert("seat data 받아오기 실패");
+            console.log(error);
+        }
+    });
+}
+
+window.onload = () => {
+    getSeatData();
+}
+
+// 사용중인 좌석 오렌지색으로 바꾸기
+

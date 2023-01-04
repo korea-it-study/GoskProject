@@ -4,8 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 @Data
 @Builder
 public class Seat {

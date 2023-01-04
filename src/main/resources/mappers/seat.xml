@@ -18,6 +18,14 @@
         <result property="reserved_total_time" column="reserved_total_time"></result>
     </resultMap>
 
+    <resultMap id="user_mst" type="com.Gosk.GoskProject20221221.domain.user.User">
+        <result property="user_id" column="user_id"></result>
+        <result property="user_phone" column="user_phone"></result>
+        <result property="user_date" column="user_date"></result>
+        <result property="user_time" column="user_time"></result>
+    </resultMap>
+
+<!--    일반석(원데이) 결제 데이터 보내기    -->
     <insert id="paySeat" parameterType="com.Gosk.GoskProject20221221.domain.seat.Seat">
         INSERT INTO
             seat_mst(
@@ -30,11 +38,12 @@
         VALUES (
             #{seat_id},
             #{user_id},
-            NOW(),
-            DATE_ADD(NOW(), INTERVAL #{reserved_total_time} HOUR)
+            DATE_ADD(NOW(), INTERVAL 9 HOUR),
+            DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL (#{seat_total_time} + 9) HOUR)
         )
     </insert>
 
+<!--    지정석(기간권) 데이터 보내기    -->
     <insert id="payReserved" parameterType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
         INSERT INTO
             reserved_seat_mst(
@@ -47,46 +56,28 @@
         VALUES(
             #{reserved_seat_id},
             #{user_id},
-            NOW(),
-            DATE_ADD(NOW(), INTERVAL #{reserved_total_time} DAY)
+            DATE_ADD(NOW(), INTERVAL 9 HOUR),
+            DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL #{reserved_total_time} DAY)
         )
     </insert>
 
+<!--    일반석 정보 불러오기    -->
     <select id="seatSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.Seat">
         SELECT
-            sm.seat_id,
-            sm.user_id,
-            sm.seat_start_time,
-            sm.seat_total_time,
-
-            um.user_id,
-            um.user_phone,
-            um.user_time
-
+            seat_id,
+            user_id
         FROM
-            seat_mst sm LEFT OUTER JOIN user_mst um ON (sm.seat_id = um.user_id)
-
-        WHERE
-            seat_id = #{seat_id}
+            seat_mst
 
     </select>
 
+<!--    지정석 정보 불러오기    -->
     <select id="reservedSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
         SELECT
-            rm.reserved_seat_id,
-            rm.user_id,
-            rm.reserved_start_time,
-            rm.reserved_total_time,
-
-            um.user_id,
-            um.user_phone,
-            um.user_time
-
+            reserved_seat_id,
+            user_id
         FROM
-            reserved_seat_mst rm LEFT OUTER JOIN user_mst um ON (rm.reserved_seat_id = um.user_id)
-
-        WHERE
-            reserved_seat_id = #{reserved_seat_id}
+            reserved_seat_mst
     </select>
 
 </mapper>

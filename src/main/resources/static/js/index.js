@@ -87,5 +87,6 @@ window.onload = () => {
     
     if(principal != "") {
         location.replace("/logout");
+        localStorage.clear();
     }
 }
