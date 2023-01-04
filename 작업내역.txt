@@ -9,53 +9,10 @@
 [src] > [java] > [controller] > [donate] > [api]
 	TimeApi
 [src] > [java] > [service] > [donate]
-	TimeService(IF)_oneday
-	TimeServiceImpl_oneday
+	TimeService(IF)_
+	TimeServiceImpl
 [src] > [resources] > [mapper] 
 	timePrice.xml
--------------------------------------------------------------
-[src] > [java] > [domain] > [donate] --------// DB
-	Donate
+-------------------------------------------------------------[상품 등록 완료]
 [src] > [java] > [dto] > [donate] --------// Client
-	DonateReqDto
-[src] > [java] > [repository] > [donate]
-	DonateRepository
-[src] > [java] > [controller] > [donate] > [api]
-	DonateApi
-[src] > [resources] > [mapper] 
-	donate.xml
-[src] > [java] > [service] > [donate]
-	DonateService
-	DonateServiceImpl
--------------------------------------------------------------// 정기결제 일시결제 1차 완료
-[src] > [java] > [controller] > [account]
-	AccountController
-[src] > [java] > [domain] > [account]--------// DB
-	Role
-	User
-[src] > [java] > [dto] > [account] --------// Client
-	UserReqDto
-[src] > [java] > [repository] > [account]
-	UserRepository
-[src] > [resources] > [mapper]
-	user.xml
-[src] > [java] > [controller] > [account] > [api]
-	UsertApi
-[src] > [java] > [service] > [account] 
-	UserService
-	UserServiceImpl
--------------------------------------------------------------// 회원가입 완료
-
-[src] > [java] > [service] > [auth]
-	PrincipalDetailsService
-	PrincipalDetails : https://bloodfinger.tistory.com/29
-[src] > [java] > [config]
-	SecurityConfig.java
-	WebConfig.java
-[src] > [java] > [handler]
-	AuthFailureHandler
-[static] > [templates] > [account]
-	login.html (로그인 from + model error 표기)
-[src] > [java] > [controller] > [account]
-	AccountController
-
+	TimePriceRespDto

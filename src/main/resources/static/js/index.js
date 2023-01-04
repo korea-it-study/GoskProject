@@ -1,3 +1,13 @@
+
+// 로그인 정보 //// 로그인 정보 //
+window.onload = () => {
+    let principal = getPrincipal();
+    
+    if(principal != "") {
+        location.replace("/logout");
+    }
+}
+
 // 페이지 이동 //// 페이지 이동 //
 
 // 관리자 페이지

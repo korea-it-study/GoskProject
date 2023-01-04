@@ -80,40 +80,47 @@
     </insert>
 
 
-<!--    &lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;-->
-<!--    <resultMap id="donateArea" type="com.unicef.domain.donate.Donate">-->
-<!--        &lt;!&ndash; 조인을 위함 &ndash;&gt;-->
-<!--        <result property="donate_area_id" column="donate_area_id"></result>-->
-<!--        <result property="donate_area" column="donate_area"></result>-->
-<!--    </resultMap>-->
-<!--    <resultMap id="donate" type="com.unicef.domain.donate.Donate">-->
-<!--        &lt;!&ndash; 조인을 위함 &ndash;&gt;-->
-<!--        <result property="donate_id" column="donate_id"></result>-->
-<!--        <result property="user_id" column="user_id"></result>-->
-<!--        <result property="donate_type" column="donate_type"></result>-->
-<!--        <result property="donate_amount" column="donate_amount"></result>-->
-<!--        <result property="create_date" column="create_date"></result>-->
-<!--        <result property="update_date" column="update_date"></result>-->
-<!--    </resultMap>-->
-<!--    <select id="getDonateList"-->
-<!--            parameterType="Integer"-->
-<!--            resultMap="donate">-->
-<!--        select-->
-<!--        dm.donate_id,-->
-<!--        dm.user_id,-->
-<!--        dm.donate_type,-->
-<!--        dm.donate_amount,-->
-
-<!--        dam.donate_area,-->
-
-<!--        dm.create_date,-->
-<!--        dm.update_date-->
-<!--        from-->
-<!--        donate_mst dm-->
-<!--        left outer join donate_area_mst dam on (dam.donate_area_id = dm.donate_area_id)-->
-<!--        where-->
-<!--        user_id = #{user_id}-->
-<!--    </select>-->
+    <!-- SELECT --><!-- SELECT --><!-- SELECT --><!-- SELECT --><!-- SELECT --><!-- SELECT --><!-- SELECT -->
+    <select id="getOnedayPriceListSelect"
+            parameterType="List"
+            resultType="com.Gosk.GoskProject20221221.domain.TimePrice">
+        SELECT
+            oneday_time,
+            oneday_price
+        from
+            oneday_price_mst
+        ORDER BY oneday_time
+    </select>
+    <select id="getCommuterTpPriceListSelect"
+            parameterType="List"
+            resultType="com.Gosk.GoskProject20221221.domain.TimePrice">
+        SELECT
+            commuter_tp_time,
+            commuter_tp_price
+        from
+            commuter_time_price_mst
+        ORDER BY commuter_tp_time
+    </select>
+    <select id="getCommuterDpPriceListSelect"
+            parameterType="List"
+            resultType="com.Gosk.GoskProject20221221.domain.TimePrice">
+        SELECT
+            commuter_dp_time,
+            commuter_dp_price
+        from
+            commuter_day_price_mst
+        ORDER BY commuter_dp_time
+    </select>
+    <select id="getReservedPriceListSelect"
+            parameterType="List"
+            resultType="com.Gosk.GoskProject20221221.domain.TimePrice">
+        SELECT
+            reserved_time,
+            reserved_price
+        from
+            reserved_price_mst
+        ORDER BY reserved_time
+    </select>
 
 <!--    <delete id="deleteDonate" parameterType="com.unicef.domain.donate.Donate">-->
 <!--        delete-->

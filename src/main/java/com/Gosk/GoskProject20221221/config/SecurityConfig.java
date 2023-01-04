@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .passwordParameter("user_pw")
                     .loginPage("/account/login") // 우리가 만든 로그인 페이지
                     .loginProcessingUrl("/account/login")
-                    .defaultSuccessUrl("/index", false)
+                    .defaultSuccessUrl("/logout", false)
                     .successHandler(new AuthSuccessHandler()) // 로그인 성공시 들어가는 주소
                     .failureHandler(new AuthFailureHandler()) // 로그인 실패
                     .and()

@@ -1,4 +1,4 @@
-package com.Gosk.GoskProject20221221.dto;
+package com.Gosk.GoskProject20221221.dto.Time;
 
 import com.Gosk.GoskProject20221221.domain.TimePrice;
 import lombok.Data;

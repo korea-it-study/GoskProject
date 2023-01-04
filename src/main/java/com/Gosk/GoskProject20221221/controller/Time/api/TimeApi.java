@@ -2,7 +2,7 @@ package com.Gosk.GoskProject20221221.controller.Time.api;
 
 
 import com.Gosk.GoskProject20221221.dto.CMRespDto;
-import com.Gosk.GoskProject20221221.dto.TimePriceReqDto;
+import com.Gosk.GoskProject20221221.dto.Time.TimePriceReqDto;
 import com.Gosk.GoskProject20221221.service.TimeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

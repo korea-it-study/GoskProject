@@ -6,28 +6,101 @@ let plusType = null;
 let plusTime = null;
 let plusPrice = null;
 
+// 현재 상품 호출
+let timePriceList = TimePriceList();
 
-const reserved = document.querySelector(".reserved");
-const nomal = document.querySelector(".nomal");
-
-const plusPopup = document.querySelector(".plus-popup");
-const plusPopBack = document.querySelector(".plus-pop-back");
-const plusRegisterBtn = document.querySelector(".plus-register-btn");
 
 const updateBtns = document.querySelectorAll(".update-btn");
 const fixPopBack = document.querySelector(".fix-pop-back");
 const fixUpdateBtn = document.querySelector(".fix-update-btn");
 const fixCloseBtn = document.querySelector(".fix-close-btn");
 
+// 좌석 조회
+$('.product-category > ul > li').click(function(){
+    if($(this).length){
+        alert(43)
+        $(this).attr('id', '');
+        $('.prouct-table').find('tr').removeClass("invisible");
+    }
+});
+
+
 // 지정석만 조회
-reserved.onclick = () => {
-    alert("지정석");
-}
+$('.reserved').click(function(){
+    $(this).attr('id', 'active-btn');
+    $('.reserved-item').removeClass("invisible");
+    $('.nomal-item').addClass("invisible");
+})
 
 // 일반석만 조회
-nomal.onclick = () => {
-    alert("일반석");
-}
+$('.nomal').click(function(){
+    $(this).attr('id', 'active-btn');
+    $('.nomal-item').removeClass("invisible");
+    $('.reserved-item').addClass("invisible");
+})
+
+// 기본 상품 데이터
+$(function(){
+        //onedayTime        
+        for(i=0; i<timePriceList[0].length; i++){
+            $('.prouct-table').append(`    
+                <tr class="nomal-item">
+                    <td>일반석</td>
+                    <td>원데이
+                        <br>${timePriceList[0][i].onedayTime}시간
+                    </td>
+                    <td><span>${timePriceList[0][i].onedayPrice}</span>원</td>
+                    <td><button class="update-btn btn">수정</button></td>
+                    <td><button class="dlt-btn btn">삭제</button></td>
+                </tr>
+            `);
+        }
+
+        //commuterTp      
+        for(i=0; i<timePriceList[1].length; i++){
+            $('.prouct-table').append(`    
+                <tr class="nomal-item">
+                    <td>일반석</td>
+                    <td>시간권
+                        <br>${timePriceList[1][i].commuterTpTime}시간
+                    </td>
+                    <td><span>${timePriceList[1][i].commuterTpPrice}</span>원</td>
+                    <td><button class="update-btn btn">수정</button></td>
+                    <td><button class="dlt-btn btn">삭제</button></td>
+                </tr>
+            `);
+        }
+
+        //commuterDp       
+        for(i=0; i<timePriceList[2].length; i++){
+            $('.prouct-table').append(`    
+                <tr class="nomal-item">
+                    <td>일반석</td>
+                    <td>기간권
+                        <br>${timePriceList[2][i].commuterDpTime}일
+                    </td>
+                    <td><span>${timePriceList[2][i].commuterDpPrice}</span>원</td>
+                    <td><button class="update-btn btn">수정</button></td>
+                    <td><button class="dlt-btn btn">삭제</button></td>
+                </tr>
+            `);
+        }
+
+        //reserved      
+        for(i=0; i<timePriceList[3].length; i++){
+            $('.prouct-table').append(`  
+                <tr class="reserved-item">
+                    <td>지정석</td>
+                    <td>기간권
+                        <br>${timePriceList[3][i].reservedTime}일
+                    </td>
+                    <td><span>${timePriceList[3][i].reservedPrice}</span>원</td>
+                    <td><button class="update-btn btn">수정</button></td>
+                    <td><button class="dlt-btn btn">삭제</button></td>
+                </tr>
+            `);
+        }
+});
 
 
 // 등록 팝업 // // 등록 팝업 //
@@ -120,9 +193,8 @@ fixUpdateBtn.onclick = () => {
 
 
 
-// ajax로 보내야 하는 데이터
+// ajax. 상품 등록 데이터
 function plusInfoData(plusInfo, pickLink){  
-
     $.ajax({
         async: false,
         type: "POST",
@@ -131,7 +203,9 @@ function plusInfoData(plusInfo, pickLink){
         data: JSON.stringify(plusInfo),
         dataType: "json",
         success: (response) => {
-            console.log(response);
+            console.log(response);    
+            $('.plus-pop-back').addClass("invisible");
+            $(location).prop("href", location.href);
         },
         error: (error) => {
             alert(error);

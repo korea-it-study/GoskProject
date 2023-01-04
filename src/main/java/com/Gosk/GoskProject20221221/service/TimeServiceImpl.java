@@ -1,11 +1,16 @@
 package com.Gosk.GoskProject20221221.service;
 
 import com.Gosk.GoskProject20221221.domain.TimePrice;
-import com.Gosk.GoskProject20221221.dto.TimePriceReqDto;
+import com.Gosk.GoskProject20221221.dto.Time.*;
 import com.Gosk.GoskProject20221221.repository.TimePriceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -65,4 +70,61 @@ public class TimeServiceImpl implements TimeService {
         }
         return false;
     }
+
+    @Override
+    public List<OnedayPriceRespDto> getOnedayPriceListSelect() throws Exception {
+        // 원데이 상품 리스트 가져오기
+        Map<String, Object> paramsMap = new HashMap<String, Object>();
+        List<OnedayPriceRespDto> onedayPriceList = new ArrayList<OnedayPriceRespDto>();
+
+        timePrice.getOnedayPriceListSelect().forEach(timePrice -> {
+            onedayPriceList.add(timePrice.getOnedayPriceEntity());
+        });
+
+        log.info("[TimeServiceImpl] Oneday 상품리스트 성공");
+        return onedayPriceList;
+    }
+
+    @Override
+    public List<CommuterTpPriceRespDto> getCommuterTpPriceListSelect() throws Exception {
+        // 정액 시간제 상품 리스트 가져오기
+        Map<String, Object> paramsMap = new HashMap<String, Object>();
+        List<CommuterTpPriceRespDto> commuterTpPriceList = new ArrayList<CommuterTpPriceRespDto>();
+
+        timePrice.getCommuterTpPriceListSelect().forEach(timePrice -> {
+            commuterTpPriceList.add(timePrice.getCommuterTpPriceEntity());
+        });
+
+        log.info("[TimeServiceImpl] commuterTp 상품리스트 성공");
+        return commuterTpPriceList;
+    }
+
+    @Override
+    public List<CommuterDpPriceRespDto> getCommuterDpPriceListSelect() throws Exception {
+        // 정액 기간제 상품 리스트 가져오기
+        Map<String, Object> paramsMap = new HashMap<String, Object>();
+        List<CommuterDpPriceRespDto> commuterDpPriceList = new ArrayList<CommuterDpPriceRespDto>();
+
+        timePrice.getCommuterDpPriceListSelect().forEach(timePrice -> {
+            commuterDpPriceList.add(timePrice.getCommuterDpPriceEntity());
+        });
+
+        log.info("[TimeServiceImpl] commuterDp 상품리스트 성공");
+        return commuterDpPriceList;
+    }
+
+    @Override
+    public List<ReservedPriceRespDto> getReservedPriceListSelect() throws Exception {
+        // 지정석 상품 리스트 가져오기
+        Map<String, Object> paramsMap = new HashMap<String, Object>();
+        List<ReservedPriceRespDto> reservedPriceList = new ArrayList<ReservedPriceRespDto>();
+
+        timePrice.getReservedPriceListSelect().forEach(timePrice -> {
+            reservedPriceList.add(timePrice.getReservedPriceEntity());
+        });
+
+        log.info("[TimeServiceImpl] commuterDp 상품리스트 성공");
+        return reservedPriceList;
+    }
+
 }

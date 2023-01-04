@@ -1,9 +1,7 @@
+let responseData = null;
 
-// 로그인 정보 들고다니기
-    
+// 로그인 정보 들고다니기    
 function getPrincipal() {
-    let responseData = null;
-
     $.ajax({
         async: false,
         type: "GET",
@@ -15,14 +13,30 @@ function getPrincipal() {
         },
         error: (error) => {
             console.log(error);
-            alert("로그인 정보 들고오기 실패???");
         }
     });
 
     return responseData;
 }
 
+// 상품 불러오기
+function TimePriceList(){  
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: "/api/admin/productlist",
+        dataType: "json",
+        success: (response) => {
+            console.log(response);    
+            responseData = response.data;
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    })
 
+    return responseData;
+}
 
 // 유저 정보 리스트 들고오기
 
