@@ -69,4 +69,22 @@
 
     </select>
 
+    <select id="reservedSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
+        SELECT
+            rm.reserved_seat_id,
+            rm.user_id,
+            rm.reserved_start_time,
+            rm.reserved_total_time,
+
+            um.user_id,
+            um.user_phone,
+            um.user_time
+
+        FROM
+            reserved_seat_mst rm LEFT OUTER JOIN user_mst um ON (rm.reserved_seat_id = um.user_id)
+
+        WHERE
+            reserved_seat_id = #{reserved_seat_id}
+    </select>
+
 </mapper>

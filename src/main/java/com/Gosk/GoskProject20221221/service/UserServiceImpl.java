@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
 
         if (user != null) { // 아이디가 기존에 이미 있다면, (중복)
             Map<String, String> errorMap = new HashMap<String, String>();
+
             errorMap.put("duplicateFlag", "이미 가입된 아이디입니다");
             throw new CustomValidationException("DuplicateMainUsername MainUsername", errorMap);
         }
