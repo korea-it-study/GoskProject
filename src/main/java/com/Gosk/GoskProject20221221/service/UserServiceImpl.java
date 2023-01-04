@@ -21,11 +21,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkDuplicationUserPhone(String userPhone) {
 
-        log.info("[2 UserServiceImpl] 아이디 중복체크 :::::::::::::: {}", userPhone);
+//        log.info("[2 UserServiceImpl] 아이디 중복체크 :::::::::::::: {}", userPhone);
 
         User user = userRepository.userSelect(userPhone);
 
-        log.info("[1 UserServiceImpl] 아이디 중복체크 :::::::::::::: {}", user);
+//        log.info("[1 UserServiceImpl] 아이디 중복체크 :::::::::::::: {}", user);
 
         if (user != null) { // 아이디가 기존에 이미 있다면, (중복)
             Map<String, String> errorMap = new HashMap<String, String>();

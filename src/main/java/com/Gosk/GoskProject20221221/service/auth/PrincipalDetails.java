@@ -26,12 +26,12 @@ public class PrincipalDetails implements UserDetails {
      @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-         log.info("1 getRole 들고오나? :::::::::::::::::::::::::::::::: {}", user.getRole().getRole());
+//         log.info("1 getRole 들고오나? :::::::::::::::::::::::::::::::: {}", user.getRole().getRole());
 
         Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(() -> user.getRole().getRole());
 
-        log.info("2 getRole 들고오나? :::::::::::::::::::::::::::::::: {}", user.getRole().getRole());
+//        log.info("2 getRole 들고오나? :::::::::::::::::::::::::::::::: {}", user.getRole().getRole());
 
 //         return null;
          return authorities;

@@ -18,4 +18,55 @@
         <result property="reserved_total_time" column="reserved_total_time"></result>
     </resultMap>
 
+    <insert id="paySeat" parameterType="com.Gosk.GoskProject20221221.domain.seat.Seat">
+        INSERT INTO
+            seat_mst(
+                seat_id,
+                user_id,
+                seat_start_time,
+                seat_total_time
+
+        VALUES (
+            #{user_id},
+            NOW(),
+            #{seat_total_time}
+        )
+    </insert>
+
+    <insert id="payReserved" parameterType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
+        INSERT INTO
+            reserved_seat_mst(
+                reserved_seat_id,
+                user_id,
+                reserved_start_time,
+                reserved_total_time
+        )
+
+        VALUES(
+            #{reserved_seat_id},
+            #{user_id},
+            NOW(),
+            DATE_ADD(NOW(), INTERVAL #{reserved_total_time} DAY)
+        )
+    </insert>
+
+    <select id="seatSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.Seat">
+        SELECT
+            sm.seat_id,
+            sm.user_id,
+            sm.seat_start_time,
+            sm.seat_total_time,
+
+            um.user_id,
+            um.user_phone,
+            um.user_time
+
+        FROM
+            seat_mst sm LEFT OUTER JOIN user_mst um ON (sm.seat_id = um.user_id)
+
+        WHERE
+            seat_id = #{seat_id}
+
+    </select>
+
 </mapper>

@@ -1,4 +1,12 @@
+let principal = getPrincipal();
+
+var pickSeat = null;
+var pickPrice = null;
+var pickTime = null;
+var time = null;
+
 // 페이지 이동 //// 페이지 이동 //
+
 
 // 취소하기
 $('.index-btn').click(function(){
@@ -13,7 +21,7 @@ $('.pay-btn').click(function(){
 
 // 결제 데이터 정리 //// 결제 데이터 정리 //
 $(function(){
-    var time = localStorage.getItem("time");   
+    time = localStorage.getItem("time");   
 
     if(time == "oneday"){
         time = "원데이"
@@ -23,9 +31,9 @@ $(function(){
         time = "지정석"
     }
 
-    var pickSeat = localStorage.getItem("pickSeat");
-    var pickTime = localStorage.getItem("pickTime");
-    var pickPrice = localStorage.getItem("pickPrice");
+    pickSeat = localStorage.getItem("pickSeat");
+    pickTime = localStorage.getItem("pickTime");
+    pickPrice = localStorage.getItem("pickPrice");
 
     $('.pay-content > ul').html(`
         <li>
@@ -53,13 +61,6 @@ payBtn.onclick = () => {
 }
 
 function payment() {
-
-    var time = localStorage.getItem("time");  
-    var pickSeat = localStorage.getItem("pickSeat");
-    var pickTime = localStorage.getItem("pickTime");
-    var pickPrice = localStorage.getItem("pickPrice");
-
-    let principal = getPrincipal();
 
     let orderNum = null;
     
@@ -101,7 +102,7 @@ function paymentCard(data) {
 		if (rsp.success) {
          // 결제 성공 시 로직,
          alert("결제가 완료되었습니다!");
-         alert(JSON.stringify(data));
+         infoSeatData(data);
          location.replace("/index");
 
 		} else {
@@ -116,6 +117,40 @@ function paymentCard(data) {
 
 // 결제 정보 데이터 넘기기
 
-function infoData(data) {
+function infoSeatData(data) {
+
+    let url = null;
+    let jsonData = null;
     
+    if(time == "원데이" || time == "정액권") {
+        url = "/api/pay/seat";
+        jsonData = {
+            seatId: data.pickSeat,
+            userId: principal.user_id
+        }
+
+    }else if(time == "지정석") {
+        url = "/api/pay/reserved";
+        jsonData = {
+            reservedSeatId: data.pickSeat,
+            userId: principal.user_id
+        }
+    }
+
+    
+    $.ajax({
+        async:false,
+        url: url,
+        contentType: "application/json",
+        data: JSON.stringify(jsonData),
+        dataType: JSON,
+        success: (response) => {
+            alert("seat data 보내기 성공");
+            console.log(response);
+        },
+        error: (error) => {
+            alert("seat data 보내기 실패");
+            console.log(error);
+        }
+    });
 }

@@ -42,18 +42,18 @@ public class AccountApi {
 
     @GetMapping("/principal/member") // 아이디 검증
     public ResponseEntity<?> getPrincipalMember(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-        log.info("[userApi] getPrincipalMember 데이터 :::::::: {}", principalDetails);
+//        log.info("[userApi] getPrincipalMember 데이터 :::::::: {}", principalDetails);
 
         return ResponseEntity.ok().body(new CMRespDto<>(1, "login userInfo", principalDetails == null ? "" : principalDetails));
     }
 
     @PostMapping("/principal/password") // 비밀번호 검증
     public ResponseEntity<?> getPrincipalPassword(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody Map<String, Object> userPwMap) throws Exception {
-        log.info("1 [userApi] getPrincipalPassword 데이터 :::::::: {}", principalDetails);
+//        log.info("1 [userApi] getPrincipalPassword 데이터 :::::::: {}", principalDetails);
 
         boolean pwchk = new BCryptPasswordEncoder().matches((String)userPwMap.get("pwchk"), principalDetails.getUser().getUser_pw());
 
-        log.info("2 [userApi] getPrincipalPassword 비번 :::::::: {}", pwchk);
+//        log.info("2 [userApi] getPrincipalPassword 비번 :::::::: {}", pwchk);
 
         if(pwchk) {
             return ResponseEntity.ok().body(new CMRespDto<>(1, "password check", pwchk));
