@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Builder
 @Data
@@ -17,7 +18,7 @@ public class SeatReqDto {
     private String seatId;
     private int userId;
     private LocalDateTime seatStartTime;
-    private LocalDateTime seatTotalTime;
+    private String seatTotalTime;
 
     public Seat toSeatEntity() {
         return Seat.builder()

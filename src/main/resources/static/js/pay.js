@@ -52,7 +52,7 @@ $(function(){
     `);
 })
 
-// 결제 api
+// 결제 api // 결제 api
 
 const payBtn = document.querySelector(".pay-btn");
 
@@ -60,13 +60,23 @@ payBtn.onclick = () => {
     payment();
 }
 
-function payment() {
 
-    let orderNum = null;
-    
-    for(let i=0; i<10; i++) {
+// 주문번호 만들기
+function createOrderNum(){
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    let orderNum = year + month + day;
+    for(let i=0;i<10;i++) {
         orderNum += Math.floor(Math.random() * 8);
     }
+    return orderNum;
+}
+
+
+function payment() {
 
     const data = {
         userId : principal.user.user_phone,
@@ -74,7 +84,7 @@ function payment() {
         pickTime : pickTime,
         pickSeat : pickSeat,
         pickPrice : pickPrice,
-        orderNum : orderNum
+        orderNum : createOrderNum()
     }
     
     paymentCard(data);
@@ -103,6 +113,11 @@ function paymentCard(data) {
          // 결제 성공 시 로직,
          alert("결제가 완료되었습니다!");
          infoSeatData(data);
+
+            // if(data.time == "정액권") {
+            //     infoUserData(data);
+            // }
+
          location.replace("/index");
 
 		} else {
@@ -115,35 +130,47 @@ function paymentCard(data) {
    });
 }
 
-// 결제 정보 데이터 넘기기
+// 결제 정보 좌석 데이터 넘기기
 
 function infoSeatData(data) {
 
     let url = null;
     let jsonData = null;
     
-    if(time == "원데이" || time == "정액권") {
+    if(time == "원데이") { // 원데이일 때 보내지는 링크와 데이터
+        // 원데이의 경우 seat데이터에서만 남은 시간이 있게!
         url = "/api/pay/seat";
         jsonData = {
             seatId: data.pickSeat,
-            userId: principal.user_id
+            userId: principal.user.user_id,
+            seatTotalTime: data.pickTime.replace("시간", "")
         }
 
-    }else if(time == "지정석") {
+    }else if(time == "지정석") { // 지정석일 때 보내지는 링크와 데이터
         url = "/api/pay/reserved";
         jsonData = {
             reservedSeatId: data.pickSeat,
-            userId: principal.user_id
+            userId: principal.user.user_id,
+            reservedTotalTime: (data.pickTime.replace("주", "") * 7)
         }
-    }
 
+    }
+    // else if(time == "정액권") {
+    //     //일단 나중에 생각해보기로하자
+    //     url = "/api/pay/computer";
+    //     jsonData = {
+    //         seatId: data.pickSeat,
+    //         userId: principal.user.user_id
+    //     }
+    // }
     
     $.ajax({
         async:false,
         url: url,
+        type: "POST",
         contentType: "application/json",
         data: JSON.stringify(jsonData),
-        dataType: JSON,
+        dataType: "json",
         success: (response) => {
             alert("seat data 보내기 성공");
             console.log(response);
@@ -154,3 +181,41 @@ function infoSeatData(data) {
         }
     });
 }
+
+// 결제정보 유저 데이터 넘기기 (정액권용!!!!!!!!!!!!!!!!!!!!!!)
+// 얘는 정액권에서 user_mst의 user_time, user_date로 넘어가야함
+
+// function infoUserData(data) {
+
+//     let jsonUserData = null;
+
+//     if(pickTime.indexOf("주")) {
+//         jsonUserData = {
+//             userId: principal.user.user_id,
+//             userDate: data.encodeURI(data.pickTime.replace("주", ""))
+//         }
+
+//     }else if(pickTime.indexOf("시간")){
+//         jsonUserData = {
+//             userId: principal.user.user_id,
+//             userTime: data.encodeURI(data.pickTime.replace("시간", ":00:00"))
+//         }
+//     }
+
+//     $.ajax({
+//         async:false,
+//         url: "/api/account/timeData",
+//         type: "put",
+//         contentType: "application/json",
+//         data: JSON.stringify(),
+//         dataType: "json",
+//         success: (response) => {
+//             alert("user data 보내기 성공");
+//             console.log(response);
+//         },
+//         error: (error) => {
+//             alert("user data 보내기 실패");
+//             console.log(error);
+//         }
+//     });
+// }

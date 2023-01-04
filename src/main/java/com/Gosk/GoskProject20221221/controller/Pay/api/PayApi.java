@@ -19,16 +19,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PayApi {
 
+    private final SeatService seatService;
+
 //    private final SeatService seatService;
 
     @PostMapping("/seat")
     public ResponseEntity<?> seatPay(@RequestBody SeatReqDto seatReqDto) throws Exception {
+
+        seatService.paySeat(seatReqDto);
+
         System.out.println("[PAY API] seat pay data :::::::" + seatReqDto);
         return ResponseEntity.ok().body(new CMRespDto<>(1, "seat data success", seatReqDto));
     }
 
     @PostMapping("/reserved")
     public ResponseEntity<?> reservedSeatPay(@RequestBody ReservedSeatReqDto reservedSeatReqDto) throws Exception {
+
+        seatService.payReservedSeat(reservedSeatReqDto);
+
         System.out.println("[PAY API] reserved seat pay data :::::::" + reservedSeatReqDto);
         return ResponseEntity.ok().body(new CMRespDto<>(1, "reserved seat data success", reservedSeatReqDto));
     }

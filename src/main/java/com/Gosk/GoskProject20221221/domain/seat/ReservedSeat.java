@@ -11,5 +11,5 @@ public class ReservedSeat {
     private String reserved_seat_id;
     private int user_id;
     private LocalDateTime reserved_start_time;
-    private LocalDateTime reserved_total_time;
+    private String reserved_total_time;
 }
