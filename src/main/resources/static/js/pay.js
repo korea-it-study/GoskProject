@@ -126,14 +126,16 @@ function infoSeatData(data) {
         url = "/api/pay/seat";
         jsonData = {
             seatId: data.pickSeat,
-            userId: principal.user_id
+            userId: principal.user_id,
+            seatTotalTime: data.pickTime.replace("시간", ":00:00")
         }
 
     }else if(time == "지정석") {
         url = "/api/pay/reserved";
         jsonData = {
             reservedSeatId: data.pickSeat,
-            userId: principal.user_id
+            userId: principal.user_id,
+            reservedTotalTime: data.pickTime.replace("시간", "")
         }
     }
 
@@ -141,9 +143,9 @@ function infoSeatData(data) {
     $.ajax({
         async:false,
         url: url,
-        contentType: "application/json",
+        type: "POST",
         data: JSON.stringify(jsonData),
-        dataType: JSON,
+        dataType: "json",
         success: (response) => {
             alert("seat data 보내기 성공");
             console.log(response);
