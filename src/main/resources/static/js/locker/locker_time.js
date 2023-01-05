@@ -10,3 +10,4 @@ $('.time-content > ul > li').click(function(){
     localStorage.setItem("pickPrice", $(this).find("div").text().trim());
     location.href = "/pay";
 });
+

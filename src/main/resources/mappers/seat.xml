@@ -18,6 +18,8 @@
         <result property="reserved_total_time" column="reserved_total_time"></result>
     </resultMap>
 
+
+
     <insert id="paySeat" parameterType="com.Gosk.GoskProject20221221.domain.seat.Seat">
         INSERT INTO
             seat_mst(
@@ -31,7 +33,7 @@
             #{seat_id},
             #{user_id},
             NOW(),
-            DATE_ADD(NOW(), INTERVAL #{reserved_total_time} HOUR)
+            DATE_ADD(NOW(), INTERVAL #{seat_total_time} HOUR)
         )
     </insert>
 
@@ -87,6 +89,26 @@
 
         WHERE
             reserved_seat_id = #{reserved_seat_id}
+    </select>
+
+    <insert id="payLocker">
+        insert into
+            locker_mst
+        values
+        (
+            #{locker_id},
+            #{user_id},
+            DATE_ADD(NOW(), interval 9 HOUR),
+            DATE_ADD((DATE_ADD(NOW(), interval 9 HOUR)), INTERVAL #{locker_end_time} DAY)
+        )
+    </insert>
+
+    <select id="getLocker" resultType="java.lang.String">
+        select
+            locker_id
+        from
+            locker_mst
+
     </select>
 
 </mapper>

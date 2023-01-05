@@ -4,6 +4,7 @@ package com.Gosk.GoskProject20221221.controller.Time;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/time")
 @Controller
@@ -22,5 +23,5 @@ public class TimePageController {
         return "time/time_reserved";
     }
     @GetMapping("/locker")
-    public String locker(){return "locker/locker_time";}
+    public String locker(){return "time/time_locker";}
 }

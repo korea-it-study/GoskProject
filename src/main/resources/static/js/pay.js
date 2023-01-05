@@ -29,6 +29,8 @@ $(function(){
         time = "정액권"
     }else if(time == "reserved"){
         time = "지정석"
+    }else {
+        time = "사물함"
     }
 
     pickSeat = localStorage.getItem("pickSeat");
@@ -154,6 +156,13 @@ function infoSeatData(data) {
             reservedTotalTime: (data.pickTime.replace("주", "") * 7)
         }
 
+    }else if(time == "사물함"){
+        url = "/api/pay/locker";
+        jsonData = {
+            lockerId: data.pickSeat,
+            userId: principal.user.user_id,
+            lockerEndTime: (data.pickTime.replace("주(사물함)", "") * 7)
+        }
     }
     // else if(time == "정액권") {
     //     //일단 나중에 생각해보기로하자
@@ -172,7 +181,7 @@ function infoSeatData(data) {
         data: JSON.stringify(jsonData),
         dataType: "json",
         success: (response) => {
-            alert("seat data 보내기 성공");
+            alert(JSON.stringify(jsonData));
             console.log(response);
         },
         error: (error) => {
@@ -219,3 +228,4 @@ function infoSeatData(data) {
 //         }
 //     });
 // }
+

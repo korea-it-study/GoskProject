@@ -1,3 +1,7 @@
+
+
+
+
 //선택한 사물함 클릭 시 버튼색깔 변경 및 사물함 이름 표시
 $(".locker-management-content button").click(function(){
     if($(this).hasClass('org-btn') == false){
@@ -32,3 +36,30 @@ $('.next-btn').click(function(){
     }
 });
 
+function getLocker(){
+    let responseData = null;
+    $.ajax({
+       async: false,
+       url: "/api/get/locker",
+        type: "get",
+        success : (response) => {
+           console.log("get 결과" + response.data);
+           responseData = response.data;
+        },
+        error : (error) =>{
+           console.log(error)
+        }
+    });
+    //사용중 사물함이름 - 전체 사물함 이름
+    responseData.forEach(lockerUse => {
+        const lockerName = document.querySelectorAll(".btn")
+        lockerName.forEach((lockerAll,index) => {
+            if(lockerUse === lockerAll.textContent){
+                lockerName[index].classList.add("org-btn");
+            }
+        })
+    })
+}
+window.onload = () => {
+    getLocker();
+}

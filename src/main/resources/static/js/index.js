@@ -63,10 +63,11 @@ $('.out-btn').click(function(){
 // 현재시간 안내 //// 현재시간 안내 //
 function printTime(){
     $(".main-content > p").text(dateToStr());
-};
+}
 
 $(function init(){
-    setInterval(printTime, 1000);
+    setInterval(printTime, 1000); //1초마다
+
 });
 
 function dateToStr(){
@@ -80,7 +81,7 @@ function dateToStr(){
     var day = date.getDate();
     var dayName = week[date.getDay()];
   
-    return year+'년 '+month+'월 '+day+'일 '+dayName+'요일 '+localTime;    
+    return year+'년 '+month+'월 '+day+'일 '+dayName+'요일 '+localTime;
 }
 
 window.onload = () => {

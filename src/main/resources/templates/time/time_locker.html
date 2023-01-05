@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{head :: head}"></head>
+<head>
+    <link rel="stylesheet" href="/static/css/time/time.css">
+    <title>G-OSK 사물함 결제</title>
+</head>
+<body>
+    <main class="container">
+<!-- header -->
+        <header class="time-header">
+            <i class="fa-solid fa-ticket"></i>
+            <p>사물함 이용권 선택</p>
+            <div>원하는 이용권을 선택해 하세요.</div>
+        </header>
+<!-- section -->
+        <section class="time-content">
+            <ul>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        1주(사물함)
+                    </p>
+                    <div>4,000원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        2주(사물함)
+                    </p>
+                    <div>6,000원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        3주(사물함)
+                    </p>
+                    <div>10,000원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        4주(사물함)
+                    </p>
+                    <div>14,000원</div>
+                </li>
+                <li>
+                    <p>
+                        <i class="fa-solid fa-ticket"></i>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        6주(사물함)
+                    </p>
+                    <div>20,000원</div>
+                </li>
+            </ul>
+            <!-- <div class="junho">
+                <button>
+                    <i class="fa-solid fa-circle-chevron-left"></i>
+                </button>
+                <span>1</span>
+                <span>/</span>
+                <span>3</span>
+                <button>
+                    <i class="fa-solid fa-circle-chevron-right"></i>
+                </button>
+            </div> -->
+        </section>
+<!-- footer -->
+        <footer class="time-footer">
+            <p>
+                <i class="fa-solid fa-star"></i>
+                구입하신 시간 내에서 자유롭게 이용할 수 있는 이용권입니다.
+            </p>
+            <p>
+                <i class="fa-solid fa-star"></i>
+                사물함은 실제 사용한 시간만큼만 실시간 차감/관리 됩니다.
+            </p>
+            <div>
+                <button class="btn gray-btn index-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                    홈으로
+                </button>
+            </div>
+            
+        </footer>
+    </main>
+    <script src="/static/js/locker/locker_time.js"></script>
+</body>
+</html>
