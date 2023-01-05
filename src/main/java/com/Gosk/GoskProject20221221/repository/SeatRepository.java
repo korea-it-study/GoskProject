@@ -7,6 +7,7 @@ import com.Gosk.GoskProject20221221.dto.seat.ReservedSeatReqDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -17,4 +18,6 @@ public interface SeatRepository {
     public int payReserved (ReservedSeat reservedSeat);
     public int payLocker(Locker locker);
     public List<String> getLocker();
+    public int deleteLocker(Date now);
+
 }

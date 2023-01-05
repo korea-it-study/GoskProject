@@ -10,9 +10,8 @@ import com.Gosk.GoskProject20221221.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
 
 
 @Service
@@ -20,6 +19,7 @@ import java.util.concurrent.locks.Lock;
 public class SeatServiceImpl implements SeatService {
 
     private final SeatRepository seatRepository;
+
 
     @Override
     public boolean paySeat(SeatReqDto seatReqDto) {
@@ -56,6 +56,12 @@ public class SeatServiceImpl implements SeatService {
 
 
         return names; // 삭제된 건수
+    }
+
+    @Override
+    public int deleteLocker(Date now) {
+
+        return seatRepository.deleteLocker(now);
     }
 
 

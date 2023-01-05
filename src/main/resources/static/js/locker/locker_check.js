@@ -40,7 +40,7 @@ function getLocker(){
     let responseData = null;
     $.ajax({
        async: false,
-       url: "/api/get/locker",
+       url: "/api/locker",
         type: "get",
         success : (response) => {
            console.log("get 결과" + response.data);

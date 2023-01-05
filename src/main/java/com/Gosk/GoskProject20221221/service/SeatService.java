@@ -5,6 +5,7 @@ import com.Gosk.GoskProject20221221.dto.seat.ReservedSeatReqDto;
 import com.Gosk.GoskProject20221221.dto.seat.SeatReqDto;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public interface SeatService {
@@ -12,5 +13,6 @@ public interface SeatService {
     public boolean payReservedSeat(ReservedSeatReqDto reservedSeatReqDto);
     public boolean payLocker(LockerReqDto lockerReqDto);
     public List<String> getLocker();
+    public int deleteLocker(Date now);
 
 }
