@@ -22,16 +22,14 @@ public class SeatApi {
     @GetMapping("/useSeat")
     public ResponseEntity<?> useSeat() throws Exception {
 
-        seatService.useSeat();
-
-        return ResponseEntity.ok().body(new CMRespDto<>(1, "Seat Data Load Success", null));
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "Seat Data Load Success",  seatService.useSeat()));
     }
 
     @GetMapping("/useReservedSeat")
     public ResponseEntity<?> useReservedSeat() throws Exception {
 
-        seatService.useReservedSeat();
 
-        return ResponseEntity.ok().body(new CMRespDto<>(1, "Seat Data Load Success", null));
+
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "Seat Data Load Success", seatService.useReservedSeat()));
     }
 }

@@ -66,4 +66,14 @@
             user_phone = #{user_phone}
     </select>
 
+    <update id="updateTime" parameterType="com.Gosk.GoskProject20221221.domain.user.User">
+        UPDATE
+            user_mst
+        SET
+            user_date = DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL #{user_date} WEEK),
+            user_time = #{user_time}
+        WHERE
+            user_id = #{user_id}
+    </update>
+
 </mapper>

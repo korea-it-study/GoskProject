@@ -17,8 +17,8 @@ public class User {
     private Role role;
     private String user_phone;
     private String user_pw;
-    private LocalDateTime user_time;
-    private LocalDateTime user_date;
+    private String user_time;
+    private String user_date;
     private LocalDateTime user_create_date;
     private LocalDateTime user_update_date;
 }

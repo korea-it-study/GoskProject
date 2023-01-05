@@ -4,8 +4,10 @@ import com.Gosk.GoskProject20221221.domain.user.User;
 import com.Gosk.GoskProject20221221.dto.User.UserReqDto;
 import com.Gosk.GoskProject20221221.exception.CustomValidationException;
 import com.Gosk.GoskProject20221221.repository.UserRepository;
+import com.Gosk.GoskProject20221221.service.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -50,6 +52,15 @@ public class UserServiceImpl implements UserService {
         }
 
         return false;
+    }
+
+    @Override // 정액권 구매시 user date, user time
+    public boolean userUpdateTime(UserReqDto userReqDto) throws Exception {
+        User userTimeEntity = userReqDto.toUpdateTime();
+
+        int result = userRepository.updateTime(userTimeEntity);
+
+        return result != 0;
     }
 
 

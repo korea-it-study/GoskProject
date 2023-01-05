@@ -11,7 +11,7 @@ public interface SeatService {
     public boolean paySeat(SeatReqDto seatReqDto);
     public boolean payReservedSeat(ReservedSeatReqDto reservedSeatReqDto);
 
-    public List<SeatRespDto> useSeat();
+    public List<String> useSeat() throws Exception;
 
-    public List<ReservedSeatRespDto> useReservedSeat();
+    public List<String> useReservedSeat() throws Exception;
 }

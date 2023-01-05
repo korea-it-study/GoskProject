@@ -1,5 +1,6 @@
 package com.Gosk.GoskProject20221221.dto.seat;
 
+import com.Gosk.GoskProject20221221.domain.seat.Seat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,5 @@ public class ReservedSeatRespDto {
     private int userId;
     private LocalDateTime reservedStartTime;
     private LocalDateTime reservedTotalTime;
+
 }

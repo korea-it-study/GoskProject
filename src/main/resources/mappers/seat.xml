@@ -62,20 +62,18 @@
     </insert>
 
 <!--    일반석 정보 불러오기    -->
-    <select id="seatSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.Seat">
+    <select id="seatSelect" resultType="java.lang.String">
         SELECT
-            seat_id,
-            user_id
+            seat_id
         FROM
             seat_mst
 
     </select>
 
 <!--    지정석 정보 불러오기    -->
-    <select id="reservedSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
+    <select id="reservedSelect" resultType="java.lang.String">
         SELECT
-            reserved_seat_id,
-            user_id
+            reserved_seat_id
         FROM
             reserved_seat_mst
     </select>

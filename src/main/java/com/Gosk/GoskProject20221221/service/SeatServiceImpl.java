@@ -41,32 +41,15 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<SeatRespDto> useSeat() {
+    public List<String> useSeat() throws Exception {
 
-        List<SeatRespDto> useSeatList = new ArrayList<>();
-
-        seatRepository.seatSelect().forEach(useList -> {
-            useSeatList.add(SeatRespDto.builder()
-                            .seatId(useList.getSeat_id())
-                            .userId(useList.getUser_id())
-                            .build());
-        });
-
-        return useSeatList;
+        return seatRepository.seatSelect();
     }
 
     @Override
-    public List<ReservedSeatRespDto> useReservedSeat() {
+    public List<String> useReservedSeat() throws Exception {
 
-        List<ReservedSeatRespDto> useReservedList = new ArrayList<>();
-
-        seatRepository.reservedSelect().forEach(useList -> {
-            useReservedList.add(ReservedSeatRespDto.builder()
-                            .reservedSeatId(useList.getReserved_seat_id())
-                            .userId(useList.getUser_id())
-                        .build());
-        });
-        return useReservedList;
+        return seatRepository.reservedSelect();
     }
 
 

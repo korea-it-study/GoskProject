@@ -114,9 +114,9 @@ function paymentCard(data) {
          alert("결제가 완료되었습니다!");
          infoSeatData(data);
 
-            // if(data.time == "정액권") {
-            //     infoUserData(data);
-            // }
+            if(data.time == "정액권") {
+                infoUserData(data);
+            }
 
          location.replace("/index");
 
@@ -154,15 +154,13 @@ function infoSeatData(data) {
             reservedTotalTime: (data.pickTime.replace("주", "") * 7)
         }
 
+    }else if(time == "정액권") { // 일반석과 url은 같이 들어가지만 user_mst에 따로 들어가게함
+        url = "/api/pay/seat";
+        jsonData = {
+            seatId: data.pickSeat,
+            userId: principal.user.user_id
+        }
     }
-    // else if(time == "정액권") {
-    //     //일단 나중에 생각해보기로하자
-    //     url = "/api/pay/computer";
-    //     jsonData = {
-    //         seatId: data.pickSeat,
-    //         userId: principal.user.user_id
-    //     }
-    // }
     
     $.ajax({
         async:false,
@@ -185,37 +183,39 @@ function infoSeatData(data) {
 // 결제정보 유저 데이터 넘기기 (정액권용!!!!!!!!!!!!!!!!!!!!!!)
 // 얘는 정액권에서 user_mst의 user_time, user_date로 넘어가야함
 
-// function infoUserData(data) {
+function infoUserData(data) {
 
-//     let jsonUserData = null;
+    let jsonUserData = null;
 
-//     if(pickTime.indexOf("주")) {
-//         jsonUserData = {
-//             userId: principal.user.user_id,
-//             userDate: data.encodeURI(data.pickTime.replace("주", ""))
-//         }
+    if(data.pickTime.includes("주")) {
+        jsonUserData = {
+            userId: principal.user.user_id,
+            userDate: data.pickTime.replace("주", ""),
+            userTime: 0
+        }
 
-//     }else if(pickTime.indexOf("시간")){
-//         jsonUserData = {
-//             userId: principal.user.user_id,
-//             userTime: data.encodeURI(data.pickTime.replace("시간", ":00:00"))
-//         }
-//     }
+    }else if(data.pickTime.includes("시간")){
+        jsonUserData = {
+            userId: principal.user.user_id,
+            userTime: encodeURI(data.pickTime.replace("시간", ":00:00")),
+            userDate: 0
+        }
+    }
 
-//     $.ajax({
-//         async:false,
-//         url: "/api/account/timeData",
-//         type: "put",
-//         contentType: "application/json",
-//         data: JSON.stringify(),
-//         dataType: "json",
-//         success: (response) => {
-//             alert("user data 보내기 성공");
-//             console.log(response);
-//         },
-//         error: (error) => {
-//             alert("user data 보내기 실패");
-//             console.log(error);
-//         }
-//     });
-// }
+    $.ajax({
+        async:false,
+        url: "/api/account/timeData",
+        type: "put",
+        contentType: "application/json",
+        data: JSON.stringify(jsonUserData),
+        dataType: "json",
+        success: (response) => {
+            alert("user data 보내기 성공");
+            console.log(response);
+        },
+        error: (error) => {
+            alert("user data 보내기 실패");
+            console.log(error);
+        }
+    });
+}

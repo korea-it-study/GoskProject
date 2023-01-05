@@ -8,4 +8,6 @@ public interface UserRepository {
 
     public int join(User user);
     public User userSelect(String userPhone);
+
+    public int updateTime(User user);
 }

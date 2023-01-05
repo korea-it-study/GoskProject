@@ -62,4 +62,10 @@ public class AccountApi {
         }
     }
 
+    @PutMapping("/timeData")
+    public ResponseEntity<?> computerUserUpdate(@RequestBody UserReqDto userReqDto) throws Exception {
+
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "userTimeData success", userService.userUpdateTime(userReqDto)));
+    }
+
 }

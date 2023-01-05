@@ -52,13 +52,18 @@ basic.onclick =() => {
 
 //선택한 좌석 클릭 시 버튼색깔 변경 및 좌석 이름 표시
 $(".seat-content button").click(function(){
+
     if($(this).hasClass('org-btn') == false){
+
         if($(this).hasClass('sky-btn') == true){
+
             $(this).removeClass('sky-btn');
             $(".seat-select-name").attr('value',"");
+
         }else{
             $(this).addClass('sky-btn').siblings().removeClass('sky-btn');
             $('.seat-select-name').attr('value',$(this).text());
+
         }
     } else {
         $(".seat-select-name").attr('value',"");
@@ -68,18 +73,28 @@ $(".seat-content button").click(function(){
 
 // 데이터 받아서 사용중인 좌석 org-btn으로 바꾸기 //
 
-//데이터 받아오기
+//일반석 데이터 받아오기
 
 function getSeatData() {
+    let responseData = null;
+    let url = null;
+
+    if(seatbasic.classList.contains("invisible")) {
+        url = "/api/seat/useReservedSeat"
+    }else if(seatspecial.classList.contains("invisible")){
+        url = "/api/seat/useSeat"
+    }
+
     $.ajax({
         async:false,
-        url: "/api/seat/useSeat",
+        url: url,
         type: "get",
         contentType: "application/json",
         dataType: "json",
         success: (response) => {
             alert("seat data 받아오기 성공");
-            alert(response.data);
+            responseData = response.data;
+            getSeatList(responseData);
             console.log(response);
         },
         error: (error) => {
@@ -89,9 +104,24 @@ function getSeatData() {
     });
 }
 
+
+
+
+// 사용중인 좌석 오렌지색으로 바꾸기
+
+function getSeatList(responseData) {
+
+    responseData.forEach(seatUse => {
+        const seatName = document.querySelectorAll(".btn")
+        seatName.forEach((seatAll,index) => {
+            if(seatUse === seatAll.textContent){
+                seatName[index].classList.add("org-btn");
+            }
+        })
+    });
+}
+
 window.onload = () => {
     getSeatData();
 }
-
-// 사용중인 좌석 오렌지색으로 바꾸기
 

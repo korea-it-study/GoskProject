@@ -18,11 +18,12 @@ public class UserReqDto {
     private int roleId;
     private String userPhone;
     private String userPw;
-    private LocalDateTime userTime;
-    private LocalDateTime userDate;
+    private String userTime;
+    private String userDate;
     private LocalDateTime userCreateDate;
     private LocalDateTime userUpdateDate;
 
+    // 회원가입 유저 정보 입력
     public User toUserEntity() {
         return User.builder()
                 .user_id(userId)
@@ -30,6 +31,17 @@ public class UserReqDto {
                 .user_pw(new BCryptPasswordEncoder().encode(userPw))
                 .user_create_date(userCreateDate)
                 .user_update_date(userUpdateDate)
+                .build();
+    }
+
+    //정액권 구매시 유저 남은시간 업데이트
+
+    public User toUpdateTime() {
+
+        return User.builder()
+                .user_id(userId)
+                .user_time(userTime)
+                .user_date(userDate)
                 .build();
     }
 }
