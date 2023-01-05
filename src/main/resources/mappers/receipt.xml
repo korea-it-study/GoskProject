@@ -22,7 +22,7 @@
                 receipt_kinds,
                 receipt_price,
                 receipt_time,
-                receipt_day
+                receipt_day,
                 receipt_create_date
             )
 

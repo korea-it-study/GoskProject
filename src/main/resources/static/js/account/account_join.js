@@ -67,9 +67,29 @@ function phoneFormat(phoneNumber) {
 
 function userInfoData() {
 
+    // 유효성 검사
+
+    const regex = /\d{3}-\d{3,4}-\d{4}/; 
+    const pwRegex = /\d{4}/;
+
+    const userId = document.querySelector(".phone-id");
+    const userPw = document.querySelector(".phone-pw");
+
     let joinInfo = {
-        userPhone : $(".phone-id").val(),
-        userPw : $(".phone-pw").val()
+        userPhone : userId.value,
+        userPw : userPw.value
+    }
+
+    if(!joinInfo.userPhone) {
+        alert("휴대폰 번호는 비워둘 수 없습니다.");
+        return false;
+    }else if(!regex.test(joinInfo.userPhone)) {
+        alert("휴대폰 번호의 양식에 맞지않습니다.");
+        alert(joinInfo.userPhone + joinInfo.userPw);
+        return false;
+    }else if(!pwRegex.test(joinInfo.userPw)){
+        alert("비밀번호는 네자리 숫자입니다.");
+        return false;
     }
 
     $.ajax({
@@ -109,7 +129,7 @@ function checkDuplicate() {
         data: JSON.stringify(joinInfo),
         dataType: "json",
         success: (response) => {
-            console.log("joinInfo : ", joinInfo);
+            if(joinInfo.userPhone )
             alert("사용가능한 아이디입니다!");
             userInfoData();
         },
@@ -119,3 +139,8 @@ function checkDuplicate() {
         }
     });
 }
+
+$('.index-btn').click(function(){
+    location.href = "/index";
+    localStorage.clear();
+});

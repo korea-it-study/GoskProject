@@ -7,6 +7,7 @@ import com.Gosk.GoskProject20221221.service.UserService;
 import com.Gosk.GoskProject20221221.service.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Slf4j
@@ -33,11 +35,12 @@ public class AccountApi {
     }
 
     @PostMapping("/join") // 회원가입
-    public ResponseEntity<?> userJoin(@RequestBody UserReqDto userReqDto, BindingResult bindingResult) throws Exception {
+    public ResponseEntity<?> userJoin(@Valid @RequestBody UserReqDto userReqDto) throws Exception {
 
         userService.userJoin(userReqDto);
 
-        return ResponseEntity.ok().body(new CMRespDto<>(1, "Successfully joined", null));
+            return ResponseEntity.ok().body(new CMRespDto<>(1, "Successfully joined", null));
+
     }
 
     @GetMapping("/principal/member") // 아이디 검증

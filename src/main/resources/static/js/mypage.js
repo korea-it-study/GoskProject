@@ -6,3 +6,15 @@ $('.index-btn').click(function(){
     location.href = "/index";
     localStorage.clear();
 });
+
+
+// 나의 구매내역 받아오기
+
+function getReceiptList() {
+    
+    let receiptData = null;
+
+    $.ajax({
+        async: false
+    })
+}
