@@ -23,7 +23,7 @@
     </insert>
 
     <!--table8 정액권 시간 상품등록-->
-    <insert id="commuterTpPriceInsert"
+    <insert id="commuterTpInsert"
             parameterType="com.Gosk.GoskProject20221221.domain.TimePrice"
             useGeneratedKeys="true"
             keyProperty="commuter_tp_id"
@@ -42,7 +42,7 @@
     </insert>
 
     <!--table9 정액권 기간 상품등록-->
-    <insert id="commuterDpPriceInsert"
+    <insert id="commuterDpInsert"
             parameterType="com.Gosk.GoskProject20221221.domain.TimePrice"
             useGeneratedKeys="true"
             keyProperty="commuter_dp_id"
@@ -68,14 +68,14 @@
     >
         insert into
         reserved_price_mst(
-        reserved_price_id,
-        reserved_time,
-        reserved_price
+            reserved_price_id,
+            reserved_time,
+            reserved_price
         )
         values(
-        0,
-        #{reserved_time},
-        #{reserved_price}
+            0,
+            #{reserved_time},
+            #{reserved_price}
         )
     </insert>
 
@@ -85,26 +85,29 @@
             parameterType="List"
             resultType="com.Gosk.GoskProject20221221.domain.TimePrice">
         SELECT
+            oneday_price_id,
             oneday_time,
             oneday_price
         from
             oneday_price_mst
         ORDER BY oneday_time
     </select>
-    <select id="getCommuterTpPriceListSelect"
+    <select id="getCommuterTpListSelect"
             parameterType="List"
             resultType="com.Gosk.GoskProject20221221.domain.TimePrice">
         SELECT
+            commuter_tp_id,
             commuter_tp_time,
             commuter_tp_price
         from
             commuter_time_price_mst
         ORDER BY commuter_tp_time
     </select>
-    <select id="getCommuterDpPriceListSelect"
+    <select id="getCommuterDpListSelect"
             parameterType="List"
             resultType="com.Gosk.GoskProject20221221.domain.TimePrice">
         SELECT
+            commuter_dp_id,
             commuter_dp_time,
             commuter_dp_price
         from
@@ -115,6 +118,7 @@
             parameterType="List"
             resultType="com.Gosk.GoskProject20221221.domain.TimePrice">
         SELECT
+            reserved_price_id,
             reserved_time,
             reserved_price
         from
@@ -122,12 +126,83 @@
         ORDER BY reserved_time
     </select>
 
-<!--    <delete id="deleteDonate" parameterType="com.unicef.domain.donate.Donate">-->
-<!--        delete-->
-<!--        from-->
-<!--        donate_mst-->
-<!--        where-->
-<!--        donate_id = #{donate_id}-->
-<!--    </delete>-->
 
+    <!--UPDATE--><!--UPDATE--><!--UPDATE--><!--UPDATE--><!--UPDATE-->
+    <update id="onedayPriceUpdate"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice">
+        update
+            oneday_price_mst
+        set
+            oneday_time = #{oneday_time},
+            oneday_price = #{oneday_price}
+        where
+            oneday_price_id = #{oneday_price_id}
+    </update>
+    <update id="commuterTpUpdate"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice">
+        update
+            commuter_time_price_mst
+        set
+            commuter_tp_time = #{commuter_tp_time},
+            commuter_tp_price = #{commuter_tp_price}
+        where
+            commuter_tp_id = #{commuter_tp_id}
+    </update>
+    <update id="commuterDpUpdate"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice">
+        update
+            commuter_day_price_mst
+        set
+            commuter_dp_time = #{commuter_dp_time},
+            commuter_dp_price = #{commuter_dp_price}
+        where
+            commuter_dp_id = #{commuter_dp_id}
+    </update>
+    <update id="reservedPriceUpdate"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice">
+        update
+            reserved_price_mst
+        set
+            reserved_time = #{reserved_time},
+            reserved_price = #{reserved_price}
+        where
+            reserved_price_id = #{reserved_price_id}
+    </update>
+
+    <!--DELETE--><!--DELETE--><!--DELETE--><!--DELETE-->
+    <delete id="onedayPriceDelete"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice">
+            delete
+        from
+            oneday_price_mst
+        where
+            oneday_price_id = #{oneday_price_id}
+    </delete>
+
+    <delete id="commuterTpDelete"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice">
+            delete
+        from
+            commuter_time_price_mst
+        where
+            commuter_tp_id = #{commuter_tp_id}
+    </delete>
+
+    <delete id="commuterDpDelete"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice">
+            delete
+        from
+            commuter_day_price_mst
+        where
+            commuter_dp_id = #{commuter_dp_id}
+    </delete>
+
+    <delete id="commuterDpDelete"
+            parameterType="com.Gosk.GoskProject20221221.domain.TimePrice">
+            delete
+        from
+            reserved_price_mst
+        where
+            reserved_price_id = #{reserved_price_id}
+    </delete>
 </mapper>

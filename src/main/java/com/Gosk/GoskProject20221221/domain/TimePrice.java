@@ -18,6 +18,7 @@ public class TimePrice {
 
     public OnedayPriceRespDto getOnedayPriceEntity(){
         return OnedayPriceRespDto.builder()
+                .onedayPriceId(oneday_price_id)
                 .onedayTime(oneday_time)
                 .onedayPrice(oneday_price)
                 .build();
@@ -28,8 +29,9 @@ public class TimePrice {
     private int commuter_tp_time;
     private int commuter_tp_price;
 
-    public CommuterTpPriceRespDto getCommuterTpPriceEntity(){
-        return CommuterTpPriceRespDto.builder()
+    public CommuterTpRespDto getCommuterTpEntity(){
+        return CommuterTpRespDto.builder()
+                .commuterTpId(commuter_tp_id)
                 .commuterTpTime(commuter_tp_time)
                 .commuterTpPrice(commuter_tp_price)
                 .build();
@@ -40,8 +42,9 @@ public class TimePrice {
     private int commuter_dp_time;
     private int commuter_dp_price;
 
-    public CommuterDpPriceRespDto getCommuterDpPriceEntity(){
-        return CommuterDpPriceRespDto.builder()
+    public CommuterDpRespDto getCommuterDpEntity(){
+        return CommuterDpRespDto.builder()
+                .commuterDpId(commuter_dp_id)
                 .commuterDpTime(commuter_dp_time)
                 .commuterDpPrice(commuter_dp_price)
                 .build();
@@ -54,6 +57,7 @@ public class TimePrice {
 
     public ReservedPriceRespDto getReservedPriceEntity() {
         return ReservedPriceRespDto.builder()
+                .reservedPriceId(reserved_price_id)
                 .reservedTime(reserved_time)
                 .reservedPrice(reserved_price)
                 .build();

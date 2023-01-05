@@ -1,11 +1,21 @@
 // 상품추가
-let plusTablePick = null; // table 구분용
+let plusTablePick = null; // table 등록 구분용
 let plusInfo = null; //ajax 보낼 등록 데이터
-let updateInfo = null; //ajax 보낼 수정 데이터
 let plusSeat = null; 
 let plusType = null;
 let plusTime = null;
 let plusPrice = null;
+// 상품수정
+let updateTablePick = null; // table 등록 구분용
+let updateInfo = null; //ajax 보낼 수정 데이터
+let fixId = null;
+let fixSeat = null; 
+let fixType = null;
+let fixTime = null;
+let fixPrice = null;
+
+//상품삭제
+let deleteId = null;
 
 // 현재 상품 호출
 let timePriceList = TimePriceList();
@@ -31,7 +41,7 @@ $('.product-category > button').click(function(){
         }
     }else{
         $('.product-category > button').removeClass("sky-btn");
-        $('.prouct-table').find('tr').removeClass("invisible");
+        $('.product-table').find('tr').removeClass("invisible");
     }
 });
 
@@ -39,11 +49,12 @@ $('.product-category > button').click(function(){
 $(function(){
     //onedayTime        
     for(i=0; i<timePriceList[0].length; i++){
-        $('.prouct-table').append(`    
+        $('.product-table').append(`    
             <tr class="normal-item">
-                <td>일반석</td>
-                <td>원데이
-                    <br>${timePriceList[0][i].onedayTime}시간
+                <td class="${timePriceList[0][i].onedayPriceId}">일반석</td>
+                <td>
+                    <p>원데이</p>
+                    ${timePriceList[0][i].onedayTime}시간
                 </td>
                 <td><span>${comma(timePriceList[0][i].onedayPrice)}</span>원</td>
                 <td><button class="update-btn btn">수정</button></td>
@@ -54,11 +65,12 @@ $(function(){
 
     //commuterTp      
     for(i=0; i<timePriceList[1].length; i++){
-        $('.prouct-table').append(`    
+        $('.product-table').append(`    
             <tr class="normal-item">
-                <td>일반석</td>
-                <td>시간권
-                    <br>${timePriceList[1][i].commuterTpTime}시간
+                <td class="${timePriceList[1][i].commuterTpId}">일반석</td>
+                <td>
+                    <p>시간권</p>
+                    ${timePriceList[1][i].commuterTpTime}시간
                 </td>
                 <td><span>${comma(timePriceList[1][i].commuterTpPrice)}</span>원</td>
                 <td><button class="update-btn btn">수정</button></td>
@@ -69,11 +81,12 @@ $(function(){
 
     //commuterDp       
     for(i=0; i<timePriceList[2].length; i++){
-        $('.prouct-table').append(`    
+        $('.product-table').append(`    
             <tr class="normal-item">
-                <td>일반석</td>
-                <td>기간권
-                    <br>${timePriceList[2][i].commuterDpTime}주
+                <td class="${timePriceList[2][i].commuterDpId}">일반석</td>
+                <td>
+                    <p>기간권</p>
+                    ${timePriceList[2][i].commuterDpTime}주
                 </td>
                 <td><span>${comma(timePriceList[2][i].commuterDpPrice)}</span>원</td>
                 <td><button class="update-btn btn">수정</button></td>
@@ -84,11 +97,12 @@ $(function(){
 
     //reserved      
     for(i=0; i<timePriceList[3].length; i++){
-        $('.prouct-table').append(`  
+        $('.product-table').append(`  
             <tr class="reserved-item">
-                <td>지정석</td>
-                <td>기간권
-                    <br>${timePriceList[3][i].reservedTime}주
+                <td class="${timePriceList[3][i].reservedPriceId}">지정석</td>
+                <td>
+                    <p>기간권</p>
+                    ${timePriceList[3][i].reservedTime}주
                 </td>
                 <td><span>${comma(timePriceList[3][i].reservedPrice)}</span>원</td>
                 <td><button class="update-btn btn">수정</button></td>
@@ -99,11 +113,12 @@ $(function(){
 
     //locker
     for(i=0; i < 2; i++){
-        $('.prouct-table').append(`  
+        $('.product-table').append(`  
             <tr class="locker-item">
                 <td>사물함</td>
-                <td>기간권
-                    <br>n주
+                <td>
+                    <p>기간권</p>
+                    n주
                 </td>
                 <td><span>000000</span>원</td>
                 <td><button class="update-btn btn">수정</button></td>
@@ -193,28 +208,125 @@ $(function(){
         $('.fix-time').val("");
         $('.fix-price').val("");
         updateInfo = null;
+        pickIndex = null;
 
         $('.fix-pop-back').removeClass("invisible");
     
         // 선택좌석
-        var pickIndex = $(this).parents('tr').index();
-        alert(pickIndex);
-        alert($('tr:eq('+pickIndex+')').html());
-        alert($('.prouct-table > tr:eq('+pickIndex+') > td:eq(1)').html());
-        alert($('.prouct-table > tr:eq('+pickIndex+') > td:eq(1)').text());
+        var pickIndex = $(this).parents('tr').index() - 1;
+
+        $('.fix-popup > input:nth-child(1)').val($('.product-table > tr:eq('+pickIndex+') > td:eq(0)').text());
+        $('.fix-popup > input:nth-child(2)').val($('.product-table > tr:eq('+pickIndex+') > td:eq(1) > p').text());
+
+        // 수정 팝업에서 수정버튼 클릭시
+        $('.fix-update-btn').click(function(){
+            fixId = $('.product-table > tr:eq('+pickIndex+') > td:eq(0)').attr("class");
+            fixSeat = $('.fix-popup > input:nth-child(1)').val();
+            fixType = $('.fix-popup > input:nth-child(2)').val();
+            fixTime = $('.fix-time').val();
+            fixPrice = $('.fix-price').val();
+        
+            if(fixSeat == "일반석" && fixType == "원데이"){    
+                updateTablePick = "oneday";
+                //Table7 원데이 가격(oneday_price_mst)
+                updateInfo = {
+                    onedayPriceId: fixId, // PK
+                    onedayTime: fixTime, // 수정 시간
+                    onedayPrice: fixPrice // 수정 가격
+                }
+            }else if(fixSeat == "일반석" && fixType == "시간권"){
+                updateTablePick = "commuter/tp";
+                //Table8 정액권 시간가격(commuter_time_price_mst)
+                updateInfo = {
+                    commuterTpId: fixId, // PK
+                    commuterTpTime: fixTime, // 수정 시간
+                    commuterTpPrice: fixPrice // 수정 가격
+                }
+            }else if(fixSeat == "일반석" && fixType == "기간권"){
+                updateTablePick = "commuter/dp";
+                //Table9 정액권 기간가격(commuter_day_price_mst)
+                updateInfo = {
+                    commuterDpId: fixId, // PK
+                    commuterDpTime: fixTime, // 수정 시간
+                    commuterDpPrice: fixPrice // 수정 가격
+                }
+            }else if(fixSeat == "지정석" && fixType == "기간권"){
+                updateTablePick = "reserved";
+                //Table10 지정석 가격(reserved_price_mst)
+                updateInfo = {
+                    reservedPriceId: fixId, // PK
+                    reservedTime: fixTime, // 수정 시간
+                    reservedPrice: fixPrice // 수정 가격
+                }
+            }
+            updateInfoData(updateInfo, updateTablePick);
+        })
+        
     })
     
     $(".fix-update-btn").click(function(){
-        alert("수정")
         $('.fix-pop-back').addClass("invisible");
     })
 
     $(".fix-close-btn").click(function(){
-        alert("완료")
         $('.fix-pop-back').addClass("invisible");
     })    
 })
 
+
+// 삭제 클릭 // // 삭제 클릭 //
+$(function(){
+    // 팝업 열기
+    $(".dlt-btn").click(function(){
+        // 선택좌석
+        var pickIndex = $(this).parents('tr').index() - 1;
+        deleteId = $('.product-table > tr:eq('+pickIndex+') > td:eq(0)').attr("class");
+
+        // 수정 팝업에서 수정버튼 클릭시
+        $('.fix-update-btn').click(function(){
+            fixSeat = $('.fix-popup > input:nth-child(1)').val();
+            fixType = $('.fix-popup > input:nth-child(2)').val();
+            fixTime = $('.fix-time').val();
+            fixPrice = $('.fix-price').val();
+        
+            if(fixSeat == "일반석" && fixType == "원데이"){    
+                updateTablePick = "oneday";
+                //Table7 원데이 가격(oneday_price_mst)
+                updateInfo = {
+                    onedayPriceId: fixId, // PK
+                    onedayTime: fixTime, // 수정 시간
+                    onedayPrice: fixPrice // 수정 가격
+                }
+            }else if(fixSeat == "일반석" && fixType == "시간권"){
+                updateTablePick = "commuter/tp";
+                //Table8 정액권 시간가격(commuter_time_price_mst)
+                updateInfo = {
+                    commuterTpId: fixId, // PK
+                    commuterTpTime: fixTime, // 수정 시간
+                    commuterTpPrice: fixPrice // 수정 가격
+                }
+            }else if(fixSeat == "일반석" && fixType == "기간권"){
+                updateTablePick = "commuter/dp";
+                //Table9 정액권 기간가격(commuter_day_price_mst)
+                updateInfo = {
+                    commuterDpId: fixId, // PK
+                    commuterDpTime: fixTime, // 수정 시간
+                    commuterDpPrice: fixPrice // 수정 가격
+                }
+            }else if(fixSeat == "지정석" && fixType == "기간권"){
+                updateTablePick = "reserved";
+                //Table10 지정석 가격(reserved_price_mst)
+                updateInfo = {
+                    reservedPriceId: fixId, // PK
+                    reservedTime: fixTime, // 수정 시간
+                    reservedPrice: fixPrice // 수정 가격
+                }
+            }
+            deleteInfoData(updateLink, deleteId)
+        })
+        
+    })
+})
 
 
 
@@ -233,9 +345,46 @@ function plusInfoData(plusInfo, pickLink){
             $(location).prop("href", location.href);
         },
         error: (error) => {
-            alert(error);
             console.log(error);
         }
     })
 }
 
+
+// ajax. 상품 수정 데이터
+function updateInfoData(updateInfo, updateLink){  
+    $.ajax({
+        async: false,
+        type: "PUT",
+        url: "/api/time/" + updateLink,
+        contentType: "application/json",
+        data: JSON.stringify(updateInfo),
+        dataType: "json",
+        success: (response) => {
+            console.log(response);    
+            $('.fix-pop-back').addClass("invisible");
+            $(location).prop("href", location.href);
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    })
+}
+
+
+// ajax. 상품 삭제 데이터
+function deleteInfoData(updateLink, oneday_price_id){  
+    $.ajax({
+        async: false,
+        type: "delete",
+        url: "/api/time/" + updateLink + "/" + oneday_price_id,
+        dataType: "json",
+        success: (response) => {
+            console.log(response);    
+            $(location).prop("href", location.href);
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    })
+}

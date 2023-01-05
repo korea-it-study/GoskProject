@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class ReservedPriceRespDto {
     // table10 지정석
+    private int reservedPriceId;
     private int reservedTime;
     private int reservedPrice;
 
