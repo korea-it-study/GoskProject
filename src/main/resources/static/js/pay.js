@@ -79,16 +79,15 @@ function createOrderNum(){
 function payment() {
 
     const data = {
-        userId : principal.user.user_phone,
+        userPhone : principal.user.user_phone,
         time : time,
         pickTime : pickTime,
         pickSeat : pickSeat,
         pickPrice : pickPrice,
         orderNum : createOrderNum()
     }
-    
-    paymentCard(data);
 
+    paymentCard(data);
 }
 
 
@@ -105,18 +104,19 @@ function paymentCard(data) {
 	  	// amount: data.pickPrice,
         amount: "100",
         buyer_email: "",
-	   	buyer_name: data.userId,
-	  	buyer_tel: data.userId
+	   	buyer_name: data.userPhone,
+	  	buyer_tel: data.user_phone
   	}, 
 	function (rsp) { // callback
 		if (rsp.success) {
          // 결제 성공 시 로직,
          alert("결제가 완료되었습니다!");
          infoSeatData(data);
-
             if(data.time == "정액권") {
                 infoUserData(data);
             }
+        infoReceiptData(data);
+
 
          location.replace("/index");
 
@@ -170,7 +170,7 @@ function infoSeatData(data) {
         data: JSON.stringify(jsonData),
         dataType: "json",
         success: (response) => {
-            alert("seat data 보내기 성공");
+            // alert("seat data 보내기 성공");
             console.log(response);
         },
         error: (error) => {
@@ -198,7 +198,6 @@ function infoUserData(data) {
         jsonUserData = {
             userId: principal.user.user_id,
             userTime: encodeURI(data.pickTime.replace("시간", ":00:00")),
-            userDate: 0
         }
     }
 
@@ -210,7 +209,7 @@ function infoUserData(data) {
         data: JSON.stringify(jsonUserData),
         dataType: "json",
         success: (response) => {
-            alert("user data 보내기 성공");
+            // alert("user data 보내기 성공");
             console.log(response);
         },
         error: (error) => {
@@ -218,4 +217,47 @@ function infoUserData(data) {
             console.log(error);
         }
     });
+}
+
+// 구매내역 (영수증) 데이터 보내기 //
+
+function infoReceiptData(data) {
+    let receiptData = null;
+
+    if(data.pickTime.includes("주")) {
+        receiptData = {
+            userId: principal.user.user_id,
+            receiptKinds: data.time,
+            receiptPrice: data.pickPrice.replace("원", "").replace(",", ""),
+            receiptDay: data.pickTime,
+            receiptTime: 0
+        }
+
+    }else if(data.pickTime.includes("시간")) {
+        receiptData = {
+                userId: principal.user.user_id,
+                receiptKinds: data.time,
+                receiptPrice: data.pickPrice.replace("원", "").replace(",", ""),
+                receiptDay: 0,
+                receiptTime: data.pickTime
+            }
+    }
+
+    $.ajax({
+        async:false,
+        url: "/api/mypage/receipt",
+        type: "post",
+        contentType: "application/json",
+        data: JSON.stringify(receiptData),
+        dataType: "json",
+        success: (response) => {
+            alert("receipt data 보내기 성공");
+            console.log(response);
+        },
+        error: (error) => {
+            alert("receipt data 보내기 실패");
+            alert(JSON.stringify(receiptData));
+            console.log(error);
+        }
+    })
 }

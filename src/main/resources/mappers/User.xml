@@ -38,8 +38,8 @@
             0,
             #{user_phone},
             #{user_pw},
-            NOW(),
-            NOW()
+            DATE_ADD(NOW(), INTERVAL 9 HOUR),
+            DATE_ADD(NOW(), INTERVAL 9 HOUR)
             )
 
     </insert>

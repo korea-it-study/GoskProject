@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gosk.GoskProject20221221.repository.ReceiptRepository">
+
+    <resultMap id="receipt" type="com.Gosk.GoskProject20221221.domain.Receipt">
+        <result property="receipt_id" column="receipt_id"></result>
+        <result property="user_id" column="user_id"></result>
+        <result property="receipt_kinds" column="receipt_kinds"></result>
+        <result property="receipt_price" column="receipt_price"></result>
+        <result property="receipt_time" column="receipt_time"></result>
+        <result property="receipt_day" column="receipt_day"></result>
+        <result property="receipt_create_date" column="receipt_create_date"></result>
+    </resultMap>
+
+    <insert id="payReceipt" parameterType="com.Gosk.GoskProject20221221.domain.Receipt">
+        INSERT INTO
+            receipt_mst(
+                receipt_id,
+                user_id,
+                receipt_kinds,
+                receipt_price,
+                receipt_time,
+                receipt_day
+                receipt_create_date
+            )
+
+        VALUES(
+            0,
+            #{user_id},
+            #{receipt_kinds},
+            #{receipt_price},
+            #{receipt_time},
+            #{receipt_day},
+            DATE_ADD(NOW(), INTERVAL 9 HOUR)
+            )
+
+    </insert>
+
+</mapper>
