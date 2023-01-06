@@ -135,7 +135,7 @@ public class TimeServiceImpl implements TimeService {
             reservedPriceList.add(timePrice.getReservedPriceEntity());
         });
 
-        log.info("[TimeServiceImpl] commuterDp 상품리스트 성공");
+        log.info("[TimeServiceImpl] reserved 상품리스트 성공");
         return reservedPriceList;
     }
 
@@ -227,6 +227,38 @@ public class TimeServiceImpl implements TimeService {
 
             errorMap.put("error table10", "UPDATE table10 에러입니다");
             throw new CustomValidationException("error table10", errorMap);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onedayPriceDelete(int oneday_price_id) throws Exception {
+        if(timePrice.onedayPriceDelete(oneday_price_id) > 0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean commuterTpDelete(int commuter_tp_id) throws Exception {
+        if(timePrice.commuterTpDelete(commuter_tp_id) > 0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean commuterDpDelete(int commuter_dp_id) throws Exception {
+        if(timePrice.commuterDpDelete(commuter_dp_id) > 0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean reservedPriceDelete(int reserved_price_id) throws Exception {
+        if(timePrice.reservedPriceDelete(reserved_price_id) > 0){
+            return true;
         }
         return false;
     }

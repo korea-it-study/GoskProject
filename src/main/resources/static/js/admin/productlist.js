@@ -15,7 +15,10 @@ let fixTime = null;
 let fixPrice = null;
 
 //상품삭제
+let deleteTablePick = null; // table 등록 구분용
 let deleteId = null;
+let deleteSeat = null;
+let deleteType = null;
 
 // 현재 상품 호출
 let timePriceList = TimePriceList();
@@ -276,55 +279,36 @@ $(function(){
 
 // 삭제 클릭 // // 삭제 클릭 //
 $(function(){
-    // 팝업 열기
+    // 삭제 클릭
     $(".dlt-btn").click(function(){
         // 선택좌석
         var pickIndex = $(this).parents('tr').index() - 1;
         deleteId = $('.product-table > tr:eq('+pickIndex+') > td:eq(0)').attr("class");
 
-        // 수정 팝업에서 수정버튼 클릭시
-        $('.fix-update-btn').click(function(){
-            fixSeat = $('.fix-popup > input:nth-child(1)').val();
-            fixType = $('.fix-popup > input:nth-child(2)').val();
-            fixTime = $('.fix-time').val();
-            fixPrice = $('.fix-price').val();
+        deleteSeat = $('.product-table > tr:eq('+pickIndex+') > td:eq(0)').text();
+        deleteType = $('.product-table > tr:eq('+pickIndex+') > td:eq(1) > p').text();
+
+        // 삭제 테이블 구분용    
+        if(deleteSeat == "일반석" && deleteType == "원데이"){    
+            deleteTablePick = "oneday"; //Table7 원데이
+        }else if(deleteSeat == "일반석" && deleteType == "시간권"){
+            deleteTablePick = "commuter/tp"; //Table8 정액권 시간
+        }else if(deleteSeat == "일반석" && deleteType == "기간권"){
+            deleteTablePick = "commuter/dp"; //Table9 정액권 기간
+        }else if(deleteSeat == "지정석" && deleteType == "기간권"){
+            deleteTablePick = "reserved"; //Table10 지정석
+        }
+
+        let deleteCheck = confirm("선택" + deleteSeat + "의 " + deleteType + "을 삭제하시겠습니까?");
         
-            if(fixSeat == "일반석" && fixType == "원데이"){    
-                updateTablePick = "oneday";
-                //Table7 원데이 가격(oneday_price_mst)
-                updateInfo = {
-                    onedayPriceId: fixId, // PK
-                    onedayTime: fixTime, // 수정 시간
-                    onedayPrice: fixPrice // 수정 가격
-                }
-            }else if(fixSeat == "일반석" && fixType == "시간권"){
-                updateTablePick = "commuter/tp";
-                //Table8 정액권 시간가격(commuter_time_price_mst)
-                updateInfo = {
-                    commuterTpId: fixId, // PK
-                    commuterTpTime: fixTime, // 수정 시간
-                    commuterTpPrice: fixPrice // 수정 가격
-                }
-            }else if(fixSeat == "일반석" && fixType == "기간권"){
-                updateTablePick = "commuter/dp";
-                //Table9 정액권 기간가격(commuter_day_price_mst)
-                updateInfo = {
-                    commuterDpId: fixId, // PK
-                    commuterDpTime: fixTime, // 수정 시간
-                    commuterDpPrice: fixPrice // 수정 가격
-                }
-            }else if(fixSeat == "지정석" && fixType == "기간권"){
-                updateTablePick = "reserved";
-                //Table10 지정석 가격(reserved_price_mst)
-                updateInfo = {
-                    reservedPriceId: fixId, // PK
-                    reservedTime: fixTime, // 수정 시간
-                    reservedPrice: fixPrice // 수정 가격
-                }
-            }
-            deleteInfoData(updateLink, deleteId)
-        })
-        
+        if(deleteCheck){
+            deleteInfoData(deleteTablePick, deleteId)
+        }
+
+        pickIndex = null;
+        deleteId = null;
+        deleteSeat = null;
+        deleteType = null;
     })
 })
 
@@ -371,13 +355,12 @@ function updateInfoData(updateInfo, updateLink){
     })
 }
 
-
 // ajax. 상품 삭제 데이터
-function deleteInfoData(updateLink, oneday_price_id){  
+function deleteInfoData(deleteTablePick, deleteId){  
     $.ajax({
         async: false,
         type: "delete",
-        url: "/api/time/" + updateLink + "/" + oneday_price_id,
+        url: "/api/time/" + deleteTablePick + "/" + deleteId,
         dataType: "json",
         success: (response) => {
             console.log(response);    

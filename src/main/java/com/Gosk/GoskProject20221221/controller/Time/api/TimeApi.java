@@ -89,9 +89,24 @@ public class TimeApi {
     }
 
     // 상품 삭제
-    @DeleteMapping("/oneday/{oneday_price_id}")
-    public ResponseEntity<?> deleteUser(@PathVariable int oneday_price_id) throws Exception{
-        return ResponseEntity.ok(new CMRespDto<>(1, "table7.원데이 상품삭제", TimeService.onedayPriceDelete(oneday_price_id)));
+    @DeleteMapping("/oneday/{deleteId}")
+    public ResponseEntity<?> onedayPriceDelete(@PathVariable int deleteId) throws Exception{
+        return ResponseEntity.ok(new CMRespDto<>(1, "table7.원데이 상품삭제", timeService.onedayPriceDelete(deleteId)));
+    }
+
+    @DeleteMapping("/commuter/tp/{deleteId}")
+    public ResponseEntity<?> commuterTpDelete(@PathVariable int deleteId) throws Exception{
+        return ResponseEntity.ok(new CMRespDto<>(1, "table7.원데이 상품삭제", timeService.commuterTpDelete(deleteId)));
+    }
+
+    @DeleteMapping("/commuter/dp/{deleteId}")
+    public ResponseEntity<?> commuterDpDelete(@PathVariable int deleteId) throws Exception{
+        return ResponseEntity.ok(new CMRespDto<>(1, "table7.원데이 상품삭제", timeService.commuterDpDelete(deleteId)));
+    }
+
+    @DeleteMapping("/reserved/{deleteId}")
+    public ResponseEntity<?> reservedDelete(@PathVariable int deleteId) throws Exception{
+        return ResponseEntity.ok(new CMRespDto<>(1, "table7.원데이 상품삭제", timeService.reservedPriceDelete(deleteId)));
     }
     
 }

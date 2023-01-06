@@ -23,4 +23,9 @@ public interface TimeService {
     public boolean commuterDpUpdate(TimePriceReqDto timePriceReqDto) throws Exception;
     public boolean reservedPriceUpdate(TimePriceReqDto timePriceReqDto) throws Exception;
 
+    // 상품 삭제
+    public boolean onedayPriceDelete(int oneday_price_id) throws Exception;
+    public boolean commuterTpDelete(int commuter_tp_id) throws Exception;
+    public boolean commuterDpDelete(int commuter_dp_id) throws Exception;
+    public boolean reservedPriceDelete(int reserved_price_id) throws Exception;
 }

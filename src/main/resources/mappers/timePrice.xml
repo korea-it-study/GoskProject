@@ -197,11 +197,12 @@
             commuter_dp_id = #{commuter_dp_id}
     </delete>
 
-    <delete id="commuterDpDelete"
+    <delete id="reservedPriceDelete"
             parameterType="com.Gosk.GoskProject20221221.domain.TimePrice">
             delete
         from
             reserved_price_mst
+
         where
             reserved_price_id = #{reserved_price_id}
     </delete>
