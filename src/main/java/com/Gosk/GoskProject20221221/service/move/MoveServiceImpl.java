@@ -1,6 +1,6 @@
-package com.Gosk.GoskProject20221221.service;
+package com.Gosk.GoskProject20221221.service.move;
 
-import com.Gosk.GoskProject20221221.dto.seat.LockerRespDto;
+import com.Gosk.GoskProject20221221.dto.locker.LockerRespDto;
 import com.Gosk.GoskProject20221221.repository.MoveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

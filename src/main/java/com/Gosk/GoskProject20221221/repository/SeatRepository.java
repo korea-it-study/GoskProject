@@ -1,11 +1,10 @@
 package com.Gosk.GoskProject20221221.repository;
 
-import com.Gosk.GoskProject20221221.domain.seat.Locker;
+import com.Gosk.GoskProject20221221.domain.Locker;
 import com.Gosk.GoskProject20221221.domain.seat.ReservedSeat;
 import com.Gosk.GoskProject20221221.domain.seat.Seat;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 

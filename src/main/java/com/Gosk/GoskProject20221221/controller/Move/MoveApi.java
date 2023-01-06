@@ -1,7 +1,7 @@
 package com.Gosk.GoskProject20221221.controller.Move;
 
 import com.Gosk.GoskProject20221221.dto.CMRespDto;
-import com.Gosk.GoskProject20221221.service.MoveService;
+import com.Gosk.GoskProject20221221.service.move.MoveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

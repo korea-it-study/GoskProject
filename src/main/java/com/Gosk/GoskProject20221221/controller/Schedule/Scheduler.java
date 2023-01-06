@@ -1,6 +1,6 @@
 package com.Gosk.GoskProject20221221.controller.Schedule;
 
-import com.Gosk.GoskProject20221221.service.SeatService;
+import com.Gosk.GoskProject20221221.service.seat.SeatService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;

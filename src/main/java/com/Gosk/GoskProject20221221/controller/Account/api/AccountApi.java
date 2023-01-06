@@ -3,16 +3,13 @@ package com.Gosk.GoskProject20221221.controller.Account.api;
 
 import com.Gosk.GoskProject20221221.dto.CMRespDto;
 import com.Gosk.GoskProject20221221.dto.User.UserReqDto;
-import com.Gosk.GoskProject20221221.service.UserService;
+import com.Gosk.GoskProject20221221.service.user.UserService;
 import com.Gosk.GoskProject20221221.service.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

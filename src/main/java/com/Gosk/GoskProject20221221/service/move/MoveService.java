@@ -1,10 +1,12 @@
-package com.Gosk.GoskProject20221221.repository;
+package com.Gosk.GoskProject20221221.service.move;
 
 import com.Gosk.GoskProject20221221.dto.locker.LockerRespDto;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
-public interface MoveRepository {
+
+public interface MoveService {
+
     public LockerRespDto getLockerDetail(String lockerId);
     public int MoveLocker(String lockerId);
-}
+    }
+
+

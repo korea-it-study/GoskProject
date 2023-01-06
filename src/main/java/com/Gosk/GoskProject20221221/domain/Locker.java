@@ -1,4 +1,4 @@
-package com.Gosk.GoskProject20221221.domain.seat;
+package com.Gosk.GoskProject20221221.domain;
 
 import lombok.Builder;
 import lombok.Data;

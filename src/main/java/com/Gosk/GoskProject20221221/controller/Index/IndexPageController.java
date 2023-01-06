@@ -14,6 +14,6 @@ public class IndexPageController {
 
     @GetMapping("/move")
     public String seatlist() {
-        return "seatlist";
+        return "move/userMove";
     }
 }

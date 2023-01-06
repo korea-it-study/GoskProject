@@ -3,8 +3,7 @@ package com.Gosk.GoskProject20221221.controller.Time.api;
 
 import com.Gosk.GoskProject20221221.dto.CMRespDto;
 import com.Gosk.GoskProject20221221.dto.Time.TimePriceReqDto;
-import com.Gosk.GoskProject20221221.dto.User.UserReqDto;
-import com.Gosk.GoskProject20221221.service.TimeService;
+import com.Gosk.GoskProject20221221.service.time.TimeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

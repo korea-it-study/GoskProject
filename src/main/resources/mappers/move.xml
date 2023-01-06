@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Gosk.GoskProject20221221.repository.MoveRepository">
 
-<select id="getLockerDetail" resultType="com.Gosk.GoskProject20221221.dto.seat.LockerRespDto">
+<select id="getLockerDetail" resultType="com.Gosk.GoskProject20221221.dto.locker.LockerRespDto">
     select
         user_id,
         locker_end_time

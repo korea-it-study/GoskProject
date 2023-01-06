@@ -1,6 +1,6 @@
-package com.Gosk.GoskProject20221221.dto.seat;
+package com.Gosk.GoskProject20221221.dto.locker;
 
-import com.Gosk.GoskProject20221221.domain.seat.Locker;
+import com.Gosk.GoskProject20221221.domain.Locker;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

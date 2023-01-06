@@ -6,7 +6,7 @@ import com.Gosk.GoskProject20221221.dto.Time.CommuterDpRespDto;
 import com.Gosk.GoskProject20221221.dto.Time.CommuterTpRespDto;
 import com.Gosk.GoskProject20221221.dto.Time.OnedayPriceRespDto;
 import com.Gosk.GoskProject20221221.dto.Time.ReservedPriceRespDto;
-import com.Gosk.GoskProject20221221.service.TimeService;
+import com.Gosk.GoskProject20221221.service.time.TimeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

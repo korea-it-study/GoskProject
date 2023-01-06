@@ -2,19 +2,14 @@ package com.Gosk.GoskProject20221221.controller.Pay.api;
 
 
 import com.Gosk.GoskProject20221221.dto.CMRespDto;
-import com.Gosk.GoskProject20221221.dto.User.UserReqDto;
-import com.Gosk.GoskProject20221221.dto.seat.LockerReqDto;
+import com.Gosk.GoskProject20221221.dto.locker.LockerReqDto;
 import com.Gosk.GoskProject20221221.dto.seat.ReservedSeatReqDto;
 import com.Gosk.GoskProject20221221.dto.seat.SeatReqDto;
-import com.Gosk.GoskProject20221221.service.SeatService;
-import com.Gosk.GoskProject20221221.service.auth.PrincipalDetails;
+import com.Gosk.GoskProject20221221.service.seat.SeatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @Slf4j
 @RequestMapping("/api/pay")

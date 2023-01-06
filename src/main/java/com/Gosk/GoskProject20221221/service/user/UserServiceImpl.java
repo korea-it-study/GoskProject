@@ -1,13 +1,11 @@
-package com.Gosk.GoskProject20221221.service;
+package com.Gosk.GoskProject20221221.service.user;
 
 import com.Gosk.GoskProject20221221.domain.user.User;
 import com.Gosk.GoskProject20221221.dto.User.UserReqDto;
 import com.Gosk.GoskProject20221221.exception.CustomValidationException;
 import com.Gosk.GoskProject20221221.repository.UserRepository;
-import com.Gosk.GoskProject20221221.service.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

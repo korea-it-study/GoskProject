@@ -1,4 +1,4 @@
-package com.Gosk.GoskProject20221221.service;
+package com.Gosk.GoskProject20221221.service.user;
 
 import com.Gosk.GoskProject20221221.dto.User.UserReqDto;
 import com.Gosk.GoskProject20221221.service.auth.PrincipalDetails;
