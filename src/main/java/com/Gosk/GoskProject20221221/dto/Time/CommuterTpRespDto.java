@@ -9,9 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CommuterDpPriceRespDto {
+public class CommuterTpRespDto {
 
-    // table9 정액권 기간
-    private int commuterDpTime;
-    private int commuterDpPrice;
+    // table8 정액권 시간
+    private int commuterTpId;
+    private int commuterTpTime;
+    private int commuterTpPrice;
+
+
 }

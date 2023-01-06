@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class OnedayPriceRespDto {
 
     // table7 원데이 가격
+    private int onedayPriceId;
     private int onedayTime;
     private int onedayPrice;
 }

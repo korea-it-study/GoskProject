@@ -24,7 +24,7 @@ public class TimePriceReqDto {
     private int commuterTpTime;
     private int commuterTpPrice;
 
-    public TimePrice toCommuterTpPriceEntity() {
+    public TimePrice toCommuterTpEntity() {
         return TimePrice.builder()
                 .commuter_tp_id(commuterTpId)
                 .commuter_tp_time(commuterTpTime)
@@ -37,7 +37,7 @@ public class TimePriceReqDto {
     private int commuterDpTime;
     private int commuterDpPrice;
 
-    public TimePrice toCommuterDpPriceEntity() {
+    public TimePrice toCommuterDpEntity() {
         return TimePrice.builder()
                 .commuter_dp_id(commuterDpId)
                 .commuter_dp_time(commuterDpTime)
