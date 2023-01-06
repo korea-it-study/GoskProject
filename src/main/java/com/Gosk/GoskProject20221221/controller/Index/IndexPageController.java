@@ -11,4 +11,9 @@ public class IndexPageController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("/move")
+    public String seatlist() {
+        return "seatlist";
+    }
 }

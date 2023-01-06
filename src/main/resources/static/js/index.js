@@ -27,7 +27,7 @@ $('.myinfo-btn').click(function(){
 
 // 자리이동
 $('.seatmove-btn').click(function(){
-    location.href = "/";
+    location.href = "/move";
 });
 
 // time(원데이/정액권/지정권)
@@ -38,6 +38,7 @@ $('.oneday-btn, .commuter-btn, .reserved-btn').click(function(){
 
 // 사물함
 $('.locker-btn').click(function(){
+    localStorage.setItem("time", $(this).val());
     location.href = "/locker/check";
 });
 
@@ -62,10 +63,11 @@ $('.out-btn').click(function(){
 // 현재시간 안내 //// 현재시간 안내 //
 function printTime(){
     $(".main-content > p").text(dateToStr());
-};
+}
 
 $(function init(){
-    setInterval(printTime, 1000);
+    setInterval(printTime, 1000); //1초마다
+
 });
 
 function dateToStr(){
@@ -79,7 +81,7 @@ function dateToStr(){
     var day = date.getDate();
     var dayName = week[date.getDay()];
   
-    return year+'년 '+month+'월 '+day+'일 '+dayName+'요일 '+localTime;    
+    return year+'년 '+month+'월 '+day+'일 '+dayName+'요일 '+localTime;
 }
 
 window.onload = () => {

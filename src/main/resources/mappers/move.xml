@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gosk.GoskProject20221221.repository.MoveRepository">
+
+<select id="getLockerDetail" resultType="com.Gosk.GoskProject20221221.dto.seat.LockerRespDto">
+    select
+        user_id,
+        locker_end_time
+    from
+        locker_mst
+    where
+        locker_id = #{lockerId}
+    </select>
+
+<update id="MoveLocker">
+    update
+        locker_mst
+    set
+        locker_id = #{lockerId}
+    where
+
+    </update>
+</mapper>

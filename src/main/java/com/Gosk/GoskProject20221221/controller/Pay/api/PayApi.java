@@ -3,6 +3,7 @@ package com.Gosk.GoskProject20221221.controller.Pay.api;
 
 import com.Gosk.GoskProject20221221.dto.CMRespDto;
 import com.Gosk.GoskProject20221221.dto.User.UserReqDto;
+import com.Gosk.GoskProject20221221.dto.seat.LockerReqDto;
 import com.Gosk.GoskProject20221221.dto.seat.ReservedSeatReqDto;
 import com.Gosk.GoskProject20221221.dto.seat.SeatReqDto;
 import com.Gosk.GoskProject20221221.service.SeatService;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Slf4j
 @RequestMapping("/api/pay")
 @RestController
@@ -20,8 +23,6 @@ import org.springframework.web.bind.annotation.*;
 public class PayApi {
 
     private final SeatService seatService;
-
-//    private final SeatService seatService;
 
     @PostMapping("/seat")
     public ResponseEntity<?> seatPay(@RequestBody SeatReqDto seatReqDto) throws Exception {
@@ -40,6 +41,8 @@ public class PayApi {
 //        System.out.println("[PAY API] reserved seat pay data :::::::" + reservedSeatReqDto);
         return ResponseEntity.ok().body(new CMRespDto<>(1, "reserved seat data success", reservedSeatReqDto));
     }
-
-
+    @PostMapping("/locker")
+    public ResponseEntity<?> lockerPay(@RequestBody LockerReqDto lockerReqDto){
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "locker data success", seatService.payLocker(lockerReqDto)));
+    }
 }

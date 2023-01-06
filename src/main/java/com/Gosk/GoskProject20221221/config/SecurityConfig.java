@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/index", "/account/login", "/account/join")
                 .permitAll() // 전원 접근 가능
 
-                .antMatchers("/mypage", "/time/**", "/seat", "/seat/**","/locker/**", "/pay", "/in", "/out")
+                .antMatchers("/mypage", "/time/**", "/seat", "/seat/**","/locker/**", "/pay", "/in", "/out","/move")
                 .authenticated()
 
                 .antMatchers("/api/**")

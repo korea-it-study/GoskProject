@@ -78,4 +78,39 @@
             reserved_seat_mst
     </select>
 
+    <insert id="payLocker">
+        insert into
+            locker_mst
+        values
+        (
+            #{locker_id},
+            #{user_id},
+            DATE_ADD(NOW(), interval 9 HOUR),
+            DATE_ADD((DATE_ADD(NOW(), interval 9 HOUR)), INTERVAL #{locker_end_time} DAY)
+        )
+    </insert>
+
+    <select id="getLocker" resultType="java.lang.String">
+        select
+            locker_id
+        from
+            locker_mst
+
+    </select>
+    <select id="getUserLocker" resultType="java.lang.String">
+        select
+            locker_id
+        from
+            locker_mst
+        where
+            user_id = #{userId}
+    </select>
+
+    <delete id="deleteLocker">
+        delete from
+            locker_mst
+        where
+            <![CDATA[locker_end_time > #{now}]]>
+
+    </delete>
 </mapper>

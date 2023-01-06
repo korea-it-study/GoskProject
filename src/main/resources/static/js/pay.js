@@ -29,6 +29,8 @@ $(function(){
         time = "정액권"
     }else if(time == "reserved"){
         time = "지정석"
+    }else {
+        time = "사물함"
     }
 
     pickSeat = localStorage.getItem("pickSeat");
@@ -159,6 +161,13 @@ function infoSeatData(data) {
         jsonData = {
             seatId: data.pickSeat,
             userId: principal.user.user_id
+        }
+    }else if(time == "사물함"){
+        url = "/api/pay/locker";
+        jsonData = {
+            lockerId: data.pickSeat,
+            userId: principal.user.user_id,
+            lockerEndTime: (data.pickTime.replace("주(사물함)", "") * 7)
         }
     }
     
