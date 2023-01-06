@@ -17,7 +17,7 @@ public interface SeatService {
     public List<String> useReservedSeat() throws Exception;
     public boolean payLocker(LockerReqDto lockerReqDto);
     public List<String> getLocker();
-    public int deleteLocker(Date now);
+    public int scheduledDeleteLocker(Date now);
     public String getUserLocker(int userId);
 
 }

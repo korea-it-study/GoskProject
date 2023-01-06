@@ -4,22 +4,37 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Gosk.GoskProject20221221.repository.MoveRepository">
 
-<select id="getLockerDetail" resultType="com.Gosk.GoskProject20221221.dto.locker.LockerRespDto">
+
+    <resultMap id="user" type="com.Gosk.GoskProject20221221.domain.user.User">
+        <result property="user_id" column="user_id"></result>
+        <result property="user_phone" column="user_phone"></result>
+
+    </resultMap>
+
+    <resultMap id="locker" type="com.Gosk.GoskProject20221221.domain.Locker">
+        <result property="user_id" column="user_id"></result>
+        <result property="locker_end_time" column="locker_end_time"></result>
+        <collection property="user" resultMap="user"></collection>
+    </resultMap>
+
+<select id="getLockerDetail" resultMap="locker">
     select
-        user_id,
-        locker_end_time
+        lm.user_id,
+        um.user_phone,
+        DATE_FORMAT(locker_end_time, '%Y-%m-%d') AS locker_end_time
     from
-        locker_mst
+        locker_mst lm
+        left outer join user_mst um on(um.user_id = lm.user_id)
     where
         locker_id = #{lockerId}
     </select>
 
-<update id="MoveLocker">
+<update id="moveLocker">
     update
         locker_mst
     set
-        locker_id = #{lockerId}
+        locker_id = #{afterSeat}
     where
-
+        locker_id = #{nowSeat}
     </update>
 </mapper>

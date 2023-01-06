@@ -16,9 +16,9 @@ public class Scheduler {
 
     @Scheduled(cron = "0 0 22 * * *") ///매일 22시에 실행
     public void timeout() {
-        int timeoutList = seatService.deleteLocker(new Date());
-
+        int timeoutList = seatService.scheduledDeleteLocker(new Date());
         System.out.println( new Date() + " 삭제개수" + timeoutList);
     }
+
 
 }

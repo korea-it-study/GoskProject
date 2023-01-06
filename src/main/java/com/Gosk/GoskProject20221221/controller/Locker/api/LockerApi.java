@@ -18,9 +18,10 @@ public class LockerApi {
     public ResponseEntity<?> getLocker(){
         return ResponseEntity.ok().body(new CMRespDto<>(1, "getLocker", seatService.getLocker()));
     }
-    @GetMapping("/user/locker/{userId}")
+    @GetMapping("/locker/{userId}")
     public ResponseEntity<?> getUserLocker(@PathVariable int userId){
 
         return ResponseEntity.ok().body(new CMRespDto<>(1, "getUserLocker", seatService.getUserLocker(userId)));
     }
+
 }

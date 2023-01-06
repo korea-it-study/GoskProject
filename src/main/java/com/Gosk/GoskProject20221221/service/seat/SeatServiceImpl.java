@@ -69,8 +69,7 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public int deleteLocker(Date now) {
-
+    public int scheduledDeleteLocker(Date now) {
         return seatRepository.deleteLocker(now);
     }
 

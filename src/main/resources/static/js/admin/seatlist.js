@@ -11,12 +11,15 @@ const lockerManage = document.querySelector(".locker-management-content");
 const lockerName = document.querySelectorAll(".locker-management-content > div .btn")
 const userShow = document.querySelector(".user-show");
 
-// 지정석만 조회
+
+// 지정석만 조회 + 선택 다 풀기
 reserved.onclick = () => {
     alert("지정석");
     seatSpecial.classList.remove("invisible");
     lockerManage.classList.add("invisible");
     seatBasic.classList.add("invisible");
+    seatBtnService();
+
 }
 
 // 일반석만 조회
@@ -25,6 +28,7 @@ nomal.onclick = () => {
     seatSpecial.classList.add("invisible");
     lockerManage.classList.add("invisible");
     seatBasic.classList.remove("invisible");
+    seatBtnService();
 }
 
 // 사물함만 조회
@@ -33,19 +37,55 @@ locker.onclick = () => {
     seatSpecial.classList.add("invisible");
     lockerManage.classList.remove("invisible");
     seatBasic.classList.add("invisible");
+    seatBtnService();
     
 }
 
+//초기 seat 설정 (value 달아주기)
 const seatBtns = document.querySelectorAll(".seat-btn");
-
-seatBtns.forEach((seatBtn, index) => {
-    seatBtn.onclick = () => {
-        seatBtn.classList.toggle("selected-seat");
-        seatBtn.classList.toggle("seatborder");
-    }
+seatBtns.forEach(seatBtn => {
+    seatBtn.value = seatBtn.textContent;
 });
 
-//move에서는 필요없는 기능
+function seatBtnService(){
+    offSelectClass();
+//좌석버튼 클릭시
+    seatBtns.forEach((seatBtn, index) => {
+        //value 부여
+        let seatName = seatBtn.value
+        seatBtn.innerHTML = `${seatName}`;
+
+        seatBtn.onclick = () => {
+
+            seatBtn.classList.toggle("selected-seat");
+            seatBtn.classList.toggle("seatborder");
+            //사용중인 좌석이면
+            if(seatBtn.classList.contains("org-btn")){
+                seatBtn.classList.toggle("get-dtl");
+                console.log("사용중인 좌석");
+                //dtl 포함되어있으면 세부정보 가져와
+                if(seatBtn.classList.contains("get-dtl")){
+                    console.log("dtl 켜짐");
+                    getSeatDtl(seatName, index);
+                }else{
+                    console.log("dtl 꺼짐");
+                    seatBtn.innerHTML = `${seatName}`;
+                }
+
+            }
+        }
+    });
+}
+
+
+function offSelectClass(){
+    seatBtns.forEach(seatBtn => {
+        seatBtn.classList.remove("selected-seat");
+        seatBtn.classList.remove("seatborder");
+        seatBtn.classList.remove("get-dtl");
+    })
+}
+
 const repairBtn = document.querySelector(".repair-btn");
 
 repairBtn.onclick = () => {
@@ -87,6 +127,7 @@ closeBtn.onclick = () => {
 popupRegisterBtn.onclick = () => {
     alert("변경");
 
+
 }
 
 
@@ -123,8 +164,8 @@ function categoryList(sVal) {
         selList.innerHTML = ""; // 원래 좌석
         selList2.innerHTML = ""; // 이동할 좌석
 
-        //원래좌석 선택
-        let responseData = req("/api/user/locker/" + principal.user.user_id);
+        //원래 좌석 선택(모든 사용중인 좌석 선택 가능)
+        let responseData = getReq("/api/move/locker/");
         if(responseData == null) {
             selList.innerHTML = `
         <option value="null">이용중인 좌석이 없습니다</option>
@@ -149,7 +190,8 @@ function categoryList(sVal) {
 }
 
 
-function req(url) {
+//getAjax
+function getReq(url) {
     let responseData = null;
     $.ajax({
         async: false,
@@ -167,9 +209,9 @@ function req(url) {
     return responseData;
 }
 
-//사용중 사물함 오렌지
+//사용중 사물함 오렌지 바르기
 function getOrg(){
-    let responseData = req("/api/locker");
+    let responseData = getReq("/api/locker");
     responseData.forEach(lockerUse => {
         lockerName.forEach((lockerAll,index) => {
             if(lockerUse === lockerAll.textContent){
@@ -177,6 +219,24 @@ function getOrg(){
             }
         })
     })
+
+}
+
+
+function getSeatDtl(clickSeat, index){
+
+    //사물함이면
+    if(clickSeat.includes("AL") || clickSeat.includes("BL") || clickSeat.includes("CL")){
+
+        let responseData = getReq("/api/move/locker/" + clickSeat);
+            seatBtns[index].innerHTML = `
+        <span>${clickSeat}</span>
+        <div class="seat-div">
+        <p class="arrow_box">사용자:<br> ${responseData.userPhone}<br>
+        만료일:<br> ${responseData.lockerEndTime} </p>
+        </div>
+        `;
+    }
 
 }
 

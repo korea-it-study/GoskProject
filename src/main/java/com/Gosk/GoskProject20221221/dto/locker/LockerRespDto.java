@@ -9,6 +9,6 @@ import java.time.LocalDateTime;
 @Builder
 public class LockerRespDto {
     private int userId;
-
-    private LocalDateTime lockerEndTime;
+    private String userPhone;
+    private String lockerEndTime;
 }
