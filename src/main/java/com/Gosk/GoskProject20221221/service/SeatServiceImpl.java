@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -52,16 +53,21 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public List<String> getLocker() {
         List<String> names = seatRepository.getLocker();
-        System.out.println("사용중 =========" + names);
+        System.out.println("사물함 사용중 =========" + names);
 
-
-        return names; // 삭제된 건수
+        return names;
     }
 
     @Override
     public int deleteLocker(Date now) {
 
         return seatRepository.deleteLocker(now);
+    }
+
+    @Override
+    public String getUserLocker(int userId) {
+
+        return seatRepository.getUserLocker(userId);
     }
 
 

@@ -36,6 +36,7 @@ $('.next-btn').click(function(){
     }
 });
 
+//locker만 정보 가져옴
 function getLocker(){
     let responseData = null;
     $.ajax({
@@ -52,12 +53,13 @@ function getLocker(){
     });
     //사용중 사물함이름 - 전체 사물함 이름
     responseData.forEach(lockerUse => {
-        const lockerName = document.querySelectorAll(".btn")
+        const lockerName = document.querySelectorAll(".locker-management-content > div .btn ")
         lockerName.forEach((lockerAll,index) => {
+            //비교중에 Use랑 특정 lockerAll의 값이 같아 질때 특정 index에 org 해준다
             if(lockerUse === lockerAll.textContent){
                 lockerName[index].classList.add("org-btn");
             }
-        })
+        });
     })
 }
 window.onload = () => {

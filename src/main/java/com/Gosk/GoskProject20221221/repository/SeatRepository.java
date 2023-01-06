@@ -20,4 +20,6 @@ public interface SeatRepository {
     public List<String> getLocker();
     public int deleteLocker(Date now);
 
+    public String getUserLocker(int userId);
+
 }

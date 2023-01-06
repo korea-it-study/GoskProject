@@ -27,7 +27,7 @@ $('.myinfo-btn').click(function(){
 
 // 자리이동
 $('.seatmove-btn').click(function(){
-    location.href = "/";
+    location.href = "/move";
 });
 
 // time(원데이/정액권/지정권)

@@ -7,6 +7,7 @@ import com.Gosk.GoskProject20221221.dto.seat.SeatReqDto;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface SeatService {
     public boolean paySeat(SeatReqDto seatReqDto);
@@ -14,5 +15,6 @@ public interface SeatService {
     public boolean payLocker(LockerReqDto lockerReqDto);
     public List<String> getLocker();
     public int deleteLocker(Date now);
+    public String getUserLocker(int userId);
 
 }
