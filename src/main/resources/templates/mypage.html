@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://kit.fontawesome.com/44bcb903a4.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" href="/static/css/reset.css">
-
-<link rel="stylesheet" href="/static/css/mypage.css">
-<title>G-OSK 프로젝트</title>
+<head th:replace="~{head :: head}"></head>
+<head>
+    <link rel="stylesheet" href="/static/css/mypage.css">
+    <title>G-OSK 프로젝트</title>
+</head>
 <body>
     <main class="container">
 <!-- header -->
@@ -46,13 +42,7 @@
             </table>
             <div class="table-container">
                 <table class="sales-table">
-                    <colgroup>
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="20%">
-                    </colgroup>
+         
                     <tr>
                         <td>1</td>
                         <td>2022-12-22</td>
@@ -138,6 +128,6 @@
             </button>
         </footer>
     </main>
-    <script src="/static/js/pay.js"></script>
+    <script src="/static/js/mypage.js"></script>
 </body>
 </html>

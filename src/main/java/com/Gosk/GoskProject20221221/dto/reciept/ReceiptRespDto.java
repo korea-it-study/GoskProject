@@ -8,30 +8,18 @@ import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Builder
 @Data
-@AllArgsConstructor
+@Builder
 @RequiredArgsConstructor
-public class ReceiptReqDto {
-
+@AllArgsConstructor
+public class ReceiptRespDto {
     private int receiptId;
     private int userId;
     private String receiptKinds;
     private int receiptPrice;
     private String receiptTime;
     private String receiptDay;
+    private int receiptUse;
     private String receiptCreateDate;
 
-
-    public Receipt toReceiptEntity() {
-        return Receipt.builder()
-                .receipt_id(receiptId)
-                .user_id(userId)
-                .receipt_kinds(receiptKinds)
-                .receipt_price(receiptPrice)
-                .receipt_time(receiptTime)
-                .receipt_day(receiptDay)
-                .receipt_create_date(receiptCreateDate)
-                .build();
-    }
 }

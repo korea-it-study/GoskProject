@@ -11,6 +11,7 @@
         <result property="receipt_price" column="receipt_price"></result>
         <result property="receipt_time" column="receipt_time"></result>
         <result property="receipt_day" column="receipt_day"></result>
+        <result property="receipt_use" column="receipt_use"></result>
         <result property="receipt_create_date" column="receipt_create_date"></result>
     </resultMap>
 
@@ -37,5 +38,22 @@
             )
 
     </insert>
+
+    <select id="getReceipt" resultMap="receipt">
+        SELECT
+            receipt_id,
+            user_id,
+            receipt_kinds,
+            receipt_price,
+            receipt_time,
+            receipt_day,
+            receipt_use,
+            DATE_FORMAT(receipt_create_date, '%Y-%m-%d') AS receipt_create_date
+        FROM
+            receipt_mst
+        WHERE
+            user_id = #{user_id}
+
+    </select>
 
 </mapper>
