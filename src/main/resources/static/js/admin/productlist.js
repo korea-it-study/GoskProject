@@ -208,13 +208,8 @@ $(function(){
 $(function(){
     // 팝업 열기
     $(".update-btn").click(function(){
-        $('.fix-time').val("");
-        $('.fix-price').val("");
-        updateInfo = null;
-        pickIndex = null;
-
         $('.fix-pop-back').removeClass("invisible");
-    
+
         // 선택좌석
         var pickIndex = $(this).parents('tr').index() - 1;
 
@@ -262,19 +257,43 @@ $(function(){
                     reservedPrice: fixPrice // 수정 가격
                 }
             }
-            updateInfoData(updateInfo, updateTablePick);
         })
+    })
         
+    $(".fix-update-btn").click(function(){
+        if(fixTime == "" || fixPrice == ""){
+            alert("빈 값을 확인해주세요");
+        }else if(!intCheck.test(fixTime)) {
+            alert("수정 시간/기간은 숫자만 입력 가능합니다.");
+            $('.fix-time').val("");
+        }else if(!intCheck.test(fixPrice)) {
+            alert("수정 가격은 숫자만 입력 가능합니다.");
+            $('.fix-price').val("");
+        }else if(doubleCheck(fixTime, updateTablePick)) {
+            alert("중복된 시간입니다.");
+            $('.fix-price').val("");
+         }else{
+            updateInfoData(updateInfo, updateTablePick);
+            $('.fix-pop-back').addClass("invisible");
+        }
     })
     
-    $(".fix-update-btn").click(function(){
+    $(".fix-close-btn").click(function(){
         $('.fix-pop-back').addClass("invisible");
     })
 
-    $(".fix-close-btn").click(function(){
-        $('.fix-pop-back').addClass("invisible");
-    })    
+    updateInfo = null;
+    pickIndex = null;
+    fixId = null;
+    fixSeat = null;
+    fixType = null;
+    fixTime = null;
+    fixPrice = null;
+
+    $('.fix-time').val("");
+    $('.fix-price').val("");
 })
+
 
 
 // 삭제 클릭 // // 삭제 클릭 //
@@ -312,6 +331,14 @@ $(function(){
     })
 })
 
+// 종복 체크 // // 중복 체크 //
+function doubleCheck(time, tablePick){
+
+    timePriceList
+
+
+    return true;
+}
 
 
 // ajax. 상품 등록 데이터

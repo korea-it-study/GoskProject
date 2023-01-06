@@ -71,6 +71,7 @@ function comma(str) {
 }
 
 // 유효성 체크! //
+let intCheck = /^[0-9]+$/; 
 var userIdCheck = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
 var passwdCheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
 var nameCheck = RegExp(/^[가-힣]{2,6}$/);
