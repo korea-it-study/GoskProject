@@ -62,6 +62,7 @@ function getReceipts(receiptData) {
     receiptData.forEach(receipt => {
 
         let receiptUse = null;
+        let receiptProduct = null;
 
         if(receipt.receiptUse == "0") {
             receiptUse = "사용종료";
@@ -69,11 +70,17 @@ function getReceipts(receiptData) {
             receiptUse = "사용중";
         }
 
+        if(receipt.receiptDay == "0"){
+            receiptProduct = receipt.receiptTime;
+        }else if(receipt.receiptTime == "0") {
+            receiptProduct = receipt.receiptDay;
+        }
+
         salesTable.innerHTML += `
         <tr>
             <td>${receipt.receiptId}</td>
             <td>${receipt.receiptCreateDate}</td>
-            <td>${receipt.receiptKinds}</td>
+            <td><p>${receipt.receiptKinds}<p>${receiptProduct}</td>
             <td>${comma(receipt.receiptPrice)} 원</td>
             <td>${receiptUse}</td>
         </tr>
