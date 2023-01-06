@@ -46,7 +46,6 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-<<<<<<< HEAD
     public List<String> useSeat() throws Exception {
 
         return seatRepository.seatSelect();
@@ -56,7 +55,10 @@ public class SeatServiceImpl implements SeatService {
     public List<String> useReservedSeat() throws Exception {
 
         return seatRepository.reservedSelect();
-=======
+
+    }
+
+     @Override
     public boolean payLocker(LockerReqDto lockerReqDto) {
         Locker locker = lockerReqDto.toLockerEntity();
         int result = seatRepository.payLocker(locker);
@@ -82,7 +84,6 @@ public class SeatServiceImpl implements SeatService {
     public String getUserLocker(int userId) {
 
         return seatRepository.getUserLocker(userId);
->>>>>>> origin/mungi
     }
 
 

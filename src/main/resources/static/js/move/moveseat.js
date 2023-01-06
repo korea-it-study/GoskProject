@@ -1,3 +1,11 @@
+// 홈으로 버튼 index로 보내기
+
+$('.index-btn').click(function(){
+    alert(1);
+    location.href = "/index";
+    localStorage.clear();
+});
+
 let principal = getPrincipal();
 
 const reserved = document.querySelector(".reserved");
@@ -45,21 +53,7 @@ seatBtns.forEach((seatBtn, index) => {
     }
 });
 
-//move에서는 필요없는 기능
-const repairBtn = document.querySelector(".repair-btn");
 
-repairBtn.onclick = () => {
-    seatBtns.forEach((seatBtn, index) => {
-        if (seatBtn.classList.contains("selected-seat")) {
-            seatBtn.classList.add("repaire-seat");
-            seatBtn.classList.remove("seatborder");
-        }else if(seatBtn.classList.contains("repaire-seat")){
-            seatBtn.classList.remove("repaire-seat");
-            seatBtn.classList.remove("seatborder");
-        }
-
-    })
-}
 
 // 자리이동 팝업 띄우기
 
