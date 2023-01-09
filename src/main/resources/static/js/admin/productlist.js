@@ -5,6 +5,7 @@ let plusSeat = null;
 let plusType = null;
 let plusTime = null;
 let plusPrice = null;
+
 // 상품수정
 let updateTablePick = null; // table 등록 구분용
 let updateInfo = null; //ajax 보낼 수정 데이터
@@ -161,15 +162,26 @@ $(function(){
     // 팝업 닫기
     $('.plus-close-btn').click(function(){
         $('.plus-pop-back').addClass("invisible");
+        resetData();
     })
+
+    // select 바뀔 때마다
+    $(".plus-popup > select").change(function(){  
+        resetData();
+
+        plusSeat = $('.plus-seat').val();
+        plusType = $('.plus-type').val();        
+    });
+
+    // 글자 입력할떄마다
+    $(".plus-popup > input").change(function(){
+        plusTime = $('.plus-time').val();
+        plusPrice = $('.plus-price').val();     
+    });
     
     // 등록 팝업에서 등록버튼 클릭시
-    $('.plus-register-btn').click(function(){
-        plusSeat = $('.plus-seat').val();
-        plusType = $('.plus-type').val();
-        plusTime = $('.plus-time').val();
-        plusPrice = $('.plus-price').val();
-    
+    $('.plus-register-btn').click(function(){  
+    // 값 저장
         if(plusSeat == "일반석" && plusType == "원데이"){    
             plusTablePick = "oneday";
             //Table7 원데이 가격(oneday_price_mst)
@@ -199,7 +211,25 @@ $(function(){
                 reservedPrice: plusPrice // 등록 가격
             }
         }
-        plusInfoData(plusInfo, plusTablePick);
+
+    // 값 정규식 체크
+        if(plusTime == "" || plusPrice == ""){
+            alert("빈 값을 확인해주세요");
+        }else if(doubleCheck(plusTime, plusTablePick)) {
+            alert("이미 존재하는 품목입니다.");
+            $('.plus-time').val("");
+            plusTime == "";
+        }else if(!intCheck.test(plusPrice)) {
+            alert("수정 시간/기간은 숫자만 입력 가능합니다.");
+            $('.plus-time').val("");
+            plusTime == "" 
+        }else if(!intCheck.test(plusPrice)) {
+            alert("수정 가격은 숫자만 입력 가능합니다.");
+            $('.plus-price').val("");
+            plusPrice = "";
+        }else{
+            plusInfoData(plusInfo, plusTablePick);
+        }
     })
 })
 
@@ -216,14 +246,18 @@ $(function(){
         $('.fix-popup > input:nth-child(1)').val($('.product-table > tr:eq('+pickIndex+') > td:eq(0)').text());
         $('.fix-popup > input:nth-child(2)').val($('.product-table > tr:eq('+pickIndex+') > td:eq(1) > p').text());
 
-        // 수정 팝업에서 수정버튼 클릭시
-        $('.fix-update-btn').click(function(){
+        // 글자 입력할떄마다
+        $(".fix-popup > input").change(function(){
             fixId = $('.product-table > tr:eq('+pickIndex+') > td:eq(0)').attr("class");
             fixSeat = $('.fix-popup > input:nth-child(1)').val();
             fixType = $('.fix-popup > input:nth-child(2)').val();
             fixTime = $('.fix-time').val();
-            fixPrice = $('.fix-price').val();
-        
+            fixPrice = $('.fix-price').val();            
+        });
+
+        // // 수정 팝업에서 수정버튼 클릭시
+        $('.fix-update-btn').click(function(){        
+        // 값 저장
             if(fixSeat == "일반석" && fixType == "원데이"){    
                 updateTablePick = "oneday";
                 //Table7 원데이 가격(oneday_price_mst)
@@ -257,41 +291,34 @@ $(function(){
                     reservedPrice: fixPrice // 수정 가격
                 }
             }
+
+        // 값 정규식 체크
+            if(fixTime == "" || fixPrice == ""){
+                alert("빈 값을 확인해주세요");
+            }else if(doubleCheck(fixTime, updateTablePick)) {
+                alert("이미 존재하는 품목입니다.");
+                $('.fix-time').val("");
+                fixTime == "";
+            }else if(!intCheck.test(fixTime)) {
+                alert("수정 시간/기간은 숫자만 입력 가능합니다.");
+                $('.fix-time').val("");
+                fixTime == "" 
+            }else if(!intCheck.test(fixPrice)) {
+                alert("수정 가격은 숫자만 입력 가능합니다.");
+                $('.fix-price').val("");
+                fixPrice = "";
+            }else{
+                updateInfoData(updateInfo, updateTablePick);
+            }
         })
-    })
-        
-    $(".fix-update-btn").click(function(){
-        if(fixTime == "" || fixPrice == ""){
-            alert("빈 값을 확인해주세요");
-        }else if(!intCheck.test(fixTime)) {
-            alert("수정 시간/기간은 숫자만 입력 가능합니다.");
-            $('.fix-time').val("");
-        }else if(!intCheck.test(fixPrice)) {
-            alert("수정 가격은 숫자만 입력 가능합니다.");
-            $('.fix-price').val("");
-        }else if(doubleCheck(fixTime, updateTablePick)) {
-            alert("중복된 시간입니다.");
-            $('.fix-price').val("");
-         }else{
-            updateInfoData(updateInfo, updateTablePick);
-            $('.fix-pop-back').addClass("invisible");
-        }
+        resetData();        
     })
     
+    // 팝업 닫기
     $(".fix-close-btn").click(function(){
         $('.fix-pop-back').addClass("invisible");
+        resetData();
     })
-
-    updateInfo = null;
-    pickIndex = null;
-    fixId = null;
-    fixSeat = null;
-    fixType = null;
-    fixTime = null;
-    fixPrice = null;
-
-    $('.fix-time').val("");
-    $('.fix-price').val("");
 })
 
 
@@ -331,13 +358,55 @@ $(function(){
     })
 })
 
+// 데이터 값 초기화 //
+function resetData(){   
+    plusInfo = null;
+    plusSeat = null; 
+    plusType = null;
+    plusTime = null;
+    plusPrice = null;
+    $('.plus-time').val("");
+    $('.plus-price').val(""); 
+    
+    updateInfo = null;
+    pickIndex = null;
+    fixId = null;
+    fixSeat = null;
+    fixType = null;
+    fixTime = null;
+    fixPrice = null;
+    $('.fix-time').val("");
+    $('.fix-price').val("");
+}
+
 // 종복 체크 // // 중복 체크 //
 function doubleCheck(time, tablePick){
-
-    timePriceList
-
-
-    return true;
+    if(tablePick == "oneday"){        
+        for(i=0; i<timePriceList[0].length; i++){
+            if(time == timePriceList[0][i].onedayTime){
+                return true;
+            }            
+        }
+    }else if(tablePick == "commuter/tp"){       
+        for(i=0; i<timePriceList[1].length; i++){
+            if(time == timePriceList[1][i].commuterTpTime){
+                return true;
+            }            
+        }
+    }else if(tablePick == "commuter/dp"){       
+        for(i=0; i<timePriceList[2].length; i++){
+            if(time == timePriceList[2][i].commuterDpTime){
+                return true;
+            }            
+        }
+    }else if(tablePick == "reserved"){       
+        for(i=0; i<timePriceList[3].length; i++){
+            if(time == timePriceList[3][i].reservedTime){
+                return true;
+            }            
+        }
+    }
+    return false;
 }
 
 
@@ -373,7 +442,6 @@ function updateInfoData(updateInfo, updateLink){
         dataType: "json",
         success: (response) => {
             console.log(response);    
-            $('.fix-pop-back').addClass("invisible");
             $(location).prop("href", location.href);
         },
         error: (error) => {
