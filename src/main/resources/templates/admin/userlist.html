@@ -13,7 +13,7 @@
             <div class="popup">
                 <p>수정 전 정보</p>
                 <input type="text" value="수정 전 회원 번호" readonly>
-                <input type="text" value="수정 전 회원 비번" readonly>
+                <input type="text" value="****" readonly>
                 <p>수정 할 정보</p>
                 <input type="text" placeholder="수정 할 회원 번호" onfocus="this.placeholder=''"
                     onblur="this.placeholder='수정 할 회원 번호'">
@@ -24,6 +24,45 @@
                     <button class="btn gray-btn popup-update-btn">수정</button>
                     <button class="btn org-btn popup-close-btn">닫기</button>
                 </div>
+            </div>
+        </div>
+        <div class="detail-popup-back invisible">
+            <div class="detail-popup">
+                <table class="detail-th-table">
+                    <colgroup>
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                    </colgroup>
+                    <tr>
+                        <th>No.</th>
+                        <th>구매일자</th>
+                        <th>상품명</th>
+                        <th>결제금액</th>
+                        <th>사용</th>
+                    </tr>
+                </table>
+                <div class="table-container">
+                    <table class="detail-table">
+                        <colgroup>
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                        </colgroup>
+                        <tr>
+                            <td>1</td>
+                            <td>2022-12-22</td>
+                            <td>100시간 권</td>
+                            <td>100000 원</td>
+                            <td>사용중</td>
+                        </tr>
+                    </table>
+                    </div>
+                <button class="btn org-btn detail-popup-close">닫기</button>
             </div>
         </div>
         <!-- header -->
@@ -41,16 +80,22 @@
         </header>
         <!-- section -->
         <section class="admin-container">
+            <div class="search-box">
+                <input type="text" id="phone-number" class="phone-number">
+                <button class="btn gray-btn search-btn">조회</button>
+            </div>
             <table class="th-table">
                 <colgroup>
+                    <col width="15%">
                     <col width="">
-                    <col width="20%">
+                    <col width="15%">
                     <col width="15%">
                     <col width="15%">
                 </colgroup>
                 <tr>
+                    <th>No.</th>
                     <th>전화번호</th>
-                    <th>비밀번호</th>
+                    <th>상세</th>
                     <th>수정</th>
                     <th>삭제</th>
                 </tr>
@@ -58,15 +103,17 @@
             <div class="table-container">
                 <table class="user-table">
                     <colgroup>
+                        <col width="15%">
                         <col width="">
-                        <col width="20%">
+                        <col width="15%">
                         <col width="15%">
                         <col width="15%">
                     </colgroup>
                     <!-- update-btn, dlt-btn css는 admin.css에 있음 -->
                     <tr>
+                        <td>12</td>
                         <td>010-1234-5678</td>
-                        <td>1234</td>
+                        <td><button class="btn detail-btn">상세</button></td>
                         <td><button class="btn update-btn">수정</button></td>
                         <td><button class="btn dlt-btn">삭제</button></td>
                     </tr>

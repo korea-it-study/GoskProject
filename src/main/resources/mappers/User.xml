@@ -66,6 +66,18 @@
             user_phone = #{user_phone}
     </select>
 
+<!--    관리자페이지 모든 유저 들고오기     -->
+    <select id="allUser" resultType="com.Gosk.GoskProject20221221.domain.user.User">
+        SELECT
+            um.user_id,
+            um.user_phone,
+            um.user_pw
+
+        FROM
+            user_mst um
+    </select>
+
+<!--    지정석 시간/날짜 추가하기   -->
     <update id="updateTime" parameterType="com.Gosk.GoskProject20221221.domain.user.User">
         UPDATE
             user_mst
