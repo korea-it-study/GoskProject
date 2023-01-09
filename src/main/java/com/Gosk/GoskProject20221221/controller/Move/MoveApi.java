@@ -27,4 +27,5 @@ public class MoveApi {
 
         return ResponseEntity.ok().body(new CMRespDto<>(1, "move success", moveService.MoveLocker(map)));
     }
+
 }

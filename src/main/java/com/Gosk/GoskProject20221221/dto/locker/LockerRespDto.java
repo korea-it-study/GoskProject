@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class LockerRespDto {
+    private String lockerId;
     private int userId;
     private String userPhone;
     private String lockerEndTime;

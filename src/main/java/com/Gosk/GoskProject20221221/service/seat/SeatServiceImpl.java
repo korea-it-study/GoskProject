@@ -4,12 +4,14 @@ import com.Gosk.GoskProject20221221.domain.Locker;
 import com.Gosk.GoskProject20221221.domain.seat.ReservedSeat;
 import com.Gosk.GoskProject20221221.domain.seat.Seat;
 import com.Gosk.GoskProject20221221.dto.locker.LockerReqDto;
+import com.Gosk.GoskProject20221221.dto.locker.LockerRespDto;
 import com.Gosk.GoskProject20221221.dto.seat.ReservedSeatReqDto;
 import com.Gosk.GoskProject20221221.dto.seat.SeatReqDto;
 import com.Gosk.GoskProject20221221.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -60,24 +62,14 @@ public class SeatServiceImpl implements SeatService {
         return result != 0;
     }
 
-    @Override
-    public List<String> getLocker() {
-        List<String> names = seatRepository.getLocker();
-        System.out.println("사물함 사용중 =========" + names);
 
-        return names;
-    }
 
     @Override
     public int scheduledDeleteLocker(Date now) {
         return seatRepository.deleteLocker(now);
     }
 
-    @Override
-    public String getUserLocker(int userId) {
 
-        return seatRepository.getUserLocker(userId);
-    }
 
 
 }

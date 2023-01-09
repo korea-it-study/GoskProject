@@ -22,11 +22,17 @@ public class Locker {
     private String locker_end_time;
 
 
-    public LockerRespDto toLockerRespDto (){
+    public LockerRespDto toLockerRespDto(){
         return LockerRespDto.builder()
                 .userId(user_id)
                 .lockerEndTime(locker_end_time)
                 .userPhone(user.getUser_phone())
+                .build();
+    }
+    public LockerRespDto toLockerResp(){
+        return LockerRespDto.builder()
+                .lockerId(locker_id)
+                .userId(user_id)
                 .build();
     }
 }

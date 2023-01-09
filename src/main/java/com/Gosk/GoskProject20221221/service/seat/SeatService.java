@@ -1,6 +1,8 @@
 package com.Gosk.GoskProject20221221.service.seat;
 
+import com.Gosk.GoskProject20221221.domain.Locker;
 import com.Gosk.GoskProject20221221.dto.locker.LockerReqDto;
+import com.Gosk.GoskProject20221221.dto.locker.LockerRespDto;
 import com.Gosk.GoskProject20221221.dto.seat.ReservedSeatReqDto;
 import com.Gosk.GoskProject20221221.dto.seat.SeatReqDto;
 
@@ -16,8 +18,8 @@ public interface SeatService {
 
     public List<String> useReservedSeat() throws Exception;
     public boolean payLocker(LockerReqDto lockerReqDto);
-    public List<String> getLocker();
+
     public int scheduledDeleteLocker(Date now);
-    public String getUserLocker(int userId);
+
 
 }

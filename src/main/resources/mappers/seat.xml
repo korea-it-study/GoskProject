@@ -90,9 +90,11 @@
         )
     </insert>
 
-    <select id="getLocker" resultType="java.lang.String">
+    <select id="getLocker" resultType="com.Gosk.GoskProject20221221.domain.Locker">
+
         select
-            locker_id
+            locker_id,
+            user_id
         from
             locker_mst
 

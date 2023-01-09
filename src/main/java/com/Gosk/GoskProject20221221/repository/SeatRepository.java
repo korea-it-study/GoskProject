@@ -15,9 +15,8 @@ public interface SeatRepository {
     public int paySeat(Seat seat);
     public int payReserved (ReservedSeat reservedSeat);
     public int payLocker(Locker locker);
-    public List<String> getLocker();
+
     public int deleteLocker(Date now);
 
-    public String getUserLocker(int userId);
 
 }
