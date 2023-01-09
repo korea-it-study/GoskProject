@@ -19,6 +19,26 @@ function getPrincipal() {
     return responseData;
 }
 
+
+// userId의 구매내역 받아오기
+function getReceiptList(userId) { 
+    $.ajax({
+        async:false,
+        url: "/api/mypage/" + userId,
+        type: "get",
+        contentType: "application/json",
+        dataType: "json",
+        success: (response) => {
+            responseData = response.data;
+            console.log(responseData);
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    });
+    return responseData;
+}
+
 // 상품 불러오기
 function TimePriceList(){  
     $.ajax({
