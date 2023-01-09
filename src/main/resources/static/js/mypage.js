@@ -40,6 +40,19 @@ function getReceiptList() {
 
 }
 
+$('.myinfo-btns > button').click(function(){
+    if($(this).hasClass("white-btn") === false){
+        $(this).siblings().removeClass("white-btn");
+        $(this).siblings().addClass("black-btn");
+        $(this).removeClass("black-btn").addClass("white-btn");
+
+    }else{
+        $('.myinfo-btns > button').removeClass("white-btn").addClass("black-btn");
+    }
+});
+
+// 구매내역 table에 뿌리기
+
 function getReceipts(receiptData) {
 
     const salesTable = document.querySelector(".sales-table");
@@ -57,7 +70,6 @@ function getReceipts(receiptData) {
     
              `;
 
-    // 사용중 여부는 다시 봐야함!!
 
     receiptData.forEach(receipt => {
 
