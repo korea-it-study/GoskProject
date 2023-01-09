@@ -6,6 +6,8 @@ import com.Gosk.GoskProject20221221.dto.Time.CommuterDpRespDto;
 import com.Gosk.GoskProject20221221.dto.Time.CommuterTpRespDto;
 import com.Gosk.GoskProject20221221.dto.Time.OnedayPriceRespDto;
 import com.Gosk.GoskProject20221221.dto.Time.ReservedPriceRespDto;
+import com.Gosk.GoskProject20221221.dto.locker.LockerPriceRespDto;
+import com.Gosk.GoskProject20221221.service.locker.LockerPriceService;
 import com.Gosk.GoskProject20221221.service.time.TimeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminApi {
     private final TimeService timeService;
+    private final LockerPriceService lockerService;
 
     @GetMapping("/productlist")
     public ResponseEntity<?> getTimePriceListSelect() throws Exception {
@@ -43,4 +46,11 @@ public class AdminApi {
         return ResponseEntity.ok(new CMRespDto<>(1, "TimePriceList 정보", timePrice));
     }
 
+    @GetMapping("/locker")
+    public ResponseEntity<?> getLockerPriceListSelect() throws Exception {
+        List<LockerPriceRespDto> lockerPrice = new ArrayList<LockerPriceRespDto>();
+        lockerPrice = lockerService.getLockerPriceListSelect();
+
+        return ResponseEntity.ok(new CMRespDto<>(1, "LockerPriceList 정보", lockerPrice));
+    }
 }

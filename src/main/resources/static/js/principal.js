@@ -38,30 +38,24 @@ function TimePriceList(){
     return responseData;
 }
 
-// 유저 정보 리스트 들고오기
+// 사물함 상품 불러오기
+function LockerPriceList(){  
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: "/api/admin/locker",
+        dataType: "json",
+        success: (response) => {
+            console.log(response);    
+            responseData = response.data;
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    })
 
-// function getUserList() {
-//     let userListData = null;
-
-//     $.ajax({
-//         async: false,
-//         type: "GET",
-//         url: "/api/admin/userlist",
-//         dataType: "json",
-//         success: (response) => {
-//             console.log(response);
-//             userListData = response.data;
-//             alert("유저 리스트 정보 불러오기 성공!");
-//         },
-//         error: (error) => {
-//             console.log(error);
-//             alert("유저 리스트 정보 불러오기 실패!");
-//         }
-
-//     });
-    
-//     return userListData;
-// }
+    return responseData;
+}
 
 
 //콤마찍기

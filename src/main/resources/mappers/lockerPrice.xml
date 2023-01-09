@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gosk.GoskProject20221221.repository.LockerPriceRepository">
+    <!--table11.사물함 상품등록-->
+    <insert id="lockerPriceInsert"
+            parameterType="com.Gosk.GoskProject20221221.domain.LockerPrice"
+            useGeneratedKeys="true"
+            keyProperty="locker_price_id"
+    >
+        insert into
+        locker_price_mst(
+            locker_price_id,
+            locker_time,
+            locker_price
+        )
+        values(
+            0,
+            #{locker_time},
+            #{locker_price}
+        )
+    </insert>
+
+
+<!--    &lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;&lt;!&ndash; SELECT &ndash;&gt;-->
+    <select id="getLockerPriceListSelect"
+            parameterType="List"
+            resultType="com.Gosk.GoskProject20221221.domain.LockerPrice">
+        SELECT
+            locker_price_id,
+            locker_time,
+            locker_price
+        from
+            locker_price_mst
+        ORDER BY locker_time
+    </select>
+
+    <!--UPDATE--><!--UPDATE--><!--UPDATE--><!--UPDATE--><!--UPDATE-->
+    <update id="lockerPriceUpdate"
+            parameterType="com.Gosk.GoskProject20221221.domain.LockerPrice">
+        update
+            locker_price_mst
+        set
+            locker_time = #{locker_time},
+            locker_price = #{locker_price}
+        where
+            locker_price_id = #{locker_price_id}
+    </update>
+
+    <!--DELETE--><!--DELETE--><!--DELETE--><!--DELETE-->
+    <delete id="lockerPriceDelete"
+            parameterType="com.Gosk.GoskProject20221221.domain.LockerPrice">
+            delete
+        from
+            locker_price_mst
+        where
+            locker_price_id = #{locker_price_id}
+    </delete>
+
+</mapper>
