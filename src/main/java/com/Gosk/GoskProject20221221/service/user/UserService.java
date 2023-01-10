@@ -14,5 +14,6 @@ public interface UserService {
     public boolean userUpdateTime(UserReqDto userReqDto) throws Exception;
     public List<UserRespDto> allUserList() throws Exception;
     public List<UserSeatRespDto> userSeatInfo(int userId) throws Exception;
+    public boolean userModify(UserReqDto userReqDto) throws Exception;
 
 }

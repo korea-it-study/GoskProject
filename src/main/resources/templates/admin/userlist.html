@@ -12,12 +12,13 @@
         <div class="popup-back invisible">
             <div class="popup">
                 <p>수정 전 정보</p>
-                <input type="text" name="pre-modify-phone" value="수정 전 회원 번호" readonly>
+                <input type="text" value="수정 전 회원 번호" readonly>
                 <p>수정 할 정보</p>
                 <input type="text" placeholder="수정 할 회원 번호" onfocus="this.placeholder=''"
-                    onblur="this.placeholder='수정 할 회원 번호'">
-                <input type="text" placeholder="수정 할 회원 비번" onfocus="this.placeholder=''"
-                    onblur="this.placeholder='수정 할 회원 비번'">
+                onblur="this.placeholder='수정 할 회원 번호'" maxlength="13">
+                <input type="password" placeholder="수정 할 회원 비번" onfocus="this.placeholder=''"
+                onblur="this.placeholder='수정 할 회원 비번'" maxlength="4">
+                <input type="hidden" value="userId 저장장소">
 
                 <div class="popup-btns">
                     <button class="btn gray-btn popup-update-btn">수정</button>

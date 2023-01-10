@@ -8,6 +8,7 @@ import com.Gosk.GoskProject20221221.exception.CustomValidationException;
 import com.Gosk.GoskProject20221221.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -87,6 +88,18 @@ public class UserServiceImpl implements UserService {
         });
 
         return userSeatList;
+    }
+
+    @Override
+    public boolean userModify(UserReqDto userReqDto) throws Exception {
+
+        User userModifyInfo = userReqDto.toModifyUser();
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        
+        int result = userRepository.modifyUser(userModifyInfo);
+
+        return result != 0;
     }
 
 

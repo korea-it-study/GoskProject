@@ -18,5 +18,7 @@ public interface UserRepository {
     public List<User> allUser();
 
     public List<UserSeat> seatInfo(int userId);
+
+    public int modifyUser(User user);
 }
 

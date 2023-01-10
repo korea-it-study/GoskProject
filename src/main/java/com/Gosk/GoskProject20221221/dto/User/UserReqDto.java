@@ -40,6 +40,15 @@ public class UserReqDto {
                 .build();
     }
 
+    // 회원정보 수정
+
+    public User toModifyUser() {
+        return User.builder()
+                .user_phone(userPhone)
+                .user_pw(new BCryptPasswordEncoder().encode(userPw))
+                .build();
+    }
+
     //정액권 구매시 유저 남은시간 업데이트
 
     public User toUpdateTime() {

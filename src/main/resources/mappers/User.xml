@@ -119,4 +119,14 @@
             user_id = #{user_id}
     </update>
 
+    <update id="modifyUser" parameterType="com.Gosk.GoskProject20221221.domain.user.User">
+        UPDATE
+            user_mst
+        SET
+            user_phone = #{user_phone},
+            user_pw = #{user_pw}
+        WHERE
+            user_id = #{user_id}
+    </update>
+
 </mapper>
