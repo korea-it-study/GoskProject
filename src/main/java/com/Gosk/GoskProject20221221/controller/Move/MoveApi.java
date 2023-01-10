@@ -28,4 +28,13 @@ public class MoveApi {
         return ResponseEntity.ok().body(new CMRespDto<>(1, "move success", moveService.MoveLocker(map)));
     }
 
+    @PutMapping("/seat")
+    public ResponseEntity<?> moveSeat(@RequestBody Map<String, String> map){
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "move success",moveService.moveSeat(map)));
+    }
+    @PutMapping("/special")
+    public ResponseEntity<?> movepecial(@RequestBody Map<String, String> map){
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "move success",moveService.moveSpecial(map)));
+    }
+
 }

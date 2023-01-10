@@ -10,4 +10,6 @@ import java.util.Map;
 public interface MoveRepository {
     public Locker getLockerDetail(String lockerId);
     public int moveLocker(Map<String, String > map);
+    public int moveSeat(Map<String, String > map);
+    public int moveSpecial(Map<String, String > map);
 }

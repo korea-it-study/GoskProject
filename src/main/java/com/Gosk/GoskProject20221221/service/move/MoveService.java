@@ -9,6 +9,8 @@ public interface MoveService {
 
     public LockerRespDto getLockerDetail(String lockerId);
     public int MoveLocker(Map<String, String > map);
+    public int moveSeat(Map<String, String > map);
+    public int moveSpecial(Map<String, String > map);
     }
 
 

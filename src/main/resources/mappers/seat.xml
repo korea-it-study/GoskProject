@@ -62,18 +62,18 @@
     </insert>
 
 <!--    일반석 정보 불러오기    -->
-    <select id="seatSelect" resultType="java.lang.String">
+    <select id="seatSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.Seat">
         SELECT
-            seat_id
+            *
         FROM
             seat_mst
 
     </select>
 
 <!--    지정석 정보 불러오기    -->
-    <select id="reservedSelect" resultType="java.lang.String">
+    <select id="reservedSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
         SELECT
-            reserved_seat_id
+            *
         FROM
             reserved_seat_mst
     </select>
@@ -90,23 +90,6 @@
         )
     </insert>
 
-    <select id="getLocker" resultType="com.Gosk.GoskProject20221221.domain.Locker">
-
-        select
-            locker_id,
-            user_id
-        from
-            locker_mst
-
-    </select>
-    <select id="getUserLocker" resultType="java.lang.String">
-        select
-            locker_id
-        from
-            locker_mst
-        where
-            user_id = #{userId}
-    </select>
 
     <delete id="deleteLocker">
         delete from
@@ -115,4 +98,32 @@
             <![CDATA[locker_end_time > #{now}]]>
 
     </delete>
+
+    <select id="getBasicSeatDetail" resultType="com.Gosk.GoskProject20221221.domain.seat.SeatInfo">
+        SELECT
+            sm.user_id,
+            sm.seat_total_time,
+            um.user_phone,
+            um.user_time,
+            um.user_date
+        FROM
+            seat_mst sm
+            left outer join user_mst um on(um.user_id = sm.user_id)
+        where
+            seat_id = #{seatId}
+
+    </select>
+
+    <select id="getSpecialSeatDetail" resultType="com.Gosk.GoskProject20221221.domain.seat.SpecialSeatInfo">
+    select
+        rm.user_id,
+        rm.reserved_total_time,
+        um.user_phone
+    from
+        reserved_seat_mst rm
+        left outer join user_mst um on(um.user_id = rm.user_id)
+    where
+        reserved_seat_id = #{seatId}
+
+    </select>
 </mapper>

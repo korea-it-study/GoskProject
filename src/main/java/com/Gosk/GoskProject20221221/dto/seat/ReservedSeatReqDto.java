@@ -17,7 +17,7 @@ public class ReservedSeatReqDto {
     private String reservedSeatId;
     private int userId;
     private LocalDateTime reservedStartTime;
-    private String reservedTotalTime;
+    private LocalDateTime reservedTotalTime;
 
     public ReservedSeat toReservedEntity() {
         return ReservedSeat.builder()

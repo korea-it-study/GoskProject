@@ -23,4 +23,14 @@ public class MoveServiceImpl implements MoveService{
 
         return moveRepository.moveLocker(map);
     }
+
+    @Override
+    public int moveSeat(Map<String, String> map) {
+        return moveRepository.moveSeat(map);
+    }
+
+    @Override
+    public int moveSpecial(Map<String, String> map) {
+        return moveRepository.moveSpecial(map);
+    }
 }

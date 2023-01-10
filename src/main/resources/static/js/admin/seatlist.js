@@ -11,6 +11,8 @@ const seatSpecial = document.querySelector(".seat-special");
 const lockerManage = document.querySelector(".locker-management-content");
 
 const lockerName = document.querySelectorAll(".locker-management-content > div .seat-btn");
+const normSeatName = document.querySelectorAll(".seat-basic .seat-btn");
+const specialSeatName = document.querySelectorAll(".seat-special .seat-btn");
 const userShow = document.querySelector(".user-show");
 
 
@@ -53,9 +55,7 @@ function seatBtnService(){
     offSelectClass();
     seatBtns.forEach((seatBtn, index) => {
 
-        let seatName = seatBtn.value
-        seatBtn.innerHTML = `${seatName}`;
-
+        seatBtn.innerHTML = `${seatBtn.value}`;
         seatBtn.onclick = () => {
 
             seatBtn.classList.toggle("selected-seat");
@@ -65,11 +65,9 @@ function seatBtnService(){
                 seatBtn.classList.toggle("get-dtl");
                 //dtl 포함되어있으면 세부정보 가져와
                 if(seatBtn.classList.contains("get-dtl")){
-                    console.log("dtl 켜짐");
-                    getSeatDtl(seatName, index);
+                    getSeatDtl(seatBtn, index);
                 }else{
-                    console.log("dtl 꺼짐");
-                    seatBtn.innerHTML = `${seatName}`;
+                    seatBtn.innerHTML = `${seatBtn.value}`;
                 }
 
             }
@@ -93,37 +91,71 @@ repairBtn.onclick = () => {
     let flag = true;
     let post = "post";
     let del = "delete";
-    seatBtns.forEach(seatBtn => {
 
+    let isLocker = false;
+    let isSpecial = false;
+
+    seatBtns.forEach(seatBtn => {
         if (seatBtn.classList.contains("selected-seat") && seatBtn.classList.contains("org-btn")) {
             //안된다
             alert(seatBtn.value + "는 사용중인 좌석입니다. 좌석을 이동한 후 이용하십시오.");
             flag = false;
         }else if(seatBtn.classList.contains("selected-seat") && seatBtn.classList.contains("repair-seat")){
             //repair 푸는 요청(delete)
+            if(seatBtn.parentElement.classList.contains("locker-zone")) {
+                isLocker = true;
+            }else if((seatBtn.parentElement.classList.contains("seat-special"))){
+                isSpecial = true;
+            }
             delData.push(seatBtn.value);
             seatBtn.classList.remove("repair-seat");
 
         }else if(seatBtn.classList.contains("selected-seat")){
             //repair 거는 요청(post)
+            if(seatBtn.parentElement.classList.contains("locker-zone")) {
+                isLocker = true;
+            }else if((seatBtn.parentElement.classList.contains("seat-special"))){
+                isSpecial = true;
+            }
             insData.push(seatBtn.value);
         }
 
 
-
     });
-    if(flag && delData.length > 0 && insData.length > 0) {
+
+
+    if(flag && delData.length > 0 && insData.length > 0 ) {
         console.log("둘다 요청");
-        repairReq(post, {data: insData});
-        repairReq(del, {data: delData});
+        if(isLocker){
+            repairReq(post, {data: insData},"/api/repair/locker");
+            repairReq(del, {data: delData},"/api/repair/locker");
+        }else if(isSpecial){
+            repairReq(post, {data: insData},"/api/repair/special");
+            repairReq(del, {data: delData},"/api/repair/special");
+        }else{
+            repairReq(post, {data: insData},"/api/repair/basic");
+            repairReq(del, {data: delData},"/api/repair/basic");
+        }
+
     }else if(flag && delData.length > 0 && insData.length === 0){
         console.log("off 요청");
-        repairReq(del,{data: delData});
+        if(isLocker){
+            repairReq(del, {data: delData},"/api/repair/locker");
+        }else if(isSpecial){
+            repairReq(del, {data: delData},"/api/repair/special");
+        }else{
+            repairReq(del, {data: delData},"/api/repair/basic");
+        }
     }else if(flag && insData.length > 0 && delData.length === 0){
         console.log("insert 요청");
-        repairReq(post, {data: insData});
+        if(isLocker){
+            repairReq(post, {data: insData},"/api/repair/locker");
+        }else if(isSpecial){
+            repairReq(post, {data: insData},"/api/repair/special");
+        }else{
+            repairReq(post, {data: insData},"/api/repair/basic");
+        }
     }
-
 
     console.log(delData);
     console.log(insData);
@@ -132,10 +164,12 @@ repairBtn.onclick = () => {
     seatBtnService();
 }
 
+
+
 // 자리이동 팝업 띄우기
 
 const moveBtn = document.querySelector(".move-btn");
-const selCate = document.querySelector(".sel_cate");
+const selCate = document.querySelector(".sel_cate"); //
 const selList = document.querySelector(".sel_list"); // 소분류
 const selList2 = document.querySelector(".sel_list2"); // 소소분류
 
@@ -152,6 +186,10 @@ moveBtn.onclick = () => {
 
 closeBtn.onclick = () => {
     popupBack.classList.add("invisible");
+    selCate.value = "option";
+    categoryList(selCate.value);
+
+
 }
 
 
@@ -161,65 +199,89 @@ selCate.onchange = () => {
 }
 
 
+//자리변경 팝업
 function categoryList(sVal) {
+    let responseData = null;
 
-    if(sVal == "option") {
-        num = new Array("소분류");
-        vnum = new Array("");
+    if(sVal === "option") {
+
+        selList.innerHTML = `
+        <option value="${null}">소분류</option>
+        `;
+        selList2.innerHTML = `
+        <option value="${null}">소소분류</option>
+        `;
+
    
-    } else if(sVal == "special" || sVal == "nomal" ) {
+    } else if(sVal === "special") {
 
         selList.innerHTML = ""; // 소분류
         selList2.innerHTML = ""; // 소소분류
 
+        responseData = getReq("/api/seat/useReservedSeat");
+        setSelList("special",responseData);
 
-        for(let i = 0; i < 3; i++) {
-            selList.innerHTML += `
-            <option value="${i}">${i}</option>
-            `;
-        }
 
-        for(let i = 0; i < 3; i++) {
-            selList2.innerHTML += `
-                <option value="2">DATA</option>
-            `;
-        }
+
     }else if(sVal == "locker"){
         selList.innerHTML = ""; // 원래 좌석
         selList2.innerHTML = ""; // 이동할 좌석
 
         //원래 좌석 선택(모든 사용중인 좌석 선택 가능)
-        let responseData = getReq("/api/locker");
-        if(responseData == null) {
-            selList.innerHTML = `
+        responseData = getReq("/api/locker");
+        setSelList("locker",responseData);
+
+
+    //일반석
+    }else{
+        selList.innerHTML = ""; // 원래 좌석
+        selList2.innerHTML = ""; // 이동할 좌석
+
+        //원래 좌석 선택(모든 사용중인 좌석 선택 가능)
+        responseData = getReq("/api/seat/useSeat");
+        setSelList("seat",responseData);
+
+
+    }
+}
+
+function setSelList(category, responseData){
+
+    if(responseData == null) {
+        selList.innerHTML = `
         <option value="null">이용중인 좌석이 없습니다</option>
         `;
-        }else{
-            responseData.forEach(seat => {
-                if(seat.userId !== -1){
-                    selList.innerHTML += `
-        <option value="${seat.lockerId}">${seat.lockerId}</option>
+    }else{
+        responseData.forEach(seat => {
+            if(seat.userId !== -1){
+                selList.innerHTML += `
+        <option value="${category === "locker" ?  seat.lockerId : seat.seatId}">${category === "locker" ?  seat.lockerId : seat.seatId}</option>
         `;
-                }
-
-            });
-
-        }
-        //나머지 좌석들
-        lockerName.forEach((usableLocker, index) =>{
-            if(!usableLocker.classList.contains("org-btn") && !usableLocker.classList.contains("repair-seat")){
-                selList2.innerHTML += `
-                <option value="${usableLocker.textContent}">${usableLocker.textContent}</option>
-                `;
             }
+
         });
-        popupRegisterBtn.onclick = () => {
-            if(confirm(selCate.value + selList.value + "->" + selList2.value + "변경하시겠습니까?")){
-                putReq("/api/move/locker");
-            }
+
+    }
+    //나머지 좌석들 선택
+    let param = null;
+    if(category === "locker"){
+        param = lockerName;
+    }else if(category === "seat"){
+        param = normSeatName;
+    }else{
+        param = specialSeatName;
+    }
+    param.forEach(usableSeat =>{
+        if(!usableSeat.classList.contains("org-btn") && !usableSeat.classList.contains("repair-seat")){
+            selList2.innerHTML += `
+                <option value="${usableSeat.textContent}">${usableSeat.textContent}</option>
+                `;
         }
-
-
+    });
+    popupRegisterBtn.onclick = () => {
+        if(confirm(selCate.value + selList.value + "->" + selList2.value + "변경하시겠습니까?")){
+            putReq("/api/move/" + category);
+        }
     }
 }
 
@@ -243,48 +305,78 @@ function getReq(url) {
     return responseData;
 }
 
+
 //사용중 좌석 오렌지 바르기
 function getColor(){
     //사물함
     let lockerResponseData = getReq("/api/locker");
-    lockerResponseData.forEach(lockerUse => {
-        lockerName.forEach(lockerAll=> {
-            // lockerAll.classList.remove("repair-seat");
-            if(lockerUse.lockerId === lockerAll.textContent){
-                lockerAll.classList.add("org-btn");
-                if(lockerUse.userId === -1){
-                    lockerAll.classList.remove("org-btn");
-                    lockerAll.classList.add("repair-seat");
+    if(lockerResponseData != null){
+        lockerResponseData.forEach(lockerUse => {
+            lockerName.forEach(lockerAll=> {
+                // lockerAll.classList.remove("repair-seat");
+                if(lockerUse.lockerId === lockerAll.textContent){
+                    lockerAll.classList.add("org-btn");
+                    if(lockerUse.userId === -1){
+                        lockerAll.classList.remove("org-btn");
+                        lockerAll.classList.add("repair-seat");
+                    }
                 }
-            }
+            });
         });
-    });
+    }
+
     //일반석
+    let normalSeatResponseData = getReq("/api/seat/useSeat");
+    if(normalSeatResponseData != null){
+        normalSeatResponseData.forEach(normSeatUse =>{
+            normSeatName.forEach(normAll => {
+                if(normSeatUse.seatId === normAll.textContent){
+                    normAll.classList.add("org-btn");
+                    if(normSeatUse.userId === -1){
+                        normAll.classList.remove("org-btn");
+                        normAll.classList.add("repair-seat");
+                    }
+                }
+            });
+        });
+    }
 
-
-    
     //지정석
-
-
+    let reservedSeatResponseData = getReq("/api/seat/useReservedSeat");
+    if(reservedSeatResponseData != null){
+        reservedSeatResponseData.forEach(reservedUse =>{
+            specialSeatName.forEach(reservedAll => {
+                if(reservedUse.reservedSeatId === reservedAll.textContent){
+                    reservedAll.classList.add("org-btn");
+                    if(reservedUse.userId === -1){
+                        reservedAll.classList.remove("org-btn");
+                        reservedAll.classList.add("repair-seat");
+                    }
+                }
+            });
+        });
+    }
 
 }
 
 
+
 function getSeatDtl(clickSeat, index){
     //사물함이면
-    if(clickSeat.includes("AL") || clickSeat.includes("BL") || clickSeat.includes("CL")){
-
-        let responseData = getReq("/api/move/locker/" + clickSeat);
+    let clickSeatVal = clickSeat.value
+    let responseData = null;
+    if(clickSeatVal.includes("AL") || clickSeatVal.includes("BL") || clickSeatVal.includes("CL")){
+        responseData = getReq("/api/move/locker/" + clickSeatVal);
         if(responseData.userId === -1) {
             seatBtns[index].innerHTML = `
-        <span>${clickSeat}</span>
+        <span>${clickSeatVal}</span>
         <div class="seat-div">
         <p class="arrow_box">유지보수 중</p>
         </div>
         `;
         }else{
             seatBtns[index].innerHTML = `
-        <span>${clickSeat}</span>
+        <span>${clickSeatVal}</span>
         <div class="seat-div">
         <p class="arrow_box">사용자:<br> ${responseData.userPhone}<br>
         만료일:<br> ${responseData.lockerEndTime} </p>
@@ -292,17 +384,76 @@ function getSeatDtl(clickSeat, index){
         `;
         }
 
+        //사물함 아니면서 seat-basic이면(원데이,정액권 같이)
+    }else if(clickSeat.parentElement.classList.contains("seat-basic")) {
+        responseData = getReq("/api/seat/basic/" + clickSeatVal);
+        if(responseData.userId === -1) {
+            seatBtns[index].innerHTML = `
+        <span>${clickSeatVal}</span>
+        <div class="seat-div">
+        <p class="arrow_box">유지보수 중</p>
+        </div>
+        `;
+            //원데이
+        }else if(responseData.seatTotalTime != null){
+            seatBtns[index].innerHTML = `
+        <span>${clickSeatVal}</span>
+        <div class="seat-div">
+        <p class="arrow_box">사용자:<br> ${responseData.userPhone}<br>
+        만료 시간:<br> ${responseData.seatTotalTime} </p>
+        </div>
+        `;
+            //정액권 - 시간
+        }else if(responseData.userTime != null){
+            seatBtns[index].innerHTML = `
+        <span>${clickSeatVal}</span>
+        <div class="seat-div">
+        <p class="arrow_box">사용자:<br> ${responseData.userPhone}<br>
+        남은 시간 :<br> ${responseData.userTime} </p>
+        </div>
+        `;
+            //정액권 - 기간
+        }else{
+            seatBtns[index].innerHTML = `
+        <span>${clickSeatVal}</span>
+        <div class="seat-div">
+        <p class="arrow_box">사용자:<br> ${responseData.userPhone}<br>
+       만료일: <br> ${responseData.userDate.substring(0,10)} </p>
+        </div>
+        `;
+        }
 
+        //그 외 reserved
+    }else{
+        responseData = getReq("/api/seat/special/" + clickSeatVal);
+        if(responseData.userId === -1) {
+            seatBtns[index].innerHTML = `
+        <span>${clickSeatVal}</span>
+        <div class="seat-div">
+        <p class="arrow_box">유지보수 중</p>
+        </div>
+        `;
+        }else{
+            seatBtns[index].innerHTML = `
+        <span>${clickSeatVal}</span>
+        <div class="seat-div">
+        <p class="arrow_box">사용자:<br> ${responseData.userPhone}<br>
+        만료일:<br> ${responseData.reservedSeatTotalTime.substring(0,10)} </p>
+        </div>
+        `;
+        }
     }
+
+
 
 }
 
-function repairReq(type, data){
+function repairReq(type, data, url){
 
     $.ajax({
         async: false,
         type: type,
-        url: "/api/repair/locker",
+        url: url,
         data: data,
         traditional : true,
         dataType: "json",
@@ -336,7 +487,7 @@ function putReq(url){
         success: (response) => {
             if(response.data != 0){
                 alert("변경 성공" + data.nowSeat + "->" + data.afterSeat);
-                location.replace("/index");
+                location.reload();
 
             }else{
                 alert("변경 실패");
@@ -354,4 +505,5 @@ function putReq(url){
 
 window.onload =() => {
     getColor();
+    seatBtnService();
 }

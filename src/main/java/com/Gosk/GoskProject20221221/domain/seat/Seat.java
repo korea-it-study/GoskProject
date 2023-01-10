@@ -11,6 +11,13 @@ public class Seat {
     private String seat_id;
     private int user_id;
     private LocalDateTime seat_start_time;
-    private String seat_total_time;
+    private LocalDateTime seat_total_time;
+
+    public SeatRespDto toSeatRespDto(){
+        return SeatRespDto.builder()
+                .seatId(seat_id)
+                .userId(user_id)
+                .build();
+    }
 
 }

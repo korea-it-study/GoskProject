@@ -37,4 +37,22 @@
     where
         locker_id = #{nowSeat}
     </update>
+
+    <update id="moveSeat">
+        update
+            seat_mst
+        set
+            seat_id = #{afterSeat}
+        where
+            seat_id = #{nowSeat}
+    </update>
+
+    <update id="moveSpecial">
+        update
+            reserved_seat_mst
+        set
+            reserved_seat_id = #{afterSeat}
+        where
+            reserved_seat_id = #{nowSeat}
+    </update>
 </mapper>

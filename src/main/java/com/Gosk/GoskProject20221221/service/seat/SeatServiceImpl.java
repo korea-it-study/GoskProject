@@ -3,20 +3,27 @@ package com.Gosk.GoskProject20221221.service.seat;
 import com.Gosk.GoskProject20221221.domain.Locker;
 import com.Gosk.GoskProject20221221.domain.seat.ReservedSeat;
 import com.Gosk.GoskProject20221221.domain.seat.Seat;
+import com.Gosk.GoskProject20221221.domain.seat.SeatInfo;
+import com.Gosk.GoskProject20221221.domain.seat.SpecialSeatInfo;
 import com.Gosk.GoskProject20221221.dto.locker.LockerReqDto;
 import com.Gosk.GoskProject20221221.dto.locker.LockerRespDto;
-import com.Gosk.GoskProject20221221.dto.seat.ReservedSeatReqDto;
-import com.Gosk.GoskProject20221221.dto.seat.SeatReqDto;
+import com.Gosk.GoskProject20221221.dto.seat.*;
 import com.Gosk.GoskProject20221221.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
+import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SeatServiceImpl implements SeatService {
 
     private final SeatRepository seatRepository;
@@ -42,19 +49,73 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<String> useSeat() throws Exception {
-
-        return seatRepository.seatSelect();
+    public List<SeatRespDto> useSeat() throws Exception {
+        List<Seat> useSeatList = seatRepository.seatSelect();
+        List<SeatRespDto> useSeatRespDtoList = new ArrayList<>();
+        useSeatList.forEach(useSeat ->{
+            useSeatRespDtoList.add(useSeat.toSeatRespDto());
+        });
+        return useSeatRespDtoList;
     }
 
     @Override
-    public List<String> useReservedSeat() throws Exception {
+    public List<ReservedSeatRespDto> useReservedSeat() throws Exception {
+        List<ReservedSeat> useReservedSeats = seatRepository.reservedSelect();
 
-        return seatRepository.reservedSelect();
 
+        if(useReservedSeats.size() > 0){
+            List<ReservedSeatRespDto> useReservedRespDtoList = new ArrayList<>();
+            useReservedSeats.forEach(useReserve -> {
+                useReservedRespDtoList.add(useReserve.toRespDto());
+            });
+            return useReservedRespDtoList;
+        }
+        return null;
     }
 
-     @Override
+    @Override
+
+    public SeatInfoRespDto getBasicSeatDetail(String seatId) {
+        SeatInfo seatInfo = seatRepository.getBasicSeatDetail(seatId);
+        //정액권이면
+        if(seatInfo.getUser_time() != 0){
+            return SeatInfoRespDto.builder()
+                    .userId(seatInfo.getUser_id())
+                    .userPhone(seatInfo.getUser_phone())
+                    .userTime(calcLeft(seatInfo.getUser_time()))
+                    .build();
+            //원데이면
+        }else if(seatInfo.getSeat_total_time() != null){
+            return SeatInfoRespDto.builder()
+                    .userId(seatInfo.getUser_id())
+                    .seatTotalTime(getSeatTotalTime(seatInfo.getSeat_total_time()))
+                    .userPhone(seatInfo.getUser_phone())
+                    .build();
+        }
+        return seatInfo.toSeatInfoRespDto(); //아니면 userDate만 있는 dto 생성
+    }
+    private String getSeatTotalTime(LocalDateTime seat_total_time) {
+
+        return seat_total_time.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
+    private String calcLeft(int amount){
+        int hour = amount/(60*60);
+        int minute = amount/60-(hour*60);
+        int second = amount%60;
+        return hour+"시간"+minute+"분"+second+"초";
+    }
+
+    @Override
+    public SeatInfoRespDto getSpecialSeatDetail(String seatId) {
+        SpecialSeatInfo specialSeatInfo = seatRepository.getSpecialSeatDetail(seatId);
+        return SeatInfoRespDto.builder()
+                .userId(specialSeatInfo.getUser_id())
+                .reservedSeatTotalTime(specialSeatInfo.getReserved_total_time())
+                .userPhone(specialSeatInfo.getUser_phone())
+                .build();
+    }
+
+    @Override
     public boolean payLocker(LockerReqDto lockerReqDto) {
         Locker locker = lockerReqDto.toLockerEntity();
         int result = seatRepository.payLocker(locker);
