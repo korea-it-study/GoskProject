@@ -1,3 +1,7 @@
+
+// 전체 매출 호출
+let salesList = salesListSelect();
+
 // datepicker
 $(document).ready(function () {
     $.datepicker.setDefaults({
@@ -43,4 +47,72 @@ searchBtn.onclick = () => {
     console.log(historyEndDate.value);
     console.log(seatCategory.value);
     alert("시작날짜 :" + historyStartDate.value + "끝 날짜 :" + historyEndDate.value + "좌석종류 : " + seatCategory.value);
+}
+
+
+// 제출 데이터 조회
+$(function(){             
+    //전체 매출 조회        
+    for(i=0; i<salesList.length; i++){
+        if(salesList[i].receiptDay != 0){
+            $('.sales-table').append(`  
+                <tr>
+                    <td>${salesList[i].receiptKinds} 기간권</td>
+                    <td>${salesList[i].receiptDay}주</td>
+                    <td>${salesList[i].receiptCount}회</td>
+                    <td>${comma(salesList[i].receiptPrice)}원</td>
+                </tr>      
+            `);
+        }else if(salesList[i].receiptTime != 0){
+            $('.sales-table').append(`  
+                <tr>
+                    <td>${salesList[i].receiptKinds} 시간권</td>
+                    <td>${salesList[i].receiptTime}시간</td>
+                    <td>${salesList[i].receiptCount}회</td>
+                    <td>${comma(salesList[i].receiptPrice)}원</td>
+                </tr>      
+            `);
+        }
+    }
+
+    // 조회 클릭
+    $('.search-btn').click(function(){        
+        // 상품선택
+        $('.seat-category').change(function(){
+            if($(this).val() == "전체"){
+                // 숨김 처리 전부 삭제
+            }else if($(this).val() == "원데이 시간권"){
+                
+            }else if($(this).val() == "정액권 시간권"){
+                
+            }else if($(this).val() == "정액권 기간권"){
+                
+            }else if($(this).val() == "지정석 기간권"){
+                
+            }else if($(this).val() == "사물함 기간권"){
+                
+            }
+        });
+    });
+    
+});
+
+
+
+// 매출내역 가져오기 //// 매출내역 가져오기 //
+function salesListSelect(){  
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: "/api/admin/saleslist",
+        dataType: "json",
+        success: (response) => {
+            console.log(response);    
+            responseData = response.data;
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    })
+    return responseData;
 }

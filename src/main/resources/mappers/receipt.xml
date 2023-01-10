@@ -53,7 +53,19 @@
             receipt_mst
         WHERE
             user_id = #{user_id}
+    </select>
 
+    <select id="getSalesListSelect" resultMap="receipt">
+        SELECT
+            receipt_kinds,
+            receipt_price,
+            receipt_time,
+            receipt_day,
+            SUBSTRING(receipt_create_date,1,10) AS receipt_create_date,
+        COUNT(*) receipt_count
+        FROM
+            receipt_mst group BY receipt_kinds, receipt_price, receipt_day, receipt_day
+        ORDER BY receipt_kinds, receipt_price, receipt_time, receipt_day
     </select>
 
 </mapper>

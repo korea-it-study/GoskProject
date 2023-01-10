@@ -52,7 +52,6 @@ $(function(){
 
 
 // 클릭할 때 뿌리는 데이터 변경 
-
 $(function(){
     $(".myinfo-btns > button").click(function() {
         if($(".btn-today").hasClass("white-btn") === true) { // 오늘 버튼 눌렀을 때
@@ -169,9 +168,9 @@ function getReceipts(receiptData) {
         }
 
         if(receiptData[i].receiptDay == "0"){
-            receiptProduct = receiptData[i].receiptTime;
+            receiptProduct = receiptData[i].receiptTime + "시간";
         }else if(receiptData[i].receiptTime == "0") {
-            receiptProduct = receiptData[i].receiptDay;
+            receiptProduct = receiptData[i].receiptDay + "주";
         }
 
         salesTable.innerHTML += `

@@ -1,3 +1,22 @@
+/* section *//* section *//* section *//* section */
+
+.table-container {
+    width: 930px;
+    padding-right: 10px;
+    overflow:auto; 
+    overflow-x: hidden;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 20px;  /* 스크롤바의 너비 */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #62c1a9; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
 .sales-category {
     display: flex;
     align-items: center;
