@@ -3,6 +3,7 @@ package com.Gosk.GoskProject20221221.service.user;
 import com.Gosk.GoskProject20221221.domain.user.User;
 import com.Gosk.GoskProject20221221.dto.User.UserReqDto;
 import com.Gosk.GoskProject20221221.dto.User.UserRespDto;
+import com.Gosk.GoskProject20221221.dto.User.UserSeatRespDto;
 import com.Gosk.GoskProject20221221.exception.CustomValidationException;
 import com.Gosk.GoskProject20221221.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +75,18 @@ public class UserServiceImpl implements UserService {
         });
 
         return userList;
+    }
+
+    @Override
+    public List<UserSeatRespDto> userSeatInfo(int userId) throws Exception {
+
+        List<UserSeatRespDto> userSeatList = new ArrayList<>();
+
+        userRepository.seatInfo(userId).forEach(userSeat -> {
+            userSeatList.add(userSeat.toSeatInfo());
+        });
+
+        return userSeatList;
     }
 
 
