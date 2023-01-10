@@ -15,7 +15,7 @@ function getUserAllList() {
             toUserList(userListData);
         },
         error: (error) => {
-            console.log(error)
+            console.log(error);
         }
     });
 }
@@ -87,6 +87,10 @@ function toUserList(userListData) {
     updateBtns.forEach((updateBtn, index) => {
         updateBtn.onclick = () => {
             popupBack.classList.remove("invisible");
+            const preModifyPhone = document.querySelectorAll('input[name="pre-modify-phone"]');
+
+            preModifyPhone[0].value = "";
+            preModifyPhone[0].value = "010-1111-1111 : " + index;
         }
     })
 

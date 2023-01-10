@@ -18,8 +18,6 @@ public class UserRespDto {
     private int roleId;
     private String userPhone;
     private String userPw;
-    private String userTime;
-    private String userDate;
-    private LocalDateTime userCreateDate;
-    private LocalDateTime userUpdateDate;
+    private String seatId;
+    private String reservedSeatId;
 }

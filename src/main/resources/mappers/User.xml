@@ -7,8 +7,8 @@
     <resultMap id="role" type="com.Gosk.GoskProject20221221.domain.user.Role">
     <result property="role_id" column="role_id"></result>
     <result property="role" column="role"></result>
-
     </resultMap>
+
     <resultMap id="user" type="com.Gosk.GoskProject20221221.domain.user.User">
         <result property="user_id" column="user_id"></result>
         <result property="role_id" column="role_id"></result>
@@ -19,6 +19,24 @@
         <result property="user_create_date" column="user_create_date"></result>
         <result property="user_update_date" column="user_update_date"></result>
         <collection property="role" resultMap="role"></collection>
+    </resultMap>
+
+    <resultMap id="allUser" type="com.Gosk.GoskProject20221221.domain.user.AllUser">
+        <result property="user_id" column="user_id"></result>
+        <result property="user_phone" column="user_phone"></result>
+        <result property="user_pw" column="user_pw"></result>
+        <result property="seat_id" column="seat_id"></result>
+        <result property="reserved_seat_id" column="reserved_seat_id"></result>
+    </resultMap>
+
+    <resultMap id="seat" type="com.Gosk.GoskProject20221221.domain.seat.Seat">
+        <result property="user_id" column="user_id"></result>
+        <result property="seat_id" column="seat_id"></result>
+    </resultMap>
+
+    <resultMap id="reservedSeat" type="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
+        <result property="user_id" column="user_id"></result>
+        <result property="reserved_seat_id" column="reserved_seat_id"></result>
     </resultMap>
 
 <!--  회원가입  -->
@@ -67,14 +85,24 @@
     </select>
 
 <!--    관리자페이지 모든 유저 들고오기     -->
-    <select id="allUser" resultType="com.Gosk.GoskProject20221221.domain.user.User">
+    <select id="allUser" resultType="com.Gosk.GoskProject20221221.domain.user.AllUser">
         SELECT
             um.user_id,
             um.user_phone,
-            um.user_pw
+            um.user_pw,
+
+            sm.user_id,
+            sm.seat_id,
+
+            rm.user_id,
+            rm.reserved_seat_id
 
         FROM
-            user_mst um
+            user_mst um LEFT OUTER JOIN seat_mst sm ON (rm.user_id = sm.user_id)
+                        LEFT OUTER JOIN reserved_seat_mst rm ON (um.user_id = rm.user_id)
+
+        WHERE
+            um.user_id = #{user_id}
     </select>
 
 <!--    지정석 시간/날짜 추가하기   -->

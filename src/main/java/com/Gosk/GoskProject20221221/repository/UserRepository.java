@@ -1,5 +1,6 @@
 package com.Gosk.GoskProject20221221.repository;
 
+import com.Gosk.GoskProject20221221.domain.user.AllUser;
 import com.Gosk.GoskProject20221221.domain.user.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,5 +14,5 @@ public interface UserRepository {
 
     public int updateTime(User user);
 
-    public List<User> allUser();
+    public List<AllUser> allUser();
 }
