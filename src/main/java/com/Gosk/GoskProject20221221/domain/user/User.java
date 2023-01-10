@@ -1,5 +1,6 @@
 package com.Gosk.GoskProject20221221.domain.user;
 
+import com.Gosk.GoskProject20221221.dto.User.UserRespDto;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -14,20 +15,13 @@ import java.time.LocalDateTime;
 public class User {
 
     private int user_id;
-
     private int role_id;
-
     private Role role;
-
     private String user_phone;
-
     private String user_pw;
-
     private String user_time;
-
     private String user_date;
-
     private LocalDateTime user_create_date;
-
     private LocalDateTime user_update_date;
+
 }
