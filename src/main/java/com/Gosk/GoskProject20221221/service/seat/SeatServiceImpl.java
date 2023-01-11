@@ -130,7 +130,29 @@ public class SeatServiceImpl implements SeatService {
         return seatRepository.deleteLocker(now);
     }
 
+    @Override
+    public int scheduledDeleteCommutation(Date now) {
+        int delete = seatRepository.deleteCommutation(now);
+        int update = seatRepository.updateUserDate(now);
+        int result = 0;
+        if(delete == update){
+            System.out.println("동일");
+            result = (delete + update) / 2;
+            return result;
+        }
 
+        System.out.println(delete + update);
+        result = delete + update;
+        return result;
+    }
 
+    @Override
+    public int scheduledDeleteOneday(Date now) {
+        return seatRepository.deleteOneday(now);
+    }
 
+    @Override
+    public int closingTimeOneday() {
+        return seatRepository.closingDelete();
+    }
 }

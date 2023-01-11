@@ -18,7 +18,7 @@ public class SeatReqDto {
     private String seatId;
     private int userId;
     private LocalDateTime seatStartTime;
-    private LocalDateTime seatTotalTime;
+    private String seatTotalTime;
 
     public Seat toSeatEntity() {
         return Seat.builder()

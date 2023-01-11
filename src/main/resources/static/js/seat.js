@@ -114,8 +114,11 @@ function getSeatList(responseData) {
     responseData.forEach(seatUse => {
         const seatName = document.querySelectorAll(".btn")
         seatName.forEach((seatAll,index) => {
-            if(seatUse === seatAll.textContent){
+            if(seatUse.seatId === seatAll.textContent){
                 seatName[index].classList.add("org-btn");
+                if(seatUse.userId === -1){
+                    seatName[index].classList.add("repair-seat");
+                }
             }
         })
     });

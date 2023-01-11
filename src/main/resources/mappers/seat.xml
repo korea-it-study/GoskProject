@@ -39,7 +39,7 @@
             #{seat_id},
             #{user_id},
             DATE_ADD(NOW(), INTERVAL 9 HOUR),
-            DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL (#{seat_total_time} + 9) HOUR)
+            DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL (#{seat_total_time}) HOUR)
         )
     </insert>
 
@@ -64,7 +64,8 @@
 <!--    일반석 정보 불러오기    -->
     <select id="seatSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.Seat">
         SELECT
-            *
+            seat_id,
+            user_id
         FROM
             seat_mst
 
@@ -73,7 +74,8 @@
 <!--    지정석 정보 불러오기    -->
     <select id="reservedSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
         SELECT
-            *
+            reserved_seat_id,
+            user_id
         FROM
             reserved_seat_mst
     </select>
@@ -126,4 +128,37 @@
         reserved_seat_id = #{seatId}
 
     </select>
+
+    <delete id="deleteCommutation">
+        DELETE
+            sm
+        FROM
+            seat_mst sm
+            LEFT OUTER JOIN user_mst um ON(um.user_id = sm.user_id)
+        WHERE
+            <![CDATA[user_date < #{now}]]>
+    </delete>
+
+    <update id="updateUserDate">
+        update
+            user_mst
+        set
+            user_date = null
+        where
+            <![CDATA[user_date < #{now}]]>
+    </update>
+
+    <delete id="deleteOneday">
+        delete from
+            seat_mst
+        where
+            <![CDATA[seat_total_time < #{now}]]>
+    </delete>
+
+    <delete id="closingDelete">
+        delete from
+            seat_mst
+        where
+            seat_total_time is not null
+    </delete>
 </mapper>

@@ -22,6 +22,9 @@ public interface SeatRepository {
     public int payLocker(Locker locker);
 
     public int deleteLocker(Date now);
-
+    public int deleteCommutation(Date now);
+    public int updateUserDate(Date now);
+    public int deleteOneday(Date now);
+    public int closingDelete();
 
 }

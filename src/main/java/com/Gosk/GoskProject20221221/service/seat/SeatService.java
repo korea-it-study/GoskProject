@@ -24,6 +24,8 @@ public interface SeatService {
     public boolean payLocker(LockerReqDto lockerReqDto);
 
     public int scheduledDeleteLocker(Date now);
-
+    public int scheduledDeleteCommutation(Date now);
+    public int scheduledDeleteOneday(Date now);
+    public int closingTimeOneday();
 
 }
