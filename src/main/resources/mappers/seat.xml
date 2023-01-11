@@ -95,7 +95,7 @@
         delete from
             locker_mst
         where
-            <![CDATA[locker_end_time > #{now}]]>
+            <![CDATA[locker_end_time < #{now}]]>
 
     </delete>
 

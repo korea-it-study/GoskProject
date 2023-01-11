@@ -94,12 +94,14 @@ repairBtn.onclick = () => {
 
     let isLocker = false;
     let isSpecial = false;
+    let Pass = true;
 
     seatBtns.forEach(seatBtn => {
-        if (seatBtn.classList.contains("selected-seat") && seatBtn.classList.contains("org-btn")) {
+        if(seatBtn.classList.contains("selected-seat") && seatBtn.classList.contains("org-btn")) {
             //안된다
             alert(seatBtn.value + "는 사용중인 좌석입니다. 좌석을 이동한 후 이용하십시오.");
             flag = false;
+            Pass = false;
         }else if(seatBtn.classList.contains("selected-seat") && seatBtn.classList.contains("repair-seat")){
             //repair 푸는 요청(delete)
             if(seatBtn.parentElement.classList.contains("locker-zone")) {
@@ -108,8 +110,8 @@ repairBtn.onclick = () => {
                 isSpecial = true;
             }
             delData.push(seatBtn.value);
+            Pass = false;
             seatBtn.classList.remove("repair-seat");
-
         }else if(seatBtn.classList.contains("selected-seat")){
             //repair 거는 요청(post)
             if(seatBtn.parentElement.classList.contains("locker-zone")) {
@@ -118,13 +120,14 @@ repairBtn.onclick = () => {
                 isSpecial = true;
             }
             insData.push(seatBtn.value);
+            Pass = false;
         }
 
 
     });
 
 
-    if(flag && delData.length > 0 && insData.length > 0 ) {
+    if(!Pass && flag && delData.length > 0 && insData.length > 0 ) {
         console.log("둘다 요청");
         if(isLocker){
             repairReq(post, {data: insData},"/api/repair/locker");
@@ -137,7 +140,7 @@ repairBtn.onclick = () => {
             repairReq(del, {data: delData},"/api/repair/basic");
         }
 
-    }else if(flag && delData.length > 0 && insData.length === 0){
+    }else if(!Pass && flag && delData.length > 0 && insData.length === 0){
         console.log("off 요청");
         if(isLocker){
             repairReq(del, {data: delData},"/api/repair/locker");
@@ -146,7 +149,7 @@ repairBtn.onclick = () => {
         }else{
             repairReq(del, {data: delData},"/api/repair/basic");
         }
-    }else if(flag && insData.length > 0 && delData.length === 0){
+    }else if(!Pass && flag && insData.length > 0 && delData.length === 0){
         console.log("insert 요청");
         if(isLocker){
             repairReq(post, {data: insData},"/api/repair/locker");
@@ -157,11 +160,16 @@ repairBtn.onclick = () => {
         }
     }
 
-    console.log(delData);
-    console.log(insData);
-    alert("reload");
-    getColor();
-    seatBtnService();
+
+    if(!Pass){
+        console.log(delData);
+        console.log(insData);
+        getColor();
+        seatBtnService();
+    }else{
+        alert("선택한 좌석이 없습니다");
+    }
+
 }
 
 
