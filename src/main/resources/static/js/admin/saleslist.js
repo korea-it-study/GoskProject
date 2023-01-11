@@ -2,6 +2,11 @@
 // 전체 매출 호출
 let salesList = salesListSelect();
 
+// 정의
+let total = 0; //총액
+let startDate = null; //시작날짜
+let endDate = null; //마지막 날짜
+
 // datepicker
 $(document).ready(function () {
     $.datepicker.setDefaults({
@@ -34,24 +39,11 @@ $(function () {
 });
 
 
-// 조회버튼
-const searchBtn = document.querySelector(".search-btn");
 
-const historyStartDate = document.querySelector("#history_start_date");
-const historyEndDate = document.querySelector("#history_end_date");
-const seatCategory = document.querySelector("#seat-category");
-
-
-searchBtn.onclick = () => {
-    console.log(historyStartDate.value);
-    console.log(historyEndDate.value);
-    console.log(seatCategory.value);
-    alert("시작날짜 :" + historyStartDate.value + "끝 날짜 :" + historyEndDate.value + "좌석종류 : " + seatCategory.value);
-}
 
 
 // 제출 데이터 조회
-$(function(){             
+$(function(){      
     //전체 매출 조회        
     for(i=0; i<salesList.length; i++){
         if(salesList[i].receiptDay != 0){
@@ -73,28 +65,50 @@ $(function(){
                 </tr>      
             `);
         }
+        total += salesList[i].receiptPrice;
     }
 
-    // 조회 클릭
-    $('.search-btn').click(function(){        
-        // 상품선택
-        $('.seat-category').change(function(){
-            if($(this).val() == "전체"){
-                // 숨김 처리 전부 삭제
-            }else if($(this).val() == "원데이 시간권"){
-                
-            }else if($(this).val() == "정액권 시간권"){
-                
-            }else if($(this).val() == "정액권 기간권"){
-                
-            }else if($(this).val() == "지정석 기간권"){
-                
-            }else if($(this).val() == "사물함 기간권"){
-                
+    //전체 매출 기본 현황
+    $(".total-price > div > b").html(`
+        ${comma(total)}원
+    `)
+      
+    // 조회 클릭선택
+    $('.search-btn').click(function(){       
+        $('.sales-table > tr').addClass("invisible");
+
+        startDate = new Date($("#history_start_date").val());
+        endDate = new Date($("#history_end_date").val());
+        total = 0;
+
+        for(i=0; i<salesList.length; i++){
+            if(startDate <= new Date(salesList[i].receiptCreateDate) && new Date(salesList[i].receiptCreateDate) <= endDate){
+                if($('.seat-category').val() == "원데이 시간권" && salesList[i].receiptKinds == "원데이" && salesList[i].receiptTime != 0){
+                    $('.sales-table > tr:eq('+i+')').removeClass("invisible");
+                    total += salesList[i].receiptPrice;
+                }else if($('.seat-category').val() == "정액권 시간권" && salesList[i].receiptKinds == "정액권" && salesList[i].receiptTime != 0){
+                    $('.sales-table > tr:eq('+i+')').removeClass("invisible");
+                    total += salesList[i].receiptPrice;
+                }else if($('.seat-category').val() == "정액권 기간권" && salesList[i].receiptKinds == "정액권" && salesList[i].receiptDay != 0){
+                    $('.sales-table > tr:eq('+i+')').removeClass("invisible");
+                    total += salesList[i].receiptPrice;
+                }else if($('.seat-category').val() == "지정석 기간권" && salesList[i].receiptKinds == "지정석" && salesList[i].receiptDay != 0){
+                    $('.sales-table > tr:eq('+i+')').removeClass("invisible");
+                    total += salesList[i].receiptPrice;
+                }else if($('.seat-category').val() == "사물함 기간권" && salesList[i].receiptKinds == "사물함" && salesList[i].receiptDay != 0){
+                    $('.sales-table > tr:eq('+i+')').removeClass("invisible");
+                    total += salesList[i].receiptPrice;
+                }else if($('.seat-category').val() == "전체"){
+                    $('.sales-table > tr').removeClass("invisible");
+                    total += salesList[i].receiptPrice;
+                }
             }
-        });
-    });
-    
+        }
+            
+        $(".total-price > div > b").html(`
+            ${comma(total)}원
+        `)        
+    }); 
 });
 
 
