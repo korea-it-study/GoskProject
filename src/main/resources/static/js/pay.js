@@ -6,17 +6,10 @@ var pickTime = null;
 var time = null;
 
 // 페이지 이동 //// 페이지 이동 //
-
-
 // 취소하기
 $('.index-btn').click(function(){
     location.href = "/index";
     localStorage.clear();
-});
-
-// 결제하기
-$('.pay-btn').click(function(){
-
 });
 
 // 결제 데이터 정리 //// 결제 데이터 정리 //
@@ -118,10 +111,7 @@ function paymentCard(data) {
                 infoUserData(data);
             }
         infoReceiptData(data);
-
-
-         location.replace("/index");
-
+        location.replace("/index");
 		} else {
           // 결제 실패 시 로직,
              var msg = '결제에 실패했습니다. \n';
@@ -238,7 +228,7 @@ function infoReceiptData(data) {
             userId: principal.user.user_id,
             receiptKinds: data.time,
             receiptPrice: data.pickPrice.replace("원", "").replace(",", ""),
-            receiptDay: data.pickTime,
+            receiptDay: data.pickTime.replace("주", ""),
             receiptTime: 0
         }
 
@@ -248,7 +238,7 @@ function infoReceiptData(data) {
                 receiptKinds: data.time,
                 receiptPrice: data.pickPrice.replace("원", "").replace(",", ""),
                 receiptDay: 0,
-                receiptTime: data.pickTime
+                receiptTime: data.pickTime.replace("시간", ""),
             }
     }
 

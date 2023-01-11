@@ -17,9 +17,12 @@ public class ReceiptRespDto {
     private int userId;
     private String receiptKinds;
     private int receiptPrice;
-    private String receiptTime;
-    private String receiptDay;
+    private int receiptTime;
+    private int receiptDay;
     private int receiptUse;
     private String receiptCreateDate;
+    private int receiptCount;
 
 }
+
+
