@@ -161,4 +161,71 @@
         where
             seat_total_time is not null
     </delete>
+
+    <delete id="deleteReserve">
+        DELETE from
+            reserved_seat_mst
+        WHERE
+            <![CDATA[reserved_total_time < #{now}]]>
+    </delete>
+
+    <delete id="forcedExitReserve" parameterType="java.util.List">
+        delete from
+            reserved_seat_mst
+        where
+            <foreach collection="list" item="item" separator="or">
+                (reserved_seat_id = #{item})
+            </foreach>;
+
+    </delete>
+
+    <delete id="forcesExitSeat" parameterType="java.util.List">
+        delete from
+            seat_mst
+        where
+            <foreach collection="list" item="item" separator="or">
+                (seat_id = #{item})
+            </foreach>
+    </delete>
+
+    <delete id="forcedExitLocker" parameterType="java.util.List">
+        delete from
+            locker_mst
+        where
+            <foreach collection="list" item="item" separator="or">
+                (locker_id = #{item})
+            </foreach>
+    </delete>
+
+
+    <update id="userNullSet" parameterType="java.lang.String">
+        UPDATE
+            user_mst
+        SET
+            user_time = 0,
+            user_date = null
+        WHERE
+            user_id = (
+                        select
+                            user_id
+                        FROM
+                            seat_mst
+                        WHERE
+                            seat_id = #{seatId}
+                        );
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        where
+            user_id = (
+                        select
+                            user_id
+                        FROM
+                            seat_mst
+                        WHERE
+                            seat_id = #{seatId}
+                        )
+
+    </update>
 </mapper>

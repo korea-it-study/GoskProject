@@ -130,36 +130,35 @@ repairBtn.onclick = () => {
     if(!Pass && flag && delData.length > 0 && insData.length > 0 ) {
         console.log("둘다 요청");
         if(isLocker){
-            repairReq(post, {data: insData},"/api/repair/locker");
-            repairReq(del, {data: delData},"/api/repair/locker");
+            customReq(post, {data: insData},"/api/repair/locker");
+            customReq(del, {data: delData},"/api/repair/locker");
         }else if(isSpecial){
-            repairReq(post, {data: insData},"/api/repair/special");
-            repairReq(del, {data: delData},"/api/repair/special");
+            customReq(post, {data: insData},"/api/repair/special");
+            customReq(del, {data: delData},"/api/repair/special");
         }else{
-            repairReq(post, {data: insData},"/api/repair/basic");
-            repairReq(del, {data: delData},"/api/repair/basic");
+            customReq(post, {data: insData},"/api/repair/basic");
+            customReq(del, {data: delData},"/api/repair/basic");
         }
 
     }else if(!Pass && flag && delData.length > 0 && insData.length === 0){
         console.log("off 요청");
         if(isLocker){
-            repairReq(del, {data: delData},"/api/repair/locker");
+            customReq(del, {data: delData},"/api/repair/locker");
         }else if(isSpecial){
-            repairReq(del, {data: delData},"/api/repair/special");
+            customReq(del, {data: delData},"/api/repair/special");
         }else{
-            repairReq(del, {data: delData},"/api/repair/basic");
+            customReq(del, {data: delData},"/api/repair/basic");
         }
     }else if(!Pass && flag && insData.length > 0 && delData.length === 0){
         console.log("insert 요청");
         if(isLocker){
-            repairReq(post, {data: insData},"/api/repair/locker");
+            customReq(post, {data: insData},"/api/repair/locker");
         }else if(isSpecial){
-            repairReq(post, {data: insData},"/api/repair/special");
+            customReq(post, {data: insData},"/api/repair/special");
         }else{
-            repairReq(post, {data: insData},"/api/repair/basic");
+            customReq(post, {data: insData},"/api/repair/basic");
         }
     }
-
 
     if(!Pass){
         console.log(delData);
@@ -173,6 +172,30 @@ repairBtn.onclick = () => {
 }
 
 
+//강제 퇴실 클릭시
+const exitBtn = document.querySelector(".exit-btn");
+exitBtn.onclick = () => {
+    let selectedList = [];
+    let seatCondition = "";
+    seatBtns.forEach(seatBtn => {
+        //선택된게 있으면 - 지정석
+        if(seatBtn.classList.contains("selected-seat") && seatBtn.parentElement.classList.contains("seat-special")){
+            selectedList.push(seatBtn.value + "reserve");
+            seatCondition = "지정석 [";
+
+        }else if(seatBtn.classList.contains("selected-seat") && seatBtn.parentElement.classList.contains("seat-basic")) {
+            selectedList.push(seatBtn.value + "seat");
+            seatCondition = "일반석 [";
+        }else if(seatBtn.classList.contains("selected-seat") && seatBtn.parentElement.parentElement.classList.contains("locker-management-content")){
+            selectedList.push(seatBtn.value + "locker");
+            seatCondition = "사물함 [";
+        }
+
+        });
+
+    customReq("delete",selectedList,"/api/seat/exit")
+    alert(seatCondition + selectedList + "] 좌석을 강제 퇴장 합니다.");
+}
 
 // 자리이동 팝업 띄우기
 
@@ -248,7 +271,6 @@ function categoryList(sVal) {
         //원래 좌석 선택(모든 사용중인 좌석 선택 가능)
         responseData = getReq("/api/seat/useSeat");
         setSelList("seat",responseData);
-
 
     }
 }
@@ -456,7 +478,7 @@ function getSeatDtl(clickSeat, index){
 
 }
 
-function repairReq(type, data, url){
+function customReq(type, data, url){
 
     $.ajax({
         async: false,
@@ -466,7 +488,7 @@ function repairReq(type, data, url){
         traditional : true,
         dataType: "json",
         success: (response) => {
-            console.log(type + " 결과: " + response);
+            console.log(type + " 결과: " + response + "건");
             alert(type + "성공");
         },
         error: (error) => {

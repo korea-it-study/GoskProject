@@ -27,5 +27,7 @@ public interface SeatService {
     public int scheduledDeleteCommutation(Date now);
     public int scheduledDeleteOneday(Date now);
     public int closingTimeOneday();
+    public int scheduledDeleteReserve(Date now);
+    public int forcedExit(List<String> arr);
 
 }

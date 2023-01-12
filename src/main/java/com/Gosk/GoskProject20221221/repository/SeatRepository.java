@@ -5,6 +5,7 @@ import com.Gosk.GoskProject20221221.domain.seat.ReservedSeat;
 import com.Gosk.GoskProject20221221.domain.seat.Seat;
 import com.Gosk.GoskProject20221221.domain.seat.SeatInfo;
 import com.Gosk.GoskProject20221221.domain.seat.SpecialSeatInfo;
+import com.Gosk.GoskProject20221221.domain.user.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
@@ -26,5 +27,14 @@ public interface SeatRepository {
     public int updateUserDate(Date now);
     public int deleteOneday(Date now);
     public int closingDelete();
+    public int deleteReserve(Date now);
+    public int forcedExitReserve(List<String> arr);
+    public int forcesExitSeat(List<String> arr);
+    public int forcedExitLocker(List<String> arr);
+
+    //일반석 userNullset하고 영수증 바꾸기
+    public String userNullSet(String seatId);
+
+//    public int userReceiptSet()
 
 }

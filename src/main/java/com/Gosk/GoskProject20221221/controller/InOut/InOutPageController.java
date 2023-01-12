@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class InOutPageController {
 
-    @GetMapping("/inout")
-    public String inOut(){
-        return "inout";
+    @GetMapping("/in")
+    public String in(){
+        return "in";
     }
+    @GetMapping("/out")
+    public String out() {return "out";}
 
 }

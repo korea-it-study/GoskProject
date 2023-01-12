@@ -155,4 +155,41 @@ public class SeatServiceImpl implements SeatService {
     public int closingTimeOneday() {
         return seatRepository.closingDelete();
     }
+
+    @Override
+    public int scheduledDeleteReserve(Date now) {
+        return seatRepository.deleteReserve(now);
+    }
+
+    @Override
+    public int forcedExit(List<String> arr) {
+
+        List<String> newArr = new ArrayList<>();
+        int result = 0;
+        if(arr.get(0).contains("reserve")){
+
+            arr.forEach(seat ->{
+                newArr.add(seat.substring(0,seat.indexOf("reserve")));
+            });
+            result = seatRepository.forcedExitReserve(newArr);
+            //지정석 삭제
+        }else if(arr.get(0).contains("seat")){
+            //일반석 삭제
+            arr.forEach(seat ->{
+                String userId = seatRepository.userNullSet(seat.substring(0,seat.indexOf("seat")));
+
+
+            });
+
+
+            result = seatRepository.forcesExitSeat(newArr);
+        }else{
+            //사물함 삭제
+            arr.forEach(seat ->{
+                newArr.add(seat.substring(0,seat.indexOf("locker")));
+            });
+            result = seatRepository.forcedExitLocker(newArr);
+        }
+        return result;
+    }
 }
