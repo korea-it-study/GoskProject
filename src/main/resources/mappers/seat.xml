@@ -93,13 +93,7 @@
     </insert>
 
 
-    <delete id="deleteLocker">
-        delete from
-            locker_mst
-        where
-            <![CDATA[locker_end_time < #{now}]]>
 
-    </delete>
 
     <select id="getBasicSeatDetail" resultType="com.Gosk.GoskProject20221221.domain.seat.SeatInfo">
         SELECT
@@ -129,15 +123,56 @@
 
     </select>
 
-    <delete id="deleteCommutation">
-        DELETE
-            sm
-        FROM
-            seat_mst sm
-            LEFT OUTER JOIN user_mst um ON(um.user_id = sm.user_id)
+    <update id="updateLocker">
+        update
+            receipt_mst rm
+            INNER JOIN locker_mst lm ON(lm.user_id = rm.user_id)
+        set
+            rm.receipt_use = 0
+        where
+            <![CDATA[lm.locker_end_time < #{now}]]>
+
+        ;
+        UPDATE
+            locker_mst lm
+            INNER JOIN receipt_mst rm ON(rm.user_id = lm.user_id)
+        SET
+            lm.user_id = 0
         WHERE
+            rm.receipt_use = 0 and
+            rm.receipt_kinds = "사물함";
+
+    </update>
+
+    <update id="updateCommutation">
+        update
+            user_mst
+        set
+            user_time = null,
+            user_date = null
+        where
             <![CDATA[user_date < #{now}]]>
-    </delete>
+        ;
+        UPDATE
+            receipt_mst rm
+            inner join seat_mst sm ON (rm.user_id = sm.user_id)
+        SET
+            receipt_use = 0
+        WHERE
+            rm.user_id = sm.user_id and
+            rm.receipt_kinds = "정액권"
+        ;
+        update
+            seat_mst sm
+            inner join user_mst um ON (um.user_id = sm.user_id)
+        set
+            sm.user_id = 0
+        where
+            sm.user_id = um.user_id and
+            sm.seat_total_time is null
+        ;
+
+    </update>
 
     <update id="updateUserDate">
         update
@@ -148,19 +183,32 @@
             <![CDATA[user_date < #{now}]]>
     </update>
 
-    <delete id="deleteOneday">
-        delete from
+    <update id="updateOneday">
+        update
             seat_mst
+        set
+            user_id = 0
         where
             <![CDATA[seat_total_time < #{now}]]>
-    </delete>
+    </update>
 
-    <delete id="closingDelete">
-        delete from
-            seat_mst
-        where
-            seat_total_time is not null
-    </delete>
+    <update id="closingDelete">
+        UPDATE
+            receipt_mst rm
+            inner join seat_mst sm ON (rm.user_id = sm.user_id)
+        SET
+            receipt_use = 0
+        WHERE
+            rm.user_id in (
+                            select
+                                user_id
+                            from
+                                seat_mst sm
+                            where
+                                sm.seat_total_time IS NOT null
+                            )and
+            rm.receipt_kinds = "원데이";
+    </update>
 
     <delete id="deleteReserve">
         DELETE from
@@ -169,63 +217,128 @@
             <![CDATA[reserved_total_time < #{now}]]>
     </delete>
 
-    <delete id="forcedExitReserve" parameterType="java.util.List">
-        delete from
-            reserved_seat_mst
-        where
-            <foreach collection="list" item="item" separator="or">
-                (reserved_seat_id = #{item})
-            </foreach>;
 
-    </delete>
-
-    <delete id="forcesExitSeat" parameterType="java.util.List">
-        delete from
-            seat_mst
-        where
-            <foreach collection="list" item="item" separator="or">
-                (seat_id = #{item})
-            </foreach>
-    </delete>
-
-    <delete id="forcedExitLocker" parameterType="java.util.List">
-        delete from
-            locker_mst
-        where
-            <foreach collection="list" item="item" separator="or">
-                (locker_id = #{item})
-            </foreach>
-    </delete>
-
-
-    <update id="userNullSet" parameterType="java.lang.String">
-        UPDATE
-            user_mst
-        SET
-            user_time = 0,
-            user_date = null
-        WHERE
-            user_id = (
-                        select
-                            user_id
-                        FROM
-                            seat_mst
-                        WHERE
-                            seat_id = #{seatId}
-                        );
+    <update id="forcedExitReserve" parameterType="java.util.List">
         update
             receipt_mst
         set
             receipt_use = 0
         where
-            user_id = (
-                        select
-                            user_id
-                        FROM
-                            seat_mst
-                        WHERE
-                            seat_id = #{seatId}
-                        )
+            <foreach collection="list" item="item" separator="or">
+                (user_id = (
+                            select
+                                user_id
+                            from
+                                reserved_seat_mst
+                            where
+                                reserved_seat_id = #{item}
+                            );
+                )
+            </foreach>
+
+        update
+            reserved_seat_mst
+        set
+            user_id = 0
+        where
+            <foreach collection="list" item="item" separator="or">
+                (reserved_seat_id = #{item})
+            </foreach>
 
     </update>
+
+
+    <update id="forcedExitLocker" parameterType="java.util.List">
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        where
+            <foreach collection="list" item="item" separator="or">
+                (user_id = (
+                            select
+                                user_id
+                            FROM
+                                locker_mst
+                            WHERE
+                                locker_id = #{item}
+                            )
+                )
+            </foreach>;
+        update
+            locker_mst
+        set
+            user_id = 0
+        where
+            <foreach collection="list" item="item" separator="or">
+                (locker_id = #{item})
+            </foreach>
+    </update>
+
+
+    <update id="forcedExitSeat" parameterType="java.util.List">
+        UPDATE
+            user_mst
+        SET
+            user_time = null,
+            user_date = null
+        where
+            <foreach collection="list" item="item" separator="or">
+                (user_id = (
+                            select
+                                user_id
+                            FROM
+                                seat_mst
+                            WHERE
+                                seat_id = #{item}
+                            )
+                )
+            </foreach>
+            ;
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        where
+            <foreach collection="list" item="item" separator="or">
+                (user_id = (
+                            select
+                                user_id
+                            FROM
+                                seat_mst
+                            WHERE
+                                seat_id = #{item}
+                            )
+                )
+            </foreach>
+        ;
+        update
+            seat_mst
+        where
+            <foreach collection="list" item="item" separator="or">
+                (seat_id = #{item})
+            </foreach>
+
+    </update>
+
+    <delete id="delete0Seat">
+        delete from
+            seat_mst
+        where
+            user_id = 0
+    </delete>
+
+    <delete id="delete0Reserve">
+        delete from
+            reserved_seat_mst
+        where
+            user_id = 0
+    </delete>
+
+    <delete id="delete0Locker">
+        delete from
+            locker_mst
+        where
+            user_id = 0
+    </delete>
 </mapper>

@@ -223,7 +223,15 @@ function infoUserData(data) {
 function infoReceiptData(data) {
     let receiptData = null;
 
-    if(data.pickTime.includes("주")) {
+    if(data.pickTime.includes("주(사물함)")){
+        receiptData = {
+            userId: principal.user.user_id,
+            receiptKinds: data.time,
+            receiptPrice: data.pickPrice.replace("원", "").replace(",", ""),
+            receiptDay: data.pickTime.replace("주(사물함)", ""),
+            receiptTime: 0
+        }
+    }else if(data.pickTime.includes("주")) {
         receiptData = {
             userId: principal.user.user_id,
             receiptKinds: data.time,

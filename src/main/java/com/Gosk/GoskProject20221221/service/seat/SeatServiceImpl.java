@@ -124,38 +124,32 @@ public class SeatServiceImpl implements SeatService {
     }
 
 
-
     @Override
     public int scheduledDeleteLocker(Date now) {
-        return seatRepository.deleteLocker(now);
+        seatRepository.updateLocker(now);
+        return seatRepository.delete0Locker();
     }
 
+    //여기서 싹다 삭제됨 원데이 까지
     @Override
     public int scheduledDeleteCommutation(Date now) {
-        int delete = seatRepository.deleteCommutation(now);
-        int update = seatRepository.updateUserDate(now);
-        int result = 0;
-        if(delete == update){
-            System.out.println("동일");
-            result = (delete + update) / 2;
-            return result;
-        }
-
-        System.out.println(delete + update);
-        result = delete + update;
-        return result;
+        seatRepository.updateCommutation(now);
+        return seatRepository.delete0Seat();
     }
 
     @Override
     public int scheduledDeleteOneday(Date now) {
-        return seatRepository.deleteOneday(now);
+        seatRepository.updateOneday(now);
+        return seatRepository.delete0Seat();
     }
 
     @Override
     public int closingTimeOneday() {
-        return seatRepository.closingDelete();
+        seatRepository.closingDelete();
+        return seatRepository.delete0Seat();
     }
 
+    //날짜되면 지정석 지우기
     @Override
     public int scheduledDeleteReserve(Date now) {
         return seatRepository.deleteReserve(now);
@@ -166,29 +160,32 @@ public class SeatServiceImpl implements SeatService {
 
         List<String> newArr = new ArrayList<>();
         int result = 0;
-        if(arr.get(0).contains("reserve")){
 
+        //지정석 삭제
+        if(arr.get(0).contains("reserve")){
             arr.forEach(seat ->{
                 newArr.add(seat.substring(0,seat.indexOf("reserve")));
             });
             result = seatRepository.forcedExitReserve(newArr);
-            //지정석 삭제
+            seatRepository.delete0Reserve();
+
+        //일반석 삭제
         }else if(arr.get(0).contains("seat")){
-            //일반석 삭제
+
             arr.forEach(seat ->{
-                String userId = seatRepository.userNullSet(seat.substring(0,seat.indexOf("seat")));
-
-
+                newArr.add(seat.substring(0,seat.indexOf("seat")));
             });
+            result = seatRepository.forcedExitSeat(newArr);
+            seatRepository.delete0Seat();
 
-
-            result = seatRepository.forcesExitSeat(newArr);
+        //사물함 삭제
         }else{
-            //사물함 삭제
+
             arr.forEach(seat ->{
                 newArr.add(seat.substring(0,seat.indexOf("locker")));
             });
             result = seatRepository.forcedExitLocker(newArr);
+            seatRepository.delete0Locker();
         }
         return result;
     }

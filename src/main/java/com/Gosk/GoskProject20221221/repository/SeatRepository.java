@@ -22,19 +22,26 @@ public interface SeatRepository {
     public int payReserved (ReservedSeat reservedSeat);
     public int payLocker(Locker locker);
 
-    public int deleteLocker(Date now);
-    public int deleteCommutation(Date now);
+    public int updateLocker(Date now);
+    public int updateCommutation(Date now);
     public int updateUserDate(Date now);
-    public int deleteOneday(Date now);
+    public int updateOneday(Date now);
+
     public int closingDelete();
+
     public int deleteReserve(Date now);
+    //seat에서 0된거 다 삭제
+    public int delete0Seat();
+    public int delete0Reserve();
+    public int delete0Locker();
+    //지정석을 user_id 0으로 바꾸고 영수증 사용종료
     public int forcedExitReserve(List<String> arr);
-    public int forcesExitSeat(List<String> arr);
+
+    //일반석 user_id 0으로 바꾸고 userNullset 하고 영수증 사용종료
+    public int forcedExitSeat(List<String> arr);
+    //사물함 user_id 0으로 바꾸고  영수증 사용종료
     public int forcedExitLocker(List<String> arr);
 
-    //일반석 userNullset하고 영수증 바꾸기
-    public String userNullSet(String seatId);
 
-//    public int userReceiptSet()
 
 }

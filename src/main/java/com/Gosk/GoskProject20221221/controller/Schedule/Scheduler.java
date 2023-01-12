@@ -15,13 +15,13 @@ import java.util.Date;
 public class Scheduler {
     private final SeatService seatService;
 
-    @Scheduled(cron = "0 0 22 * * *") ///매일 22시에 사물함, 기간권, 지정석 만료시 삭제, 원데이 일괄 삭제
+    @Scheduled(cron = "0 15 18 * * *") ///매일 22시에 사물함, 기간권, 지정석 만료시 삭제, 원데이 일괄 삭제
     public void timeoutLocker() {
         Date now = new Date();
+        int closingOnedayList = seatService.closingTimeOneday();
         int timeoutLockerList = seatService.scheduledDeleteLocker(now);
         int timeoutCommutationList = seatService.scheduledDeleteCommutation(now);
         int timeoutReserveList = seatService.scheduledDeleteReserve(now);
-        int closingOnedayList = seatService.closingTimeOneday();
 
         System.out.println( now + " 사물함 삭제개수 " + timeoutLockerList);
         System.out.println(now + " 기간권 삭제 개수 " + timeoutCommutationList);
