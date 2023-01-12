@@ -99,7 +99,7 @@ $(function(){
                     $('.sales-table > tr:eq('+i+')').removeClass("invisible");
                     total += salesList[i].receiptPrice;
                 }else if($('.seat-category').val() == "전체"){
-                    $('.sales-table > tr').removeClass("invisible");
+                    $('.sales-table > tr:eq('+i+')').removeClass("invisible");
                     total += salesList[i].receiptPrice;
                 }
             }
@@ -113,20 +113,3 @@ $(function(){
 
 
 
-// 매출내역 가져오기 //// 매출내역 가져오기 //
-function salesListSelect(){  
-    $.ajax({
-        async: false,
-        type: "GET",
-        url: "/api/admin/saleslist",
-        dataType: "json",
-        success: (response) => {
-            console.log(response);    
-            responseData = response.data;
-        },
-        error: (error) => {
-            console.log(error);
-        }
-    })
-    return responseData;
-}

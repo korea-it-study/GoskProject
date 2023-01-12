@@ -1,3 +1,5 @@
+let dubleChk = doubleCheck();
+
 // 페이지 이동 //// 페이지 이동 //
 $(function(){
     var time = localStorage.getItem("time");
@@ -125,3 +127,13 @@ window.onload = () => {
     getSeatData();
 }
 
+// 중복구매 방지 //// 중복구매 방지 //
+for(i=0; i < dubleChk.length; i++){
+    if(dubleChk[i].receiptKinds != "사물함" && dubleChk[i].receiptUse == 1){
+        console.log("사용중" + dubleChk[i].receiptUse );
+    }else{
+        console.log("사용X" + dubleChk[i].receiptUse );
+        console.log("사용X" + dubleChk[i].receiptUse );
+    }
+
+}

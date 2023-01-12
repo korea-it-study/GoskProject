@@ -38,6 +38,8 @@ public class Receipt {
 
     public ReceiptRespDto toSalesListEntity() {
         return ReceiptRespDto.builder()
+                .userId(user_id)
+                .receiptUse(receipt_use)
                 .receiptKinds(receipt_kinds)
                 .receiptPrice(receipt_price)
                 .receiptTime(receipt_time)

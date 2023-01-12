@@ -22,7 +22,6 @@ public class ReceiptRespDto {
     private int receiptUse;
     private String receiptCreateDate;
     private int receiptCount;
-
 }
 
 

@@ -78,6 +78,43 @@ function LockerPriceList(){
 }
 
 
+// 매출내역 가져오기 //// 매출내역 가져오기 //
+function salesListSelect(){  
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: "/api/admin/saleslist",
+        dataType: "json",
+        success: (response) => {
+            console.log(response);    
+            responseData = response.data;
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    })
+    return responseData;
+}
+
+// 구매 중복검사 //// 구매 중복검사 //
+function doubleCheck(){  
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: "/api/account/doublechk",
+        dataType: "json",
+        success: (response) => {
+            console.log(response);    
+            responseData = response.data;
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    })
+    return responseData;
+}
+
+
 //콤마찍기
 function comma(str) {
     str = String(str);

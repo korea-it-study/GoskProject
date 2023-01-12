@@ -57,10 +57,12 @@
 
     <select id="getSalesListSelect" resultMap="receipt">
         SELECT
+            user_id,
             receipt_kinds,
             receipt_price,
             receipt_time,
             receipt_day,
+            receipt_use,
             SUBSTRING(receipt_create_date,1,10) AS receipt_create_date,
         COUNT(*) receipt_count
         FROM

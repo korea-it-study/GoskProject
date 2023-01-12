@@ -1,4 +1,4 @@
-let principal = getPrincipal();
+
 
 const reserved = document.querySelector(".reserved");
 const nomal = document.querySelector(".nomal");
@@ -10,6 +10,7 @@ const lockerManage = document.querySelector(".locker-management-content");
 
 const lockerName = document.querySelectorAll(".locker-management-content > div .btn")
 const userShow = document.querySelector(".user-show");
+
 
 // 지정석만 조회
 reserved.onclick = () => {
@@ -180,9 +181,7 @@ function getOrg(){
 
 }
 
-
-
-
 window.onload =() => {
     getOrg();
 }
+
