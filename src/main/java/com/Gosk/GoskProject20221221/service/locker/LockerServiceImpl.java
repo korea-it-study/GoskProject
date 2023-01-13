@@ -16,17 +16,26 @@ public class LockerServiceImpl implements LockerService{
     private final LockerRepository lockerRepository;
 
     @Override
-    public List<LockerRespDto> getLocker() {
-        List<Locker> lockers = lockerRepository.getLocker();
+    public List<LockerRespDto> getAllLocker() {
+        List<Locker> lockers = lockerRepository.getAllLocker();
         List<LockerRespDto> lockersResp = new ArrayList<>();
         lockers.forEach(locker -> {
             lockersResp.add(locker.toLockerResp());
-            System.out.println("사물함 사용중 =========" + locker.getLocker_id());
         });
 
 
         return lockersResp;
     }
+    @Override
+    public List<String> getUseLocker() {
+        return lockerRepository.getUseLocker();
+    }
+
+    @Override
+    public List<String> getUsableLocker() {
+        return lockerRepository.getUsableLocker();
+    }
+
 
     @Override
     public String getUserLocker(int userId) {
@@ -34,15 +43,11 @@ public class LockerServiceImpl implements LockerService{
         return lockerRepository.getUserLocker(userId);
     }
 
-    @Override
-    public int repairLocker(List<String> arr) {
-
-        return lockerRepository.repairReq(arr);
-    }
 
     @Override
-    public int offRepair(List<String> arr) {
-        return lockerRepository.offRepair(arr);
+    public int insertLocker(List<String> arr) {
+
+        return lockerRepository.insertLocker(arr);
     }
 
 

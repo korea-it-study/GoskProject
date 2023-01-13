@@ -71,6 +71,25 @@
 
     </select>
 
+    <select id="useSeat" resultType="java.lang.String">
+        SELECT
+            seat_id
+        FROM
+            seat_mst
+        where
+            user_id != 0 and
+            user_id != -1
+    </select>
+
+    <select id="usableSeat" resultType="java.lang.String">
+        SELECT
+            seat_id
+        FROM
+            seat_mst
+        where
+            user_id = 0
+    </select>
+
 <!--    지정석 정보 불러오기    -->
     <select id="reservedSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
         SELECT
@@ -79,6 +98,26 @@
         FROM
             reserved_seat_mst
     </select>
+
+    <select id="useReserved" resultType="java.lang.String">
+        SELECT
+            reserved_seat_id
+        FROM
+            reserved_seat_mst
+        where
+            user_id != 0 and
+            user_id != -1
+    </select>
+
+    <select id="usableReserved" resultType="java.lang.String">
+        SELECT
+            reserved_seat_id
+        FROM
+            reserved_seat_mst
+        where
+            user_id = 0
+    </select>
+
 
     <insert id="payLocker">
         insert into
@@ -92,10 +131,36 @@
         )
     </insert>
 
+    <insert id="insertSeat">
+        insert into
+            seat_mst(seat_id, user_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+                (
+                #{item},
+                0
+                )
+        </foreach>
+    </insert>
+
+    <insert id="insertSpecial">
+        insert into
+            reserved_seat_mst(reserved_seat_id, user_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+                (
+                #{item},
+                0
+                )
+        </foreach>
+    </insert>
+
 
     <delete id="deleteLocker">
-        delete from
+        update
             locker_mst
+        set
+            user_id = 0
         where
             <![CDATA[locker_end_time < #{now}]]>
 
@@ -128,6 +193,7 @@
         reserved_seat_id = #{seatId}
 
     </select>
+
 
     <delete id="deleteCommutation">
         DELETE

@@ -14,7 +14,11 @@ import java.util.List;
 @Mapper
 public interface SeatRepository {
     public List<ReservedSeat> reservedSelect();
+    public List<String> useReserved();
+    public List<String> usableReserved();
     public List<Seat> seatSelect();
+    public List<String> useSeat();
+    public List<String> usableSeat();
     public int paySeat(Seat seat);
 
     public SeatInfo getBasicSeatDetail(String seatId);
@@ -35,6 +39,8 @@ public interface SeatRepository {
     //일반석 userNullset하고 영수증 바꾸기
     public String userNullSet(String seatId);
 
-//    public int userReceiptSet()
+
+    public int insertSeat(List<String> arr);
+    public int insertSpecial(List<String> arr);
 
 }

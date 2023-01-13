@@ -12,4 +12,6 @@ public interface RepairRepository {
     public int offRepairSpecial(List<String> arr);
     public int repairBasicReq(List<String> arr);
     public int offRepairBasic(List<String> arr);
+    public int repairLockerReq(List<String> arr);
+    public int offRepairLocker(List<String> arr);
 }

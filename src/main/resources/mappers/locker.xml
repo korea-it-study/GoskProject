@@ -26,7 +26,7 @@
     </resultMap>
 
 
-    <select id="getLocker" resultType="com.Gosk.GoskProject20221221.domain.Locker">
+    <select id="getAllLocker" resultType="com.Gosk.GoskProject20221221.domain.Locker">
 
         select
             locker_id,
@@ -35,6 +35,26 @@
             locker_mst
 
     </select>
+
+    <select id="getUseLocker" resultType="java.lang.String">
+        select
+            locker_id
+        from
+            locker_mst
+        where
+            user_id != -1 and
+            user_id != 0
+    </select>
+
+    <select id="getUsableLocker" resultType="java.lang.String">
+        select
+            locker_id
+        from
+            locker_mst
+        where
+            user_id = 0
+    </select>
+
     <select id="getUserLocker" resultType="java.lang.String">
         select
             locker_id
@@ -44,28 +64,20 @@
             user_id = #{userId}
     </select>
 
-    <insert id="repairReq" parameterType="java.util.List">
+
+
+
+    <insert id="insertLocker">
         insert into
             locker_mst(locker_id, user_id)
         values
         <foreach collection="list" item="item" separator=",">
                 (
                 #{item},
-                -1
+                0
                 )
         </foreach>
-
     </insert>
 
-    <delete id="offRepair" parameterType="java.util.List">
-        delete from
-            locker_mst
-        where
-        <foreach collection="list" item="item" separator="or">
-            (locker_id = #{item})
 
-        </foreach>
-
-
-    </delete>
 </mapper>

@@ -80,9 +80,9 @@ function getSeatData() {
     let url = null;
 
     if(seatbasic.classList.contains("invisible")) {
-        url = "/api/seat/useReservedSeat"
+        url = "/api/seat/allReservedSeat"
     }else if(seatspecial.classList.contains("invisible")){
-        url = "/api/seat/useSeat"
+        url = "/api/seat/allSeat"
     }
 
     $.ajax({

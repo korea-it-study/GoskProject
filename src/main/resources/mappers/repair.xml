@@ -4,52 +4,86 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Gosk.GoskProject20221221.repository.RepairRepository">
 
-    <insert id="repairSpecialReq" parameterType="java.util.List">
-        insert into
-            reserved_seat_mst(reserved_seat_id, user_id)
-        values
-        <foreach collection="list" item="item" separator=",">
+    <update id="repairSpecialReq" parameterType="java.util.List">
+        update
+            reserved_seat_mst
+        set
+            user_id = -1
+        where
+        <foreach collection="list" item="item" separator="or">
                 (
-                #{item},
-                -1
+                reserved_seat_id = #{item}
                 )
         </foreach>
 
-    </insert>
+    </update>
 
-    <delete id="offRepairSpecial" parameterType="java.util.List">
-        delete from
+    <update id="offRepairSpecial" parameterType="java.util.List">
+        update
             reserved_seat_mst
+        set
+            user_id = 0
         where
         <foreach collection="list" item="item" separator="or">
             (reserved_seat_id = #{item})
 
         </foreach>
 
-    </delete>
+    </update>
 
-    <insert id="repairBasicReq" parameterType="java.util.List">
-        insert into
-            seat_mst(seat_id, user_id)
-        values
-        <foreach collection="list" item="item" separator=",">
-            (
-            #{item},
-            -1
-            )
-        </foreach>
-
-    </insert>
-
-    <delete id="offRepairBasic" parameterType="java.util.List">
-        delete from
+    <update id="repairBasicReq" parameterType="java.util.List">
+        update
             seat_mst
+        set
+            user_id = -1
         where
         <foreach collection="list" item="item" separator="or">
-            (seat_id = #{item})
+                (
+                seat_id = #{item}
+                )
+        </foreach>
+
+    </update>
+
+    <update id="offRepairBasic" parameterType="java.util.List">
+        update
+            seat_mst
+        set
+            user_id = 0
+        where
+        <foreach collection="list" item="item" separator="or">
+                (seat_id = #{item})
 
         </foreach>
 
-    </delete>
+    </update>
+
+    <update id="repairLockerReq" parameterType="java.util.List">
+        update
+            locker_mst
+        set
+            user_id = -1
+        where
+        <foreach collection="list" item="item" separator="or">
+                (
+                locker_id = #{item}
+                )
+        </foreach>
+
+    </update>
+
+    <update id="offRepairLocker" parameterType="java.util.List">
+        update
+            locker_mst
+        set
+            user_id = 0
+        where
+        <foreach collection="list" item="item" separator="or">
+                (locker_id = #{item})
+
+        </foreach>
+
+
+    </update>
 
 </mapper>

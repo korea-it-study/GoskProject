@@ -7,8 +7,12 @@ import java.util.List;
 
 @Mapper
 public interface LockerRepository {
-    public List<Locker> getLocker();
+    public List<Locker> getAllLocker();
+    public List<String > getUseLocker();
+    public List<String> getUsableLocker();
+
     public String getUserLocker(int userId);
-    public int repairReq(List<String> arr);
-    public int offRepair(List<String> arr);
+
+
+    public int insertLocker(List<String> arr);
 }

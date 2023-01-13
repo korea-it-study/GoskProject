@@ -15,9 +15,14 @@ public interface SeatService {
     public boolean paySeat(SeatReqDto seatReqDto);
     public boolean payReservedSeat(ReservedSeatReqDto reservedSeatReqDto);
 
-    public List<SeatRespDto> useSeat() throws Exception;
+    public List<SeatRespDto> allSeat() throws Exception;
+    public List<String> useSeat();
+    public List<String> usableSeat();
 
-    public List<ReservedSeatRespDto> useReservedSeat() throws Exception;
+    public List<ReservedSeatRespDto> allReservedSeat() throws Exception;
+    public List<String> useReservedSeat();
+    public List<String> usableReserved();
+
 
     public SeatInfoRespDto getBasicSeatDetail(String seatId);
     public SeatInfoRespDto getSpecialSeatDetail(String seatId);
@@ -29,5 +34,8 @@ public interface SeatService {
     public int closingTimeOneday();
     public int scheduledDeleteReserve(Date now);
     public int forcedExit(List<String> arr);
+
+
+//    public int insertSeat(List<String> arr);
 
 }

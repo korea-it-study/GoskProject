@@ -49,7 +49,7 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<SeatRespDto> useSeat() throws Exception {
+    public List<SeatRespDto> allSeat() throws Exception {
         List<Seat> useSeatList = seatRepository.seatSelect();
         List<SeatRespDto> useSeatRespDtoList = new ArrayList<>();
         useSeatList.forEach(useSeat ->{
@@ -59,7 +59,17 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<ReservedSeatRespDto> useReservedSeat() throws Exception {
+    public List<String> useSeat() {
+        return seatRepository.useSeat();
+    }
+
+    @Override
+    public List<String> usableSeat() {
+        return seatRepository.usableSeat();
+    }
+
+    @Override
+    public List<ReservedSeatRespDto> allReservedSeat() throws Exception {
         List<ReservedSeat> useReservedSeats = seatRepository.reservedSelect();
 
 
@@ -71,6 +81,16 @@ public class SeatServiceImpl implements SeatService {
             return useReservedRespDtoList;
         }
         return null;
+    }
+
+    @Override
+    public List<String> useReservedSeat() {
+        return seatRepository.useReserved();
+    }
+
+    @Override
+    public List<String> usableReserved() {
+        return seatRepository.usableReserved();
     }
 
     @Override
@@ -176,12 +196,8 @@ public class SeatServiceImpl implements SeatService {
         }else if(arr.get(0).contains("seat")){
             //일반석 삭제
             arr.forEach(seat ->{
-                String userId = seatRepository.userNullSet(seat.substring(0,seat.indexOf("seat")));
-
-
+                newArr.add(seat.substring(0,seat.indexOf("seat")));
             });
-
-
             result = seatRepository.forcesExitSeat(newArr);
         }else{
             //사물함 삭제
@@ -192,4 +208,13 @@ public class SeatServiceImpl implements SeatService {
         }
         return result;
     }
+
+//    @Override
+//    public int insertSeat(List<String> arr) {
+////        int seat = seatRepository.insertSeat(arr);
+//        int special = seatRepository.insertSpecial(arr);
+//        return special;
+//    }
+
+
 }

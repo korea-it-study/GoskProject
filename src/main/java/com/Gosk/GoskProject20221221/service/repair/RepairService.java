@@ -10,4 +10,6 @@ public interface RepairService {
     public int offRepairSpecial(List<String> arr);
     public int repairBasic(List<String> arr);
     public int offRepairBasic(List<String> arr);
+    public int repairLocker(List<String> arr);
+    public int offRepairLocker(List<String> arr);
 }

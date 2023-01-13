@@ -169,7 +169,7 @@ function getReq(url) {
 
 //사용중 사물함 오렌지
 function getOrg(){
-    let responseData = getReq("/api/locker");
+    let responseData = getReq("/api/allLocker");
     responseData.forEach(lockerUse => {
         lockerName.forEach((lockerAll,index) => {
             if(lockerUse === lockerAll.textContent){

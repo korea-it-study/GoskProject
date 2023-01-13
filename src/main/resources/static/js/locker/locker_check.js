@@ -41,7 +41,7 @@ function getLocker(){
     let responseData = null;
     $.ajax({
        async: false,
-       url: "/api/locker",
+       url: "/api/allLocker",
         type: "get",
         success : (response) => {
            console.log("get 결과" + response.data);

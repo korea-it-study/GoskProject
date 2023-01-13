@@ -6,8 +6,12 @@ import java.util.List;
 
 public interface LockerService {
 
-    public List<LockerRespDto> getLocker();
+    public List<LockerRespDto> getAllLocker();
+    public List<String> getUseLocker();
+    public List<String> getUsableLocker();
+
     public String getUserLocker(int userId);
-    public int repairLocker(List<String> arr);
-    public int offRepair(List<String> arr);
+
+
+    public int insertLocker(List<String> arr);
 }

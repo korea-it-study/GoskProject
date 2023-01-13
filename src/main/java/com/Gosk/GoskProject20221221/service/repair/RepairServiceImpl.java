@@ -38,4 +38,15 @@ public class RepairServiceImpl implements RepairService {
         return repairRepository.offRepairBasic(arr);
     }
 
+
+    @Override
+    public int repairLocker(List<String> arr) {
+        return repairRepository.repairLockerReq(arr);
+    }
+
+    @Override
+    public int offRepairLocker(List<String> arr) {
+        return repairRepository.offRepairLocker(arr);
+    }
+
 }
