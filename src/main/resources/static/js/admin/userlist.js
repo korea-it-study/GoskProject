@@ -5,10 +5,6 @@ let userListData = getUserAllList();
 const userTable = document.querySelector(".user-table");
 const modifyInput = document.querySelectorAll(".popup input")
 
-// 유효성 검사
-const regex = /\d{3}-\d{3,4}-\d{4}/; 
-const pwRegex = /\d{4}/;
-
 // 아이디 중복 체크
 
 function checkDuplicate(userPhone, userId) {
@@ -25,7 +21,9 @@ function checkDuplicate(userPhone, userId) {
         data: JSON.stringify(phoneCheck),
         dataType: "json",
         success: (response) => {
-            alert("사용가능한 아이디입니다!");
+            if(modifyInput[1].value) {
+                alert("사용가능한 아이디입니다!");
+            }
             userModify(userId);
         },
         error: (error) => {
@@ -79,7 +77,9 @@ function userSeatList(userId) {
 
 // 유저 수정 정보 보내기
 function userModify(userId) {
+    let responseData = null;
     jsonData = {
+        userId: modifyInput[3].value,
         userPhone: modifyInput[1].value,
         userPw: modifyInput[2].value,
     }
@@ -94,18 +94,36 @@ function userModify(userId) {
         success: (response) => {
             responseData = response.data;
             console.log(responseData);
+            alert("수정 완료!");
+            location.reload();
         },
         error: (error) => {
             console.log(error);
-            alert(JSON.stringify(jsonData));
+            alert("수정 실패!")
         }
     })
 }
 
 // 유저 정보 삭제하기
-function userDelete() {
+function userDelete(userId) {
 
+    $.ajax({
+        async: false,
+        type: "delete",
+        url: "/api/admin/userDelete/" + userId,
+        dataType: "json",
+        success: (response) => {
+            alert("회원 삭제 완료!");
+
+            location.reload();
+        },
+        error: (error) => {
+            alert("회원 삭제 실패!");
+            console.log(error);
+        }
+    });
 }
+
 
  // 휴대폰 번호로 유저 찾기 (search 버튼 이벤트)
  const phoneNumber = document.querySelector(".phone-number");
@@ -140,9 +158,19 @@ function userDelete() {
          }else {}
      });
 
+     phoneNumber.value = "";
+
     updateBtnEvent();
     detailBtnEvent();
+    dltBtnEvent();
  }
+
+ phoneNumber.onkeyup = () => {
+    
+    if(window.event.keyCode == 13){
+        searchBtn.click();
+    }
+}
 
 
 //유저 리스트 표 안에 뿌리기
@@ -174,6 +202,7 @@ function toUserList() {
 
     updateBtnEvent();
     detailBtnEvent();
+    dltBtnEvent();
 
 }
 
@@ -296,8 +325,10 @@ function updateBtnEvent() {
         updateBtn.onclick = () => {
             popupBack.classList.remove("invisible");
     
-            modifyInput[0].value = "";
-            modifyInput[3].value = "";
+            modifyInput.forEach (modBtn => {
+                modBtn.value = "";
+            })
+
             modifyInput[0].value = userListData[index].userPhone;
             modifyInput[3].value = userListData[index].userId;
         }
@@ -310,8 +341,6 @@ function updateBtnEvent() {
     // 수정 팝업 닫기 버튼
     popupCloseBtn.onclick = () => {
         popupBack.classList.add("invisible");
-        modifyInput[1].value = "";
-        modifyInput[2].value = "";
     }
     
     // 수정 팝업에서 수정버튼 클릭시
@@ -322,20 +351,70 @@ function updateBtnEvent() {
             userId: modifyInput[3].value
         }
 
+        // 유효성 검사
+        const regex = /\d{3}-\d{3,4}-\d{4}/; 
+        const pwRegex = /\d{4}/;
+
+        if(!jsonData.userPhone && jsonData.userPw) {
+            alert("휴대폰 번호와 비밀번호 둘 다 비워둘 수 없습니다.");
+        }
+
         if(!jsonData.userPhone) {
-            alert("휴대폰 번호는 비워둘 수 없습니다.");
-            return false;
+
         }else if(!regex.test(jsonData.userPhone)) {
             alert("휴대폰 번호의 양식에 맞지않습니다.");
             return false;
-        }else if(!pwRegex.test(jsonData.userPw)){
+
+        }
+        
+        if(jsonData.userPw == "") {
+
+        }else if(!pwRegex.test(modifyInput[3].value)){
             alert("비밀번호는 네자리 숫자입니다.");
             return false;
         }
         
         checkDuplicate(jsonData.userPhone, jsonData.userId);
     }
+
+    // 엔터로 줄바꿈
+
+    for(let i = 0; i < modifyInput.length; i++) {
+        modifyInput[i].onkeyup = () => {
+            if(window.event.keyCode == 13){
+                if(i != 2) {
+                    modifyInput[i + 1].focus();
+                }else {
+                    popupUpdateBtn.click();
+                }
+            }
+        }
+    }
     
+}
+
+
+// 삭제 버튼 클릭 이벤트
+function dltBtnEvent() {
+    
+    const dltBtn = document.querySelectorAll(".dlt-btn");
+    const userList = document.querySelectorAll(".user-table tr td");
+    
+    dltBtn.forEach((dlt, index) => {
+        
+        dlt.onclick = () => {
+
+            userId = userList[index * 5].innerText;
+            userPhone = userList[1 + (index * 5)].innerText;
+
+            if(confirm("정말로  '" + userPhone + "' 회원을 삭제하시겠습니까?")) {
+                userDelete(userId);
+
+            }else {
+                alert("회원 삭제를 취소하셨습니다!");
+            }
+        }
+    })
 }
 
 

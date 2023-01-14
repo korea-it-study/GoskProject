@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Slf4j
 @RequestMapping("/api/admin")
 @RestController
@@ -27,7 +29,13 @@ public class UserListApi {
     }
 
     @PutMapping("/userModify/{userId}")
-    public  ResponseEntity<?> userModify(@PathVariable int userId, UserReqDto userReqDto) throws Exception {
+    public  ResponseEntity<?> userModify(@PathVariable int userId, @Valid @RequestBody UserReqDto userReqDto) throws Exception {
         return ResponseEntity.ok().body(new CMRespDto<>(1, "userInfo load success", userService.userModify(userReqDto)));
+    }
+
+    @DeleteMapping("/userDelete/{userId}")
+    public ResponseEntity<?> userDelete(@PathVariable int userId) throws Exception {
+
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "userDelete success", userService.userDelete(userId)));
     }
 }

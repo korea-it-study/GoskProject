@@ -129,7 +129,6 @@ function checkDuplicate() {
         data: JSON.stringify(joinInfo),
         dataType: "json",
         success: (response) => {
-            if(joinInfo.userPhone )
             alert("사용가능한 아이디입니다!");
             userInfoData();
         },

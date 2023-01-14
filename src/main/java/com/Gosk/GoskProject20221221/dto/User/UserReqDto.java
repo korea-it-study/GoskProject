@@ -7,9 +7,6 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
@@ -37,15 +34,6 @@ public class UserReqDto {
                 .user_pw(new BCryptPasswordEncoder().encode(userPw))
                 .user_create_date(userCreateDate)
                 .user_update_date(userUpdateDate)
-                .build();
-    }
-
-    // 회원정보 수정
-
-    public User toModifyUser() {
-        return User.builder()
-                .user_phone(userPhone)
-                .user_pw(new BCryptPasswordEncoder().encode(userPw))
                 .build();
     }
 

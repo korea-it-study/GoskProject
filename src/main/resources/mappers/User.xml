@@ -24,11 +24,15 @@
     <resultMap id="seat" type="com.Gosk.GoskProject20221221.domain.seat.Seat">
         <result property="user_id" column="user_id"></result>
         <result property="seat_id" column="seat_id"></result>
+        <result property="seat_total_time" column="seat_total_time"></result>
+        <result property="seat_start_time" column="seat_start_time"></result>
     </resultMap>
 
     <resultMap id="reservedSeat" type="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
         <result property="user_id" column="user_id"></result>
         <result property="reserved_seat_id" column="reserved_seat_id"></result>
+        <result property="reserved_total_time" column="reserved_total_time"></result>
+        <result property="reserved_start_time" column="reserved_start_time"></result>
     </resultMap>
 
 <!--  회원가입  -->
@@ -74,6 +78,7 @@
 
         WHERE
             user_phone = #{user_phone}
+
     </select>
 
 <!--    관리자페이지 모든 유저 들고오기     -->
@@ -87,6 +92,7 @@
         user_mst um
 
     </select>
+
     <select id="seatInfo" resultType="com.Gosk.GoskProject20221221.domain.user.UserSeat">
         SELECT
             um.user_id,
@@ -124,7 +130,51 @@
             user_mst
         SET
             user_phone = #{user_phone},
-            user_pw = #{user_pw}
+            user_pw = #{user_pw},
+            user_update_date = DATE_ADD(NOW(), INTERVAL 9 HOUR)
+        WHERE
+            user_id = #{user_id}
+    </update>
+
+    <select id="preModUserSelect" resultMap="user">
+        SELECT
+            user_id,
+            user_phone,
+            user_pw,
+            user_time,
+            user_date,
+            user_create_date,
+            user_update_date
+
+        from user_mst
+
+        WHERE
+        user_id = #{user_id}
+    </select>
+
+    <delete id="deleteUser">
+        DELETE FROM user_mst
+        WHERE user_id = #{user_id}
+    </delete>
+
+    <update id="deleteSeatUser">
+        UPDATE
+            seat_mst
+        SET
+            user_id = 0,
+            seat_start_time = null,
+            seat_total_time = null
+        WHERE
+            user_id = #{user_id}
+    </update>
+
+    <update id="deleteReservedUser">
+        UPDATE
+            reserved_seat_mst
+        SET
+            user_id = 0,
+            reserved_start_time = null,
+            reserved_total_time = null
         WHERE
             user_id = #{user_id}
     </update>
