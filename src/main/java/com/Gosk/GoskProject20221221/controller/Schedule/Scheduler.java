@@ -18,9 +18,9 @@ public class Scheduler {
     @Scheduled(cron = "0 0 22 * * *") ///매일 22시에 사물함, 기간권, 지정석 만료시 삭제, 원데이 일괄 삭제
     public void timeoutLocker() {
         Date now = new Date();
-        int timeoutLockerList = seatService.scheduledDeleteLocker(now);
-        int timeoutCommutationList = seatService.scheduledDeleteCommutation(now);
-        int timeoutReserveList = seatService.scheduledDeleteReserve(now);
+        int timeoutLockerList = seatService.scheduledUpdateLocker(now);
+        int timeoutCommutationList = seatService.scheduledUpdateCommutation(now);
+        int timeoutReserveList = seatService.scheduleUpdateReserve(now);
         int closingOnedayList = seatService.closingTimeOneday();
 
         System.out.println( now + " 사물함 삭제개수 " + timeoutLockerList);
@@ -30,9 +30,9 @@ public class Scheduler {
     }
 
 
-    @Scheduled(cron = "0 * 10-22 * * *") //10시부터 22시까지 1분 마다 원데이 퇴식
+    @Scheduled(cron = "0 * 10-22 * * *") //10시부터 22시까지 1분 마다 원데이 퇴실
     public void timeoutOneday(){
-        int timeoutList = seatService.scheduledDeleteOneday(new Date());
+        int timeoutList = seatService.scheduledUpdateOneday(new Date());
         System.out.println(new Date() + " 원데이 삭제 개수 " + timeoutList);
     }
 

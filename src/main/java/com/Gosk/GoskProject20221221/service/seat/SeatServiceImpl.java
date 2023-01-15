@@ -94,7 +94,6 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-
     public SeatInfoRespDto getBasicSeatDetail(String seatId) {
         SeatInfo seatInfo = seatRepository.getBasicSeatDetail(seatId);
         //정액권이면
@@ -112,7 +111,7 @@ public class SeatServiceImpl implements SeatService {
                     .userPhone(seatInfo.getUser_phone())
                     .build();
         }
-        return seatInfo.toSeatInfoRespDto(); //아니면 userDate만 있는 dto 생성
+        return seatInfo.toSeatInfoRespDto();
     }
     private String getSeatTotalTime(LocalDateTime seat_total_time) {
 
@@ -146,65 +145,64 @@ public class SeatServiceImpl implements SeatService {
 
 
     @Override
-    public int scheduledDeleteLocker(Date now) {
-        return seatRepository.deleteLocker(now);
+    public int scheduledUpdateLocker(Date now) {
+        return seatRepository.timeoutLocker(now);
     }
 
     @Override
-    public int scheduledDeleteCommutation(Date now) {
-        int delete = seatRepository.deleteCommutation(now);
-        int update = seatRepository.updateUserDate(now);
-        int result = 0;
-        if(delete == update){
-            System.out.println("동일");
-            result = (delete + update) / 2;
-            return result;
-        }
+    public int scheduledUpdateCommutation(Date now) {
+        //정액제 제거 기간권
+        //시간권 -> 입실 -> 퇴실시간 설정 -> 해당 퇴실시간 되면 제거
+        //퇴실 시간 설정 -> 되기 전에 퇴실 -> 이용시간 차감
+        //서버단에서 시간 계산 -> 조회할때 이용자에게 보여주삼 -> 입퇴실할때만 update
 
-        System.out.println(delete + update);
-        result = delete + update;
-        return result;
+        return seatRepository.timeoutCommutation(now);
     }
 
     @Override
-    public int scheduledDeleteOneday(Date now) {
-        return seatRepository.deleteOneday(now);
+    public int scheduledUpdateOneday(Date now) {
+        return seatRepository.timeoutOneday(now);
     }
-
     @Override
     public int closingTimeOneday() {
-        return seatRepository.closingDelete();
+        return seatRepository.closingOneday();
     }
-
     @Override
-    public int scheduledDeleteReserve(Date now) {
-        return seatRepository.deleteReserve(now);
+    public int scheduleUpdateReserve(Date now) {
+        return seatRepository.timeoutReserve(now);
     }
 
     @Override
     public int forcedExit(List<String> arr) {
-
         List<String> newArr = new ArrayList<>();
+        List<Integer> userIdArr;
         int result = 0;
+        //지정석이면
         if(arr.get(0).contains("reserve")){
 
             arr.forEach(seat ->{
                 newArr.add(seat.substring(0,seat.indexOf("reserve")));
             });
-            result = seatRepository.forcedExitReserve(newArr);
-            //지정석 삭제
+            //id리스트
+            userIdArr = seatRepository.getReservedUser(newArr);
+            result = seatRepository.forcedExit(userIdArr);
+
+            //일반석이면
         }else if(arr.get(0).contains("seat")){
-            //일반석 삭제
+
             arr.forEach(seat ->{
                 newArr.add(seat.substring(0,seat.indexOf("seat")));
             });
-            result = seatRepository.forcesExitSeat(newArr);
+            userIdArr = seatRepository.getSeatUser(newArr);
+            result = seatRepository.forcedExit(userIdArr);
+            //사물함이면
         }else{
-            //사물함 삭제
+
             arr.forEach(seat ->{
                 newArr.add(seat.substring(0,seat.indexOf("locker")));
             });
-            result = seatRepository.forcedExitLocker(newArr);
+            userIdArr = seatRepository.getLockerUser(newArr);
+            result = seatRepository.forcedExit(userIdArr);
         }
         return result;
     }

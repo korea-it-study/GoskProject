@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gosk.GoskProject20221221.repository.InoutRepository">
+
+
+<select id="getInfo" resultType="com.Gosk.GoskProject20221221.domain.user.InInfo">
+    SELECT
+        um.user_id,
+        um.user_time,
+        um.user_date,
+        sm.seat_id,
+        sm.seat_total_time,
+        rm.reserved_seat_id,
+        rm.reserved_total_time,
+        cm.receipt_kinds,
+        cm.receipt_time,
+        cm.receipt_day
+
+    FROM
+        user_mst um
+        LEFT OUTER JOIN seat_mst sm ON(sm.user_id = um.user_id)
+        LEFT OUTER JOIN reserved_seat_mst rm ON(rm.user_id = um.user_id)
+        LEFT OUTER JOIN receipt_mst cm ON(cm.user_id = um.user_id)
+    WHERE
+        um.user_id = #{user_id} and
+        cm.receipt_use = 1 and
+        cm.receipt_kinds != "사물함"
+
+    </select>
+
+</mapper>

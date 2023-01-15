@@ -8,6 +8,7 @@ import com.Gosk.GoskProject20221221.domain.seat.SpecialSeatInfo;
 import com.Gosk.GoskProject20221221.domain.user.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 
@@ -26,18 +27,22 @@ public interface SeatRepository {
     public int payReserved (ReservedSeat reservedSeat);
     public int payLocker(Locker locker);
 
-    public int deleteLocker(Date now);
-    public int deleteCommutation(Date now);
+    public int timeoutLocker(Date now);
+    public int timeoutCommutation(Date now);
     public int updateUserDate(Date now);
-    public int deleteOneday(Date now);
-    public int closingDelete();
-    public int deleteReserve(Date now);
-    public int forcedExitReserve(List<String> arr);
-    public int forcesExitSeat(List<String> arr);
-    public int forcedExitLocker(List<String> arr);
+    public int timeoutOneday(Date now);
+    public int closingOneday();
+    public int timeoutReserve(Date now);
 
-    //일반석 userNullset하고 영수증 바꾸기
-    public String userNullSet(String seatId);
+    public List<Integer> getReservedUser(List<String> arr);
+    public List<Integer> getSeatUser(List<String> arr);
+    public List<Integer> getLockerUser(List<String> arr);
+//    public int[] seatGetUser(List<String> arr);
+
+
+    public int forcedExit(List<Integer> arr);
+
+
 
 
     public int insertSeat(List<String> arr);

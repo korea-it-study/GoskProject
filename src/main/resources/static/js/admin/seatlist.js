@@ -207,8 +207,8 @@ exitBtn.onclick = () => {
         });
 
     if(selectedList.length > 0 ) {
-        if (confirm(selectedList + "] 좌석을 강제 퇴장 합니다")) {
-            customReq("delete", selectedList, "/api/seat/exit");
+        if (confirm(seatCondition + selectedList + "] 좌석을 강제 퇴장 합니다")) {
+            customReq("put", {data: selectedList}, "/api/seat/exit");
         }
     }else{
         alert("사용자가 없는 좌석이 선택되었습니다.");

@@ -28,11 +28,12 @@ public interface SeatService {
     public SeatInfoRespDto getSpecialSeatDetail(String seatId);
     public boolean payLocker(LockerReqDto lockerReqDto);
 
-    public int scheduledDeleteLocker(Date now);
-    public int scheduledDeleteCommutation(Date now);
-    public int scheduledDeleteOneday(Date now);
+    public int scheduledUpdateLocker(Date now);
+    public int scheduledUpdateCommutation(Date now);
+    public int scheduledUpdateOneday(Date now);
+
     public int closingTimeOneday();
-    public int scheduledDeleteReserve(Date now);
+    public int scheduleUpdateReserve(Date now);
     public int forcedExit(List<String> arr);
 
 

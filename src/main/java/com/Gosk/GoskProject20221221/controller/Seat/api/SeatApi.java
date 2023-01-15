@@ -57,7 +57,7 @@ public class SeatApi {
         return ResponseEntity.ok().body(new CMRespDto<>(1, "reserved seat detail load success", seatService.getSpecialSeatDetail(seatId)));
     }
 
-    @GetMapping("/exit")
+    @PutMapping("/exit")
     public ResponseEntity<?> forcedExit(@RequestParam(value="data") List<String> arr){
         return ResponseEntity.ok().body(new CMRespDto<>(1, "exit Success",seatService.forcedExit(arr)));
     }
