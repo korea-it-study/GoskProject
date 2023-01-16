@@ -32,7 +32,7 @@ public class AccountApi {
 
     @PostMapping("/join/checkDuplicate")
     public ResponseEntity<?> joinCheckDuplicate(@RequestBody UserReqDto userReqDto) throws Exception {
-        log.info("[UserApi] userInfoData :::::::::::::::::::::::::::::::: {}", userReqDto);
+//        log.info("[UserApi] userInfoData :::::::::::::::::::::::::::::::: {}", userReqDto);
         userService.checkDuplicationUserPhone(userReqDto.getUserPhone());
 
         return ResponseEntity.ok(new CMRespDto<>(1, "userPhone duplicate check success", null));

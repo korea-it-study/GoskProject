@@ -24,4 +24,11 @@ public class User {
     private LocalDateTime user_create_date;
     private LocalDateTime user_update_date;
 
+    public UserRespDto toAllUserList() {
+        return UserRespDto.builder()
+                .userId(user_id)
+                .userPw(user_pw)
+                .userPhone(user_phone)
+                .build();
+    }
 }
