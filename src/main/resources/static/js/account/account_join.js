@@ -1,3 +1,8 @@
+// 페이지 이동
+$('.index-btn').click(function(){
+    location.href = "/index";
+    localStorage.clear();
+});
 
 
 $('.join-keybord > button').click(function(){
@@ -58,7 +63,6 @@ function phoneFormat(phoneNumber) {
 
 
   // 회원가입 정보 보내기
-
   const joinBtn = document.querySelector(".join-btn");
 
   joinBtn.onclick = () => {
@@ -66,9 +70,7 @@ function phoneFormat(phoneNumber) {
   }
 
 function userInfoData() {
-
     // 유효성 검사
-
     const regex = /\d{3}-\d{3,4}-\d{4}/; 
     const pwRegex = /\d{4}/;
 
@@ -114,9 +116,7 @@ function userInfoData() {
 }
 
 // 중복체크
-
 function checkDuplicate() {
-
     let joinInfo = {
         userPhone : $(".phone-id").val()
     }
@@ -138,8 +138,3 @@ function checkDuplicate() {
         }
     });
 }
-
-$('.index-btn').click(function(){
-    location.href = "/index";
-    localStorage.clear();
-});

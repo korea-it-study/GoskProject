@@ -35,12 +35,12 @@ $('.next-btn').click(function(){
     }
 });
 
-//locker만 정보 가져옴
+//사용중인 locker만 정보 가져옴
 function getLocker(){
     let responseData = null;
     $.ajax({
        async: false,
-       url: "/api/locker",
+       url: "/api/allLocker",
         type: "get",
         success : (response) => {
            console.log("get 결과" + response.data);
@@ -53,10 +53,15 @@ function getLocker(){
     //사용중 사물함이름 - 전체 사물함 이름
     responseData.forEach(lockerUse => {
         const lockerName = document.querySelectorAll(".locker-management-content > div .btn ")
-        lockerName.forEach((lockerAll,index) => {
-            //비교중에 Use랑 특정 lockerAll의 값이 같아 질때 특정 index에 org 해준다
-            if(lockerUse === lockerAll.textContent){
-                lockerName[index].classList.add("org-btn");
+        lockerName.forEach(lockerAll => {
+            //비교중에 Use랑 특정 lockerAll의 값이 같아 질때 선택 못하게 org-btn이나 gray-btn 바르기
+            if(lockerUse.lockerId === lockerAll.textContent){
+                console.log("사용중 ====== " + lockerUse.lockerId);
+                lockerAll.classList.add("org-btn");
+                if(lockerUse.userId === -1){
+                    lockerAll.classList.add("repair-seat");
+                    console.log("user_id  -1임 " + lockerUse.lockerId);
+                }
             }
         });
     })

@@ -39,7 +39,7 @@
             #{seat_id},
             #{user_id},
             DATE_ADD(NOW(), INTERVAL 9 HOUR),
-            DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL (#{seat_total_time} + 9) HOUR)
+            DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL (#{seat_total_time}) HOUR)
         )
     </insert>
 
@@ -62,21 +62,62 @@
     </insert>
 
 <!--    일반석 정보 불러오기    -->
-    <select id="seatSelect" resultType="java.lang.String">
+    <select id="seatSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.Seat">
         SELECT
-            seat_id
+            seat_id,
+            user_id
         FROM
             seat_mst
 
     </select>
 
+    <select id="useSeat" resultType="java.lang.String">
+        SELECT
+            seat_id
+        FROM
+            seat_mst
+        where
+            user_id != 0 and
+            user_id != -1
+    </select>
+
+    <select id="usableSeat" resultType="java.lang.String">
+        SELECT
+            seat_id
+        FROM
+            seat_mst
+        where
+            user_id = 0
+    </select>
+
 <!--    지정석 정보 불러오기    -->
-    <select id="reservedSelect" resultType="java.lang.String">
+    <select id="reservedSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
+        SELECT
+            reserved_seat_id,
+            user_id
+        FROM
+            reserved_seat_mst
+    </select>
+
+    <select id="useReserved" resultType="java.lang.String">
         SELECT
             reserved_seat_id
         FROM
             reserved_seat_mst
+        where
+            user_id != 0 and
+            user_id != -1
     </select>
+
+    <select id="usableReserved" resultType="java.lang.String">
+        SELECT
+            reserved_seat_id
+        FROM
+            reserved_seat_mst
+        where
+            user_id = 0
+    </select>
+
 
     <insert id="payLocker">
         insert into
@@ -90,27 +131,244 @@
         )
     </insert>
 
-    <select id="getLocker" resultType="java.lang.String">
-        select
-            locker_id
-        from
+
+
+    <update id="timeoutLocker" parameterType="date">
+
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        where
+            user_id in(  select
+                            user_id
+                        from
+                            locker_mst
+                        where
+                            <![CDATA[locker_end_time < #{now}]]>
+                    )and
+            receipt_kinds = "사물함";
+
+        update
             locker_mst
+        set
+            user_id = 0
+        where
+        <![CDATA[locker_end_time < #{now}]]>;
+    </update>
+
+    <update id="timeoutCommutation">
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        WHERE
+            user_id in (select
+                            user_id
+                        from
+                            user_mst
+                        where
+                            <![CDATA[user_date < #{now}]]>
+                        )and
+            receipt_kinds = "정액권";
+        update
+            user_mst
+        set
+            user_time = null,
+            user_date = null
+        where
+            <![CDATA[user_date < #{now}]]>
+
+
+    </update>
+
+    <select id="getBasicSeatDetail" resultType="com.Gosk.GoskProject20221221.domain.seat.SeatInfo">
+        SELECT
+            sm.user_id,
+            sm.seat_total_time,
+            um.user_phone,
+            um.user_time,
+            um.user_date
+        FROM
+            seat_mst sm
+            left outer join user_mst um on(um.user_id = sm.user_id)
+        where
+            seat_id = #{seatId}
 
     </select>
-    <select id="getUserLocker" resultType="java.lang.String">
+
+    <select id="getSpecialSeatDetail" resultType="com.Gosk.GoskProject20221221.domain.seat.SpecialSeatInfo">
+    select
+        rm.user_id,
+        rm.reserved_total_time,
+        um.user_phone
+    from
+        reserved_seat_mst rm
+        left outer join user_mst um on(um.user_id = rm.user_id)
+    where
+        reserved_seat_id = #{seatId}
+
+    </select>
+
+
+    <select id="getReservedUser" resultType="int">
         select
-            locker_id
+            user_id
+        from
+            reserved_seat_mst
+        where
+            <foreach collection="list" item="item" separator="or">
+                (reserved_seat_id = #{item})
+            </foreach>
+    </select>
+
+    <select id="getSeatUser" resultType="int">
+        select
+            user_id
+        from
+            seat_mst
+        where
+        <foreach collection="list" item="item" separator="or">
+            (seat_id = #{item})
+        </foreach>
+    </select>
+
+    <select id="getLockerUser" resultType="int">
+        select
+            user_id
         from
             locker_mst
         where
-            user_id = #{userId}
+        <foreach collection="list" item="item" separator="or">
+            (locker_id = #{item})
+        </foreach>
     </select>
 
-    <delete id="deleteLocker">
-        delete from
-            locker_mst
-        where
-            <![CDATA[locker_end_time > #{now}]]>
 
-    </delete>
+
+    <update id="updateUserDate">
+        update
+            user_mst
+        set
+            user_date = null
+        where
+            <![CDATA[user_date < #{now}]]>
+    </update>
+
+    <update id="timeoutOneday">
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        where
+            user_id in (select
+                            user_id
+                        from
+                            seat_mst
+                        where
+                            <![CDATA[seat_total_time < #{now}]]>
+                        ) and
+            receipt_kinds = "원데이";
+
+        update
+            seat_mst
+        set
+            user_id = 0
+        where
+            <![CDATA[seat_total_time < #{now}]]>
+
+
+
+    </update>
+
+    <update id="closingOneday">
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        where
+            receipt_kinds = "원데이";
+
+        update
+            seat_mst
+        set
+            user_id = 0
+        where
+            seat_total_time is not null and
+            user_id != 0
+    </update>
+
+    <update id="timeoutReserve">
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        WHERE
+            user_id in (select
+                            user_id
+                        from
+                            reserved_seat_mst
+                        where
+                            <![CDATA[reserved_end_time < #{now}]]>
+                        )and
+            receipt_kinds = "지정석";
+
+        update
+            reserved_seat_mst
+        set
+            user_id = 0
+        where
+            <![CDATA[reserved_end_time < #{now}]]>
+    </update>
+
+
+
+    <update id="forcedExit" parameterType="java.util.List">
+        UPDATE
+            receipt_mst cm
+            left outer join locker_mst lm ON(lm.user_id = cm.user_id)
+            left outer join seat_mst sm ON( sm.user_id = cm.user_id)
+            left outer join reserved_seat_mst rm ON ( rm.user_id = cm.user_id)
+            left outer join user_mst um ON (um.user_id = cm.user_id )
+        set
+            lm.user_id = 0,
+            sm.user_id = 0,
+            rm.user_id = 0,
+            um.user_time = null,
+            um.user_date = NULL,
+            cm.receipt_use = 0
+        WHERE
+            <foreach collection="list" item="item" separator="or">
+                (cm.user_id = #{item})
+            </foreach>
+
+
+    </update>
+
+
+    <insert id="insertSeat">
+        insert into
+            seat_mst(seat_id, user_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+                (
+                #{item},
+                0
+                )
+        </foreach>
+    </insert>
+
+    <insert id="insertSpecial">
+        insert into
+            reserved_seat_mst(reserved_seat_id, user_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+                (
+                #{item},
+                0
+                )
+        </foreach>
+    </insert>
+
+
 </mapper>

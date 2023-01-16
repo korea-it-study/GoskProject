@@ -11,7 +11,7 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://web-study.c6csxmxkinkd.ap-northeast-2.rds.amazonaws.com:3306/GoskProject
+    url: jdbc:mariadb://web-study.c6csxmxkinkd.ap-northeast-2.rds.amazonaws.com:3306/GoskProject?allowMultiQueries=true
     username: admin
     password: 1q2w3e4r
 

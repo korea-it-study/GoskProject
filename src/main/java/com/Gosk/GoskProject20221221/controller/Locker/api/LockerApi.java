@@ -2,6 +2,7 @@ package com.Gosk.GoskProject20221221.controller.Locker.api;
 
 
 import com.Gosk.GoskProject20221221.dto.CMRespDto;
+import com.Gosk.GoskProject20221221.service.locker.LockerService;
 import com.Gosk.GoskProject20221221.dto.Time.TimePriceReqDto;
 import com.Gosk.GoskProject20221221.dto.locker.LockerPriceReqDto;
 import com.Gosk.GoskProject20221221.service.locker.LockerPriceService;
@@ -12,23 +13,44 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RequestMapping("/api")
 @RestController
 @RequiredArgsConstructor
 public class LockerApi {
-    private final SeatService seatService;
+
+    private final LockerService lockerService;
     private final LockerPriceService lockerPriceService;
 
-    @GetMapping("/locker")
+//    @PostMapping("/locker")
+//    public ResponseEntity<?> insertLocker(@RequestParam(value="data")List<String> arr){
+//        return ResponseEntity.ok().body(new CMRespDto<>(1, "insert locker", lockerService.insertLocker(arr)));
+//    }
+
+    //사용중인 라커, 안사용 중인 라커
+    @GetMapping("/allLocker")
     public ResponseEntity<?> getLocker(){
-        return ResponseEntity.ok().body(new CMRespDto<>(1, "getLocker", seatService.getLocker()));
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "Locker data load success", lockerService.getAllLocker()));
     }
-    @GetMapping("/user/locker/{userId}")
+    @GetMapping("/useLocker")
+    public ResponseEntity<?> getUseLocker(){
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "Locker data load success", lockerService.getUseLocker()));
+    }
+    @GetMapping("/noUseLocker")
+    public ResponseEntity<?> getUsableLocker(){
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "Locker data load success", lockerService.getUsableLocker()));
+    }
+
+    //라커 디테일
+    @GetMapping("/locker/{userId}")
     public ResponseEntity<?> getUserLocker(@PathVariable int userId){
 
-        return ResponseEntity.ok().body(new CMRespDto<>(1, "getUserLocker", seatService.getUserLocker(userId)));
+        return ResponseEntity.ok().body(new CMRespDto<>(1, "getUserLocker", lockerService.getUserLocker(userId)));
     }
+
+
 
     // 사물함 가격 등록
     @PostMapping("/locker/price")

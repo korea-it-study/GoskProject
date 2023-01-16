@@ -37,6 +37,12 @@
     height: 180px;
 }
 
+/* 유지보수 좌석 색 */
+.repair-seat {
+    background-color: #575757;
+    color: black;
+}
+
 /* 이용여부seat-view */
 .seat-header-bot>.seat-view>span {
     line-height: 97px;
