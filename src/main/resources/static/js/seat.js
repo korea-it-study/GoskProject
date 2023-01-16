@@ -1,5 +1,9 @@
 let dubleChk = doubleCheck();
 
+window.onload = () => {
+    getSeatData();
+}
+
 // 페이지 이동 //// 페이지 이동 //
 $(function(){
     var time = localStorage.getItem("time");
@@ -15,7 +19,6 @@ $(function(){
 // 홈으로 버튼 index로 보내기
 
 $('.index-btn').click(function(){
-    alert(1);
     location.href = "/index";
     localStorage.clear();
 });
@@ -94,7 +97,6 @@ function getSeatData() {
         contentType: "application/json",
         dataType: "json",
         success: (response) => {
-            alert("seat data 받아오기 성공");
             responseData = response.data;
             getSeatList(responseData);
             console.log(response);
@@ -107,10 +109,7 @@ function getSeatData() {
 }
 
 
-
-
 // 사용중인 좌석 오렌지색으로 바꾸기
-
 function getSeatList(responseData) {
 
     responseData.forEach(seatUse => {
@@ -123,17 +122,12 @@ function getSeatList(responseData) {
     });
 }
 
-window.onload = () => {
-    getSeatData();
-}
-
 // 중복구매 방지 //// 중복구매 방지 //
-for(i=0; i < dubleChk.length; i++){
-    if(dubleChk[i].receiptKinds != "사물함" && dubleChk[i].receiptUse == 1){
-        console.log("사용중" + dubleChk[i].receiptUse );
-    }else{
-        console.log("사용X" + dubleChk[i].receiptUse );
-        console.log("사용X" + dubleChk[i].receiptUse );
+$(function(){
+    for(i=0; i < dubleChk.length; i++){
+        if(dubleChk[i].receiptKinds != "사물함" && dubleChk[i].receiptUse == 1){
+            alert("상품은 중복 구매가 불가능합니다.")
+            location.href = "/index";
+        }
     }
-
-}
+})

@@ -1,5 +1,4 @@
-
-
+let dubleChk = doubleCheck();
 
 
 //선택한 사물함 클릭 시 버튼색깔 변경 및 사물함 이름 표시
@@ -65,3 +64,14 @@ function getLocker(){
 window.onload = () => {
     getLocker();
 }
+
+
+// 중복구매 방지 //// 중복구매 방지 //
+$(function(){
+    for(i=0; i < dubleChk.length; i++){
+        if(dubleChk[i].receiptKinds == "사물함" && dubleChk[i].receiptUse == 1){
+            alert("상품은 중복 구매가 불가능합니다.")
+            location.href = "/index";
+        }
+    }
+})
