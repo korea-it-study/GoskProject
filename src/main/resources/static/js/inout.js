@@ -1,14 +1,13 @@
 // 홈으로 버튼 index로 보내기
 
 $('.index-btn').click(function(){
-    alert(1);
     location.href = "/index";
     localStorage.clear();
 });
 
 const inInfo = document.querySelector(".in-info");
-// 입실
 
+// 입실
 class InApi {
     static #instance = null;
     static getInstance() {
@@ -41,7 +40,6 @@ class InApi {
                 console.log(error);
             }
         });
-
         return inRespData;
     }
 
@@ -53,7 +51,6 @@ class InApi {
 
 
 // 퇴실
-
 class OutApi {
     static #instance = null;
     static getInstance() {
