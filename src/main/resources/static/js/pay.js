@@ -196,7 +196,7 @@ function infoUserData(data) {
     }else if(data.pickTime.includes("시간")){
         jsonUserData = {
             userId: principal.user.user_id,
-            userTime: data.pickTime.replace("시간", "") * 60 * 60 ,
+            userTime: data.pickTime.replace("시간", "") * 60 * 60
         }
     }
 

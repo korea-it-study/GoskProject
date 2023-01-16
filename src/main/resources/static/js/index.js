@@ -44,12 +44,12 @@ $('.locker-btn').click(function(){
 
 // 입실
 $('.in-btn').click(function(){
-    location.href = "/inout";
+    location.href = "/in";
 });
 
 // 퇴실
 $('.out-btn').click(function(){
-    location.href = "/inout";
+    location.href = "/out";
 });
 
 

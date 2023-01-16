@@ -85,9 +85,9 @@ function getSeatData() {
     let url = null;
 
     if(seatbasic.classList.contains("invisible")) {
-        url = "/api/seat/useReservedSeat"
+        url = "/api/seat/allReservedSeat"
     }else if(seatspecial.classList.contains("invisible")){
-        url = "/api/seat/useSeat"
+        url = "/api/seat/allSeat"
     }
 
     $.ajax({
@@ -115,8 +115,14 @@ function getSeatList(responseData) {
     responseData.forEach(seatUse => {
         const seatName = document.querySelectorAll(".btn")
         seatName.forEach((seatAll,index) => {
-            if(seatUse === seatAll.textContent){
-                seatName[index].classList.add("org-btn");
+            if(seatUse.userId !== 0 && seatUse.seatId === seatAll.textContent){
+                seatAll.classList.add("org-btn");
+                if(seatUse.userId === -1){
+                    seatAll.classList.remove("org-btn");
+                    seatAll.classList.add("repair-seat");
+                }
+            }else if(seatUse.userId === 0 && seatUse.seatId === seatAll.textContent){
+                seatAll.classList.remove("repair-seat");
             }
         })
     });

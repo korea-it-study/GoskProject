@@ -79,8 +79,14 @@ closeBtn.onclick = () => {
 
 // 이동 팝업에서 변경버튼 클릭시
 popupRegisterBtn.onclick = () => {
-    alert("변경");
 
+    //함수 호출
+    if(selCate.value === "locker"){
+        if(confirm(selCate.value + selList.value + "->" + selList2.value + "변경하시겠습니까?")){
+            putReq("/api/move/locker");
+        }
+
+    }
 }
 
 
@@ -118,7 +124,7 @@ function categoryList(sVal) {
         selList2.innerHTML = ""; // 이동할 좌석
 
         //원래좌석 선택
-        let responseData = req("/api/user/locker/" + principal.user.user_id);
+        let responseData = getReq("/api/locker/" + principal.user.user_id);
         if(responseData == null) {
             selList.innerHTML = `
         <option value="null">이용중인 좌석이 없습니다</option>
@@ -142,8 +148,8 @@ function categoryList(sVal) {
     }
 }
 
-
-function req(url) {
+//이용중인 좌석, 사용자 좌석 등 get
+function getReq(url) {
     let responseData = null;
     $.ajax({
         async: false,
@@ -163,7 +169,7 @@ function req(url) {
 
 //사용중 사물함 오렌지
 function getOrg(){
-    let responseData = req("/api/locker");
+    let responseData = getReq("/api/allLocker");
     responseData.forEach(lockerUse => {
         lockerName.forEach((lockerAll,index) => {
             if(lockerUse === lockerAll.textContent){
@@ -174,6 +180,37 @@ function getOrg(){
 
 }
 
+//변경 요청
+function putReq(url){
+    let data = {
+        nowSeat : selList.value,
+        afterSeat : selList2.value
+    }
+
+    $.ajax({
+        async: false,
+        type: "put",
+        url: url,
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        dataType: "json",
+        success: (response) => {
+            if(response.data != 0){
+                alert("변경 성공" + data.nowSeat + "->" + data.afterSeat);
+                location.replace("/index");
+
+            }else{
+                alert("변경 실패");
+                location.reload();
+            }
+        },
+        error: (error)=>{
+            console.log(error);
+        }
+
+    });
+
+}
 
 
 
