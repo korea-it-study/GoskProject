@@ -377,7 +377,6 @@ function getColor(){
             });
         });
 
-
     //일반석
     let normalSeatResponseData = getReq("/api/seat/allSeat");
         normalSeatResponseData.forEach(normSeatUse =>{

@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -34,7 +35,15 @@ public class Scheduler {
     public void timeoutOneday(){
         int timeoutList = seatService.scheduledUpdateOneday(new Date());
         System.out.println(new Date() + " 원데이 삭제 개수 " + timeoutList);
+
     }
+//    @Scheduled(cron = "0 * 10-22 * * *")
+//    public void timeoutCommutation(){
+//        LocalDateTime now = LocalDateTime.now();
+//        if(now.isAfter(exitTime)){
+//
+//        }
+//    }
 
 
 

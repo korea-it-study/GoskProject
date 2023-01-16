@@ -2,6 +2,7 @@ package com.Gosk.GoskProject20221221.dto.User;
 
 import lombok.*;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 
 @Data
@@ -13,7 +14,7 @@ public class InInfoRespDto {
 
 
     private int userId;
-    private int userTime;
+    private  Integer userTime;
     private LocalDateTime userDate;
     private String seatId;
     private LocalDateTime seatTotalTime;
@@ -22,5 +23,6 @@ public class InInfoRespDto {
     private String receiptKinds;
     private int receiptTime;
     private int receiptDay;
+    private String leftTime;
 
 }

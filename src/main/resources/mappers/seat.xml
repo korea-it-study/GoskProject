@@ -294,7 +294,8 @@
         set
             user_id = 0
         where
-            seat_total_time is not null
+            seat_total_time is not null and
+            user_id != 0
     </update>
 
     <update id="timeoutReserve">

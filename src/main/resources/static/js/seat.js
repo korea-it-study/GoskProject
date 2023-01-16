@@ -114,11 +114,14 @@ function getSeatList(responseData) {
     responseData.forEach(seatUse => {
         const seatName = document.querySelectorAll(".btn")
         seatName.forEach((seatAll,index) => {
-            if(seatUse.seatId === seatAll.textContent){
-                seatName[index].classList.add("org-btn");
+            if(seatUse.userId !== 0 && seatUse.seatId === seatAll.textContent){
+                seatAll.classList.add("org-btn");
                 if(seatUse.userId === -1){
-                    seatName[index].classList.add("repair-seat");
+                    seatAll.classList.remove("org-btn");
+                    seatAll.classList.add("repair-seat");
                 }
+            }else if(seatUse.userId === 0 && seatUse.seatId === seatAll.textContent){
+                seatAll.classList.remove("repair-seat");
             }
         })
     });

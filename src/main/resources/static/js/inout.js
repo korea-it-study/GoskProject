@@ -32,6 +32,8 @@ class InApi {
                 if(inRespData.receiptKinds === null){
                     alert("이용중인 좌석이 없습니다.");
                     location.replace("/index");
+                }else if(inRespData.receiptKinds === "정액권"){
+                    location.replace("/seat");
                 }
                 console.log(inRespData);
             },
@@ -139,7 +141,7 @@ window.onload = () => {
         `;
     }else{
         //기간제, 시간권
-
+        let text = resp.receiptDay = null ? "시간" : "주";
         inInfo.innerHTML = `
         <li>
             <p><i class="fa-regular fa-clock"></i>입실(현재)시간</p>
@@ -147,16 +149,16 @@ window.onload = () => {
         </li>
         <li>
             <p><i class="fa-solid fa-hourglass-half"></i>구매권</p>
-            <span>지정석 ${resp.receiptDay} 주</span>
+            <span>일반석 ${resp.receiptDay = null ? resp.receiptTime : resp.receiptDay} text</span>
         </li>
         <li class="close">
             <p><i class="fa-regular fa-calendar-xmark"></i>종료일자</p>
-            <span>${resp.reservedTotalTime.substring(0,10)}<span>
-            <span class="close">22:00</span>
+            <span>${resp.receiptDay}<span>
+            <span class="close"></span>
         </li>
         <li>
             <p><i class="fa-solid fa-chair"></i>입장좌석</p>
-            <div>${resp.reservedSeatId}</div>
+            <div>${resp.seatId}</div>
         </li>
         `;
     }

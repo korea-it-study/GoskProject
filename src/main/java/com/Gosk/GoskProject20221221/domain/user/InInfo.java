@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class InInfo {
 
     private int user_id;
-    private int user_time;
+    private Integer user_time;
     private LocalDateTime user_date;
     private String seat_id;
     private LocalDateTime seat_total_time;
