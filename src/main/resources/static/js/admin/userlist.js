@@ -3,7 +3,7 @@ let userId = null;
 let jsonData = null;
 let userListData = getUserAllList();
 const userTable = document.querySelector(".user-table");
-const modifyInput = document.querySelectorAll(".popup input")
+const modifyInput = document.querySelectorAll(".popup input");
 
 // 아이디 중복 체크
 
@@ -335,6 +335,7 @@ function updateBtnEvent() {
     })
 
     modifyInput[1].onkeyup = function(){
+        alert(this.value);
         this.value = autoHypenPhone( this.value ) ;
         }
     
@@ -355,8 +356,9 @@ function updateBtnEvent() {
         const regex = /\d{3}-\d{3,4}-\d{4}/; 
         const pwRegex = /\d{4}/;
 
-        if(!jsonData.userPhone && jsonData.userPw) {
+        if(!jsonData.userPhone && !jsonData.userPw) {
             alert("휴대폰 번호와 비밀번호 둘 다 비워둘 수 없습니다.");
+            return false;
         }
 
         if(!jsonData.userPhone) {
@@ -369,7 +371,7 @@ function updateBtnEvent() {
         
         if(jsonData.userPw == "") {
 
-        }else if(!pwRegex.test(modifyInput[3].value)){
+        }else if(!pwRegex.test(modifyInput[2].value)){
             alert("비밀번호는 네자리 숫자입니다.");
             return false;
         }
