@@ -5,6 +5,39 @@ let userListData = getUserAllList();
 const userTable = document.querySelector(".user-table");
 const modifyInput = document.querySelectorAll(".popup input");
 
+
+//전화번호에 자동으로 하이픈 붙여주는 함수
+
+var autoHypenPhone = function(str){
+    str = str.replace(/[^0-9]/g, '');
+    var tmp = '';
+    if( str.length < 4){
+        return str;
+    }else if(str.length < 7){
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3);
+        return tmp;
+    }else if(str.length < 11){
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3, 3);
+        tmp += '-';
+        tmp += str.substr(6);
+        return tmp;
+    }else{              
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3, 4);
+        tmp += '-';
+        tmp += str.substr(7);
+        return tmp;
+    }
+
+    return str;
+}
+
+
 // 아이디 중복 체크
 
 function checkDuplicate(userPhone, userId) {
@@ -334,10 +367,11 @@ function updateBtnEvent() {
         }
     })
 
+
     modifyInput[1].onkeyup = function(){
-        alert(this.value);
-        this.value = autoHypenPhone( this.value ) ;
-        }
+        this.value = autoHypenPhone( this.value ) ; 
+    }
+
     
     // 수정 팝업 닫기 버튼
     popupCloseBtn.onclick = () => {
@@ -375,23 +409,11 @@ function updateBtnEvent() {
             alert("비밀번호는 네자리 숫자입니다.");
             return false;
         }
+
         
         checkDuplicate(jsonData.userPhone, jsonData.userId);
     }
 
-    // 엔터로 줄바꿈
-
-    for(let i = 0; i < modifyInput.length; i++) {
-        modifyInput[i].onkeyup = () => {
-            if(window.event.keyCode == 13){
-                if(i != 2) {
-                    modifyInput[i + 1].focus();
-                }else {
-                    popupUpdateBtn.click();
-                }
-            }
-        }
-    }
     
 }
 
@@ -419,37 +441,6 @@ function dltBtnEvent() {
     })
 }
 
-
-//전화번호에 자동으로 하이픈 붙여주는 함수
-
-var autoHypenPhone = function(str){
-    str = str.replace(/[^0-9]/g, '');
-    var tmp = '';
-    if( str.length < 4){
-        return str;
-    }else if(str.length < 7){
-        tmp += str.substr(0, 3);
-        tmp += '-';
-        tmp += str.substr(3);
-        return tmp;
-    }else if(str.length < 11){
-        tmp += str.substr(0, 3);
-        tmp += '-';
-        tmp += str.substr(3, 3);
-        tmp += '-';
-        tmp += str.substr(6);
-        return tmp;
-    }else{              
-        tmp += str.substr(0, 3);
-        tmp += '-';
-        tmp += str.substr(3, 4);
-        tmp += '-';
-        tmp += str.substr(7);
-        return tmp;
-    }
-
-    return str;
-}
 
 
 window.onload = () => {
