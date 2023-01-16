@@ -353,7 +353,8 @@ function updateBtnEvent() {
     const popupBack = document.querySelector(".popup-back");
     const popupUpdateBtn = document.querySelector(".popup-update-btn");
     const popupCloseBtn = document.querySelector(".popup-close-btn");
-    
+    const userList = document.querySelectorAll(".user-table tr td");
+
     updateBtns.forEach((updateBtn, index) => {
         updateBtn.onclick = () => {
             popupBack.classList.remove("invisible");
@@ -362,8 +363,8 @@ function updateBtnEvent() {
                 modBtn.value = "";
             })
 
-            modifyInput[0].value = userListData[index].userPhone;
-            modifyInput[3].value = userListData[index].userId;
+            modifyInput[0].value = userList[1 + (index * 5)].innerText;
+            modifyInput[3].value = userList[index * 5].innerText;
         }
     })
 

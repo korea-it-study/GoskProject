@@ -54,6 +54,11 @@
 .inout-content ul li p{
     line-height: 200px;
 }
+
+.inout-content ul li p i{
+    margin-right: 30px;
+}
+
 .inout-content ul li span{
     line-height: 200px;
 }
