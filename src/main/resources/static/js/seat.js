@@ -129,5 +129,6 @@ function getSeatList(responseData) {
 
 window.onload = () => {
     getSeatData();
+    alert(2);
 }
 
