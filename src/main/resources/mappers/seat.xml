@@ -25,41 +25,6 @@
         <result property="user_time" column="user_time"></result>
     </resultMap>
 
-<!--    일반석(원데이) 결제 데이터 보내기    -->
-    <insert id="paySeat" parameterType="com.Gosk.GoskProject20221221.domain.seat.Seat">
-        INSERT INTO
-            seat_mst(
-                seat_id,
-                user_id,
-                seat_start_time,
-                seat_total_time
-        )
-
-        VALUES (
-            #{seat_id},
-            #{user_id},
-            DATE_ADD(NOW(), INTERVAL 9 HOUR),
-            DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL (#{seat_total_time}) HOUR)
-        )
-    </insert>
-
-<!--    지정석(기간권) 데이터 보내기    -->
-    <insert id="payReserved" parameterType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
-        INSERT INTO
-            reserved_seat_mst(
-                reserved_seat_id,
-                user_id,
-                reserved_start_time,
-                reserved_total_time
-        )
-
-        VALUES(
-            #{reserved_seat_id},
-            #{user_id},
-            DATE_ADD(NOW(), INTERVAL 9 HOUR),
-            DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL #{reserved_total_time} DAY)
-        )
-    </insert>
 
 <!--    일반석 정보 불러오기    -->
     <select id="seatSelect" resultType="com.Gosk.GoskProject20221221.domain.seat.Seat">
@@ -118,18 +83,44 @@
             user_id = 0
     </select>
 
+<!--UPDATE--><!--UPDATE--><!--UPDATE--><!--UPDATE--><!--UPDATE-->
 
-    <insert id="payLocker">
-        insert into
+<!--    일반석(원데이) 결제 데이터 보내기    -->
+    <update id="paySeat" 
+            parameterType="com.Gosk.GoskProject20221221.domain.seat.Seat">
+        update
+            seat_mst
+        set
+            user_id = #{user_id},
+            seat_start_time = DATE_ADD(NOW(), INTERVAL 9 HOUR),
+            seat_total_time = DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL (#{seat_total_time}) HOUR)
+        where
+            seat_id = #{seat_id}
+    </update>
+<!--    지정석(기간권) 데이터 보내기    -->
+    <update id="payReserved"
+            parameterType="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
+        update
+            reserved_seat_mst
+        set
+            user_id = #{user_id},
+            reserved_start_time = DATE_ADD(NOW(), INTERVAL 9 HOUR),
+            reserved_total_time = DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL #{reserved_total_time} DAY)
+        where
+            reserved_seat_id = #{reserved_seat_id}
+    </update>
+<!-- 사물함 사용 정보 수정 -->
+    <update id="payLocker"
+                parameterType="com.Gosk.GoskProject20221221.domain.Locker">
+        update
             locker_mst
-        values
-        (
-            #{locker_id},
-            #{user_id},
-            DATE_ADD(NOW(), interval 9 HOUR),
-            DATE_ADD((DATE_ADD(NOW(), interval 9 HOUR)), INTERVAL #{locker_end_time} DAY)
-        )
-    </insert>
+        set
+            user_id = #{user_id},
+            locker_start_time = DATE_ADD(NOW(), interval 9 HOUR),
+            locker_end_time = DATE_ADD((DATE_ADD(NOW(), interval 9 HOUR)), INTERVAL #{locker_end_time} DAY)
+        where
+            locker_id = #{locker_id}
+    </update>
 
 
 

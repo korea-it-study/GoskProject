@@ -58,14 +58,14 @@
         UPDATE
             seat_mst a
             JOIN(
-            SELECT user_id, seat_start_time, seat_end_time
+            SELECT user_id, seat_start_time, seat_total_time
             FROM	seat_mst
             WHERE seat_id = #{nowSeat}
             ) b
         SET
             a.user_id = b.user_id,
             a.seat_start_time = b.seat_start_time,
-            a.seat_end_time = b.seat_end_time
+            a.seat_total_time = b.seat_total_time
         WHERE
             a.seat_id = #{afterSeat};
 
@@ -74,7 +74,7 @@
         set
             user_id = 0,
             seat_start_time = null,
-            seat_end_time = null
+            seat_total_time = null
         where
             seat_id = #{nowSeat}
     </update>
@@ -83,14 +83,14 @@
         UPDATE
             reserved_seat_mst a
             JOIN(
-            SELECT user_id, reserved_start_time, reserved_end_time
+            SELECT user_id, reserved_start_time, reserved_total_time
             FROM	reserved_seat_mst
             WHERE   reserved_seat_id = #{nowSeat}
             ) b
         SET
             a.user_id = b.user_id,
             a.reserved_start_time = b.reserved_start_time,
-            a.reserved_end_time = b.reserved_end_time
+            a.reserved_total_time = b.reserved_total_time
         WHERE
             a.reserved_seat_id = #{afterSeat};
 

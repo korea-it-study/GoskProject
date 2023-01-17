@@ -63,21 +63,4 @@
         where
             user_id = #{userId}
     </select>
-
-
-
-
-    <insert id="insertLocker">
-        insert into
-            locker_mst(locker_id, user_id)
-        values
-        <foreach collection="list" item="item" separator=",">
-                (
-                #{item},
-                0
-                )
-        </foreach>
-    </insert>
-
-
 </mapper>

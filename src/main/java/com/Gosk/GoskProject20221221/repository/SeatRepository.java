@@ -25,6 +25,8 @@ public interface SeatRepository {
     public SeatInfo getBasicSeatDetail(String seatId);
     public SpecialSeatInfo getSpecialSeatDetail(String seatId);
     public int payReserved (ReservedSeat reservedSeat);
+
+    // 사용여부 업데이트
     public int payLocker(Locker locker);
 
     public int timeoutLocker(Date now);

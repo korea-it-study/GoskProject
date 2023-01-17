@@ -43,29 +43,29 @@ function getLocker(){
        url: "/api/allLocker",
         type: "get",
         success : (response) => {
-           console.log("get 결과" + response.data);
            responseData = response.data;
         },
         error : (error) =>{
            console.log(error)
         }
     });
+        const lockerName = document.querySelectorAll(".locker-management-content > div .btn ")
     //사용중 사물함이름 - 전체 사물함 이름
     responseData.forEach(lockerUse => {
-        const lockerName = document.querySelectorAll(".locker-management-content > div .btn ")
-        lockerName.forEach(lockerAll => {
-            //비교중에 Use랑 특정 lockerAll의 값이 같아 질때 선택 못하게 org-btn이나 gray-btn 바르기
-            if(lockerUse.lockerId === lockerAll.textContent){
-                console.log("사용중 ====== " + lockerUse.lockerId);
+        lockerName.forEach(lockerAll=> {
+            if(lockerUse.userId !== 0 && lockerUse.lockerId === lockerAll.textContent){
                 lockerAll.classList.add("org-btn");
                 if(lockerUse.userId === -1){
+                    lockerAll.classList.remove("org-btn");
                     lockerAll.classList.add("repair-seat");
-                    console.log("user_id  -1임 " + lockerUse.lockerId);
                 }
+            }else if(lockerUse.userId === 0 && lockerUse.lockerId === lockerAll.textContent){
+                lockerAll.classList.remove("repair-seat");
             }
         });
-    })
+    });
 }
+
 window.onload = () => {
     getLocker();
 }
