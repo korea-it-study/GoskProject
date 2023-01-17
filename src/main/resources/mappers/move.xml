@@ -99,7 +99,7 @@
         set
             user_id = 0,
             reserved_start_time = null,
-            reserved_time = null
+            reserved_total_time = null
         where
             reserved_seat_id = #{nowSeat}
     </update>

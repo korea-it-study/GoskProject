@@ -1,5 +1,7 @@
 /* 관리자  좌석 관리  */
 let principal = getPrincipal();
+let clickUserPhone = null;
+
 
 const reserved = document.querySelector(".reserved");
 const nomal = document.querySelector(".nomal");
@@ -15,35 +17,30 @@ const specialSeatName = document.querySelectorAll(".seat-special .seat-btn");
 const userShow = document.querySelector(".user-show");
 
 
+// 좌석 조회 (색상 변경)
+$('.seat-category > button').click(function(){
+    if($(this).hasClass("sky-btn") === false){
+        $(this).siblings().removeClass("sky-btn");
+        $(this).removeClass("white-btn").addClass("sky-btn");
+        
+        if($('.normal').hasClass('sky-btn')){
+            $('.seat-basic').removeClass("invisible");
+            $('.seat-special').addClass("invisible");
+            $('.locker-management-content').addClass("invisible");
+        }else if($('.reserved').hasClass('sky-btn')){
+            $('.seat-special').removeClass("invisible");
+            $('.seat-basic').addClass("invisible");
+            $('.locker-management-content').addClass("invisible");
+        }else if($('.locker').hasClass('sky-btn')){
+            $('.locker-management-content').removeClass("invisible");
+            $('.seat-basic').addClass("invisible");
+            $('.seat-special').addClass("invisible");
+        }
+    }
 
-// 지정석만 조회 + 선택 다 풀기
-reserved.onclick = () => {
-    alert("지정석");
-    seatSpecial.classList.remove("invisible");
-    lockerManage.classList.add("invisible");
-    seatBasic.classList.add("invisible");
     seatBtnService();
+});
 
-}
-
-// 일반석만 조회
-nomal.onclick = () => {
-    alert("일반석");
-    seatSpecial.classList.add("invisible");
-    lockerManage.classList.add("invisible");
-    seatBasic.classList.remove("invisible");
-    seatBtnService();
-}
-
-// 사물함만 조회
-locker.onclick = () => {
-    alert("사물함");
-    seatSpecial.classList.add("invisible");
-    lockerManage.classList.remove("invisible");
-    seatBasic.classList.add("invisible");
-    seatBtnService();
-
-}
 
 //초기 seat 설정 (value 달아주기)
 const seatBtns = document.querySelectorAll(".seat-btn");
@@ -229,16 +226,13 @@ const popupRegisterBtn = document.querySelector(".popup-register-btn");
 
 moveBtn.onclick = () => {
     popupBack.classList.remove("invisible");
-    let userPhone = principal.user.user_phone;
-    userShow.innerHTML = `사용자 : ${userPhone.slice(-4)}`
 }
+
 
 closeBtn.onclick = () => {
     popupBack.classList.add("invisible");
     selCate.value = "option";
     categoryList(selCate.value);
-
-
 }
 
 
@@ -251,9 +245,9 @@ selCate.onchange = () => {
 //자리변경 팝업
 function categoryList(sVal) {
     let responseData = null;
+    let responseUser = null;
 
     if(sVal === "option") {
-
         selList.innerHTML = `
         <option value="${null}">소분류</option>
         `;
@@ -262,13 +256,12 @@ function categoryList(sVal) {
         `;
 
     } else if(sVal === "special") {
-
         selList.innerHTML = ""; // 소분류
         selList2.innerHTML = ""; // 소소분류
-
+        
         responseData = getReq("/api/seat/useReservedSeat");
         setSelList("special",responseData);
-
+        responseUser = getReq("/api/seat/special/" + selList.value);
 
     }else if(sVal == "locker"){
         selList.innerHTML = ""; // 원래 좌석
@@ -277,21 +270,43 @@ function categoryList(sVal) {
         //원래 좌석 선택(모든 사용중인 좌석 선택 가능)
         responseData = getReq("/api/useLocker");
         setSelList("locker",responseData);
-
+        responseUser = getReq("/api/move/locker/" + selList.value);
     //일반석
     }else{
         selList.innerHTML = ""; // 원래 좌석
         selList2.innerHTML = ""; // 이동할 좌석
-
+        
         //원래 좌석 선택(모든 사용중인 좌석 선택 가능)
         responseData = getReq("/api/seat/useSeat");
         setSelList("seat",responseData);
-
+        responseUser = getReq("/api/seat/basic/" + selList.value);
     }
+    
+    clickUserPhone = responseUser.userPhone;
+
+    if(clickUserPhone != null){
+        userShow.innerHTML = `사용자 : ${clickUserPhone.slice(-4)}`
+    }else{
+        userShow.innerHTML = `사용자: -`
+    }
+        
+    selList.onchange = () => {
+        if(sVal === "special") {
+            responseUser = getReq("/api/seat/special/" + selList.value);
+    
+        }else if(sVal == "locker"){
+            responseUser = getReq("/api/move/locker/" + selList.value);
+        }else{
+            responseUser = getReq("/api/seat/basic/" + selList.value);
+        }
+        
+        clickUserPhone = responseUser.userPhone;
+        userShow.innerHTML = `사용자 : ${clickUserPhone.slice(-4)}`
+    }
+
 }
 
 function setSelList(category, responseData){
-    console.log(responseData);
     if(responseData === null || responseData.length === 0) {
         selList.innerHTML = `
         <option value="null">이용중인 좌석이 없습니다</option>
@@ -356,7 +371,7 @@ function getReq(url) {
 }
 
 
-//사용중 좌석 오렌지 바르기
+//사용중 좌석 오렌지 바르기 (새로고침)
 function getColor(){
     //사물함
     let lockerResponseData = getReq("/api/allLocker");
@@ -497,7 +512,6 @@ function getSeatDtl(clickSeat, index){
 }
 
 function customReq(type, data, url){
-
     $.ajax({
         async: false,
         type: type,
@@ -506,8 +520,9 @@ function customReq(type, data, url){
         traditional : true,
         dataType: "json",
         success: (response) => {
-            console.log(type + " 결과: " + response + "건");
+            console.log(type + " 결과: " + response.data + "건");
             alert(type + "성공");
+            location.reload();
         },
         error: (error) => {
             console.log(error);

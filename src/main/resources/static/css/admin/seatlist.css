@@ -1,20 +1,12 @@
-.seat-category>ul {
+.seat-category {
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
+    margin: 50px 0px;
 }
 
-.seat-category>ul>li {
-    width: 300px;
-    height: 100px;
-    border-radius: 5px;
-    text-align: center;
-    background-color: #fff;
-    color: black;
-    margin: 10px;
-    padding: 20px;
-
-    cursor: pointer;
+.seat-category > button{
+    width: 300px; height: 100px;
+    margin: 10px 20px;
 }
 
 .btn-all {
