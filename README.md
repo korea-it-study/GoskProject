@@ -1,7 +1,7 @@
 # GoskProject
 Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 진행했습니다.
 
-
+<br/><br/>
 
 
 # 프로젝트 시연 동영상, 참조 사이트
@@ -11,7 +11,7 @@ Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 진행했습니�
 
 키오스크의 경우 사이트가 따로 없기 때문에 참조 사이트를 참고하여 제작하였습니다.
 
-
+<br/><br/>
 
 
 
@@ -49,12 +49,14 @@ Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 진행했습니�
   + 입/퇴실
   + 일반석 / 지정석 사용 현황 들고오기
 
+<br/><br/>
 
 # 기술 스택
 <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white"><img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white">
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"><img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"><img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white"><img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white">
 
+<br/><br/>
 
 # 주요 구현 기능
 주요 기능 정리
@@ -148,6 +150,8 @@ Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 진행했습니�
     상품 분류 / 시간 / 판매 횟수 / 누적 금액 조회 가능.
     하단에 총 매출로 선택한 기간의 매출 확인.
 
+
+<br/><br/>
 ---
 
 
@@ -156,7 +160,7 @@ Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 진행했습니�
  2. 결제 API를 호출해 결제 기능 구현.
  3. JS 정규식 체크를 이용해 전화번호 및 비밀번호 양식에 맞지 않을 시 가입 불가.
  4. 매출 조회의 날짜 선택의 경우 JQUERY의 캘린더 기능을 사용, 날짜 선택 가능.
-
+<br/><br/>
 
 
 
@@ -164,6 +168,7 @@ Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 진행했습니�
  <img width="790" alt="Gosk" src="https://user-images.githubusercontent.com/109320970/212833404-6bdedd1f-c286-4bfa-b72e-9466c73e512c.png">
 
 
+<br/><br/>
 
 # 프로젝트 소감
 
@@ -174,4 +179,4 @@ Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 진행했습니�
 > 팀원들 모두가 첫 프로젝트와는 전혀 다른 분야의 프로젝트를 진행하다보니 생소한 기능이 많았습니다. 특히 독서실 키오스크의 경우 '시간' 이라는 키워드가 가장 중요했기 때문에 시간에 대한 기능들을 공부하고, 적용시키는 과정에서 많은 것을 배울 수 있었습니다. 지식이 늘어갈 수록 할 수 있다는 자신감이 붙고, 상대적으로 새 기능에 대한 막연한 두려움은 줄어들었습니다. 자신감이 커지니 일의 효율에도 탄력이 붙어 정해진 일정 안에 빠르게 작업이 가능했던 경험은 우리 모두에게 큰 자산이 되었다고 할 수 있습니다.
 
 ### 키오스크와 홈페이지 연동에 대한 아쉬움
-> 관리자 페이지의 경우, 키오스크 뿐 아니라 web용 페이지를 따로 만들어 관리할 수 있도록 만들고 싶었지만 빡빡한 일정으로 인해 키오스크용 관리자 페이지만 만들 수 있었던 것이 아쉽습니다. 중간에 몸이 아팠던 팀원, 빠질 수 없는 일정이 있던 팀원 등이 있어 더욱 빡빡했던 일정이었기 때문에 아쉬움은 매우 컸습니다. 다음에도 키오스크를 구현할 일이 생긴다면 그때는 web용 홈페이지도 함께 구현해보고 싶습니다.
+> 키오스크 작업을 계획하던 당시, 관련 WEB홈페이지(고객용)와 어플리케이션(관리자용) 제작에 대한 이야기도 나왔습니다. 그러나 일정이 촉박했던 까닭에 키오스크 작업만으로 프로젝트를 마무리해야 했습니다. 팀원 모두가 관련으로 깊은 아쉬움을 표현했고, 이후에라도 프로젝트를 함께 진행하게 된다면 독서실 키오스크의 확장 영역으로 WEB홈페이지와 어플리케이션 작업도 구현해보려 합니다.
