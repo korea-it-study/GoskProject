@@ -23,5 +23,3 @@ public class ReceiptRespDto {
     private String receiptCreateDate;
     private int receiptCount;
 }
-
-

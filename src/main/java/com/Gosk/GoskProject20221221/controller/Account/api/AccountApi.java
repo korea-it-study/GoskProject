@@ -76,21 +76,4 @@ public class AccountApi {
     }
 
 
-    @GetMapping("/doublechk") //중복구매 막기
-    public ResponseEntity<?> getdoublechk(@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception {
-        List<ReceiptRespDto> salesList = new ArrayList<ReceiptRespDto>();
-        salesList = receiptService.getSalesListSelect();
-
-        List<ReceiptRespDto> doubleCheck = new ArrayList<ReceiptRespDto>();
-
-        int userId = principalDetails.getUser().getUser_id();
-
-        for(int i=0; i < salesList.size(); i++){
-            if(salesList.get(i).getUserId() == userId && salesList.get(i).getReceiptUse() == 1) {
-                doubleCheck.add(salesList.get(i));
-            }
-        }
-        return ResponseEntity.ok(new CMRespDto<>(1, "사용품목 여부", doubleCheck));
-    }
-
 }

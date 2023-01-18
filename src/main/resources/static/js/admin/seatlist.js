@@ -119,8 +119,6 @@ repairBtn.onclick = () => {
             insData.push(seatBtn.value);
             Pass = false;
         }
-
-
     });
 
 
@@ -213,7 +211,6 @@ exitBtn.onclick = () => {
 }
 
 // 자리이동 팝업 띄우기
-
 const moveBtn = document.querySelector(".move-btn");
 const selCate = document.querySelector(".sel_cate"); //
 const selList = document.querySelector(".sel_list"); // 소분류
@@ -303,8 +300,8 @@ function categoryList(sVal) {
         clickUserPhone = responseUser.userPhone;
         userShow.innerHTML = `사용자 : ${clickUserPhone.slice(-4)}`
     }
-
 }
+
 
 function setSelList(category, responseData){
     if(responseData === null || responseData.length === 0) {
@@ -377,7 +374,7 @@ function getColor(){
     let lockerResponseData = getReq("/api/allLocker");
         lockerResponseData.forEach(lockerUse => {
             lockerName.forEach(lockerAll=> {
-                // lockerAll.classList.remove("repair-seat");
+                lockerAll.classList.remove("repair-seat");
                 //0이면 아무변화 x
                 if(lockerUse.userId !== 0 && lockerUse.lockerId === lockerAll.textContent){
                     lockerAll.classList.add("org-btn");

@@ -17,56 +17,56 @@
 
     <insert id="payReceipt" parameterType="com.Gosk.GoskProject20221221.domain.Receipt">
         INSERT INTO
-            receipt_mst(
-                receipt_id,
-                user_id,
-                receipt_kinds,
-                receipt_price,
-                receipt_time,
-                receipt_day,
-                receipt_create_date
-            )
+        receipt_mst(
+        receipt_id,
+        user_id,
+        receipt_kinds,
+        receipt_price,
+        receipt_time,
+        receipt_day,
+        receipt_create_date
+        )
 
         VALUES(
-            0,
-            #{user_id},
-            #{receipt_kinds},
-            #{receipt_price},
-            #{receipt_time},
-            #{receipt_day},
-            DATE_ADD(NOW(), INTERVAL 9 HOUR)
-            )
+        0,
+        #{user_id},
+        #{receipt_kinds},
+        #{receipt_price},
+        #{receipt_time},
+        #{receipt_day},
+        DATE_ADD(NOW(), INTERVAL 9 HOUR)
+        )
 
     </insert>
 
     <select id="getReceipt" resultMap="receipt">
         SELECT
-            receipt_id,
-            user_id,
-            receipt_kinds,
-            receipt_price,
-            receipt_time,
-            receipt_day,
-            receipt_use,
-            DATE_FORMAT(receipt_create_date, '%Y-%m-%d') AS receipt_create_date
+        receipt_id,
+        user_id,
+        receipt_kinds,
+        receipt_price,
+        receipt_time,
+        receipt_day,
+        receipt_use,
+        DATE_FORMAT(receipt_create_date, '%Y-%m-%d') AS receipt_create_date
         FROM
-            receipt_mst
+        receipt_mst
         WHERE
-            user_id = #{user_id}
+        user_id = #{user_id}
     </select>
 
     <select id="getSalesListSelect" resultMap="receipt">
         SELECT
-            user_id,
-            receipt_kinds,
-            receipt_price,
-            receipt_time,
-            receipt_day,
-            receipt_use,
-            SUBSTRING(receipt_create_date,1,10) AS receipt_create_date,
+        user_id,
+        receipt_kinds,
+        receipt_price,
+        receipt_time,
+        receipt_day,
+        receipt_use,
+        SUBSTRING(receipt_create_date,1,10) AS receipt_create_date,
         COUNT(*) receipt_count
         FROM
-            receipt_mst group BY receipt_kinds, receipt_price, receipt_day, receipt_day
+        receipt_mst group BY receipt_kinds, receipt_price, receipt_day, receipt_day
         ORDER BY receipt_kinds, receipt_price, receipt_time, receipt_day
     </select>
 

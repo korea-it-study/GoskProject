@@ -12,7 +12,6 @@ public interface ReceiptRepository {
 
     public List<Receipt> getReceipt(int userId);
 
-    // 매출조회
     public List<Receipt> getSalesListSelect() throws Exception;
 
 }
