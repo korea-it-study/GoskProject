@@ -184,7 +184,7 @@ window.onload = () => {
 
         }
         indexBtn.onclick = () => {
-            alert(1);
+//            alert(1);
             location.href = "/index";
             localStorage.clear();
         }

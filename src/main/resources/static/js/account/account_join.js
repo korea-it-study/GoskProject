@@ -87,7 +87,7 @@ function userInfoData() {
         return false;
     }else if(!regex.test(joinInfo.userPhone)) {
         alert("휴대폰 번호의 양식에 맞지않습니다.");
-        alert(joinInfo.userPhone + joinInfo.userPw);
+//        alert(joinInfo.userPhone + joinInfo.userPw);
         return false;
     }else if(!pwRegex.test(joinInfo.userPw)){
         alert("비밀번호는 네자리 숫자입니다.");
@@ -104,8 +104,8 @@ function userInfoData() {
         success: (response) => {
             console.log(response);
             alert("회원가입 완료!");
-            alert("userId : " + joinInfo.userPhone + "\n" +
-            "userPw : " + joinInfo.userPw);
+//            alert("userId : " + joinInfo.userPhone + "\n" +
+            // "userPw : " + joinInfo.userPw);
             location.replace("/account/login");
         },
         error: (error) => {

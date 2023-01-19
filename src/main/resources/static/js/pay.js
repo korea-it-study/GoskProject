@@ -168,7 +168,7 @@ function infoSeatData(data) {
             console.log(response);
         },
         error: (error) => {
-            alert("seat data 보내기 실패");
+//            alert("seat data 보내기 실패");
             console.log(error);
         }
     });
@@ -207,7 +207,7 @@ function infoUserData(data) {
             console.log(response);
         },
         error: (error) => {
-            alert("user data 보내기 실패");
+//            alert("user data 보내기 실패");
             console.log(error);
         }
     });
@@ -252,12 +252,12 @@ function infoReceiptData(data) {
         data: JSON.stringify(receiptData),
         dataType: "json",
         success: (response) => {
-            alert("receipt data 보내기 성공");
+//            alert("receipt data 보내기 성공");
             console.log(response);
         },
         error: (error) => {
-            alert("receipt data 보내기 실패");
-            alert(JSON.stringify(receiptData));
+//            alert("receipt data 보내기 실패");
+//            alert(JSON.stringify(receiptData));
             console.log(error);
         }
     })

@@ -61,8 +61,27 @@ $(function(){
             for(let i = 0; receiptData.length; i++) {
                 receiptDate = new Date(receiptData[i].receiptCreateDate);
 
+                if(receiptData[i].receiptUse == "0") {
+                    receiptUse = "사용종료";
+                }else if(receiptData[i].receiptUse == "1") {
+                    receiptUse = "사용중";
+                }
+        
+                if(receiptData[i].receiptDay == "0"){
+                    receiptProduct = receiptData[i].receiptTime + "시간";
+                }else if(receiptData[i].receiptTime == "0") {
+                    receiptProduct = receiptData[i].receiptDay + "주";
+                }
+
                     if(isSameDay(today, receiptDate) === true){ // 오늘 날짜와 구매 날짜가 같음
                         $(".sales-table").append(`
+                            <colgroup>
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
                             <tr>
                                 <td>${receiptData[i].receiptId}</td>
                                 <td>${receiptData[i].receiptCreateDate}</td>
@@ -83,9 +102,29 @@ $(function(){
             for(let i = 0; i < receiptData.length; i++) {
                 receiptCreateDate = new Date(receiptData[i].receiptCreateDate);
 
+                if(receiptData[i].receiptUse == "0") {
+                    receiptUse = "사용종료";
+                }else if(receiptData[i].receiptUse == "1") {
+                    receiptUse = "사용중";
+                }
+        
+                if(receiptData[i].receiptDay == "0"){
+                    receiptProduct = receiptData[i].receiptTime + "시간";
+                }else if(receiptData[i].receiptTime == "0") {
+                    receiptProduct = receiptData[i].receiptDay + "주";
+                }
+        
+
                 if(oneMon < receiptCreateDate){ // 1개월 전 날짜보다 구매날짜가 클 때
 
                     $(".sales-table").append(`
+                        <colgroup>
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                        </colgroup>
                         <tr>
                             <td>${receiptData[i].receiptId}</td>
                             <td>${receiptData[i].receiptCreateDate}</td>
@@ -106,8 +145,28 @@ $(function(){
             for(let i = 0; i < receiptData.length; i++) {
                 receiptCreateDate = new Date(receiptData[i].receiptCreateDate);
 
+                if(receiptData[i].receiptUse == "0") {
+                    receiptUse = "사용종료";
+                }else if(receiptData[i].receiptUse == "1") {
+                    receiptUse = "사용중";
+                }
+        
+                if(receiptData[i].receiptDay == "0"){
+                    receiptProduct = receiptData[i].receiptTime + "시간";
+                }else if(receiptData[i].receiptTime == "0") {
+                    receiptProduct = receiptData[i].receiptDay + "주";
+                }
+        
+
                 if(threeMon < receiptCreateDate){ // 3개월 전 날짜보다 구매날짜가 클 때
                     $(".sales-table").append(`
+                        <colgroup>
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                        </colgroup>
                         <tr>
                             <td>${receiptData[i].receiptId}</td>
                             <td>${receiptData[i].receiptCreateDate}</td>
@@ -126,7 +185,27 @@ $(function(){
                     for(let j = 0; j < receiptData.length; j++) {
                         receiptCreateDate = new Date(receiptData[j].receiptCreateDate);
 
+                        if(receiptData[i].receiptUse == "0") {
+                            receiptUse = "사용종료";
+                        }else if(receiptData[i].receiptUse == "1") {
+                            receiptUse = "사용중";
+                        }
+                
+                        if(receiptData[i].receiptDay == "0"){
+                            receiptProduct = receiptData[i].receiptTime + "시간";
+                        }else if(receiptData[i].receiptTime == "0") {
+                            receiptProduct = receiptData[i].receiptDay + "주";
+                        }
+                
+
                         $(".sales-table").append(`
+                            <colgroup>
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
                             <tr>
                                 <td>${receiptData[j].receiptId}</td>
                                 <td>${receiptData[j].receiptCreateDate}</td>
@@ -144,7 +223,6 @@ $(function(){
 // 구매내역 table에 뿌리기
 function getReceipts(receiptData) {
 
-    const TIME_ZONE = 3240 * 10000;
     const salesTable = document.querySelector(".sales-table");
 
     salesTable.innerHTML = "";

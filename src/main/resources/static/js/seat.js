@@ -147,7 +147,7 @@ function getSeatData() {
             console.log(response);
         },
         error: (error) => {
-            alert("seat data 받아오기 실패");
+//            alert("seat data 받아오기 실패");
             console.log(error);
         }
     });

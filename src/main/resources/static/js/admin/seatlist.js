@@ -519,7 +519,7 @@ function customReq(type, data, url){
         dataType: "json",
         success: (response) => {
             console.log(type + " 결과: " + response.data + "건");
-            alert(type + "성공");
+            // alert(type + "성공");
             location.reload();
         },
         error: (error) => {

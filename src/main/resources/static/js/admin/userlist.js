@@ -177,7 +177,7 @@ function userDelete(userId) {
      userListData.forEach(userList => {
          let userPhone = userList.userPhone.replaceAll("-", "");
 
-         if(userPhone.includes(phoneNumber.value)) {
+         if(userPhone.includes(phoneNumber.value.replaceAll("-", ""))) {
              
              userTable.innerHTML += `
                  <tr>
@@ -279,13 +279,13 @@ function detailBtnEvent() {
             }else if(seatData[0].reservedSeatId == null) {
                 userInfo.innerHTML += `
                 <button class="btn gray-btn">번호 : <span>${lastNumber.substring(lastNumber.lastIndexOf('-') + 1)}</span></button>
-                <button class="btn gray-btn">좌석 : <span>${seatData[0].seatId}</span></button>
+                <button class="btn gray-btn">일반석 : <span>${seatData[0].seatId}</span></button>
             `;
     
             }else if(seatData[0].seatId == null) {
                 userInfo.innerHTML += `
                     <button class="btn gray-btn">번호 : <span>${lastNumber.substring(lastNumber.lastIndexOf('-') + 1)}</span></button>
-                    <button class="btn gray-btn">좌석 : <span>${seatData[0].reservedSeatId}</span></button>
+                    <button class="btn gray-btn">지정석 : <span>${seatData[0].reservedSeatId}</span></button>
                 `;
             }else {
                 userInfo.innerHTML += `

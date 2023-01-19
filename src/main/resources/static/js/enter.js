@@ -1,7 +1,7 @@
 // 홈으로 버튼 index로 보내기
 
 $('.index-btn').click(function(){
-    alert(1);
+//    alert(1);
     location.href = "/index";
     localStorage.clear();
 });
