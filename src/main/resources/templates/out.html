@@ -9,39 +9,31 @@
     <main class="container">
 <!-- header -->
         <header class="inout-header">
-            <i class="fa-solid fa-check"></i> 
-            <p>입실처리 완료</p>
-            <div>회원님, 처리가 입실처리가 완료되었습니다.</div>
+            <i class="fa-sharp fa-solid fa-triangle-exclamation"></i>
+            <p>퇴실 확인</p>
+            <div style="color: red; font-size: 50px; font-weight: 500;">회원님, 이용권 종료시<br>재입장이 불가한 퇴장입니다. </div>
         </header>
 <!-- section -->
         <section class="inout-content">
-            <ul>
-                <li>
-                    <p><i class="fa-regular fa-clock"></i>입실(현재)시간</p>
-                    <span>12:54</span>
-                </li>
-                <li>
-                    <p><i class="fa-solid fa-hourglass-half"></i>총 좌석</p>
-                    <span>00:00:00</span>
-                </li>
-                <li class="close">
-                    <p><i class="fa-regular fa-calendar-xmark"></i>종료일자</p>
-                    <span>2023-01-02<span>
-                    <span class="close">12:30</span>
-                </li>
-                <li>
-                    <p><i class="fa-solid fa-chair"></i>입석좌석</p>
-                    <div>카페존4</div>
-                </li>
+            <ul class="in-info">
+
             </ul>
         </section>
 <!-- footer -->
         <footer class="inout-footer">
-            <button class="index-btn">
+            <button class="index-btn gray-btn">
                 <i class="fa-solid fa-house-chimney"> 홈으로</i>
+            </button>
+
+            <button class="out-btn gray-btn">
+                <i class="fa-solid fa-arrow-right-from-bracket"> 일반 퇴실</i>
+            </button>
+
+            <button class="real-exit-btn org-btn">
+                <i class="fa-regular fa-circle-xmark"> 이용권 종료</i>
             </button>
         </footer>
     </main>
-    <script src="/static/js/inout.js"></script>
+    <script src="/static/js/out.js"></script>
 </body>
 </html>

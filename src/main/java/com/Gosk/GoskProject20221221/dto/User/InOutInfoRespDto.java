@@ -2,19 +2,18 @@ package com.Gosk.GoskProject20221221.dto.User;
 
 import lombok.*;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class InInfoRespDto {
+public class InOutInfoRespDto {
 
 
 
     private int userId;
-    private  Integer userTime;
+    private Integer userTime;
     private LocalDateTime userDate;
     private String seatId;
     private LocalDateTime seatTotalTime;
@@ -24,5 +23,11 @@ public class InInfoRespDto {
     private int receiptTime;
     private int receiptDay;
     private String leftTime;
+
+
+
+    private String seatStartTime;
+    private int afterUserSecond;
+
 
 }

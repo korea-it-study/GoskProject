@@ -33,8 +33,8 @@ public class Scheduler {
 
     @Scheduled(cron = "0 * 10-22 * * *") //10시부터 22시까지 1분 마다 원데이 퇴실
     public void timeoutOneday(){
-        int timeoutList = seatService.scheduledUpdateOneday(new Date());
-        System.out.println(new Date() + " 원데이 삭제 개수 " + timeoutList);
+        int timeoutList = seatService.scheduledUpdateOnedayAndTime(new Date());
+        System.out.println(new Date() + "원데이 삭제 개수 " + timeoutList);
 
     }
 //    @Scheduled(cron = "0 * 10-22 * * *")

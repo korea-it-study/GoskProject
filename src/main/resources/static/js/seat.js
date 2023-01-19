@@ -4,7 +4,7 @@ $(function(){
     if(time == "reserved"){
         $('.basic').addClass('invisible');
         $('.seat-basic').addClass('invisible');
-    }else if(time == "oneday" || time == "commuter"){
+    }else if(time == "oneday" || time == "commuter" ||time =="enter") {
         $('.special').addClass('invisible');
         $('.seat-special').addClass('invisible');
     }
@@ -23,12 +23,57 @@ $('.index-btn').click(function(){
 $('.next-btn').click(function(){
     localStorage.setItem("pickSeat", $('.seat-select-name').val());
     var time = localStorage.getItem("time");
+if(document.referrer.includes("enter")){
 
+    //controller 에서 seatTotalTime에 null값이면 안 받아져서 처리
+    if($('.seat-select-name').val() != ""){
+        let data = {
+            userId : localStorage.getItem("userId"),
+            pickSeat: localStorage.getItem("pickSeat"),
+            seatTotalTime: localStorage.getItem("seatTotalTime")
+        }
+        if(localStorage.getItem("seatTotalTime") === "non"){
+            data = {
+                userId : localStorage.getItem("userId"),
+                pickSeat: localStorage.getItem("pickSeat")
+            }
+        }
+
+
+        $.ajax({
+            async: false,
+            type: "put",
+            url: "/api/seat/enter",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "json",
+            success: (response) => {
+                if(response.data){
+                    location.href = "/enter";
+                }else{
+                    alert("입실 실패");
+                    location.replace("/index");
+                }
+            },
+            error : (error) => {
+                console.log(error);
+            }
+
+        })
+
+
+        location.href = "/enter";
+    }else{
+        alert("좌석을 선택해 주세요.");
+    }
+}else{
     if($('.seat-select-name').val() != ""){
         location.href = "/time/" + time;
     }else{
         alert("좌석을 선택해 주세요.");
     }
+}
+
 });
 
 const seatbasic = document.querySelector(".seat-basic");
@@ -113,7 +158,7 @@ function getSeatList(responseData) {
 
     responseData.forEach(seatUse => {
         const seatName = document.querySelectorAll(".btn")
-        seatName.forEach((seatAll,index) => {
+        seatName.forEach(seatAll => {
             if(seatUse.userId !== 0 && seatUse.seatId === seatAll.textContent){
                 seatAll.classList.add("org-btn");
                 if(seatUse.userId === -1){
@@ -129,6 +174,5 @@ function getSeatList(responseData) {
 
 window.onload = () => {
     getSeatData();
-    alert(2);
 }
 

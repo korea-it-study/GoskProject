@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class InOutPageController {
 
-    @GetMapping("/in")
+    @GetMapping("/enter")
     public String in(Model model){
         return "in";
     }

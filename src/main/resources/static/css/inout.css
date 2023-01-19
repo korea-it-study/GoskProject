@@ -70,14 +70,15 @@
 .inout-footer{
     width: 100%; height: 520px;
     padding: 100px 80px 80px 80px;
+    display: flex;
+    justify-content: space-around;
 }
+
 .inout-footer > button{
-    background-color:gray;
-    color: white;
-    width: 300px;
+    width: 320px;
     height: 107px;
     font-size: 40px;
     border-radius: 20px;
-    display: block;
     margin: 0 auto;
 }
+

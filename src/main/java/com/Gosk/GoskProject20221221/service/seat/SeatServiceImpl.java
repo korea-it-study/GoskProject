@@ -6,15 +6,12 @@ import com.Gosk.GoskProject20221221.domain.seat.Seat;
 import com.Gosk.GoskProject20221221.domain.seat.SeatInfo;
 import com.Gosk.GoskProject20221221.domain.seat.SpecialSeatInfo;
 import com.Gosk.GoskProject20221221.dto.locker.LockerReqDto;
-import com.Gosk.GoskProject20221221.dto.locker.LockerRespDto;
 import com.Gosk.GoskProject20221221.dto.seat.*;
 import com.Gosk.GoskProject20221221.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -96,6 +93,7 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public SeatInfoRespDto getBasicSeatDetail(String seatId) {
         SeatInfo seatInfo = seatRepository.getBasicSeatDetail(seatId);
+
         //정액권이면
         if(seatInfo.getUser_time() != 0){
             return SeatInfoRespDto.builder()
@@ -103,6 +101,7 @@ public class SeatServiceImpl implements SeatService {
                     .userPhone(seatInfo.getUser_phone())
                     .userTime(calcLeft(seatInfo.getUser_time()))
                     .build();
+
             //원데이면
         }else if(seatInfo.getSeat_total_time() != null){
             return SeatInfoRespDto.builder()
@@ -160,8 +159,8 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public int scheduledUpdateOneday(Date now) {
-        return seatRepository.timeoutOneday(now);
+    public int scheduledUpdateOnedayAndTime(Date now) {
+        return seatRepository.timeoutOnedayAndTime(now);
     }
     @Override
     public int closingTimeOneday() {
@@ -170,6 +169,12 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public int scheduleUpdateReserve(Date now) {
         return seatRepository.timeoutReserve(now);
+    }
+
+    @Override
+    public boolean enter(InOutReqDto reqDto) {
+
+        return seatRepository.enter(reqDto) != 0;
     }
 
     @Override
@@ -207,7 +212,8 @@ public class SeatServiceImpl implements SeatService {
         return result;
     }
 
-//    @Override
+
+    //    @Override
 //    public int insertSeat(List<String> arr) {
 ////        int seat = seatRepository.insertSeat(arr);
 //        int special = seatRepository.insertSpecial(arr);

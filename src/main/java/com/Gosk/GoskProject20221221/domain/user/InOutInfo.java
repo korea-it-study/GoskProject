@@ -1,21 +1,20 @@
 package com.Gosk.GoskProject20221221.domain.user;
 
-import com.Gosk.GoskProject20221221.dto.User.InInfoRespDto;
-import lombok.Builder;
+import com.Gosk.GoskProject20221221.dto.User.InOutInfoRespDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 
 import java.time.LocalDateTime;
 
 @Getter
 @RequiredArgsConstructor
-public class InInfo {
+public class InOutInfo {
 
     private int user_id;
     private Integer user_time;
     private LocalDateTime user_date;
     private String seat_id;
+    private LocalDateTime seat_start_time;
     private LocalDateTime seat_total_time;
     private String reserved_seat_id;
     private LocalDateTime reserved_total_time;
@@ -35,8 +34,8 @@ public class InInfo {
 //    cm.receipt_time,
 //    cm.receipt_day
 
-    public InInfoRespDto toInInfoRespDto(){
-        return InInfoRespDto.builder()
+    public InOutInfoRespDto toInInfoRespDto(){
+        return InOutInfoRespDto.builder()
                 .userId(user_id)
                 .userTime(user_time)
                 .userDate(user_date)

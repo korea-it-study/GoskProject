@@ -184,15 +184,14 @@ const exitBtn = document.querySelector(".exit-btn");
 exitBtn.onclick = () => {
     let selectedList = [];
     let seatCondition = "";
+    let flag = true;
     seatBtns.forEach(seatBtn => {
         //선택된게 있으면 - 지정석
-        if(seatBtn.classList.contains("selected-seat") && (!seatBtn.classList.contains("org-btn") || seatBtn.classList.contains("repair-btn"))){
+        if(seatBtn.classList.contains("selected-seat") && (!(seatBtn.classList.contains("org-btn")) || seatBtn.classList.contains("repair-btn"))){
             //선택좌석 중에 공석이나 유지보수 좌석이 포함되어 있으면
-            selectedList = [];
-            seatCondition = "";
+            flag = false;
             return ;
-        }
-        if(seatBtn.classList.contains("selected-seat") && seatBtn.parentElement.classList.contains("seat-special")){
+        }else if(seatBtn.classList.contains("selected-seat") && seatBtn.parentElement.classList.contains("seat-special")){
             selectedList.push(seatBtn.value + "reserve");
             seatCondition = "지정석 [";
 
@@ -206,12 +205,14 @@ exitBtn.onclick = () => {
 
         });
 
-    if(selectedList.length > 0 ) {
-        if (confirm(seatCondition + selectedList + "] 좌석을 강제 퇴장 합니다")) {
+    if(selectedList.length > 0 && flag) {
+        if (confirm(seatCondition + selectedList + "] 좌석을 강제 퇴장 합니다.")) {
             customReq("put", {data: selectedList}, "/api/seat/exit");
         }
-    }else{
-        alert("사용자가 없는 좌석이 선택되었습니다.");
+    }else if(selectedList.length == 0){
+        alert("좌석을 선택해주세요.");
+    }else if(!flag){
+        alert("사용자가 없는 좌석이 선택되었습니다.")
     }
 
 }
@@ -245,7 +246,6 @@ closeBtn.onclick = () => {
 
 selCate.onchange = () => {
     categoryList(selCate.value);
-
 }
 
 
@@ -267,6 +267,7 @@ function categoryList(sVal) {
         selList.innerHTML = ""; // 소분류
         selList2.innerHTML = ""; // 소소분류
 
+        //원래 좌석 선택(모든 사용중인 좌석 선택 가능)
         responseData = getReq("/api/seat/useReservedSeat");
         setSelList("special",responseData);
 
@@ -290,6 +291,7 @@ function categoryList(sVal) {
 
     }
 }
+
 
 function setSelList(category, responseData){
     console.log(responseData);
@@ -501,7 +503,6 @@ function getSeatDtl(clickSeat, index){
 }
 
 function customReq(type, data, url){
-
     $.ajax({
         async: false,
         type: type,
@@ -510,7 +511,7 @@ function customReq(type, data, url){
         traditional : true,
         dataType: "json",
         success: (response) => {
-            console.log(type + " 결과: " + response + "건");
+            console.log(type + " 결과: " + response.data + "건");
             alert(type + "성공");
         },
         error: (error) => {
@@ -528,7 +529,6 @@ function putReq(url){
         nowSeat : selList.value,
         afterSeat : selList2.value
     }
-
     $.ajax({
         async: false,
         type: "put",
