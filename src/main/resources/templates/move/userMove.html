@@ -4,10 +4,9 @@
 <head>
     <link rel="stylesheet" href="/static/css/admin/admin.css">
     <link rel="stylesheet" href="/static/css/admin/seatlist.css">
-    <link rel="stylesheet" href="/static/css/balloon.css">
-    <title>G-OSK 프로젝트</title>
 </head>
 
+<title>G-OSK 프로젝트</title>
 <body>
     <main class="container">
         <!-- header -->
@@ -18,7 +17,7 @@
                     <li>그레이즈 스터디카페</li>
                     <li>
                         <i class="fa-solid fa-user"></i>
-                        <span>운영시간: 10:00 - 20:00</span>
+                        <span>운영시간 10:00 - 20:00</span>
                     </li>
                 </ul>
             </div>
@@ -26,22 +25,20 @@
         <!-- section -->
         <section class="admin-container">
             <div class="seat-category">
-                <ul>
-                    <li class="reserved">지정석</li>
-                    <li class="nomal">일반석</li>
-                    <li class="locker">사물함</li>
-                </ul>
+                <button class="normal btn gray-btn">일반석</button>
+                <button class="reserved btn gray-btn">지정석</button>
+                <button class="locker btn gray-btn">사물함</button>
             </div>
             <div class="table-container">
                 <!-- section -->
                 <section class="seat-content">
                     <article class="seat-basic">
-                        <button class="btn seat-btn org-btn">Os1</button>
+                        <button class="btn seat-btn">Os1</button>
                         <button class="btn seat-btn">Os2</button>
                         <button class="btn seat-btn">Os3</button>
-                        <button class="btn seat-btn org-btn">Os4</button>
+                        <button class="btn seat-btn">Os4</button>
                         <button class="btn seat-btn">Os5</button>
-                        <button class="btn seat-btn org-btn">Os6</button>
+                        <button class="btn seat-btn">Os6</button>
                         <button class="btn seat-btn">Os7</button>
                         <button class="btn seat-btn">Os8</button>
                         <button class="btn seat-btn">Os9</button>
@@ -49,7 +46,7 @@
                         <button class="btn seat-btn">Os11</button>
                         <button class="btn seat-btn">Os12</button>
                         <button class="btn seat-btn">Os13</button>
-                        <button class="btn seat-btn org-btn">Os14</button>
+                        <button class="btn seat-btn">Os14</button>
                         <button class="btn seat-btn">Os15</button>
                         <button class="btn seat-btn">Os16</button>
                         <button class="btn seat-btn">Os17</button>
@@ -121,43 +118,22 @@
                         </div>
                     </article>
                 </section>
-                <!-- footer -->
             </div>
-            <div class="btn-all">
-                <button class="btn gray-btn index-btn">홈으로</button>
-                <button class="btn sky-btn move-btn">자리이동</button>
-            </div>
-            <!-- popup -->
-            <div class="popup-back invisible">
-                <div class="popup">
-                    <span>변경할 대상</span>
-                    <select name="bdiv" id="ctg" class="sel_cate">
-                        <option value="option">선택하기</option>
-                        <option value="nomal">일반석</option>
-                        <option value="special">지정석</option>
-                        <option value="locker">사물함</option>
-                    </select>
-                    <span>변경할 좌석</span>
-                    <select name="sdiv" id="ctg_nm" class="sel_list">
-                        <option value="">소분류</option>
-                       </select>
-                    <span>이동할 좌석</span>
-                    <select name="cdiv" id="ctg_nm2" class="sel_list2">
-                        <option value="">소소분류</option>
-                    </select>
-    
-                    <div class="popup-btns">
-                        <span class="user-show"></span>
-                        <button class="btn gray-btn popup-register-btn">변경</button>
-                        <button class="btn org-btn close-btn">닫기</button>
-                    </div>
-                </div>
-            </div>
-            
         </section>
         <!-- footer -->
-        <footer class="admin-footer">
-
+        <footer class="seat-footer">
+            <div class="btn-all">
+                <article>
+                    <span>사용석</span>
+                    <input type="input" class="seat-use-name" readonly>
+                    <span>이동석</span>
+                    <input type="input" class="seat-move-name" readonly>
+                </article>
+                <article>
+                    <button class="btn gray-btn index-btn">홈으로</button>
+                    <button class="btn sky-btn move-btn">자리이동</button>    
+                </article>
+            </div>
         </footer>
     </main>
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{head :: head}"></head>
+<head>
+    <link rel="stylesheet" href="/static/css/inout.css">
+    <title>G-OSK 입실/퇴실</title>
+</head>
+<body>
+    <main class="container">
+<!-- header -->
+        <header class="inout-header">
+            <i class="fa-sharp fa-solid fa-triangle-exclamation"></i>
+            <p>퇴실 확인</p>
+            <div style="color: red; font-size: 50px; font-weight: 500;">회원님, 이용권 종료시<br>재입장이 불가한 퇴장입니다. </div>
+        </header>
+<!-- section -->
+        <section class="inout-content">
+            <ul class="in-info">
+
+            </ul>
+        </section>
+<!-- footer -->
+        <footer class="inout-footer">
+            <button class="index-btn gray-btn">
+                <i class="fa-solid fa-house-chimney"> 홈으로</i>
+            </button>
+
+            <button class="out-btn gray-btn">
+                <i class="fa-solid fa-arrow-right-from-bracket"> 일반 퇴실</i>
+            </button>
+
+            <button class="real-exit-btn org-btn">
+                <i class="fa-regular fa-circle-xmark"> 이용권 종료</i>
+            </button>
+        </footer>
+    </main>
+    <script src="/static/js/out.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
-
-
+let principal = getPrincipal();
+let receiptData = getReceiptList(principal.user.user_id);
 
 
 //선택한 사물함 클릭 시 버튼색깔 변경 및 사물함 이름 표시
@@ -36,32 +36,49 @@ $('.next-btn').click(function(){
     }
 });
 
-//locker만 정보 가져옴
+//사용중인 locker만 정보 가져옴
 function getLocker(){
     let responseData = null;
     $.ajax({
        async: false,
-       url: "/api/locker",
+       url: "/api/allLocker",
         type: "get",
         success : (response) => {
-           console.log("get 결과" + response.data);
            responseData = response.data;
         },
         error : (error) =>{
            console.log(error)
         }
     });
+        const lockerName = document.querySelectorAll(".locker-management-content > div .btn ")
     //사용중 사물함이름 - 전체 사물함 이름
     responseData.forEach(lockerUse => {
-        const lockerName = document.querySelectorAll(".locker-management-content > div .btn ")
-        lockerName.forEach((lockerAll,index) => {
-            //비교중에 Use랑 특정 lockerAll의 값이 같아 질때 특정 index에 org 해준다
-            if(lockerUse === lockerAll.textContent){
-                lockerName[index].classList.add("org-btn");
+        lockerName.forEach(lockerAll=> {
+            if(lockerUse.userId !== 0 && lockerUse.lockerId === lockerAll.textContent){
+                lockerAll.classList.add("org-btn");
+                if(lockerUse.userId === -1){
+                    lockerAll.classList.remove("org-btn");
+                    lockerAll.classList.add("repair-seat");
+                }
+            }else if(lockerUse.userId === 0 && lockerUse.lockerId === lockerAll.textContent){
+                lockerAll.classList.remove("repair-seat");
             }
         });
-    })
+    });
 }
+
 window.onload = () => {
     getLocker();
 }
+
+
+
+// 중복구매 방지 //// 중복구매 방지 //
+$(function(){
+    for(i=0; i < receiptData.length; i++){
+        if(receiptData[i].receiptKinds == "사물함" && receiptData[i].receiptUse == 1){
+            alert("상품은 중복 구매가 불가능합니다.")
+            location.href = "/index";
+        }
+    }
+})

@@ -19,7 +19,7 @@ public class PayApi {
 
     private final SeatService seatService;
 
-    @PostMapping("/seat")
+    @PutMapping("/seat")
     public ResponseEntity<?> seatPay(@RequestBody SeatReqDto seatReqDto) throws Exception {
 
         seatService.paySeat(seatReqDto);
@@ -28,7 +28,7 @@ public class PayApi {
         return ResponseEntity.ok().body(new CMRespDto<>(1, "seat data success", seatReqDto));
     }
 
-    @PostMapping("/reserved")
+    @PutMapping("/reserved")
     public ResponseEntity<?> reservedSeatPay(@RequestBody ReservedSeatReqDto reservedSeatReqDto) throws Exception {
 
         seatService.payReservedSeat(reservedSeatReqDto);
@@ -36,7 +36,8 @@ public class PayApi {
 //        System.out.println("[PAY API] reserved seat pay data :::::::" + reservedSeatReqDto);
         return ResponseEntity.ok().body(new CMRespDto<>(1, "reserved seat data success", reservedSeatReqDto));
     }
-    @PostMapping("/locker")
+
+    @PutMapping("/locker")
     public ResponseEntity<?> lockerPay(@RequestBody LockerReqDto lockerReqDto){
         return ResponseEntity.ok().body(new CMRespDto<>(1, "locker data success", seatService.payLocker(lockerReqDto)));
     }

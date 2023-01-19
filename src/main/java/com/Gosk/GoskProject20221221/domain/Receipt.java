@@ -17,22 +17,36 @@ public class Receipt {
     private int user_id;
     private String receipt_kinds;
     private int receipt_price;
-    private String receipt_time;
-    private String receipt_day;
+    private int receipt_time;
+    private int receipt_day;
     private int receipt_use;
     private String receipt_create_date;
+    private int receipt_count;
 
     public ReceiptRespDto toReceiptGetList() {
         return ReceiptRespDto.builder()
-                        .receiptId(receipt_id)
-                        .userId(user_id)
-                        .receiptKinds(receipt_kinds)
-                        .receiptPrice(receipt_price)
-                        .receiptTime(receipt_time)
-                        .receiptDay(receipt_day)
-                        .receiptUse(receipt_use)
-                        .receiptCreateDate(receipt_create_date)
-                        .build();
+                .receiptId(receipt_id)
+                .userId(user_id)
+                .receiptKinds(receipt_kinds)
+                .receiptPrice(receipt_price)
+                .receiptTime(receipt_time)
+                .receiptDay(receipt_day)
+                .receiptUse(receipt_use)
+                .receiptCreateDate(receipt_create_date)
+                .build();
     }
 
+    public ReceiptRespDto toSalesListEntity() {
+        return ReceiptRespDto.builder()
+                .userId(user_id)
+                .receiptUse(receipt_use)
+                .receiptKinds(receipt_kinds)
+                .receiptPrice(receipt_price)
+                .receiptTime(receipt_time)
+                .receiptDay(receipt_day)
+                .receiptUse(receipt_use)
+                .receiptCreateDate(receipt_create_date)
+                .receiptCount(receipt_count)
+                .build();
+    }
 }

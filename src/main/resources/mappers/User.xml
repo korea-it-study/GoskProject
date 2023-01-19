@@ -7,8 +7,8 @@
     <resultMap id="role" type="com.Gosk.GoskProject20221221.domain.user.Role">
     <result property="role_id" column="role_id"></result>
     <result property="role" column="role"></result>
-
     </resultMap>
+
     <resultMap id="user" type="com.Gosk.GoskProject20221221.domain.user.User">
         <result property="user_id" column="user_id"></result>
         <result property="role_id" column="role_id"></result>
@@ -19,6 +19,20 @@
         <result property="user_create_date" column="user_create_date"></result>
         <result property="user_update_date" column="user_update_date"></result>
         <collection property="role" resultMap="role"></collection>
+    </resultMap>
+
+    <resultMap id="seat" type="com.Gosk.GoskProject20221221.domain.seat.Seat">
+        <result property="user_id" column="user_id"></result>
+        <result property="seat_id" column="seat_id"></result>
+        <result property="seat_total_time" column="seat_total_time"></result>
+        <result property="seat_start_time" column="seat_start_time"></result>
+    </resultMap>
+
+    <resultMap id="reservedSeat" type="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
+        <result property="user_id" column="user_id"></result>
+        <result property="reserved_seat_id" column="reserved_seat_id"></result>
+        <result property="reserved_total_time" column="reserved_total_time"></result>
+        <result property="reserved_start_time" column="reserved_start_time"></result>
     </resultMap>
 
 <!--  회원가입  -->
@@ -64,14 +78,103 @@
 
         WHERE
             user_phone = #{user_phone}
+
     </select>
 
+<!--    관리자페이지 모든 유저 들고오기     -->
+    <select id="allUser" resultType="com.Gosk.GoskProject20221221.domain.user.User">
+        SELECT
+            um.user_id,
+            um.user_phone,
+            um.user_pw
+
+        FROM
+        user_mst um
+
+    </select>
+
+    <select id="seatInfo" resultType="com.Gosk.GoskProject20221221.domain.user.UserSeat">
+        SELECT
+            um.user_id,
+            um.user_phone,
+
+            sm.user_id,
+            sm.seat_id,
+
+            rm.user_id,
+            rm.reserved_seat_id
+
+        FROM
+            user_mst um LEFT OUTER JOIN seat_mst sm ON (um.user_id = sm.user_id)
+                        LEFT OUTER JOIN reserved_seat_mst rm ON (um.user_id = rm.user_id)
+
+        WHERE
+            um.user_id = #{user_id}
+
+
+    </select>
+
+    <!--    지정석 시간/날짜 추가하기   -->
     <update id="updateTime" parameterType="com.Gosk.GoskProject20221221.domain.user.User">
         UPDATE
             user_mst
         SET
             user_date = DATE_ADD((DATE_ADD(NOW(), INTERVAL 9 HOUR)), INTERVAL #{user_date} WEEK),
             user_time = #{user_time}
+        WHERE
+            user_id = #{user_id}
+    </update>
+
+    <update id="modifyUser" parameterType="com.Gosk.GoskProject20221221.domain.user.User">
+        UPDATE
+            user_mst
+        SET
+            user_phone = #{user_phone},
+            user_pw = #{user_pw},
+            user_update_date = DATE_ADD(NOW(), INTERVAL 9 HOUR)
+        WHERE
+            user_id = #{user_id}
+    </update>
+
+    <select id="preModUserSelect" resultMap="user">
+        SELECT
+            user_id,
+            user_phone,
+            user_pw,
+            user_time,
+            user_date,
+            user_create_date,
+            user_update_date
+
+        from user_mst
+
+        WHERE
+        user_id = #{user_id}
+    </select>
+
+    <delete id="deleteUser">
+        DELETE FROM user_mst
+        WHERE user_id = #{user_id}
+    </delete>
+
+    <update id="deleteSeatUser">
+        UPDATE
+            seat_mst
+        SET
+            user_id = 0,
+            seat_start_time = null,
+            seat_total_time = null
+        WHERE
+            user_id = #{user_id}
+    </update>
+
+    <update id="deleteReservedUser">
+        UPDATE
+            reserved_seat_mst
+        SET
+            user_id = 0,
+            reserved_start_time = null,
+            reserved_total_time = null
         WHERE
             user_id = #{user_id}
     </update>

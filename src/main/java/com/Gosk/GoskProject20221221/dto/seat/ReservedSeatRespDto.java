@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ReservedSeatRespDto {
     private String reservedSeatId;
+    private String seatId;
     private int userId;
     private LocalDateTime reservedStartTime;
     private LocalDateTime reservedTotalTime;

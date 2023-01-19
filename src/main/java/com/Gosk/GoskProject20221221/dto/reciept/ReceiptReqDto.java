@@ -18,8 +18,8 @@ public class ReceiptReqDto {
     private int userId;
     private String receiptKinds;
     private int receiptPrice;
-    private String receiptTime;
-    private String receiptDay;
+    private int receiptTime;
+    private int receiptDay;
     private String receiptCreateDate;
 
 

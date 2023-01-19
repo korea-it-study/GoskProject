@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gosk.GoskProject20221221.repository.LockerRepository">
+
+    <resultMap id="seat" type="com.Gosk.GoskProject20221221.domain.seat.Seat">
+        <result property="seat_id" column="seat_id"></result>
+        <result property="user_id" column="user_id"></result>
+        <result property="seat_start_time" column="seat_start_time"></result>
+        <result property="seat_total_time" column="seat_total_time"></result>
+    </resultMap>
+
+    <resultMap id="reservedSeat" type="com.Gosk.GoskProject20221221.domain.seat.ReservedSeat">
+        <result property="reserved_seat_id" column="reserved_seat_id"></result>
+        <result property="user_id" column="user_id"></result>
+        <result property="reserved_start_time" column="reserved_start_time"></result>
+        <result property="reserved_total_time" column="reserved_total_time"></result>
+    </resultMap>
+
+    <resultMap id="user_mst" type="com.Gosk.GoskProject20221221.domain.user.User">
+        <result property="user_id" column="user_id"></result>
+        <result property="user_phone" column="user_phone"></result>
+        <result property="user_date" column="user_date"></result>
+        <result property="user_time" column="user_time"></result>
+    </resultMap>
+
+
+    <select id="getAllLocker" resultType="com.Gosk.GoskProject20221221.domain.Locker">
+
+        select
+        locker_id,
+        user_id
+        from
+        locker_mst
+
+    </select>
+
+    <select id="getUseLocker" resultType="java.lang.String">
+        select
+        locker_id
+        from
+        locker_mst
+        where
+        user_id != -1 and
+        user_id != 0
+    </select>
+
+    <select id="getUsableLocker" resultType="java.lang.String">
+        select
+        locker_id
+        from
+        locker_mst
+        where
+        user_id = 0
+    </select>
+
+    <select id="getUserLocker" resultType="java.lang.String">
+        select
+        locker_id
+        from
+        locker_mst
+        where
+        user_id = #{userId}
+    </select>
+</mapper>

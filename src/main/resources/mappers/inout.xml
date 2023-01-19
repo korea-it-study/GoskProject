@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Gosk.GoskProject20221221.repository.InoutRepository">
+
+
+<select id="getInInfo" resultType="com.Gosk.GoskProject20221221.domain.user.InOutInfo">
+
+    SELECT
+        um.user_id,
+        um.user_time,
+        um.user_date,
+        sm.seat_id,
+        sm.seat_start_time,
+        sm.seat_total_time,
+        rm.reserved_seat_id,
+        rm.reserved_total_time,
+        cm.receipt_kinds,
+        cm.receipt_time,
+        cm.receipt_day
+
+    FROM
+        user_mst um
+        LEFT OUTER JOIN seat_mst sm ON(sm.user_id = um.user_id)
+        LEFT OUTER JOIN reserved_seat_mst rm ON(rm.user_id = um.user_id)
+        LEFT OUTER JOIN receipt_mst cm ON(cm.user_id = um.user_id)
+    WHERE
+        um.user_id = #{user_id} and
+        cm.receipt_use = 1 and
+        cm.receipt_kinds != "사물함"
+
+    </select>
+
+    <update id="terminateOneday" parameterType="int">
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        where
+            user_id = #{userId} and
+            receipt_kinds = "원데이";
+
+        update
+            seat_mst
+        set
+            user_id = 0,
+            seat_start_time = null,
+            seat_total_time = null
+        where
+            user_id = #{userId};
+    </update>
+
+    <update id="terminateReserved" parameterType="int">
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        where
+            user_id = #{userId} and
+            receipt_kinds = "지정석";
+
+        update
+            reserved_seat_mst
+        set
+            user_id = 0,
+            reserved_start_time = null,
+            reserved_total_time = null
+        where
+            user_id = #{userId};
+
+    </update>
+
+    <update id="terminateCommutation" parameterType="int">
+        update
+            receipt_mst
+        set
+            receipt_use = 0
+        where
+            user_id = #{userId} and
+            receipt_kinds = "정액권" and
+            receipt_use != 0;
+
+        update
+            seat_mst
+        set
+            user_id = 0,
+            seat_start_time = null,
+            seat_total_time = null
+        where
+            user_id = #{userId};
+
+        update
+            user_mst
+        set
+            user_time = 0,
+            user_date = null
+        where
+            user_id = #{userId};
+    </update>
+
+
+    <update id="exitTime" parameterType="com.Gosk.GoskProject20221221.dto.seat.InOutReqDto">
+        update
+            seat_mst
+        set
+            user_id = 0,
+            seat_start_time = null,
+            seat_total_time = null
+        where
+            seat_id = #{pickSeat};
+
+        update
+            user_mst
+        set
+            user_time = #{userTime}
+        where
+            user_id = #{userId}
+
+    </update>
+
+    <update id="exitDay" parameterType="com.Gosk.GoskProject20221221.dto.seat.InOutReqDto">
+        update
+            seat_mst
+        set
+            user_id = #{userId},
+            seat_start_time = null,
+            seat_total_time = null
+        where
+            seat_id =#{pickSeat}
+    </update>
+
+
+
+</mapper>

@@ -20,7 +20,7 @@
                     <li>그레이즈 스터디카페</li>
                     <li>
                         <i class="fa-solid fa-user"></i>
-                        <span>운영시간: 10:00 - 20:00</span>
+                        <span>운영시간 10:00 - 20:00</span>
                     </li>
                 </ul>
             </div>
@@ -42,26 +42,29 @@
                         type="hidden">
                 </div>
                 <div class="seat-search">
-                    <select id="seat-category" name="seat-category">
-                        <option value="all">전체</option>
-                        <option value="reserved">지정석</option>
-                        <option value="nomal">일반석</option>
+                    <select id="seat-category" class="seat-category" name="seat-category">
+                        <option value="전체">전체</option>
+                        <option value="원데이 시간권">원데이 시간권</option>
+                        <option value="정액권 시간권">정액권 시간권</option>
+                        <option value="정액권 기간권">정액권 기간권</option>
+                        <option value="지정석 기간권">지정석 기간권</option>
+                        <option value="사물함 기간권">사물함 기간권</option>
                         <option class="order-status-hidden" style=" display: none;">
                         </option>
                     </select>
-                    <button class="btn gray-btn search-btn">조회</button>
+                    <button class="search-btn btn gray-btn">조회</button>
                 </div>
             </div>
             <table class="sales-th-table">
                 <colgroup>
-                    <col width="25%">
-                    <col width="25%">
+                    <col width="30%">
+                    <col width="20%">
                     <col width="25%">
                     <col width="25%">
                 </colgroup>
                 <tr>
-                    <th>판매 날짜</th>
-                    <th>판매된 상품</th>
+                    <th>상품 분류</th>
+                    <th>상품 시간</th>
                     <th>판매 횟수</th>
                     <th>누적 금액</th>
                 </tr>
@@ -69,21 +72,15 @@
             <div class="table-container">
                 <table class="sales-table">
                     <colgroup>
-                        <col width="25%">
-                        <col width="25%">
+                        <col width="30%">
+                        <col width="20%">
                         <col width="25%">
                         <col width="25%">
                     </colgroup>
-                    <tr>
-                        <td>2022. 12. 22</td>
-                        <td>100시간 권</td>
-                        <td>1 회</td>
-                        <td>100000 원</td>
-                    </tr>
                 </table>
             </div>
             <div class="total-price">
-                <div><b>총 매출</b> 100000원</div>
+                <div>총 매출 <b></b></div>
             </div>
         </section>
         <!-- footer -->

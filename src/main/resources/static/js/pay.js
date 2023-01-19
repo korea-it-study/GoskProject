@@ -6,17 +6,10 @@ var pickTime = null;
 var time = null;
 
 // 페이지 이동 //// 페이지 이동 //
-
-
 // 취소하기
 $('.index-btn').click(function(){
     location.href = "/index";
     localStorage.clear();
-});
-
-// 결제하기
-$('.pay-btn').click(function(){
-
 });
 
 // 결제 데이터 정리 //// 결제 데이터 정리 //
@@ -55,7 +48,6 @@ $(function(){
 })
 
 // 결제 api // 결제 api
-
 const payBtn = document.querySelector(".pay-btn");
 
 payBtn.onclick = () => {
@@ -79,7 +71,6 @@ function createOrderNum(){
 
 
 function payment() {
-
     const data = {
         userPhone : principal.user.user_phone,
         time : time,
@@ -95,7 +86,6 @@ function payment() {
 
 // 카드 결제
 function paymentCard(data) {
-		
 	IMP.init("imp14753140"); 
 		
 	IMP.request_pay({ // param
@@ -118,10 +108,7 @@ function paymentCard(data) {
                 infoUserData(data);
             }
         infoReceiptData(data);
-
-
-         location.replace("/index");
-
+        location.replace("/index");
 		} else {
           // 결제 실패 시 로직,
              var msg = '결제에 실패했습니다. \n';
@@ -133,9 +120,7 @@ function paymentCard(data) {
 }
 
 // 결제 정보 좌석 데이터 넘기기
-
 function infoSeatData(data) {
-
     let url = null;
     let jsonData = null;
     
@@ -173,8 +158,8 @@ function infoSeatData(data) {
     
     $.ajax({
         async:false,
-        url: url,
-        type: "POST",
+        url: url, // seat_mst 링크
+        type: "PUT",
         contentType: "application/json",
         data: JSON.stringify(jsonData),
         dataType: "json",
@@ -193,7 +178,6 @@ function infoSeatData(data) {
 // 얘는 정액권에서 user_mst의 user_time, user_date로 넘어가야함
 
 function infoUserData(data) {
-
     let jsonUserData = null;
 
     if(data.pickTime.includes("주")) {
@@ -206,10 +190,11 @@ function infoUserData(data) {
     }else if(data.pickTime.includes("시간")){
         jsonUserData = {
             userId: principal.user.user_id,
-            userTime: encodeURI(data.pickTime.replace("시간", ":00:00")),
+            userTime: data.pickTime.replace("시간", "") * 60 * 60
         }
     }
 
+    // userData 업데이트
     $.ajax({
         async:false,
         url: "/api/account/timeData",
@@ -233,23 +218,30 @@ function infoUserData(data) {
 function infoReceiptData(data) {
     let receiptData = null;
 
-    if(data.pickTime.includes("주")) {
+    if(data.pickTime.includes("주(사물함)")) {
         receiptData = {
             userId: principal.user.user_id,
             receiptKinds: data.time,
             receiptPrice: data.pickPrice.replace("원", "").replace(",", ""),
-            receiptDay: data.pickTime,
+            receiptDay: data.pickTime.replace("주(사물함)", ""),
             receiptTime: 0
         }
-
+    }else if(data.pickTime.includes("주")) {
+        receiptData = {
+            userId: principal.user.user_id,
+            receiptKinds: data.time,
+            receiptPrice: data.pickPrice.replace("원", "").replace(",", ""),
+            receiptDay: data.pickTime.replace("주", ""),
+            receiptTime: 0
+        }
     }else if(data.pickTime.includes("시간")) {
         receiptData = {
-                userId: principal.user.user_id,
-                receiptKinds: data.time,
-                receiptPrice: data.pickPrice.replace("원", "").replace(",", ""),
-                receiptDay: 0,
-                receiptTime: data.pickTime
-            }
+            userId: principal.user.user_id,
+            receiptKinds: data.time,
+            receiptPrice: data.pickPrice.replace("원", "").replace(",", ""),
+            receiptDay: 0,
+            receiptTime: data.pickTime.replace("시간", ""),
+        }
     }
 
     $.ajax({

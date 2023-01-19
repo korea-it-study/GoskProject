@@ -6,6 +6,7 @@ window.onload = () => {
     if(principal != "") {
         location.replace("/logout");
     }
+    localStorage.clear();
 }
 
 // 페이지 이동 //// 페이지 이동 //
@@ -44,12 +45,13 @@ $('.locker-btn').click(function(){
 
 // 입실
 $('.in-btn').click(function(){
-    location.href = "/inout";
+    localStorage.setItem("time", $(this).val());
+    location.href = "/enter";
 });
 
 // 퇴실
 $('.out-btn').click(function(){
-    location.href = "/inout";
+    location.href = "/out";
 });
 
 
