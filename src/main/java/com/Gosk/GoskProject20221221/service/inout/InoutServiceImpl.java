@@ -5,6 +5,7 @@ import com.Gosk.GoskProject20221221.domain.user.InOutInfo;
 import com.Gosk.GoskProject20221221.dto.User.InOutInfoRespDto;
 
 import com.Gosk.GoskProject20221221.dto.seat.InOutReqDto;
+
 import com.Gosk.GoskProject20221221.repository.InoutRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +28,6 @@ public class InoutServiceImpl implements InoutService {
 
         if(inoutRepository.getInInfo(userId) != null){
             LocalDateTime now = LocalDateTime.now();
-            System.out.println("userID: " + userId);
             InOutInfo info = inoutRepository.getInInfo(userId);
 
             //시간권이면
@@ -98,7 +98,6 @@ public class InoutServiceImpl implements InoutService {
             }
 
         }else{
-            System.out.println("user id가 없다.");
             return new InOutInfoRespDto();
         }
     }
@@ -194,7 +193,7 @@ public class InoutServiceImpl implements InoutService {
                         .build();
             }
         }else{
-            System.out.println("userId 조회 안된다.");
+
             return new InOutInfoRespDto();
         }
 

@@ -1,5 +1,6 @@
 package com.Gosk.GoskProject20221221.service.seat;
 
+import com.Gosk.GoskProject20221221.dto.seat.InOutReqDto;
 import com.Gosk.GoskProject20221221.dto.locker.LockerReqDto;
 import com.Gosk.GoskProject20221221.dto.seat.*;
 

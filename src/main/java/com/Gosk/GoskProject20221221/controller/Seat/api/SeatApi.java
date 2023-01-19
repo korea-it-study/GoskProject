@@ -59,7 +59,6 @@ public class SeatApi {
     }
     @PutMapping("/enter")
     public ResponseEntity<?> enter(@RequestBody InOutReqDto reqDto){
-        System.out.println("enterData      " + reqDto);
         return ResponseEntity.ok().body(new CMRespDto<>(1, "enter success",seatService.enter(reqDto)));
     }
 

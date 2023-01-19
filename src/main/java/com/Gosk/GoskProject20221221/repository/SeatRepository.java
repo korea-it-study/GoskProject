@@ -5,6 +5,7 @@ import com.Gosk.GoskProject20221221.domain.seat.ReservedSeat;
 import com.Gosk.GoskProject20221221.domain.seat.Seat;
 import com.Gosk.GoskProject20221221.domain.seat.SeatInfo;
 import com.Gosk.GoskProject20221221.domain.seat.SpecialSeatInfo;
+
 import com.Gosk.GoskProject20221221.dto.seat.InOutReqDto;
 import org.apache.ibatis.annotations.Mapper;
 

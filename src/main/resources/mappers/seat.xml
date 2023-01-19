@@ -242,9 +242,9 @@
 
     <update id="timeoutOnedayAndTime">
         update
-        receipt_mst
+            receipt_mst
         set
-        receipt_use = 0
+            receipt_use = 0
         where
             user_id in (select
                             user_id
@@ -253,8 +253,10 @@
                         where
                             <![CDATA[seat_total_time < #{now}]]>
                         ) and
+        (
             receipt_kinds = "원데이" or
             receipt_kinds = "정액권"
+        )
 ;
         update
             user_mst
@@ -270,13 +272,13 @@
                         )
         ;
         update
-        seat_mst
+            seat_mst
         set
             user_id = 0,
             seat_start_time = null,
             seat_total_time = null
         where
-        <![CDATA[seat_total_time < #{now}]]>
+            <![CDATA[seat_total_time < #{now}]]>
 
 
 
@@ -284,29 +286,29 @@
 
     <update id="closingOneday">
         update
-        receipt_mst
+            receipt_mst
         set
-        receipt_use = 0
+            receipt_use = 0
         where
-        receipt_kinds = "원데이";
+            receipt_kinds = "원데이";
 
         update
-        seat_mst
+            seat_mst
         set
             user_id = 0,
             seat_start_time = null,
             seat_total_time = null
         where
-        seat_total_time is not null and
-        user_id != 0
+            seat_total_time is not null and
+            user_id != 0
     </update>
 
 
     <update id="timeoutReserve">
         update
-        receipt_mst
+            receipt_mst
         set
-        receipt_use = 0
+            receipt_use = 0
         WHERE
             user_id in (select
                             user_id
@@ -318,7 +320,7 @@
             receipt_kinds = "지정석";
 
         update
-        reserved_seat_mst
+            reserved_seat_mst
         set
             user_id = 0,
             reserved_start_time = null,
@@ -346,11 +348,11 @@
 
     <update id="forcedExit" parameterType="java.util.List">
         UPDATE
-        receipt_mst cm
-        left outer join locker_mst lm ON(lm.user_id = cm.user_id)
-        left outer join seat_mst sm ON( sm.user_id = cm.user_id)
-        left outer join reserved_seat_mst rm ON ( rm.user_id = cm.user_id)
-        left outer join user_mst um ON (um.user_id = cm.user_id )
+            receipt_mst cm
+            left outer join locker_mst lm ON(lm.user_id = cm.user_id)
+            left outer join seat_mst sm ON( sm.user_id = cm.user_id)
+            left outer join reserved_seat_mst rm ON ( rm.user_id = cm.user_id)
+            left outer join user_mst um ON (um.user_id = cm.user_id )
         set
             lm.user_id = 0,
             lm.locker_start_time = null,

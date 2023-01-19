@@ -26,35 +26,35 @@ public class RepairApi {
 
     @PutMapping("/special")
     public int repairSpecial(@RequestParam(value="data") List<String> arr){
-        log.info("arr::::::::::::::{}", arr);
+
         return repairService.repairSpecial(arr);
     }
 
     @DeleteMapping("/special")
     public int offRepairSpecial(@RequestParam(value="data") List<String> arr){
-        log.info("arr::::::::::::::{}", arr);
+
         return repairService.offRepairSpecial(arr);
     }
 
     @PutMapping("/basic")
     public int repairBasic(@RequestParam(value="data") List<String> arr){
-        log.info("arr::::::::::::::{}", arr);
+
         return repairService.repairBasic(arr);
     }
 
     @DeleteMapping("/basic")
     public int offRepairBasic(@RequestParam(value="data") List<String> arr){
-        log.info("arr::::::::::::::{}", arr);
+
         return repairService.offRepairBasic(arr);
     }
     @PutMapping("/locker")
     public int repairLocker(@RequestParam(value="data") List<String> arr){
-        log.info("arr::::::::::::::{}", arr);
+
         return repairService.repairLocker(arr);
     }
     @DeleteMapping("/locker")
     public int offRepairLocker(@RequestParam(value="data") List<String> arr){
-        log.info("arr::::::::::::::{}", arr);
+
         return repairService.offRepairLocker(arr);
     }
 
