@@ -22,10 +22,9 @@ public class LockerServiceImpl implements LockerService{
         lockers.forEach(locker -> {
             lockersResp.add(locker.toLockerResp());
         });
-
-
         return lockersResp;
     }
+
     @Override
     public List<String> getUseLocker() {
         return lockerRepository.getUseLocker();
@@ -39,16 +38,11 @@ public class LockerServiceImpl implements LockerService{
 
     @Override
     public String getUserLocker(int userId) {
-
         return lockerRepository.getUserLocker(userId);
     }
 
-
     @Override
     public int insertLocker(List<String> arr) {
-
         return lockerRepository.insertLocker(arr);
     }
-
-
 }

@@ -17,90 +17,90 @@
         <collection property="user" resultMap="user"></collection>
     </resultMap>
 
-<select id="getLockerDetail" resultMap="locker">
-    select
+    <select id="getLockerDetail" resultMap="locker">
+        select
         lm.user_id,
         um.user_phone,
         DATE_FORMAT(locker_end_time, '%Y-%m-%d') AS locker_end_time
-    from
+        from
         locker_mst lm
         left outer join user_mst um on(um.user_id = lm.user_id)
-    where
+        where
         locker_id = #{lockerId}
     </select>
 
-<update id="moveLocker">
-    UPDATE
+    <update id="moveLocker">
+        UPDATE
         locker_mst a
         JOIN(
         SELECT user_id, locker_start_time, locker_end_time
         FROM	locker_mst
         WHERE locker_id = #{nowSeat}
         ) b
-    SET
+        SET
         a.user_id = b.user_id,
         a.locker_start_time = b.locker_start_time,
         a.locker_end_time = b.locker_end_time
-    WHERE
+        WHERE
         a.locker_id = #{afterSeat};
 
-    update
+        update
         locker_mst
-    set
+        set
         user_id = 0,
         locker_start_time = null,
         locker_end_time = null
-    where
+        where
         locker_id = #{nowSeat}
     </update>
 
     <update id="moveSeat">
         UPDATE
-            seat_mst a
-            JOIN(
-            SELECT user_id, seat_start_time, seat_end_time
-            FROM	seat_mst
-            WHERE seat_id = #{nowSeat}
-            ) b
+        seat_mst a
+        JOIN(
+        SELECT user_id, seat_start_time, seat_total_time
+        FROM	seat_mst
+        WHERE seat_id = #{nowSeat}
+        ) b
         SET
-            a.user_id = b.user_id,
-            a.seat_start_time = b.seat_start_time,
-            a.seat_end_time = b.seat_end_time
+        a.user_id = b.user_id,
+        a.seat_start_time = b.seat_start_time,
+        a.seat_total_time = b.seat_total_time
         WHERE
-            a.seat_id = #{afterSeat};
+        a.seat_id = #{afterSeat};
 
         update
-            seat_mst
+        seat_mst
         set
-            user_id = 0,
-            seat_start_time = null,
-            seat_end_time = null
+        user_id = 0,
+        seat_start_time = null,
+        seat_total_time = null
         where
-            seat_id = #{nowSeat}
+        seat_id = #{nowSeat}
     </update>
 
     <update id="moveSpecial">
         UPDATE
-            reserved_seat_mst a
-            JOIN(
-            SELECT user_id, reserved_start_time, reserved_end_time
-            FROM	reserved_seat_mst
-            WHERE   reserved_seat_id = #{nowSeat}
-            ) b
+        reserved_seat_mst a
+        JOIN(
+        SELECT user_id, reserved_start_time, reserved_total_time
+        FROM	reserved_seat_mst
+        WHERE   reserved_seat_id = #{nowSeat}
+        ) b
         SET
-            a.user_id = b.user_id,
-            a.reserved_start_time = b.reserved_start_time,
-            a.reserved_end_time = b.reserved_end_time
+        a.user_id = b.user_id,
+        a.reserved_start_time = b.reserved_start_time,
+        a.reserved_total_time = b.reserved_total_time
         WHERE
-            a.reserved_seat_id = #{afterSeat};
+        a.reserved_seat_id = #{afterSeat};
 
         update
-            reserved_seat_mst
+        reserved_seat_mst
         set
-            user_id = 0,
-            reserved_start_time = null,
-            reserved_time = null
+        user_id = 0,
+        reserved_start_time = null,
+        reserved_total_time = null
         where
-            reserved_seat_id = #{nowSeat}
+        reserved_seat_id = #{nowSeat}
     </update>
 </mapper>

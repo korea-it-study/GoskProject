@@ -1,3 +1,10 @@
+let principal = getPrincipal();
+let receiptData = getReceiptList(principal.user.user_id);
+
+window.onload = () => {
+    getSeatData();
+}
+
 // 페이지 이동 //// 페이지 이동 //
 $(function(){
     var time = localStorage.getItem("time");
@@ -13,7 +20,6 @@ $(function(){
 // 홈으로 버튼 index로 보내기
 
 $('.index-btn').click(function(){
-    alert(1);
     location.href = "/index";
     localStorage.clear();
 });
@@ -119,7 +125,6 @@ $(".seat-content button").click(function(){
 // 데이터 받아서 사용중인 좌석 org-btn으로 바꾸기 //
 
 //일반석 데이터 받아오기
-
 function getSeatData() {
     let responseData = null;
     let url = null;
@@ -137,7 +142,6 @@ function getSeatData() {
         contentType: "application/json",
         dataType: "json",
         success: (response) => {
-            alert("seat data 받아오기 성공");
             responseData = response.data;
             getSeatList(responseData);
             console.log(response);
@@ -150,10 +154,7 @@ function getSeatData() {
 }
 
 
-
-
 // 사용중인 좌석 오렌지색으로 바꾸기
-
 function getSeatList(responseData) {
 
     responseData.forEach(seatUse => {
@@ -176,3 +177,12 @@ window.onload = () => {
     getSeatData();
 }
 
+// 중복구매 방지 //// 중복구매 방지 //
+$(function(){
+    for(i=0; i < receiptData.length; i++){
+        if(receiptData[i].receiptKinds != "사물함" && receiptData[i].receiptUse == 1){
+            alert("상품은 중복 구매가 불가능합니다.")
+            location.href = "/index";
+        }
+    }
+})

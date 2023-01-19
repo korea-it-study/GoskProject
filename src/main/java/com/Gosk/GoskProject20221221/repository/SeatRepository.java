@@ -23,6 +23,8 @@ public interface SeatRepository {
 
     public int paySeat(Seat seat);
     public int payReserved (ReservedSeat reservedSeat);
+
+    // 사용여부 업데이트
     public int payLocker(Locker locker);
 
 

@@ -25,19 +25,21 @@ public class Receipt {
 
     public ReceiptRespDto toReceiptGetList() {
         return ReceiptRespDto.builder()
-                        .receiptId(receipt_id)
-                        .userId(user_id)
-                        .receiptKinds(receipt_kinds)
-                        .receiptPrice(receipt_price)
-                        .receiptTime(receipt_time)
-                        .receiptDay(receipt_day)
-                        .receiptUse(receipt_use)
-                        .receiptCreateDate(receipt_create_date)
-                        .build();
+                .receiptId(receipt_id)
+                .userId(user_id)
+                .receiptKinds(receipt_kinds)
+                .receiptPrice(receipt_price)
+                .receiptTime(receipt_time)
+                .receiptDay(receipt_day)
+                .receiptUse(receipt_use)
+                .receiptCreateDate(receipt_create_date)
+                .build();
     }
 
     public ReceiptRespDto toSalesListEntity() {
         return ReceiptRespDto.builder()
+                .userId(user_id)
+                .receiptUse(receipt_use)
                 .receiptKinds(receipt_kinds)
                 .receiptPrice(receipt_price)
                 .receiptTime(receipt_time)

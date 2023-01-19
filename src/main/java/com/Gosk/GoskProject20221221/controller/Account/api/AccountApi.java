@@ -3,6 +3,9 @@ package com.Gosk.GoskProject20221221.controller.Account.api;
 
 import com.Gosk.GoskProject20221221.dto.CMRespDto;
 import com.Gosk.GoskProject20221221.dto.User.UserReqDto;
+import com.Gosk.GoskProject20221221.dto.reciept.ReceiptRespDto;
+import com.Gosk.GoskProject20221221.repository.ReceiptRepository;
+import com.Gosk.GoskProject20221221.service.reciept.ReceiptService;
 import com.Gosk.GoskProject20221221.service.user.UserService;
 import com.Gosk.GoskProject20221221.service.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -22,10 +27,12 @@ import java.util.Map;
 public class AccountApi {
 
     private final UserService userService;
+    private final ReceiptService receiptService;
+
 
     @PostMapping("/join/checkDuplicate")
     public ResponseEntity<?> joinCheckDuplicate(@RequestBody UserReqDto userReqDto) throws Exception {
-        log.info("[UserApi] userInfoData :::::::::::::::::::::::::::::::: {}", userReqDto);
+//        log.info("[UserApi] userInfoData :::::::::::::::::::::::::::::::: {}", userReqDto);
         userService.checkDuplicationUserPhone(userReqDto.getUserPhone());
 
         return ResponseEntity.ok(new CMRespDto<>(1, "userPhone duplicate check success", null));
@@ -67,5 +74,6 @@ public class AccountApi {
 
         return ResponseEntity.ok().body(new CMRespDto<>(1, "userTimeData success", userService.userUpdateTime(userReqDto)));
     }
+
 
 }
