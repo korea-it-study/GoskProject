@@ -3,7 +3,40 @@ let userId = null;
 let jsonData = null;
 let userListData = getUserAllList();
 const userTable = document.querySelector(".user-table");
-const modifyInput = document.querySelectorAll(".popup input")
+const modifyInput = document.querySelectorAll(".popup input");
+
+
+//전화번호에 자동으로 하이픈 붙여주는 함수
+
+var autoHypenPhone = function(str){
+    str = str.replace(/[^0-9]/g, '');
+    var tmp = '';
+    if( str.length < 4){
+        return str;
+    }else if(str.length < 7){
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3);
+        return tmp;
+    }else if(str.length < 11){
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3, 3);
+        tmp += '-';
+        tmp += str.substr(6);
+        return tmp;
+    }else{              
+        tmp += str.substr(0, 3);
+        tmp += '-';
+        tmp += str.substr(3, 4);
+        tmp += '-';
+        tmp += str.substr(7);
+        return tmp;
+    }
+
+    return str;
+}
+
 
 // 아이디 중복 체크
 
@@ -320,7 +353,8 @@ function updateBtnEvent() {
     const popupBack = document.querySelector(".popup-back");
     const popupUpdateBtn = document.querySelector(".popup-update-btn");
     const popupCloseBtn = document.querySelector(".popup-close-btn");
-    
+    const userList = document.querySelectorAll(".user-table tr td");
+
     updateBtns.forEach((updateBtn, index) => {
         updateBtn.onclick = () => {
             popupBack.classList.remove("invisible");
@@ -329,14 +363,16 @@ function updateBtnEvent() {
                 modBtn.value = "";
             })
 
-            modifyInput[0].value = userListData[index].userPhone;
-            modifyInput[3].value = userListData[index].userId;
+            modifyInput[0].value = userList[1 + (index * 5)].innerText;
+            modifyInput[3].value = userList[index * 5].innerText;
         }
     })
 
+
     modifyInput[1].onkeyup = function(){
-        this.value = autoHypenPhone( this.value ) ;
-        }
+        this.value = autoHypenPhone( this.value ) ; 
+    }
+
     
     // 수정 팝업 닫기 버튼
     popupCloseBtn.onclick = () => {
@@ -355,8 +391,9 @@ function updateBtnEvent() {
         const regex = /\d{3}-\d{3,4}-\d{4}/; 
         const pwRegex = /\d{4}/;
 
-        if(!jsonData.userPhone && jsonData.userPw) {
+        if(!jsonData.userPhone && !jsonData.userPw) {
             alert("휴대폰 번호와 비밀번호 둘 다 비워둘 수 없습니다.");
+            return false;
         }
 
         if(!jsonData.userPhone) {
@@ -369,27 +406,15 @@ function updateBtnEvent() {
         
         if(jsonData.userPw == "") {
 
-        }else if(!pwRegex.test(modifyInput[3].value)){
+        }else if(!pwRegex.test(modifyInput[2].value)){
             alert("비밀번호는 네자리 숫자입니다.");
             return false;
         }
+
         
         checkDuplicate(jsonData.userPhone, jsonData.userId);
     }
 
-    // 엔터로 줄바꿈
-
-    for(let i = 0; i < modifyInput.length; i++) {
-        modifyInput[i].onkeyup = () => {
-            if(window.event.keyCode == 13){
-                if(i != 2) {
-                    modifyInput[i + 1].focus();
-                }else {
-                    popupUpdateBtn.click();
-                }
-            }
-        }
-    }
     
 }
 
@@ -417,37 +442,6 @@ function dltBtnEvent() {
     })
 }
 
-
-//전화번호에 자동으로 하이픈 붙여주는 함수
-
-var autoHypenPhone = function(str){
-    str = str.replace(/[^0-9]/g, '');
-    var tmp = '';
-    if( str.length < 4){
-        return str;
-    }else if(str.length < 7){
-        tmp += str.substr(0, 3);
-        tmp += '-';
-        tmp += str.substr(3);
-        return tmp;
-    }else if(str.length < 11){
-        tmp += str.substr(0, 3);
-        tmp += '-';
-        tmp += str.substr(3, 3);
-        tmp += '-';
-        tmp += str.substr(6);
-        return tmp;
-    }else{              
-        tmp += str.substr(0, 3);
-        tmp += '-';
-        tmp += str.substr(3, 4);
-        tmp += '-';
-        tmp += str.substr(7);
-        return tmp;
-    }
-
-    return str;
-}
 
 
 window.onload = () => {
