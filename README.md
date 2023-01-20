@@ -58,6 +58,12 @@ Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 2022-12-21 ~ 202
 
 <br/><br/>
 
+# 데이터 베이스
+ <img width="790" alt="Gosk" src="https://user-images.githubusercontent.com/109320970/212833404-6bdedd1f-c286-4bfa-b72e-9466c73e512c.png">
+
+
+<br/><br/>
+
 # 주요 구현 기능
 ## 주요 기능 정리
 ![프레젠테이션1](https://user-images.githubusercontent.com/109320970/212833397-83c4dd0d-b940-4f6c-8158-63663f95b11d.jpg)
@@ -176,12 +182,6 @@ Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 2022-12-21 ~ 202
 <br/><br/><br/><br/>
 
 
-
-# 데이터 베이스
- <img width="790" alt="Gosk" src="https://user-images.githubusercontent.com/109320970/212833404-6bdedd1f-c286-4bfa-b72e-9466c73e512c.png">
-
-
-<br/><br/>
 
 # 프로젝트 소감
 
