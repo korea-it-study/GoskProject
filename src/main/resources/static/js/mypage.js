@@ -185,16 +185,16 @@ $(function(){
                     for(let j = 0; j < receiptData.length; j++) {
                         receiptCreateDate = new Date(receiptData[j].receiptCreateDate);
 
-                        if(receiptData[i].receiptUse == "0") {
+                         if(receiptData[j].receiptUse == "0") {
                             receiptUse = "사용종료";
-                        }else if(receiptData[i].receiptUse == "1") {
+                        }else if(receiptData[j].receiptUse == "1") {
                             receiptUse = "사용중";
                         }
                 
-                        if(receiptData[i].receiptDay == "0"){
-                            receiptProduct = receiptData[i].receiptTime + "시간";
-                        }else if(receiptData[i].receiptTime == "0") {
-                            receiptProduct = receiptData[i].receiptDay + "주";
+                        if(receiptData[j].receiptDay == "0"){
+                            receiptProduct = receiptData[j].receiptTime + "시간";
+                        }else if(receiptData[j].receiptTime == "0") {
+                            receiptProduct = receiptData[j].receiptDay + "주";
                         }
                 
 
