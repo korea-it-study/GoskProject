@@ -64,10 +64,10 @@ window.onload = () => {
 
         }else if (resp.receiptKinds === "원데이" || resp.receiptKinds === "지정석"){
             exitBtn.classList.add("invisible");
-            if(resp.receiptKinds == "원데이"){
-                let time = resp.seatTotalTime.substring(resp.seatTotalTime.indexOf("T") + 1,resp.seatTotalTime.indexOf("T") + 2);
-                if(time > 22 || time < 10){
-                    resp.seatTotalTime = resp.seatTotalTime.substring(0,10) + " 22:00:00";
+            if(resp.receiptKinds === "원데이"){
+                let time = resp.seatTotalTime.substring(resp.seatTotalTime.indexOf("T") + 1,resp.seatTotalTime.indexOf("T") + 3);
+                if(time > 21 || time < 10){
+                    resp.seatTotalTime = resp.seatTotalTime.substring(0,11) + "22:00:00";
                 }
             }
 
@@ -84,7 +84,7 @@ window.onload = () => {
             
             <li class="close">
                 <p><i class="fa-regular fa-calendar-xmark"></i>종료예정</p>
-                <span>${resp.reservedTotalTime != null ? resp.reservedTotalTime.substring(0,10) :resp.seatTotalTime}<span>
+                <span>${resp.reservedTotalTime != null ? resp.reservedTotalTime.substring(0,10) :new Date(resp.seatTotalTime).toLocaleTimeString()}<span>
                 <span class="close"></span>
             </li>
             
@@ -136,7 +136,6 @@ window.onload = () => {
         </li>
         `;
             }
-
 
             //기간권
         }else{
