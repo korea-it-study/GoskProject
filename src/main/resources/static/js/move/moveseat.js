@@ -55,7 +55,7 @@ $(function(){
         if(receiptData[i].receiptKinds == "지정석" && receiptData[i].receiptUse == 1){
     // 지정석
             //색상
-            $(".reserved").removeClass("gray-btn").addClass("white-btn");
+            $(".reserved").removeClass("gray-btn").addClass("sky-btn");
             //이미지view
             $('.seat-special').removeClass("invisible");
             $('.seat-special').siblings().addClass("invisible");
@@ -63,7 +63,7 @@ $(function(){
         } else if(receiptData[i].receiptKinds == "사물함" && receiptData[i].receiptUse == 1){
     // 사물함
             //색상
-            $(".locker").removeClass("gray-btn").addClass("white-btn");
+            $(".locker").removeClass("gray-btn").addClass("sky-btn");
             //이미지view
             $('.seat-management-content').removeClass("invisible");
             $('.seat-management-content').siblings().addClass("invisible");
@@ -71,7 +71,7 @@ $(function(){
         } else if(receiptData[i].receiptUse == 1){
     // 일반+정액석
             //색상
-            $(".normal").removeClass("gray-btn").addClass("white-btn");
+            $(".normal").removeClass("gray-btn").addClass("sky-btn");
             //이미지view
             $('.seat-basic').removeClass("invisible");
             $('.seat-basic').siblings().addClass("invisible");
@@ -87,12 +87,10 @@ $(function(){
     }
     
     // 좌석 + 사물함 중복 구매시
-    if($(".normal").hasClass('white-btn') && $(".locker").hasClass('white-btn')){
-        $(".normal").removeClass("white-btn").addClass("sky-btn");
-    }else if($(".reserved").hasClass('white-btn') && $(".locker").hasClass('white-btn')){
-        $(".reserved").removeClass("white-btn").addClass("sky-btn");
-    }else if($(".locker").hasClass('white-btn')){
-        $(".locker").removeClass("white-btn").addClass("sky-btn");
+    if($(".normal").hasClass('sky-btn') && $(".locker").hasClass('sky-btn')){
+        $(".locker").removeClass("sky-btn").addClass("white-btn");
+    }else if($(".reserved").hasClass('sky-btn') && $(".locker").hasClass('sky-btn')){
+        $(".locker").removeClass("sky-btn").addClass("white-btn");
     }
       
     if($('.normal').hasClass('sky-btn')){
@@ -156,20 +154,32 @@ $(function(){
 
 // 좌석 버튼 클릭
 $('.seat-content > article > button').click(function(){
-    $('.seat-content > article > button').removeClass("selected-seat").removeClass("seatborder");
-    $(this).addClass("selected-seat").addClass("seatborder");
-
-    seatMoveName = $('.seat-content > article > button.seatborder').text();
-    $('.seat-move-name').val(seatMoveName);  
+    if($(this).hasClass("org-btn") || $(this).hasClass("repair-seat")){
+        alert("선택 불가능 좌석입니다.");
+        $('.seat-content > article > button').removeClass("selected-seat").removeClass("seatborder");
+        $('.seat-move-name').val("");  
+    }else{
+        $('.seat-content > article > button').removeClass("selected-seat").removeClass("seatborder");
+        $(this).addClass("selected-seat").addClass("seatborder");
+        
+        seatMoveName = $('.seat-content > article > button.seatborder').text();
+        $('.seat-move-name').val(seatMoveName);  
+    }
 })
 
 // 사물함 버튼 클릭
 $('.locker-management-content > div > div > button').click(function(){
-    $('.locker-management-content > div > div > button').removeClass("selected-seat").removeClass("seatborder");
-    $(this).addClass("selected-seat").addClass("seatborder");
+    if($(this).hasClass("org-btn") || $(this).hasClass("repair-seat")){
+        alert("선택 불가능 좌석입니다.");
+        $('.locker-management-content > div > div > button').removeClass("selected-seat").removeClass("seatborder");
+        $('.seat-move-name').val("");  
+    }else{
+        $('.locker-management-content > div > div > button').removeClass("selected-seat").removeClass("seatborder");
+        $(this).addClass("selected-seat").addClass("seatborder");
 
-    seatMoveName = $('.locker-management-content > div > div > button.seatborder').text();
-    $('.seat-move-name').val(seatMoveName);  
+        seatMoveName = $('.locker-management-content > div > div > button.seatborder').text();
+        $('.seat-move-name').val(seatMoveName);  
+    }
 })
 
 
