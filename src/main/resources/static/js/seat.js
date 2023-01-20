@@ -163,7 +163,6 @@ function getSeatList(responseData) {
             if(seatUse.userId !== 0 && seatUse.seatId === seatAll.textContent){
                 seatAll.classList.add("org-btn");
                 if(seatUse.userId === -1){
-                    seatAll.classList.remove("org-btn");
                     seatAll.classList.add("repair-seat");
                 }
             }else if(seatUse.userId === 0 && seatUse.seatId === seatAll.textContent){

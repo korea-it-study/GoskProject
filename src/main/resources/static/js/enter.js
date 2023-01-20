@@ -1,7 +1,6 @@
 // 홈으로 버튼 index로 보내기
 
 $('.index-btn').click(function(){
-//    alert(1);
     location.href = "/index";
     localStorage.clear();
 });
@@ -102,16 +101,21 @@ window.onload = () => {
     }else{
         let inApi = InApi.getInstance();
         let resp = inApi.loadInData();//해당 계정의 좌석이 없으면 -> 이용 좌석이 없습니다. -> 로그아웃
-
+        console.log(resp);
         if(resp.receiptKinds === null){
             alert("이용중인 좌석이 없습니다.");
             location.replace("/index");
-        }else if(resp.receiptKinds === "원데이" || resp.receiptKinds ==="지정석") {
-            alert("그냥 입실하십시오");
-            location.replace("/index");
-        }else if(resp.seatId != null){
-            inInfo.innerHTML = ""; //이미 입실한 사람
-
+        }else if(resp.seatId != null || resp.reservedSeatId != null){
+            if(resp.receiptKinds === "원데이"){
+                alert("원데이 " + resp.seatId + " 좌석을 사용 중입니다. 입실하십시오.");
+                location.replace("/index");
+            }else if(resp.receiptKinds === "지정석"){
+                alert("지정석 " + resp.reservedSeatId + " 좌석을 사용중입니다. 입실하십시오.");
+                location.replace("/index");
+            }else{
+                alert("일반석 " + resp.seatId + " 좌석을 사용중입니다. 입실하십시오.");
+                location.replace("/index");
+            }
         }else if(resp.seatTotalTime !== null){//오늘 퇴실예정시간인 사람
             localStorage.setItem("userId",resp.userId);
             localStorage.setItem("seatTotalTime",resp.seatTotalTime);

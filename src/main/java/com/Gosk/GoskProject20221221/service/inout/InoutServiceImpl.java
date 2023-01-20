@@ -72,7 +72,7 @@ public class InoutServiceImpl implements InoutService {
                         .userDate(info.getUser_date()) //사용 만료 일자
                         .receiptKinds("기간권")
                         .receiptDay(info.getReceipt_day())
-                        .seatId(null)
+                        .seatId(info.getSeat_id())
                         .seatTotalTime(null)
                         .build();
 
@@ -80,6 +80,7 @@ public class InoutServiceImpl implements InoutService {
             }else if(Objects.equals(info.getReceipt_kinds(), "지정석")) {
                 return InOutInfoRespDto.builder()
                         .userId(userId)
+                        .seatId(null)
                         .reservedSeatId(info.getReserved_seat_id())
                         .reservedTotalTime(info.getReserved_total_time())
                         .receiptDay(info.getReceipt_day())
@@ -91,6 +92,7 @@ public class InoutServiceImpl implements InoutService {
                 return InOutInfoRespDto.builder()
                         .userId(userId)
                         .seatId(info.getSeat_id())
+                        .reservedSeatId(null)
                         .seatTotalTime(info.getSeat_total_time())
                         .receiptTime(info.getReceipt_time())
                         .receiptKinds("원데이")

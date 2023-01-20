@@ -123,7 +123,7 @@
         update
             seat_mst
         set
-            user_id = #{userId},
+            user_id = 0,
             seat_start_time = null,
             seat_total_time = null
         where
