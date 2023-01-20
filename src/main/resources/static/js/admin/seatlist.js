@@ -214,8 +214,8 @@ exitBtn.onclick = () => {
 // 자리이동 팝업 띄우기
 const moveBtn = document.querySelector(".move-btn");
 const selCate = document.querySelector(".sel_cate"); //
-const selList = document.querySelector(".sel_list"); // 소분류
-const selList2 = document.querySelector(".sel_list2"); // 소소분류
+const selList = document.querySelector(".sel_list"); // 변경좌석
+const selList2 = document.querySelector(".sel_list2"); // 이동좌석
 
 const popupBack = document.querySelector(".popup-back");
 const popup = document.querySelector(".popup");
@@ -224,12 +224,13 @@ const popupRegisterBtn = document.querySelector(".popup-register-btn");
 
 moveBtn.onclick = () => {
     popupBack.classList.remove("invisible");
+    categoryList(selCate.value);
 }
 
 
 closeBtn.onclick = () => {
     popupBack.classList.add("invisible");
-    selCate.value = "option";
+    selCate.value = "nomal";
     categoryList(selCate.value);
 }
 
@@ -244,17 +245,9 @@ function categoryList(sVal) {
     let responseData = null;
     let responseUser = null;
 
-    if(sVal === "option") {
-        selList.innerHTML = `
-        <option value="${null}">소분류</option>
-        `;
-        selList2.innerHTML = `
-        <option value="${null}">소소분류</option>
-        `;
-
-    } else if(sVal === "special") {
-        selList.innerHTML = ""; // 소분류
-        selList2.innerHTML = ""; // 소소분류
+    if(sVal === "special") {
+        selList.innerHTML = ""; // 변경좌석
+        selList2.innerHTML = ""; // 이동좌석
 
         //원래 좌석 선택(모든 사용중인 좌석 선택 가능)
         responseData = getReq("/api/seat/useReservedSeat");
@@ -309,6 +302,10 @@ function setSelList(category, responseData){
         selList.innerHTML = `
         <option value="null">이용중인 좌석이 없습니다</option>
         `;
+        selList2.innerHTML = `
+        <option value="null">선택 좌석이 없습니다</option>
+        `;
+        userShow.innerHTML = `사용자: -`
     }else{
         responseData.forEach(seat => {
                 selList.innerHTML += `
