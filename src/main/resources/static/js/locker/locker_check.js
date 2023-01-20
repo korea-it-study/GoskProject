@@ -57,7 +57,6 @@ function getLocker(){
             if(lockerUse.userId !== 0 && lockerUse.lockerId === lockerAll.textContent){
                 lockerAll.classList.add("org-btn");
                 if(lockerUse.userId === -1){
-                    lockerAll.classList.remove("org-btn");
                     lockerAll.classList.add("repair-seat");
                 }
             }else if(lockerUse.userId === 0 && lockerUse.lockerId === lockerAll.textContent){

@@ -1,16 +1,19 @@
-// 홈으로 버튼 index로 보내기
-
 
 
 const inInfo = document.querySelector(".in-info");
-const inOutFooter = document.querySelector(".inout-footer");
-const inOutHeader = document.querySelector(".inout-header");
 const exitBtn = document.querySelector(".out-btn");
 const realExitBtn = document.querySelector(".real-exit-btn");
 const indexBtn = document.querySelector(".index-btn");
 
 
-// 입실
+// 홈으로 버튼 index로 보내기
+indexBtn.onclick = () => {
+    location.href = "/index";
+    localStorage.clear();
+}
+
+
+// 퇴실
 
 class OutApi {
     static #instance = null;
@@ -49,10 +52,6 @@ class OutApi {
     }
 }
 
-
-// 퇴실
-
-
 window.onload = () => {
         let outApi = OutApi.getInstance();
         let resp = outApi.loadInOutData();//해당 계정의 좌석이 없으면 -> 이용 좌석이 없습니다. -> 로그아웃
@@ -65,9 +64,11 @@ window.onload = () => {
 
         }else if (resp.receiptKinds === "원데이" || resp.receiptKinds === "지정석"){
             exitBtn.classList.add("invisible");
-            let time = resp.seatTotalTime.substring(resp.seatTotalTime.indexOf("T") + 1,resp.seatTotalTime.indexOf("T") + 2);
-            if(time > 22 || time < 10){
-                resp.seatTotalTime = resp.seatTotalTime.substring(0,10) + " 22:00:00";
+            if(resp.receiptKinds == "원데이"){
+                let time = resp.seatTotalTime.substring(resp.seatTotalTime.indexOf("T") + 1,resp.seatTotalTime.indexOf("T") + 2);
+                if(time > 22 || time < 10){
+                    resp.seatTotalTime = resp.seatTotalTime.substring(0,10) + " 22:00:00";
+                }
             }
 
             inInfo.innerHTML = `
@@ -89,7 +90,7 @@ window.onload = () => {
             
             <li>
                 <p><i class="fa-solid fa-chair"></i>이용좌석</p>
-                <div>${resp.seatId != null ? resp.seatId : resp.reservedSeatId}</div>
+                <div>${resp.reservedSeatId != null ? resp.reservedSeatId : resp.seatId}</div>
             </li>
             `;
 
@@ -183,56 +184,48 @@ window.onload = () => {
 
 
         }
-        indexBtn.onclick = () => {
-//            alert(1);
-            location.href = "/index";
-            localStorage.clear();
-        }
-
-
-        //이용권 종료
-        realExitBtn.onclick = () => {
-            if(confirm("이용권을 종료하십니까? 기간권 및 시간권의 잔여 시간이 완전히 사라집니다.")){
-                let url = "";
-                if(resp.receiptKinds === "원데이"){
-                    url = "/api/terminate/oneday/" + resp.userId;
-                    ExitReq(url,"");
-                }else if(resp.receiptKinds === "지정석") {
-                    url = "/api/terminate/reserved/" + resp.userId;
-                    ExitReq(url,"");
-                }else {
-                    url = "/api/terminate/commutation/" + resp.userId;
-                    ExitReq(url, "");
-                }
-            }
-
-        }
-
-        //일반퇴실
-        exitBtn.onclick = () => {
-            // const afterUserSecond = document.querySelector(".after-user-second");
+//이용권 종료
+    realExitBtn.onclick = () => {
+        if(confirm("이용권을 종료하십니까? 기간권 및 시간권의 잔여 시간이 완전히 사라집니다.")){
             let url = "";
-            let data = null;
-
-            if(resp.receiptKinds === "시간권"){
-                url = "/api/out/time";
-                data = {
-                    userId:resp.userId,
-                    userTime:resp.afterUserSecond,
-                    pickSeat : resp.seatId
-                };
-                ExitReq(url,data);
-
-            }else{
-                url = "/api/out/day";
-                data = {
-                    userId:resp.userId,
-                    pickSeat : resp.seatId
-                };
-                ExitReq(url, data);
-
+            if(resp.receiptKinds === "원데이"){
+                url = "/api/terminate/oneday/" + resp.userId;
+                ExitReq(url,"");
+            }else if(resp.receiptKinds === "지정석") {
+                url = "/api/terminate/reserved/" + resp.userId;
+                ExitReq(url,"");
+            }else {
+                url = "/api/terminate/commutation/" + resp.userId;
+                ExitReq(url, "");
             }
         }
+    }
+
+//일반퇴실
+    exitBtn.onclick = () => {
+        // const afterUserSecond = document.querySelector(".after-user-second");
+        let url = "";
+        let data = null;
+
+        if(resp.receiptKinds === "시간권"){
+            url = "/api/out/time";
+            data = {
+                userId:resp.userId,
+                userTime:resp.afterUserSecond,
+                pickSeat : resp.seatId
+            };
+            ExitReq(url,data);
+
+        }else{
+            url = "/api/out/day";
+            data = {
+                userId:resp.userId,
+                pickSeat : resp.seatId
+            };
+            ExitReq(url, data);
+        }
+    }
+
 }
 
 

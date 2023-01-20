@@ -178,11 +178,14 @@ window.onload = () => {
 }
 
 // 중복구매 방지 //// 중복구매 방지 //
-$(function(){
-    for(i=0; i < receiptData.length; i++){
-        if(receiptData[i].receiptKinds != "사물함" && receiptData[i].receiptUse == 1){
-            alert("상품은 중복 구매가 불가능합니다.")
-            location.href = "/index";
+if(!document.referrer.includes("enter")){
+    $(function(){
+        for(i=0; i < receiptData.length; i++){
+            if(receiptData[i].receiptKinds != "사물함" && receiptData[i].receiptUse == 1){
+                alert("상품은 중복 구매가 불가능합니다.");
+                location.href = "/index";
+            }
         }
-    }
-})
+    })
+}
+

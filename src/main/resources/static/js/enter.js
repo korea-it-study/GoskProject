@@ -47,14 +47,12 @@ class InApi {
 }
 
 
-// 퇴실
-
 
 window.onload = () => {
-    //seat선택하고 나서
+    // seat 선택하고 나서
     if(document.referrer.includes("seat")){
         let inApi = InApi.getInstance();
-        let resp = inApi.loadInData();//해당 계정의 좌석이 없으면 -> 이용 좌석이 없습니다. -> 로그아웃
+        let resp = inApi.loadInData();
         let time = 0;
         //기간제, 시간권
         if(resp.receiptKinds === "시간권"){

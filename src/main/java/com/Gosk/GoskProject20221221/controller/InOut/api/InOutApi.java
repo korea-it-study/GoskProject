@@ -35,7 +35,7 @@ public class InOutApi {
         return ResponseEntity.ok().body(new CMRespDto<>(1, "onday terminate",inoutService.terminateOnday(userId)));
     }
 
-    @PutMapping("/terminate/reserve/{userId}")
+    @PutMapping("/terminate/reserved/{userId}")
     public ResponseEntity<?> exitReserved(@PathVariable int userId){
         return ResponseEntity.ok().body(new CMRespDto<>(1, "reserved terminate",inoutService.terminateReserved(userId)));
     }
