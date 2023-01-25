@@ -8,6 +8,7 @@ Gosk의 독서실 키오스크의 클론 코딩 프로젝트를 2022-12-21 ~ 202
 [참조 사이트](https://gosk.co.kr/default/g_library/glibrary_sub2.php?sub=02)
 
 [기능 시연 동영상](https://clipchamp.com/watch/ImYc7GSs0Ps)
+
 ![Animation2](https://user-images.githubusercontent.com/103344381/214554273-5e1c95b8-c9f5-4328-af3b-712c39982647.gif)
 
 키오스크의 경우 사이트가 따로 없기 때문에 참조 사이트를 참고하여 제작하였습니다.
